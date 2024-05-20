@@ -1,0 +1,1 @@
+ options.setProcessClosurePrimitives(flags.process_closure_primitives);

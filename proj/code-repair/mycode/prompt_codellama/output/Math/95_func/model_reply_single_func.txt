@@ -1,0 +1,12 @@
+ The bug in the code is that the `getInitialDomain` function is using the mean of the distribution as the initial domain, but this is not a valid value for the `inverseCumulativeProbability` method.
+
+The correct version of the function should use the `getDenominatorDegreesOfFreedom` method to get the correct initial domain, like this:
+```
+protected double getInitialDomain(double p) {
+    double ret;
+    double d = getDenominatorDegreesOfFreedom();
+    ret = d / (d - 2.0);
+    return ret;
+}
+```
+This will ensure that the initial domain is valid and the `inverseCumulativeProbability` method can be used correctly.

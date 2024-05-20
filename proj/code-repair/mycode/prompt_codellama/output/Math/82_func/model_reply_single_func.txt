@@ -1,0 +1,41 @@
+ The buggy function is:
+```
+private Integer getPivotRow(final int col, final SimplexTableau tableau) {
+    double minRatio = Double.MAX_VALUE;
+    Integer minRatioPos = null;
+    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {
+        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);
+        final double entry = tableau.getEntry(i, col);
+        if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {
+            final double ratio = rhs / entry;
+            if (ratio < minRatio) {
+                minRatio = ratio;
+                minRatioPos = i; 
+            }
+        }
+    }
+    return minRatioPos;
+}
+```
+The bug is in the line `final double ratio = rhs / entry;`. The variable `rhs` is a double, and the variable `entry` is a double, so the division is performed as a floating-point division. This means that the result of the division may not be exactly equal to the ratio of the two values, but may be slightly different due to rounding errors.
+
+To fix the bug, you can use the `Math.floor()` function to round the result of the division to the nearest integer. Here is the corrected code:
+```
+private Integer getPivotRow(final int col, final SimplexTableau tableau) {
+    double minRatio = Double.MAX_VALUE;
+    Integer minRatioPos = null;
+    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {
+        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);
+        final double entry = tableau.getEntry(i, col);
+        if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {
+            final double ratio = Math.floor(rhs / entry);
+            if (ratio < minRatio) {
+                minRatio = ratio;
+                minRatioPos = i; 
+            }
+        }
+    }
+    return minRatioPos;
+}
+```
+This code will round the result of the division to the nearest integer, which should fix the bug.

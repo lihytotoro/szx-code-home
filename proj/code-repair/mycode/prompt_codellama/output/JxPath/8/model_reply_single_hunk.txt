@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+double rd = InfoSetUtil.doubleValue(right);
+```
+This line is missing in the original code, and it is necessary to fix the buggy hunk.

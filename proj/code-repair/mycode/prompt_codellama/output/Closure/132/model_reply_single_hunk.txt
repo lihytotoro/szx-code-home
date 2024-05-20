@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+!mayEffectMutableState(lhs) && !mayEffectMutableState(lhs.getFirstChild())
+```
+This is because the `lhs` node is a `NAME` node, and the `lhs.getFirstChild()` node is a `POST_DEC` node. The `mayEffectMutableState` function checks whether a node may have a side effect on a variable, and it does not take into account the side effects of the child nodes of a node. Therefore, we need to check whether the `lhs` node may have a side effect on a variable, and whether the `lhs.getFirstChild()` node may have a side effect on a variable.

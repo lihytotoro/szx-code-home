@@ -1,0 +1,1 @@
+   if (val.trim().length() == 0) {        throw new NumberFormatException("\"\" is not a valid number.");    }

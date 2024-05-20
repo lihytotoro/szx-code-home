@@ -1,0 +1,40 @@
+ The bug in the code is that the `VarU` variable is not being calculated correctly. The formula for the variance of the Mann-Whitney U statistic is:
+
+VarU = n1n2prod \* (n1 + n2 + 1) / 12
+
+However, the code is using the formula:
+
+VarU = n1n2prod \* (n1 + n2) / 12
+
+This is because the formula for the variance of the normal distribution is:
+
+Var(X) = E(X^2) - E(X)^2
+
+But in this case, `E(X)` is not being calculated correctly. The correct formula for `E(X)` is:
+
+E(X) = (n1 + n2 + 1) / 2
+
+So the correct formula for `VarU` is:
+
+VarU = n1n2prod \* (n1 + n2 + 1) / 12
+
+Here is the corrected code:
+```
+private double calculateAsymptoticPValue(final double Umin,
+                                         final int n1,
+                                         final int n2)
+    throws ConvergenceException, MaxCountExceededException {
+
+    final int n1n2prod = n1 * n2;
+
+    // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation
+    final double EU = n1n2prod / 2.0;
+    final double VarU = n1n2prod * (n1 + n2 + 1) / 12.0;
+
+    final double z = (Umin - EU) / FastMath.sqrt(VarU);
+
+    final NormalDistribution standardNormal = new NormalDistribution(0, 1);
+
+    return 2 * standardNormal.cumulativeProbability(z);
+}
+```

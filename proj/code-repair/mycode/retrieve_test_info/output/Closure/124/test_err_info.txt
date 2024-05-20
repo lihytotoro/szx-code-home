@@ -1,0 +1,71 @@
+junit.framework.AssertionFailedError: 
+Expected: x=x.parentNode.parentNode;x=x.parentNode.parentNode
+Result: x=x=x.parentNode.parentNode
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        EXPR_RESULT 1 [source_file: expected0]
+            ASSIGN 1 [source_file: expected0]
+                NAME x 1 [source_file: expected0]
+                GETPROP 1 [source_file: expected0]
+                    GETPROP 1 [source_file: expected0]
+                        NAME x 1 [source_file: expected0]
+                        STRING parentNode 1 [source_file: expected0]
+                    STRING parentNode 1 [source_file: expected0]
+        EXPR_RESULT 1 [source_file: expected0]
+            ASSIGN 1 [source_file: expected0]
+                NAME x 1 [source_file: expected0]
+                GETPROP 1 [source_file: expected0]
+                    GETPROP 1 [source_file: expected0]
+                        NAME x 1 [source_file: expected0]
+                        STRING parentNode 1 [source_file: expected0]
+                    STRING parentNode 1 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        EXPR_RESULT 1 [source_file: testcode]
+            ASSIGN 1 [source_file: testcode]
+                NAME x 1 [source_file: testcode]
+                ASSIGN 1 [source_file: testcode]
+                    NAME x 1 [source_file: testcode]
+                    GETPROP 1 [source_file: testcode]
+                        GETPROP 1 [source_file: testcode]
+                            NAME x 1 [source_file: testcode]
+                            STRING parentNode 1 [source_file: testcode]
+                        STRING parentNode 1 [source_file: testcode]
+
+
+Subtree1: SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+    EXPR_RESULT 1 [source_file: expected0]
+        ASSIGN 1 [source_file: expected0]
+            NAME x 1 [source_file: expected0]
+            GETPROP 1 [source_file: expected0]
+                GETPROP 1 [source_file: expected0]
+                    NAME x 1 [source_file: expected0]
+                    STRING parentNode 1 [source_file: expected0]
+                STRING parentNode 1 [source_file: expected0]
+    EXPR_RESULT 1 [source_file: expected0]
+        ASSIGN 1 [source_file: expected0]
+            NAME x 1 [source_file: expected0]
+            GETPROP 1 [source_file: expected0]
+                GETPROP 1 [source_file: expected0]
+                    NAME x 1 [source_file: expected0]
+                    STRING parentNode 1 [source_file: expected0]
+                STRING parentNode 1 [source_file: expected0]
+
+
+Subtree2: SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+    EXPR_RESULT 1 [source_file: testcode]
+        ASSIGN 1 [source_file: testcode]
+            NAME x 1 [source_file: testcode]
+            ASSIGN 1 [source_file: testcode]
+                NAME x 1 [source_file: testcode]
+                GETPROP 1 [source_file: testcode]
+                    GETPROP 1 [source_file: testcode]
+                        NAME x 1 [source_file: testcode]
+                        STRING parentNode 1 [source_file: testcode]
+                    STRING parentNode 1 [source_file: testcode]
+

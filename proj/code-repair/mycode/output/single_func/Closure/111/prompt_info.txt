@@ -1,0 +1,8 @@
+prefix:
+protected JSType caseTopType(JSType topType) {
+
+buggy_hunk:
+  return topType;
+
+suffix:
+}

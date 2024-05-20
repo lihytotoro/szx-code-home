@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (invocation.getRawArguments().length > position) {
+
+This line is added to check if the number of arguments passed to the method is greater than the position of the matcher in the list. If it is, then the matcher can capture the arguments from the invocation.

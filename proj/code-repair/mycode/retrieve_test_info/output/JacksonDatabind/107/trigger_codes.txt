@@ -1,0 +1,1 @@
+GenericContent processableContent = mapper.readValue(JSON, GenericContent.class);

@@ -1,0 +1,1 @@
+fail("UnrecognizedOptionException wasn't thrown");

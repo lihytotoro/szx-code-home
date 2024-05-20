@@ -1,0 +1,1 @@
+assertEquals("Missing required options: fx", e.getMessage());

@@ -1,0 +1,3 @@
+if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {
+  return true;
+}

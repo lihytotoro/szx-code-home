@@ -1,0 +1,16 @@
+prefix:
+public ObjectNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+{
+
+buggy_hunk:
+    if (p.getCurrentToken() == JsonToken.START_OBJECT) {
+        p.nextToken();
+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());
+    }
+    if (p.getCurrentToken() == JsonToken.FIELD_NAME) {
+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());
+
+suffix:
+    }
+    throw ctxt.mappingException(ObjectNode.class);
+ }

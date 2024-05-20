@@ -1,0 +1,4 @@
+int greater = replacementList[i].length() - searchList[i].length();
+if (greater > 0) {
+    increase += 3 * greater; // assume 3 matches
+}

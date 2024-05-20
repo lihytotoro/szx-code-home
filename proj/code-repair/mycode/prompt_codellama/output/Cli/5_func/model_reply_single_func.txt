@@ -1,0 +1,38 @@
+ The buggy function is:
+```
+static String stripLeadingHyphens(String str)
+{
+    if (str.startsWith("--"))
+    {
+        return str.substring(2, str.length());
+    }
+    else if (str.startsWith("-"))
+    {
+        return str.substring(1, str.length());
+    }
+
+    return str;
+}
+```
+The bug is that the function does not handle the case where `str` is `null`. The `substring` method called on `null` will throw a `NullPointerException`.
+
+The corrected function should handle the case where `str` is `null` by returning `null` instead of throwing a `NullPointerException`. Here is the corrected function:
+```
+static String stripLeadingHyphens(String str)
+{
+    if (str == null)
+    {
+        return null;
+    }
+    else if (str.startsWith("--"))
+    {
+        return str.substring(2, str.length());
+    }
+    else if (str.startsWith("-"))
+    {
+        return str.substring(1, str.length());
+    }
+
+    return str;
+}
+```

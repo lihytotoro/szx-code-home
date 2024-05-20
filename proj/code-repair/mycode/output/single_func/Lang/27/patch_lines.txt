@@ -1,0 +1,1 @@
+           if (decPos < expPos) {                throw new NumberFormatException(str + " is not a valid number.");            }            dec = str.substring(decPos + 1, expPos);        } else {            dec = str.substring(decPos + 1);        }        mant = str.substring(0, decPos);    } else {        if (expPos > -1) {

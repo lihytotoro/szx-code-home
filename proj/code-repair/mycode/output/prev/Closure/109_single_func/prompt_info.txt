@@ -1,0 +1,4 @@
+buggy_func:
+private Node parseContextTypeExpression(JsDocToken token) {
+        return parseTypeName(token);
+}

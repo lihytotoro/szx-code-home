@@ -1,0 +1,1 @@
+   case Token.NOT:    case Token.NEG:    case Token.BITAND:    case Token.BITNOT:    case Token.BITOR:    case Token.BITXOR:

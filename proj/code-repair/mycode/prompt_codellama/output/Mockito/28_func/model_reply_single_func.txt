@@ -1,0 +1,9 @@
+ The bug in the function is that it is using the `assertSame` method to compare the expected and actual values, but it is not using the `equals` method to compare the objects.
+
+The `assertSame` method checks whether the two objects are the same object, not whether they have the same value. In this case, the `mockedBean` object is a different object than the `REFERENCE` object, even though they have the same value.
+
+To fix the bug, you should use the `assertEquals` method to compare the expected and actual values, like this:
+```
+assertEquals(REFERENCE, illegalInjectionExample.mockShouldNotGoInHere);
+```
+This will check whether the two objects have the same value, rather than whether they are the same object.

@@ -1,0 +1,1 @@
+junit.framework.AssertionFailedError: expected:<100.0> but was:<62.5>

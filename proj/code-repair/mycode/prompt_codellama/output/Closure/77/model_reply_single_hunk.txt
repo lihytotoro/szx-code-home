@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+case '\0': sb.append("\\0"); break;
+```
+This line adds a special case for the null character, which is represented as "\0" in JavaScript.

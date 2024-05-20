@@ -1,0 +1,1 @@
+   if (thisIsVarArgs && !thatIsVarArgs) {      return false;    }    if (!thisIsVarArgs) {      thisParam = thisParam.getNext();    }    if (!thatIsVarArgs) {      thatParam = thatParam.getNext();    }    if (thisIsVarArgs && thatIsVarArgs) {      thisParam = null;      thatParam = null;    }  }  if (thisParam != null || thatParam != null) {    return false;  }

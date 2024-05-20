@@ -1,0 +1,2 @@
+assertEquals("\"1980+04+14\"",
+mapper.writeValueAsString(java.sql.Date.valueOf("1980-04-14")));

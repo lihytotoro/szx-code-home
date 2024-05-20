@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+if (u == 0 || v == 0) {
+
+This line is added to handle the case where either u or v is 0, which can cause a division by zero error in the original code. The new line checks if either u or v is 0, and if so, it returns 0 immediately. This fixes the bug and allows the code to pass the test.

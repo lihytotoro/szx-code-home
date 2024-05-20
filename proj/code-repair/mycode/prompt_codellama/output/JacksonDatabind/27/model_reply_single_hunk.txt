@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (ext.handlePropertyValue(p, ctxt, propName, null)) {
+```
+This line is incorrect because it passes `buffer` as the last argument to `ext.handlePropertyValue()`, which is not correct. Instead, it should pass `null` as the last argument, as shown in the corrected line.

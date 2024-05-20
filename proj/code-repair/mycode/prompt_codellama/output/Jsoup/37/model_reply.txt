@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    accum.append("\n");
+
+This line appends a newline character to the `accum` StringBuilder, which is then used to create the HTML string. The `trim()` method is not needed in this case, as the newline character is already included in the string.

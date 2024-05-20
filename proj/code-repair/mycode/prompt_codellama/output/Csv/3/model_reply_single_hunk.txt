@@ -1,0 +1,6 @@
+ The correct line at the INFILL location is:
+```
+case '\\':
+    return '\\';
+```
+This line is missing from the original code, and it is needed to handle the case where the escape character is followed by another backslash.

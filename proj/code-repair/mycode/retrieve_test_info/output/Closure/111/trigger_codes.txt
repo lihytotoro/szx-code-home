@@ -1,0 +1,4 @@
+testClosureFunction("goog.isArray",
+ALL_TYPE,
+ARRAY_TYPE,
+ALL_TYPE);

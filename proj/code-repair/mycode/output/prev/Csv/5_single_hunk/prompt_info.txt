@@ -1,0 +1,11 @@
+prefix:
+public void println() throws IOException {
+    final String recordSeparator = format.getRecordSeparator();
+
+buggy_hunk:
+
+
+suffix:
+        out.append(recordSeparator);
+    newRecord = true;
+}

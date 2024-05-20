@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    reparentChild(in);
+
+This line is missing from the original code, and it is necessary to reparent the child nodes before adding them to the `childNodes` list.

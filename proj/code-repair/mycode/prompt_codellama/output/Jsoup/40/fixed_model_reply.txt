@@ -1,0 +1,1 @@
+    Validate.notEmpty(name, "String must not be empty");

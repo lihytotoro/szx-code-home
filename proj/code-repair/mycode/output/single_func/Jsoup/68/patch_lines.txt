@@ -1,0 +1,1 @@
+   int bottom = stack.size() -1;    if (bottom > MaxScopeSearchDepth)        bottom = MaxScopeSearchDepth;

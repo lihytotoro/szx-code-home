@@ -1,0 +1,1 @@
+_hashArea = Arrays.copyOf(_hashArea, _hashArea.length);

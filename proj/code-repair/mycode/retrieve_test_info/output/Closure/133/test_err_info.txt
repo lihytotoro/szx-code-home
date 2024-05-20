@@ -1,0 +1,3 @@
+java.lang.IllegalStateException: Recorded bad position information
+start-char: 14
+end-char: 13

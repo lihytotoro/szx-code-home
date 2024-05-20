@@ -1,0 +1,1 @@
+assertTrue("Encoder test-" + i, b);

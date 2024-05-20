@@ -1,0 +1,17 @@
+{
+    "failed_test_info_bugs": [
+        "Cli-40",
+        "Compress-28",
+        "Compress-44",
+        "Gson-16",
+        "Jsoup-68",
+        "Jsoup-85",
+        "Lang-57",
+        "Math-25",
+        "Math-34",
+        "Math-45",
+        "Math-50",
+        "Math-86",
+        "Mockito-8"
+    ]
+}

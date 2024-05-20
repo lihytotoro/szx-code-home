@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+return super.deserializeTypedFromAny(p, ctxt);
+```
+This line is called when the parser is pointing to a `START_ARRAY` token, which indicates that the value is a wrapper array. The `super.deserializeTypedFromAny` method is called to deserialize the value as a wrapper array.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+int newLen = (len == MAX_SEGMENT_LEN) ? (MAX_SEGMENT_LEN+1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));
+
+This line is the original buggy hunk that was removed by the INFILL location. The bug in this line is that it does not properly handle the case where the current segment length is equal to the maximum segment length (i.e., len == MAX_SEGMENT_LEN). In this case, the new length should be MAX_SEGMENT_LEN+1, but the original code returns MAX_SEGMENT_LEN instead.

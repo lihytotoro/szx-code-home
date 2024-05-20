@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+
+This line is comparing the value of the entry in the tableau at row 0 and column i to 0 using the Precision.compareTo method. If the value is greater than 0, then the column is added to the list of columns to drop.

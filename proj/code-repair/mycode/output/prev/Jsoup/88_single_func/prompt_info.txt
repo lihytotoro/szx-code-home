@@ -1,0 +1,4 @@
+buggy_func:
+public String getValue() {
+    return val;
+}

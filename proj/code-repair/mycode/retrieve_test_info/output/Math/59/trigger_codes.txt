@@ -1,0 +1,4 @@
+Assert.assertEquals("max(" + pair[1] + ", " + pair[0] + ")",
+Math.max(pair[1], pair[0]),
+FastMath.max(pair[1], pair[0]),
+MathUtils.EPSILON);

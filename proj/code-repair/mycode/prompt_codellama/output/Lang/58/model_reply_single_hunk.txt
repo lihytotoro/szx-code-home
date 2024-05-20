@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (lastChar == 'l' || lastChar == 'L') {
+
+This line checks if the last character in the input string is 'l' or 'L', which indicates that the user wants a `Long` object to be returned.

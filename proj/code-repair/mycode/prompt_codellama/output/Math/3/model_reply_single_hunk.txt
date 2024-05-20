@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+final double[] prodHigh = new double[len];
+```
+This line creates an array with a length of `len`, but the loop that follows accesses the array at index `len`, which is out of bounds.

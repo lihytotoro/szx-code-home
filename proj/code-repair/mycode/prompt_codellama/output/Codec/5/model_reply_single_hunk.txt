@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (eof && modulus != 0) {
+
+This line is responsible for handling the case where the end of the input stream is reached before the expected number of padding characters are encountered. The buggy hunk was removed because it was causing a null pointer exception when the end of the input stream was reached.

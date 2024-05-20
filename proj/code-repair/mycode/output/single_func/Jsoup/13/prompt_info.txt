@@ -1,0 +1,10 @@
+prefix:
+public boolean hasAttr(String attributeKey) {
+    Validate.notNull(attributeKey);
+
+buggy_hunk:
+
+
+suffix:
+    return attributes.hasKey(attributeKey);
+}

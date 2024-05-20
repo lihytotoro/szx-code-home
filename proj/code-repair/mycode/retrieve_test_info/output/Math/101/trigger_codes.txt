@@ -1,0 +1,1 @@
+assertNull(new ComplexFormat().parse("1 + 1", pos));

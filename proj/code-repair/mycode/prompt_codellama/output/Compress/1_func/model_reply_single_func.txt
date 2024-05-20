@@ -1,0 +1,14 @@
+ The bug in the code is that it does not check if the `in` object is null before calling the `getNextEntry()` method. This can cause a `NullPointerException` if the `in` object is null.
+
+Here is the corrected version of the `close()` method:
+```
+public void close() throws IOException {
+    if (!this.closed) {
+        if (in != null) {
+            in.close();
+        }
+        this.closed = true;
+    }
+}
+```
+This version checks if the `in` object is null before calling the `close()` method, which prevents the `NullPointerException` from occurring.

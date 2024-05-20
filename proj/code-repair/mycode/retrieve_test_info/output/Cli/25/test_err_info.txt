@@ -1,0 +1,31 @@
+junit.framework.ComparisonFailure: Long arguments did not split as expected expected:<...
+-x,--extralongarg
+ [This description is
+ Long].
+Footer
+> but was:<...
+-x,--extralongarg
+ [                    T
+                     h
+                     i
+                     s
+                     d
+                     e
+                     s
+                     c
+                     r
+                     i
+                     p
+                     t
+                     i
+                     o
+                     n
+                     i
+                     s
+                     L
+                     o
+                     n
+                     g
+                     ].
+Footer
+>

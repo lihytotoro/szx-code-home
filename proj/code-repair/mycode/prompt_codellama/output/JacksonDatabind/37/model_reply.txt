@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return new SimpleType(subclass, _bindings, _superClass, _superInterfaces, _valueHandler, _typeHandler, _asStatic);
+```
+This line creates a new `SimpleType` instance with the correct parameters, including the `ValueHandler` and `TypeHandler` instances.

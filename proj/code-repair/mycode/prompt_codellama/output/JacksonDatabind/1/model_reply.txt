@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+if (_nullSerializer != null) {
+    _nullSerializer.serialize(null, jgen, prov);
+} else {
+    jgen.writeNull();
+}

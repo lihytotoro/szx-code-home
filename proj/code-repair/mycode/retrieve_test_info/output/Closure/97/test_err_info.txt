@@ -1,0 +1,27 @@
+junit.framework.AssertionFailedError: 
+Expected: x=4294967295
+Result: x=-1
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [sourcename: expected0] [synthetic: 1] [sourcefile: expected0]
+        EXPR_RESULT 1 [sourcefile: expected0]
+            ASSIGN 1 [sourcefile: expected0]
+                NAME x 1 [sourcefile: expected0]
+                NUMBER 4.294967295E9 1 [sourcefile: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [sourcename: testcode] [synthetic: 1] [sourcefile: testcode]
+        EXPR_RESULT 1 [sourcefile: testcode]
+            ASSIGN 1 [sourcefile: testcode]
+                NAME x 1 [sourcefile: testcode]
+                NUMBER -1.0 1 [sourcefile: testcode]
+
+
+Subtree1: NUMBER 4.294967295E9 1 [sourcefile: expected0]
+
+
+Subtree2: NUMBER -1.0 1 [sourcefile: testcode]
+

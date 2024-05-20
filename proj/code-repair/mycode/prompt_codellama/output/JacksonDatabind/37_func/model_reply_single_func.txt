@@ -1,0 +1,45 @@
+ The buggy function is:
+```
+protected JavaType _narrow(Class<?> subclass)
+{
+    if (_class == subclass) {
+        return this;
+    }
+    // Should we check that there is a sub-class relationship?
+    // 15-Jan-2016, tatu: Almost yes, but there are some complications with
+    //    placeholder values, so no.
+    /*
+    if (!_class.isAssignableFrom(subclass)) {
+        throw new IllegalArgumentException("Class "+subclass.getName()+" not sub-type of "
+                +_class.getName());
+    }
+    */
+    // 15-Jan-2015, tatu: Not correct; should really re-resolve...
+    return new SimpleType(subclass, _bindings, _superClass, _superInterfaces,
+            _valueHandler, _typeHandler, _asStatic);
+}
+```
+The bug is in the line `return new SimpleType(subclass, _bindings, _superClass, _superInterfaces, _valueHandler, _typeHandler, _asStatic);`. The `SimpleType` constructor takes a `Class` object as its first argument, but the `subclass` variable is a `Class<?>` object, which is not a subclass of `Class`.
+
+The corrected function should be:
+```
+protected JavaType _narrow(Class<?> subclass)
+{
+    if (_class == subclass) {
+        return this;
+    }
+    // Should we check that there is a sub-class relationship?
+    // 15-Jan-2016, tatu: Almost yes, but there are some complications with
+    //    placeholder values, so no.
+    /*
+    if (!_class.isAssignableFrom(subclass)) {
+        throw new IllegalArgumentException("Class "+subclass.getName()+" not sub-type of "
+                +_class.getName());
+    }
+    */
+    // 15-Jan-2015, tatu: Not correct; should really re-resolve...
+    return new SimpleType(subclass.asSubclass(Class.class), _bindings, _superClass, _superInterfaces,
+            _valueHandler, _typeHandler, _asStatic);
+}
+```
+In this corrected version, the `subclass` variable is converted to a `Class` object using the `asSubclass` method, which ensures that it is a subclass of `Class`.

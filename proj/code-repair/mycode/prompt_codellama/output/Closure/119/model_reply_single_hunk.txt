@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+```
+case Token.INC:
+case Token.DEC:
+  isSet = true;
+  type = Name.Type.OTHER;
+  break;
+```
+This case statement is responsible for handling the `++` and `--` operators, which are used to increment and decrement variables. The `isSet` variable is set to `true` to indicate that the name is being set, and the `type` variable is set to `Name.Type.OTHER` to indicate that the name is being set to a value that is not a function.

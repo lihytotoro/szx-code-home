@@ -1,0 +1,24 @@
+ The bug in the code is that it is not properly handling the case where the short option is followed by a value, but the value is not separated from the option by a space.
+
+For example, the input string "-t1=last" should be parsed as the short option "-t1" with the value "last", but the code is currently parsing it as the short option "-t1" with no value.
+
+To fix the bug, we need to modify the function to check for the presence of an "=" character in the token, and if it is present, to separate the option from the value and return the option and value as separate strings.
+
+Here is the corrected version of the function:
+```
+private boolean isShortOption(String token) {
+    // short options (-S, -SV, -S=V, -SV1=V2, -S1S2)
+    if (token.startsWith("-") && token.length() >= 2) {
+        if (token.contains("=")) {
+            // option and value are separated by "="
+            String[] parts = token.split("=");
+            return options.hasShortOption(parts[0]) && parts[1].length() > 0;
+        } else {
+            // option and value are not separated by "="
+            return options.hasShortOption(token.substring(1, 2)) && token.substring(2).length() > 0;
+        }
+    }
+    return false;
+}
+```
+With this correction, the function should properly handle the case where the short option is followed by a value, and return the option and value as separate strings.

@@ -1,0 +1,50 @@
+ The buggy function is `renderWrappedText` and it has a infinite loop in the `while` loop. The loop is not properly terminated and it will continue to run until a `StackOverflowError` is thrown.
+
+The infinite loop occurs when the `text` string is longer than the `width` parameter and the `pos` variable is set to the `nextLineTabStop` parameter, which is the number of spaces to indent the next line. If the `text` string is longer than the `width` parameter and the `pos` variable is set to the `nextLineTabStop` parameter, the loop will continue to run indefinitely.
+
+To fix the bug, we need to add a check to ensure that the `text` string is not longer than the `width` parameter before setting the `pos` variable to the `nextLineTabStop` parameter. We can do this by adding the following line of code before setting the `pos` variable:
+```
+if (text.length() > width) {
+    pos = width;
+}
+```
+This check will ensure that the `pos` variable is set to the `width` parameter if the `text` string is longer than the `width` parameter. This will prevent the infinite loop from occurring.
+
+Here is the corrected version of the `renderWrappedText` function:
+```
+protected StringBuffer renderWrappedText(StringBuffer sb, int width, int nextLineTabStop, String text) {
+    int pos = findWrapPos(text, width, 0);
+
+    if (pos == -1) {
+        sb.append(rtrim(text));
+
+        return sb;
+    }
+    sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);
+
+    if (nextLineTabStop >= width) {
+        // stops infinite loop happening
+        throw new IllegalStateException("Total width is less than the width of the argument and indent - no room for the description");
+    }
+
+    // all following lines must be padded with nextLineTabStop space characters
+    final String padding = createPadding(nextLineTabStop);
+
+    while (true) {
+        text = padding + text.substring(pos).trim();
+        pos = findWrapPos(text, width, 0);
+
+        if (pos == -1) {
+            sb.append(text);
+
+            return sb;
+        }
+
+        if (text.length() > width) {
+            pos = width;
+        }
+
+        sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);
+    }
+}
+```

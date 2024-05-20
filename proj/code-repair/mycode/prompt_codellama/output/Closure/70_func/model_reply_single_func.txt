@@ -1,0 +1,45 @@
+ The buggy function is:
+```
+private void declareArguments(Node functionNode) {
+  Node astParameters = functionNode.getFirstChild().getNext();
+  Node body = astParameters.getNext();
+  FunctionType functionType = (FunctionType) functionNode.getJSType();
+  if (functionType != null) {
+    Node jsDocParameters = functionType.getParametersNode();
+    if (jsDocParameters != null) {
+      Node jsDocParameter = jsDocParameters.getFirstChild();
+      for (Node astParameter : astParameters.children()) {
+        if (jsDocParameter != null) {
+          defineSlot(astParameter, functionNode,
+              jsDocParameter.getJSType(), true);
+          jsDocParameter = jsDocParameter.getNext();
+        } else {
+          defineSlot(astParameter, functionNode, null, true);
+        }
+      }
+    }
+  }
+}
+```
+The bug is in the `for` loop where the `jsDocParameter` variable is being used to iterate over the parameters of the function. The problem is that the `jsDocParameter` variable is being reassigned to the next parameter in the function, but the loop is still using the previous value of `jsDocParameter`. This means that the loop is only checking the first parameter of the function, and not the others.
+
+To fix the bug, we need to use a different variable to iterate over the parameters of the function. Here is the corrected code:
+```
+private void declareArguments(Node functionNode) {
+  Node astParameters = functionNode.getFirstChild().getNext();
+  Node body = astParameters.getNext();
+  FunctionType functionType = (FunctionType) functionNode.getJSType();
+  if (functionType != null) {
+    Node jsDocParameters = functionType.getParametersNode();
+    if (jsDocParameters != null) {
+      Node jsDocParameter = jsDocParameters.getFirstChild();
+      for (Node astParameter : astParameters.children()) {
+        defineSlot(astParameter, functionNode,
+            jsDocParameter.getJSType(), true);
+        jsDocParameter = jsDocParameter.getNext();
+      }
+    }
+  }
+}
+```
+This code uses a new variable `astParameter` to iterate over the parameters of the function, and the `jsDocParameter` variable is only used to get the type of the first parameter.

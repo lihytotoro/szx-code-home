@@ -1,0 +1,10 @@
+prefix:
+private String getRemainingJSDocLine() {
+  String result = stream.getRemainingJSDocLine();
+
+buggy_hunk:
+
+
+suffix:
+  return result;
+}

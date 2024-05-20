@@ -1,0 +1,35 @@
+ The buggy function is:
+```
+public ObjectNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+{
+    if (p.getCurrentToken() == JsonToken.START_OBJECT) {
+        p.nextToken();
+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());
+    }
+    // 23-Sep-2015, tatu: Ugh. We may also be given END_OBJECT (similar to FIELD_NAME),
+    //    if caller has advanced to the first token of Object, but for empty Object
+    if (p.getCurrentToken() == JsonToken.FIELD_NAME) {
+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());
+    }
+    throw ctxt.mappingException(ObjectNode.class);
+}
+```
+The bug is in the second `if` statement, where it checks for `JsonToken.FIELD_NAME`. This is incorrect because `JsonToken.FIELD_NAME` is only used for fields within an object, not for the object itself.
+
+The correct version of the function is:
+```
+public ObjectNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+{
+    if (p.getCurrentToken() == JsonToken.START_OBJECT) {
+        p.nextToken();
+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());
+    }
+    // 23-Sep-2015, tatu: Ugh. We may also be given END_OBJECT (similar to FIELD_NAME),
+    //    if caller has advanced to the first token of Object, but for empty Object
+    if (p.getCurrentToken() == JsonToken.END_OBJECT) {
+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());
+    }
+    throw ctxt.mappingException(ObjectNode.class);
+}
+```
+In this version, the second `if` statement checks for `JsonToken.END_OBJECT`, which is the token that indicates the end of an object. This fixes the bug and allows the function to correctly deserialize empty objects.

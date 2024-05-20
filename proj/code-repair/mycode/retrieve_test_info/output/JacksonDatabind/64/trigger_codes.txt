@@ -1,0 +1,2 @@
+assertEquals(aposToQuotes("{}"),
+mapper.writeValueAsString(new Issue1351NonBean(0)));

@@ -1,0 +1,1 @@
+assertValidToLocale("fr__POSIX", "fr", "", "POSIX");

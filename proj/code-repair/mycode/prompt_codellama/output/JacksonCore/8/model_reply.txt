@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (_resultString != null) {
+    return (_resultArray = _resultString.toCharArray());
+}
+```
+This line is added to handle the case where the `getTextBuffer()` method is called when the `_resultString` field is not null, but the `_resultArray` field is null. In this case, the method needs to create a new array from the `_resultString` field and return it.

@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+
+    if (current == '\r') {
+
+This line is added to the original code to fix the bug. The buggy hunk was:
+
+    if (current == '\n') {
+
+The buggy hunk was counting newlines as line breaks, but it should have been counting carriage returns (CR) as line breaks. The fix is to change the condition to check for CR instead of newline.

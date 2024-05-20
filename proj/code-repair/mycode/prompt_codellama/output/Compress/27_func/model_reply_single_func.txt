@@ -1,0 +1,107 @@
+ The buggy function is:
+```
+public static long parseOctal(final byte[] buffer, final int offset, final int length) {
+    long result = 0;
+    int end = offset + length;
+    int start = offset;
+
+    if (length < 2) {
+        throw new IllegalArgumentException("Length " + length + " must be at least 2");
+    }
+
+    if (buffer[start] == 0) {
+        return 0L;
+    }
+
+    // Skip leading spaces
+    while (start < end) {
+        if (buffer[start] == ' ') {
+            start++;
+        } else {
+            break;
+        }
+    }
+
+    // Trim all trailing NULs and spaces.
+    // The ustar and POSIX tar specs require a trailing NUL or
+    // space but some implementations use the extra digit for big
+    // sizes/uids/gids ...
+    byte trailer = buffer[end - 1];
+    while (start < end && (trailer == 0 || trailer == ' ')) {
+        end--;
+        trailer = buffer[end - 1];
+    }
+    if (start == end) {
+        throw new IllegalArgumentException(
+                exceptionMessage(buffer, offset, length, start, trailer));
+    }
+
+    for (; start < end; start++) {
+        final byte currentByte = buffer[start];
+        // CheckStyle:MagicNumber OFF
+        if (currentByte < '0' || currentByte > '7') {
+            throw new IllegalArgumentException(
+                    exceptionMessage(buffer, offset, length, start, currentByte));
+        }
+        result = (result << 3) + (currentByte - '0'); // convert from ASCII
+        // CheckStyle:MagicNumber ON
+    }
+
+    return result;
+}
+```
+The bug is in the `for` loop where the `currentByte` is being checked for validity. The condition `currentByte < '0' || currentByte > '7'` is always true because the `currentByte` is being compared with the ASCII value of the characters '0' and '7', which are 48 and 55 respectively.
+
+The correct version of the function should be:
+```
+public static long parseOctal(final byte[] buffer, final int offset, final int length) {
+    long result = 0;
+    int end = offset + length;
+    int start = offset;
+
+    if (length < 2) {
+        throw new IllegalArgumentException("Length " + length + " must be at least 2");
+    }
+
+    if (buffer[start] == 0) {
+        return 0L;
+    }
+
+    // Skip leading spaces
+    while (start < end) {
+        if (buffer[start] == ' ') {
+            start++;
+        } else {
+            break;
+        }
+    }
+
+    // Trim all trailing NULs and spaces.
+    // The ustar and POSIX tar specs require a trailing NUL or
+    // space but some implementations use the extra digit for big
+    // sizes/uids/gids ...
+    byte trailer = buffer[end - 1];
+    while (start < end && (trailer == 0 || trailer == ' ')) {
+        end--;
+        trailer = buffer[end - 1];
+    }
+    if (start == end) {
+        throw new IllegalArgumentException(
+                exceptionMessage(buffer, offset, length, start, trailer));
+    }
+
+    for (; start < end; start++) {
+        final byte currentByte = buffer[start];
+        // CheckStyle:MagicNumber OFF
+        if (currentByte < '0' || currentByte > '7') {
+            throw new IllegalArgumentException(
+                    exceptionMessage(buffer, offset, length, start, currentByte));
+        }
+        result = (result << 3) + (currentByte - '0'); // convert from ASCII
+        // CheckStyle:MagicNumber ON
+    }
+
+    return result;
+}
+```
+The corrected function checks if the `currentByte` is between '0' and '7' (ASCII values 48 and 55) instead of comparing it with the ASCII values of '0' and '7'.

@@ -1,0 +1,1 @@
+       if (!charset.isEmpty()) {            charset = charset.toUpperCase(Locale.ENGLISH);            return charset;        }

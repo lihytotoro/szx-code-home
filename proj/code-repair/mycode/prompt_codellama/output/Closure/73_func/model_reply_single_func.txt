@@ -1,0 +1,12 @@
+ The bug in the function is in the `appendHexJavaScriptRepresentation` method, which is used to escape non-ASCII characters. The method is using the `StringBuilder.append(int)` method to append the hexadecimal representation of the character, but it is not using the correct format.
+
+The correct format for a hexadecimal escape sequence in JavaScript is `\uxxxx`, where `xxxx` is the hexadecimal representation of the character. The `appendHexJavaScriptRepresentation` method is using `\x` instead of `\u`.
+
+Here is the corrected version of the `appendHexJavaScriptRepresentation` method:
+```
+private static void appendHexJavaScriptRepresentation(StringBuilder sb, char c) {
+    sb.append("\\u");
+    sb.append(Integer.toHexString(c));
+}
+```
+With this correction, the `strEscape` method will produce the correct output for the test case `testUnicode`.

@@ -1,0 +1,12 @@
+prefix:
+protected final boolean _add(Annotation ann) {
+    if (_annotations == null) {
+        _annotations = new HashMap<Class<? extends Annotation>,Annotation>();
+    }
+    Annotation previous = _annotations.put(ann.annotationType(), ann);
+
+buggy_hunk:
+    return (previous != null) && previous.equals(ann);
+
+suffix:
+}

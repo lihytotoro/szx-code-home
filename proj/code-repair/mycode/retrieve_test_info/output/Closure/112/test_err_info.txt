@@ -1,0 +1,4 @@
+junit.framework.AssertionFailedError: unexpected warnings(s):
+JSC_TYPE_MISMATCH. actual parameter 1 of Class.prototype.foo does not match formal parameter
+found   : function (number): string
+required: function ((number|string)): (number|string) at [testcode] line 19 : 16

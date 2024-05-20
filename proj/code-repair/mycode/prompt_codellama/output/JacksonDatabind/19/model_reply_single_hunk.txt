@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+return MapType.construct(rawClass, _unknownType(), _unknownType());
+```
+This line is returning a `MapType` object with two unknown types, which is the correct behavior for a map with no type parameters.

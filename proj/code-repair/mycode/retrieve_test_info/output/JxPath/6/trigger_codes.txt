@@ -1,0 +1,1 @@
+assertXPathValue(context, "$d = 'a'", Boolean.TRUE);

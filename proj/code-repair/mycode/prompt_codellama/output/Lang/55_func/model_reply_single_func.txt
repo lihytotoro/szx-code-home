@@ -1,0 +1,13 @@
+ The bug in the code is that the `stopTime` variable is not being updated when the stopwatch is suspended. Here is the corrected version of the function:
+```
+public void stop() {
+    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {
+        throw new IllegalStateException("Stopwatch is not running. ");
+    }
+    if(this.runningState == STATE_RUNNING) {
+        stopTime = System.currentTimeMillis();
+    }
+    this.runningState = STATE_STOPPED;
+}
+```
+In the original code, the `stopTime` variable is only updated when the stopwatch is running, but it should also be updated when the stopwatch is suspended. The corrected code updates the `stopTime` variable regardless of the current state of the stopwatch.

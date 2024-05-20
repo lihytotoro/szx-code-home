@@ -1,0 +1,1 @@
+assertEquals("selected option", "bar", group.getSelected());

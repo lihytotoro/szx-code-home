@@ -1,0 +1,39 @@
+junit.framework.AssertionFailedError: 
+Expected: window.f=function(a){}
+Result: window.f=function(){}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: input0] [input_id: InputId: input0]
+        EXPR_RESULT 1 [source_file: input0]
+            ASSIGN 1 [source_file: input0]
+                GETPROP 1 [source_file: input0]
+                    NAME window 1 [source_file: input0]
+                    STRING f 1 [source_file: input0]
+                FUNCTION  1 [source_file: input0]
+                    NAME  1 [source_file: input0]
+                    PARAM_LIST 1 [source_file: input0]
+                        NAME a 1 [source_file: input0]
+                    BLOCK 1 [source_file: input0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: input0] [input_id: InputId: input0]
+        EXPR_RESULT 1 [source_file: input0]
+            ASSIGN 1 [source_file: input0]
+                GETPROP 1 [source_file: input0]
+                    NAME window 1 [source_file: input0]
+                    STRING f 1 [source_file: input0]
+                FUNCTION  1 [source_file: input0]
+                    NAME  1 [source_file: input0]
+                    PARAM_LIST 1 [source_file: input0]
+                    BLOCK 1 [source_file: input0]
+
+
+Subtree1: PARAM_LIST 1 [source_file: input0]
+    NAME a 1 [source_file: input0]
+
+
+Subtree2: PARAM_LIST 1 [source_file: input0]
+

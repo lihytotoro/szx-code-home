@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (name.globalSets == 1 && name.localSets == 0 &&
+```
+This line checks if the name has a global set and no local sets, which is a condition that is not met in the test case. The test case is expecting the name to have a global set and no local sets, but the code is not checking for that condition correctly.

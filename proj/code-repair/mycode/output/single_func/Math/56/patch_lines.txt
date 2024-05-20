@@ -1,0 +1,1 @@
+   indices[last] = index - count;

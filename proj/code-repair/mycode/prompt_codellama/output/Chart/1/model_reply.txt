@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    if (dataset != null && isSeriesVisibleInLegend(i)) {
+
+This is because the `isSeriesVisibleInLegend` method is only called if the `dataset` is not null, and the `getLegendItem` method is only called if the series is visible in the legend.

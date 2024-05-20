@@ -1,0 +1,1 @@
+UUID result2 = mapper.readValue(quote("not a uuid!"), UUID.class);

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    ) {
+
+This line is missing from the original code, and it is necessary to complete the function. The function is checking if a property assignment is a prototype property assignment, and it is doing this by checking if the property name is "prototype" and if the property value is a function.

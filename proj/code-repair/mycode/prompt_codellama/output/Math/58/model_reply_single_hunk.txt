@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+```
+return fit(new Gaussian.Parametric(), guess);
+```
+This is the original buggy hunk that was removed, and it is trying to use the `fit` method with a negative value for the `guess` parameter. The `fit` method expects the `guess` parameter to be a positive value, and it throws an `NotStrictlyPositiveException` if it is not.
+
+The correct line at the INFILL location should be the same as the original buggy hunk, but with the correct value for the `guess` parameter. The correct value for the `guess` parameter is the one that was previously calculated and stored in the `guess` variable.

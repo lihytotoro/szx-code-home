@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+  Node argList = getFunctionArgList(function);
+```
+This line retrieves the argument list of the function, which is used later in the code to remove unreferenced arguments.

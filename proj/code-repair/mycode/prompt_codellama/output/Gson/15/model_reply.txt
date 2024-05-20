@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (Double.isNaN(value) || Double.isInfinite(value)) {
+
+This line checks if the value is not a number (NaN) or infinite, which is not allowed in JSON. If the value is not a number or infinite, an IllegalArgumentException is thrown with a message indicating that the value must be finite.

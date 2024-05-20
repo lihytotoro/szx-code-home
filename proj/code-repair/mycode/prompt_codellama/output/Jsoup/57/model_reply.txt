@@ -1,0 +1,3 @@
+ The correct line at the INFILL location should be:
+
+attributes.remove(attrKey);

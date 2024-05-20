@@ -1,0 +1,8 @@
+ The correct line at the INFILL location should be:
+```
+if (start == end) {
+    throw new IllegalArgumentException(
+            exceptionMessage(buffer, offset, length, start, trailer));
+}
+```
+This is because the `start` variable is incremented in the `for` loop, so it is possible for `start` to equal `end` after the loop completes. In this case, the `if` statement will throw an `IllegalArgumentException` with a message indicating that the byte at the specified offset is invalid.

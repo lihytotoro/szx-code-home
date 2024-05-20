@@ -1,0 +1,2 @@
+WithBagOfStrings result = MAPPER.readerFor(WithBagOfStrings.class)
+.readValue("{\"strings\": [ \"a\", \"b\", \"c\"]}");

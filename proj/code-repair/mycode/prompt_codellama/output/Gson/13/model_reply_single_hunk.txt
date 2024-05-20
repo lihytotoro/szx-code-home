@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (last == NUMBER_CHAR_DIGIT && fitsInLong && (value != Long.MIN_VALUE || negative)) {
+```
+This line checks if the last character read is a digit, and if the number fits in a long value. If the number is negative and the value is equal to `Long.MIN_VALUE`, the line returns `PEEKED_NONE` to indicate that the number is too large to be represented as a long. This is the buggy behavior that was removed by the INFILL location.

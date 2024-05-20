@@ -1,0 +1,22 @@
+ The bug in the code is that it does not handle the case where the product of `val1` and `val2` overflows a `long`. The function should throw an `ArithmeticException` in this case, but it does not.
+
+Here is the corrected version of the function:
+```
+public static long safeMultiply(long val1, int val2) {
+    switch (val2) {
+        case -1:
+            return -val1;
+        case 0:
+            return 0L;
+        case 1:
+            return val1;
+        default:
+            long total = val1 * val2;
+            if (total / val2 != val1) {
+                throw new ArithmeticException("Multiplication overflows a long: " + val1 + " * " + val2);
+            }
+            return total;
+    }
+}
+```
+This version of the function checks if the product of `val1` and `val2` overflows a `long` before performing the multiplication. If the product overflows, it throws an `ArithmeticException`. Otherwise, it returns the product.

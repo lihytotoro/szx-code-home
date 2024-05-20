@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (constraintObj.isRecordType()) {
+```
+This line checks if the `constraintObj` is a record type, which means it is an object with named properties. The code then iterates over the properties of the record and tries to match them with the properties of the `this` object.
+
+The buggy hunk was removed because it was causing the code to crash when it encountered a record type as the `constraintObj`. The code was trying to access the `getOwnPropertyNames` method of the `constraintObj`, which was not defined for record types. By removing this hunk, the code now handles record types correctly and does not crash.

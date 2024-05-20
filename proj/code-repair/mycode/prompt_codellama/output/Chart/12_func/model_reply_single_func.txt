@@ -1,0 +1,22 @@
+ The bug in the code is in the constructor of the `MultiplePiePlot` class. The `PiePlot` object is created with a `null` dataset, which is then assigned to the `dataset` field of the `MultiplePiePlot` object. However, the `PiePlot` object is not properly initialized with the `dataset` field, and the `dataset` field is not set as the dataset of the `PiePlot` object.
+
+The correct version of the buggy function is:
+```
+public MultiplePiePlot(CategoryDataset dataset) {
+    super();
+    this.dataset = dataset;
+    PiePlot piePlot = new PiePlot(dataset);
+    this.pieChart = new JFreeChart(piePlot);
+    this.pieChart.removeLegend();
+    this.dataExtractOrder = TableOrder.BY_COLUMN;
+    this.pieChart.setBackgroundPaint(null);
+    TextTitle seriesTitle = new TextTitle("Series Title",
+            new Font("SansSerif", Font.BOLD, 12));
+    seriesTitle.setPosition(RectangleEdge.BOTTOM);
+    this.pieChart.setTitle(seriesTitle);
+    this.aggregatedItemsKey = "Other";
+    this.aggregatedItemsPaint = Color.lightGray;
+    this.sectionPaints = new HashMap();
+}
+```
+In this version, the `PiePlot` object is created with the `dataset` field as the dataset, which is then assigned to the `pieChart` field of the `MultiplePiePlot` object. This ensures that the `PiePlot` object is properly initialized with the `dataset` field, and the `dataset` field is set as the dataset of the `PiePlot` object.

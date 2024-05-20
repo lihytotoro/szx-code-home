@@ -1,0 +1,43 @@
+ The bug in the code is in the line `final double r = random.nextDouble() * sum;`. The `random.nextDouble()` method returns a random value between 0.0 (inclusive) and 1.0 (exclusive). However, the code is multiplying this value by `sum`, which is the sum of the squared distances of all points from the nearest center. This means that the probability of choosing a point as a center is proportional to the sum of its distances from all centers, which is not a valid probability distribution.
+
+To fix the bug, we need to normalize the probability distribution by dividing it by the sum of all squared distances. Here's the corrected code:
+```
+private static <T extends Clusterable<T>> List<Cluster<T>>
+    chooseInitialCenters(final Collection<T> points, final int k, final Random random) {
+
+    final List<T> pointSet = new ArrayList<T>(points);
+    final List<Cluster<T>> resultSet = new ArrayList<Cluster<T>>();
+
+    // Choose one center uniformly at random from among the data points.
+    final T firstPoint = pointSet.remove(random.nextInt(pointSet.size()));
+    resultSet.add(new Cluster<T>(firstPoint));
+
+    final double[] dx2 = new double[pointSet.size()];
+    while (resultSet.size() < k) {
+        // For each data point x, compute D(x), the distance between x and
+        // the nearest center that has already been chosen.
+        int sum = 0;
+        for (int i = 0; i < pointSet.size(); i++) {
+            final T p = pointSet.get(i);
+            final Cluster<T> nearest = getNearestCluster(resultSet, p);
+            final double d = p.distanceFrom(nearest.getCenter());
+            sum += d * d;
+            dx2[i] = sum;
+        }
+
+        // Add one new data point as a center. Each point x is chosen with
+        // probability proportional to D(x)2 / sum(D(x)2)
+        final double r = random.nextDouble() * sum / pointSet.size();
+        for (int i = 0 ; i < dx2.length; i++) {
+            if (dx2[i] >= r) {
+                final T p = pointSet.remove(i);
+                resultSet.add(new Cluster<T>(p));
+                break;
+            }
+        }
+    }
+
+    return resultSet;
+
+}
+```

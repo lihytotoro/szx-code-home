@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (block.isLoop) {
+  return false;
+}
+```
+This line checks if the current basic block is a loop, and if so, it returns false, indicating that the variable is not assigned once in the lifetime of the function.

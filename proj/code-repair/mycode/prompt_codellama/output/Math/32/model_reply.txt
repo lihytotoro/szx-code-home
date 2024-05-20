@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+if (tree.getAttribute() == BoundaryAttribute.INSIDE) {
+
+This is because the `getAttribute()` method returns an object of type `BoundaryAttribute`, which is not the same as a `Boolean`. The `BoundaryAttribute` enum has two values: `INSIDE` and `OUTSIDE`. The `INSIDE` value indicates that the polygon is inside the space, while the `OUTSIDE` value indicates that the polygon is outside the space.
+
+The original buggy line was trying to cast the `BoundaryAttribute` object to a `Boolean`, which is not possible. The correct line uses the `==` operator to compare the `BoundaryAttribute` object to the `INSIDE` value, which is a valid comparison.

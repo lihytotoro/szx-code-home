@@ -1,0 +1,53 @@
+junit.framework.AssertionFailedError: 
+Expected: x=["a",foo,"b,c"].join()
+Result: x=["a",foo,"b,c"].join(",")
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        EXPR_RESULT 1 [source_file: expected0]
+            ASSIGN 1 [source_file: expected0]
+                NAME x 1 [source_file: expected0]
+                CALL 1 [source_file: expected0]
+                    GETPROP 1 [source_file: expected0]
+                        ARRAYLIT 1 [source_file: expected0]
+                            STRING a 1 [source_file: expected0]
+                            NAME foo 1 [source_file: expected0]
+                            STRING b,c 1 [source_file: expected0]
+                        STRING join 1 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        EXPR_RESULT 1 [source_file: testcode]
+            ASSIGN 1 [source_file: testcode]
+                NAME x 1 [source_file: testcode]
+                CALL 1 [source_file: testcode]
+                    GETPROP 1 [source_file: testcode]
+                        ARRAYLIT 1 [source_file: testcode]
+                            STRING a 1 [source_file: testcode]
+                            NAME foo 1 [source_file: testcode]
+                            STRING b,c 1 [source_file: testcode]
+                        STRING join 1 [source_file: testcode]
+                    STRING , 1 [source_file: testcode]
+
+
+Subtree1: CALL 1 [source_file: expected0]
+    GETPROP 1 [source_file: expected0]
+        ARRAYLIT 1 [source_file: expected0]
+            STRING a 1 [source_file: expected0]
+            NAME foo 1 [source_file: expected0]
+            STRING b,c 1 [source_file: expected0]
+        STRING join 1 [source_file: expected0]
+
+
+Subtree2: CALL 1 [source_file: testcode]
+    GETPROP 1 [source_file: testcode]
+        ARRAYLIT 1 [source_file: testcode]
+            STRING a 1 [source_file: testcode]
+            NAME foo 1 [source_file: testcode]
+            STRING b,c 1 [source_file: testcode]
+        STRING join 1 [source_file: testcode]
+    STRING , 1 [source_file: testcode]
+

@@ -1,0 +1,1 @@
+return callHasLocalResult(value) || isToStringMethodCall(value) || locals.apply(value);

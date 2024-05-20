@@ -1,0 +1,1 @@
+   this.delimiter = format.getDelimiter();    this.escape = format.getEscape();    this.quote = format.getQuote();

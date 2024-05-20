@@ -1,0 +1,2 @@
+Assert.assertEquals(stat.evaluate(arrayZero, weightZero),
+stat.evaluate(testArray, testWeightsArray, 0, 5), 0);

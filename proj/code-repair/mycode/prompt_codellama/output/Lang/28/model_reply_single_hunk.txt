@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+```
+out.write(entityValue);
+```
+
+This line is responsible for writing the entity value to the output stream. The bug in the original code was that it was not handling supplementary characters correctly, and was instead treating them as if they were regular characters. The fix was to add the `isHex` flag to the code, which allows it to handle supplementary characters correctly.

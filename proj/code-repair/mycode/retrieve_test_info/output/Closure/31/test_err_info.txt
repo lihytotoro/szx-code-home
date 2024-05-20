@@ -1,0 +1,71 @@
+junit.framework.AssertionFailedError: 
+Expected: goog.provide("hops");goog.provide("beer");goog.require("hops");goog.require("beer")
+Result: goog.require("beer");goog.provide("beer");goog.require("hops");goog.provide("hops")
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: input0] [input_id: InputId: input0]
+        EXPR_RESULT 1 [source_file: input0]
+            CALL 1 [source_file: input0]
+                GETPROP 1 [source_file: input0]
+                    NAME goog 1 [source_file: input0]
+                    STRING provide 1 [source_file: input0]
+                STRING hops 1 [source_file: input0]
+    SCRIPT 1 [synthetic: 1] [source_file: input1] [input_id: InputId: input1]
+        EXPR_RESULT 1 [source_file: input1]
+            CALL 1 [source_file: input1]
+                GETPROP 1 [source_file: input1]
+                    NAME goog 1 [source_file: input1]
+                    STRING provide 1 [source_file: input1]
+                STRING beer 1 [source_file: input1]
+        EXPR_RESULT 2 [source_file: input1]
+            CALL 2 [source_file: input1]
+                GETPROP 2 [source_file: input1]
+                    NAME goog 2 [source_file: input1]
+                    STRING require 2 [source_file: input1]
+                STRING hops 2 [source_file: input1]
+    SCRIPT 1 [synthetic: 1] [source_file: input2] [input_id: InputId: input2]
+        EXPR_RESULT 1 [source_file: input2]
+            CALL 1 [source_file: input2]
+                GETPROP 1 [source_file: input2]
+                    NAME goog 1 [source_file: input2]
+                    STRING require 1 [source_file: input2]
+                STRING beer 1 [source_file: input2]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: input0] [input_id: InputId: input0]
+        EXPR_RESULT 1 [source_file: input0]
+            CALL 1 [source_file: input0]
+                GETPROP 1 [source_file: input0]
+                    NAME goog 1 [source_file: input0]
+                    STRING require 1 [source_file: input0]
+                STRING beer 1 [source_file: input0]
+    SCRIPT 1 [synthetic: 1] [source_file: input1] [input_id: InputId: input1]
+        EXPR_RESULT 1 [source_file: input1]
+            CALL 1 [source_file: input1]
+                GETPROP 1 [source_file: input1]
+                    NAME goog 1 [source_file: input1]
+                    STRING provide 1 [source_file: input1]
+                STRING beer 1 [source_file: input1]
+        EXPR_RESULT 2 [source_file: input1]
+            CALL 2 [source_file: input1]
+                GETPROP 2 [source_file: input1]
+                    NAME goog 2 [source_file: input1]
+                    STRING require 2 [source_file: input1]
+                STRING hops 2 [source_file: input1]
+    SCRIPT 1 [synthetic: 1] [source_file: input2] [input_id: InputId: input2]
+        EXPR_RESULT 1 [source_file: input2]
+            CALL 1 [source_file: input2]
+                GETPROP 1 [source_file: input2]
+                    NAME goog 1 [source_file: input2]
+                    STRING provide 1 [source_file: input2]
+                STRING hops 1 [source_file: input2]
+
+
+Subtree1: STRING provide 1 [source_file: input0]
+
+
+Subtree2: STRING require 1 [source_file: input0]
+

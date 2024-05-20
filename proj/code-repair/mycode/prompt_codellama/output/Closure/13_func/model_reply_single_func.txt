@@ -1,0 +1,36 @@
+ The bug in the code is that it does not properly handle the case where the `shouldRetraverse` method returns `true` after the first iteration of the loop. In this case, the function will continue to call `traverse` on the same node, even though it has already visited all of its children. This can cause the function to enter an infinite loop, as it will continue to visit the same node over and over again.
+
+To fix the bug, we need to add a check to ensure that we do not call `traverse` on the same node more than once. We can do this by adding a `visited` set to keep track of the nodes that we have already visited. Here is the corrected version of the function:
+```
+private void traverse(Node node) {
+  // The goal here is to avoid retraversing
+  // the entire AST to catch newly created opportunities.
+  // So we track whether a "unit of code" has changed,
+  // and revisit immediately.
+  if (!shouldVisit(node)) {
+    return;
+  }
+
+  int visits = 0;
+  Set<Node> visited = new HashSet<>();
+  do {
+    Node c = node.getFirstChild();
+    while(c != null) {
+      if (!visited.contains(c)) {
+        traverse(c);
+        visited.add(c);
+      }
+      Node next = c.getNext();
+      c = next;
+    }
+
+    visit(node);
+    visits++;
+
+    Preconditions.checkState(visits < 10000, "too many interations");
+  } while (shouldRetraverse(node));
+
+  exitNode(node);
+}
+```
+In this version, we add a `visited` set to keep track of the nodes that we have already visited. We check whether the current node is in the `visited` set before calling `traverse` on it. If it is not in the set, we add it to the set and call `traverse` on it. This ensures that we do not visit the same node more than once.

@@ -1,0 +1,15 @@
+prefix:
+static boolean preserveWhitespace(Node node) {
+    if (node != null && node instanceof Element) {
+        Element el = (Element) node;
+
+buggy_hunk:
+            if (el.tag.preserveWhitespace())
+                return true;
+            else
+                return el.parent() != null && el.parent().tag.preserveWhitespace();
+
+suffix:
+    }
+    return false;
+}

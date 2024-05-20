@@ -1,0 +1,2 @@
+return resolve(context, contextRawType,
+    $Gson$Types.getGenericSupertype(context, contextRawType, supertype));

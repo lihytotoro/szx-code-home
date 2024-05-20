@@ -1,0 +1,10 @@
+prefix:
+public int compareTo(Fraction object) {
+
+buggy_hunk:
+    double nOd = doubleValue();
+    double dOn = object.doubleValue();
+
+suffix:
+    return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);
+}

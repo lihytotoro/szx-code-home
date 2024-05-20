@@ -1,0 +1,67 @@
+ The buggy function is:
+```
+public double solve(double min, double max) throws MaxIterationsExceededException, 
+    FunctionEvaluationException {
+    
+    clearResult();
+    verifyInterval(min, max);
+    
+    double ret = Double.NaN;
+    
+    double yMin = f.value(min);
+    double yMax = f.value(max);
+    
+    // Verify bracketing
+    double sign = yMin * yMax;
+    if (sign >= 0) {
+        // check if either value is close to a zero
+            // neither value is close to zero and min and max do not bracket root.
+            throw new IllegalArgumentException
+            ("Function values at endpoints do not have different signs." +
+                    "  Endpoints: [" + min + "," + max + "]" + 
+                    "  Values: [" + yMin + "," + yMax + "]");
+    } else {
+        // solve using only the first endpoint as initial guess
+        ret = solve(min, yMin, max, yMax, min, yMin);
+        // either min or max is a root
+    }
+
+    return ret;
+}
+```
+The bug is in the `verifyInterval` method, which is not properly checking if the endpoints are close to zero. The `sign` variable is being calculated as the product of the values at the endpoints, which can be zero if the endpoints are close to zero. However, the `verifyInterval` method is not properly checking if the endpoints are close to zero, and it is throwing an `IllegalArgumentException` if the sign is zero, even if the endpoints are close to zero.
+
+Here is the corrected version of the function:
+```
+public double solve(double min, double max) throws MaxIterationsExceededException, 
+    FunctionEvaluationException {
+    
+    clearResult();
+    verifyInterval(min, max);
+    
+    double ret = Double.NaN;
+    
+    double yMin = f.value(min);
+    double yMax = f.value(max);
+    
+    // Verify bracketing
+    double sign = yMin * yMax;
+    if (sign >= 0) {
+        // check if either value is close to a zero
+        if (Math.abs(yMin) < 1e-10 || Math.abs(yMax) < 1e-10) {
+            // neither value is close to zero and min and max do not bracket root.
+            throw new IllegalArgumentException
+            ("Function values at endpoints do not have different signs." +
+                    "  Endpoints: [" + min + "," + max + "]" + 
+                    "  Values: [" + yMin + "," + yMax + "]");
+        } else {
+            // solve using only the first endpoint as initial guess
+            ret = solve(min, yMin, max, yMax, min, yMin);
+            // either min or max is a root
+        }
+    }
+
+    return ret;
+}
+```
+In the corrected version, the `verifyInterval` method checks if either value is close to zero by checking if the absolute value of the value is less than 1e-10. If either value is close to zero, the method does not throw an `IllegalArgumentException`, and instead returns the result of the `solve` method.

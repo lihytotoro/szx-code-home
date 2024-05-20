@@ -1,0 +1,9 @@
+prefix:
+public Object generateId(Object forPojo) {
+
+buggy_hunk:
+        id = generator.generateId(forPojo);
+
+suffix:
+    return id;
+}

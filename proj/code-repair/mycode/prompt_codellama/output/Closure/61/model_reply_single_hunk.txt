@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (compiler != null && !compiler.hasRegExpGlobalReferences()) {
+
+This line is checking if the compiler has any references to RegExp objects with the "global" flag set. If it does, then the function call is considered to have side effects, even if it is a built-in function that would otherwise have no side effects.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (start.compareTo(end) > 0) {
+
+This line checks if the start date is after the end date, which is a requirement for the createCopy method. If the start date is after the end date, an IllegalArgumentException is thrown with the message "Requires start <= end.".

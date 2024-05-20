@@ -1,0 +1,1 @@
+   int index = indexOf(x);    XYDataItem overwritten = null;    if (index >= 0 && !this.allowDuplicateXValues) {

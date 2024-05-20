@@ -1,0 +1,1 @@
+char ch4 = str.charAt(4);

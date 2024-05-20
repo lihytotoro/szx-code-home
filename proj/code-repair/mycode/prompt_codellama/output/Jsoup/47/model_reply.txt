@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+                    if (!inAttribute || escapeMode == EscapeMode.xhtml)
+
+This change ensures that the escaping of the greater-than symbol (>) is only done when it is not in an XML attribute, or when the escape mode is XHTML. This is necessary because in XHTML, the greater-than symbol is not escaped, but in HTML, it is escaped.

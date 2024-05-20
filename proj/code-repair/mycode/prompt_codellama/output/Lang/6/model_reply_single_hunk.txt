@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+            pos += Character.charCount(Character.codePointAt(input, pos));
+
+This line is correct because it updates the position of the current character in the input string by the number of characters in the current code point. This is necessary because the `translate` method may consume a surrogate pair, which is represented by two characters in the input string. By updating the position of the current character, the method can correctly process the remaining characters in the input string.

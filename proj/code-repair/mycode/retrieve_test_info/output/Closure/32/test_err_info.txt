@@ -1,0 +1,13 @@
+junit.framework.ComparisonFailure: expected:</*
+
+ [  This
+     is
+      ] ASCII    ART
+*/
+> but was:</*
+
+ [This
+ is
+] ASCII    ART
+*/
+>

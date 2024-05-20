@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+            for (int i = begin; i < begin + length; i++) {
+
+This line replaces the original buggy line and fixes the issue with the for loop. The loop now starts at the beginning of the segment (as specified by the begin parameter) and ends at the end of the segment (as specified by the length parameter).

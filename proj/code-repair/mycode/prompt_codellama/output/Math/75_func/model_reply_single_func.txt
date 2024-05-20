@@ -1,0 +1,14 @@
+ The buggy function is:
+```
+public double getPct(Object v) {
+    return getCumPct((Comparable<?>) v);
+}
+```
+The bug is that the function is casting the `Object` parameter to a `Comparable<?>` parameter, which is not necessary. The `Object` parameter is already a `Comparable<?>`, so the cast is redundant and can be removed.
+
+The corrected function is:
+```
+public double getPct(Object v) {
+    return getCumPct(v);
+}
+```

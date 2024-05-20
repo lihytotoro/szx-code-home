@@ -1,0 +1,1 @@
+Assert.assertEquals(Complex.ZERO.reciprocal(), Complex.INF);

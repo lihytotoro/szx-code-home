@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (dataset != null && dataset.getRowCount() > 0) {
+```
+This line checks if the dataset is not null and if it has at least one row, which is necessary for the code to work correctly.

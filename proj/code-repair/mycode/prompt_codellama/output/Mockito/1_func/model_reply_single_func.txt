@@ -1,0 +1,23 @@
+ The bug is in the `captureArgumentsFrom` method, specifically in the `if (invocation.getRawArguments().length > position)` condition.
+
+The method is trying to capture the arguments from the `invocation` object, but it is not handling the case where the number of arguments in the `invocation` object is less than the number of matchers in the `matchers` list.
+
+Here is the corrected version of the `captureArgumentsFrom` method:
+```
+public void captureArgumentsFrom(Invocation invocation) {
+    if (invocation.getMethod().isVarArgs()) {
+        int indexOfVararg = invocation.getRawArguments().length - 1;
+        throw new UnsupportedOperationException();
+    } else {
+        for (int position = 0; position < matchers.size(); position++) {
+            Matcher m = matchers.get(position);
+            if (m instanceof CapturesArguments) {
+                if (invocation.getRawArguments().length > position) {
+                    ((CapturesArguments) m).captureFrom(invocation.getArgumentAt(position, Object.class));
+                }
+            }
+        }
+    }
+}
+```
+In this version, the method checks if the number of arguments in the `invocation` object is greater than the current position in the `matchers` list, and only captures the argument if it is. This ensures that the method does not try to capture arguments that do not exist in the `invocation` object.

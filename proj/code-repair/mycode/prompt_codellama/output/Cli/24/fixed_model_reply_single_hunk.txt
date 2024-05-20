@@ -1,0 +1,3 @@
+if (nextLineTabStop >= width) {
+    nextLineTabStop = width - 1;
+}

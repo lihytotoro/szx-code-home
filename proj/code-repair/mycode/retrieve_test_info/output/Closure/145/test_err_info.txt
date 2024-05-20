@@ -1,0 +1,1 @@
+junit.framework.ComparisonFailure: expected:<if(e1)[{A:function goo(){return true}]}> but was:<if(e1)[A:function goo(){return true]}>

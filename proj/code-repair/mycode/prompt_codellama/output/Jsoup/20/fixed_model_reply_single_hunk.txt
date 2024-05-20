@@ -1,0 +1,3 @@
+if (docData.startsWith("\uFEFF")) {
+    docData = docData.substring(1);
+}

@@ -1,0 +1,1 @@
+        parameters.hasNext() && arguments.hasNext()) {    parameter = parameters.next();

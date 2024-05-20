@@ -1,0 +1,3 @@
+if (upper == -1 || upper > str.length()) {
+    upper = str.length();
+}

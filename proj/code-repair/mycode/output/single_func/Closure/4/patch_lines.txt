@@ -1,0 +1,1 @@
+ if (resolved) {    super.resolveInternal(t, enclosing);    finishPropertyContinuations();    return registry.isLastGeneration() ?        getReferencedType() : this;  }  resolveViaProperties(t, enclosing);  if (detectImplicitPrototypeCycle()) {

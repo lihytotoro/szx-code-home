@@ -1,0 +1,11 @@
+ The correct line at the INFILL location is:
+
+if (i <= maxCode) {
+
+This line was removed from the code because it was causing an ArrayIndexOutOfBoundsException. The variable "i" was being used as an index into the "codes" array, but it was not being checked to make sure it was within the bounds of the array. This could have caused the code to access an index that did not exist in the array, which would have resulted in the ArrayIndexOutOfBoundsException.
+
+The correct line at the INFILL location is the one that checks the value of "i" to make sure it is within the bounds of the "codes" array. This line is:
+
+if (i <= maxCode) {
+
+This line ensures that "i" is a valid index into the "codes" array, and prevents the code from accessing an index that does not exist in the array.

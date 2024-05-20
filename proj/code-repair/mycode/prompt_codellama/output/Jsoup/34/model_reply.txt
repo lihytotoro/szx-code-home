@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (offset < length) {
+
+This line checks if the current offset is less than the length of the input sequence, and if so, it continues the loop. The buggy line was removed because it was not necessary and it was causing the error.

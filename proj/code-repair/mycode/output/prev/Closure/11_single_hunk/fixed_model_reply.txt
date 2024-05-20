@@ -1,0 +1,2 @@
+  } else if (validator.expectNotNullOrUndefined(t, n, childType,
+      "No properties on this expression", getNativeType(OBJECT_TYPE))) {

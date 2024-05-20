@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+String elName = endTag.getName();
+```
+This is because the `endTag` object has a `getName()` method that returns the name of the end tag, which is what we need to compare with the element name in the stack.

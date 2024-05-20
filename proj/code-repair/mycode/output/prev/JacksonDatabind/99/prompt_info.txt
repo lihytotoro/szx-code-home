@@ -1,0 +1,14 @@
+prefix:
+protected String buildCanonicalName()
+{
+    StringBuilder sb = new StringBuilder();
+    sb.append(_class.getName());
+    sb.append('<');
+    sb.append(_referencedType.toCanonical());
+
+buggy_line:
+
+
+suffix:
+    return sb.toString();
+}

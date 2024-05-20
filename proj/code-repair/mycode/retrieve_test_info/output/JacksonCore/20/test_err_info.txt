@@ -1,0 +1,1 @@
+com.fasterxml.jackson.core.JsonGenerationException: No native support for writing embedded objects

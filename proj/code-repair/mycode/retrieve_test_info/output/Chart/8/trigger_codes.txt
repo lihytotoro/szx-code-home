@@ -1,0 +1,1 @@
+assertEquals(35, w.getWeek());

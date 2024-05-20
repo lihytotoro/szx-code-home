@@ -1,0 +1,25 @@
+ The buggy function is:
+```
+public DocumentType(String name, String publicId, String systemId, String baseUri) {
+    super(baseUri);
+
+    Validate.notEmpty(name);
+    attr("name", name);
+    attr("publicId", publicId);
+    attr("systemId", systemId);
+}
+```
+The bug is that the `Validate.notEmpty` method is used to validate the `name` parameter, but it is not checking if the `name` parameter is empty. Instead, it is checking if the `baseUri` parameter is empty, which is not the intended behavior.
+
+The corrected function should be:
+```
+public DocumentType(String name, String publicId, String systemId, String baseUri) {
+    super(baseUri);
+
+    Validate.notEmpty(name, "name must not be empty");
+    attr("name", name);
+    attr("publicId", publicId);
+    attr("systemId", systemId);
+}
+```
+This function checks if the `name` parameter is empty and throws an `IllegalArgumentException` with the message "name must not be empty" if it is.

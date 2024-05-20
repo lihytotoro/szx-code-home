@@ -1,0 +1,20 @@
+ The bug is in the `parseDataNode` function, specifically in the `if (tag.equals(titleTag) || tag.equals(textareaTag))` block.
+
+The `tag.equals(titleTag) || tag.equals(textareaTag)` check is used to determine whether the current tag is a `title` or `textarea` tag, and if so, to create a `TextNode` instead of a `DataNode`. However, this check is not correct, as it only checks for the `title` and `textarea` tags, and does not check for other tags that may have the same behavior.
+
+To fix the bug, you can modify the `if` statement to check for all tags that should be treated as `TextNode`s, like this:
+```
+if (tag.isData() || tag.equals(titleTag) || tag.equals(textareaTag)) {
+    String data = tq.chompTo("</" + tagName);
+    tq.chompTo(">");
+
+    Node dataNode;
+    if (tag.isData()) {
+        dataNode = new DataNode(data, baseUri);
+    } else {
+        dataNode = TextNode.createFromEncoded(data, baseUri);
+    }
+    child.appendChild(dataNode);
+}
+```
+This will ensure that all tags that should be treated as `TextNode`s are handled correctly, and that the `DataNode`s are created correctly.

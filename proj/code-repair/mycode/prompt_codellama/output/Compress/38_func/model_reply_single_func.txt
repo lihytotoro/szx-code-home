@@ -1,0 +1,21 @@
+ The bug in the code is that it returns `true` if the file is a directory, but it also returns `true` if the file name ends with a slash. This means that if the file name ends with a slash, it will be treated as a directory, even if it is not actually a directory.
+
+Here is the corrected version of the function:
+```
+public boolean isDirectory() {
+    if (file != null) {
+        return file.isDirectory();
+    }
+
+    if (linkFlag == LF_DIR) {
+        return true;
+    }
+
+    if (getName().endsWith("/")) {
+        return false;
+    }
+
+    return false;
+}
+```
+In this version, the function returns `false` if the file name ends with a slash, to avoid treating it as a directory.

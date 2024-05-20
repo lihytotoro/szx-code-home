@@ -1,0 +1,1 @@
+String lowerParam = param.toLowerCase();

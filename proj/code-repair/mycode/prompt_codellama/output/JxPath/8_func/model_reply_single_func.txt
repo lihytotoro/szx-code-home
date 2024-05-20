@@ -1,0 +1,56 @@
+ The buggy function is:
+```
+private boolean compute(Object left, Object right) {
+    left = reduce(left);
+    right = reduce(right);
+
+    if (left instanceof InitialContext) {
+        ((InitialContext) left).reset();
+    }
+    if (right instanceof InitialContext) {
+        ((InitialContext) right).reset();
+    }
+    if (left instanceof Iterator && right instanceof Iterator) {
+        return findMatch((Iterator) left, (Iterator) right);
+    }
+    if (left instanceof Iterator) {
+        return containsMatch((Iterator) left, right);
+    }
+    if (right instanceof Iterator) {
+        return containsMatch((Iterator) right, left);
+    }
+    double ld = InfoSetUtil.doubleValue(left);
+    double rd = InfoSetUtil.doubleValue(right);
+    return evaluateCompare(ld == rd ? 0 : ld < rd ? -1 : 1);
+}
+```
+The bug is in the line `double ld = InfoSetUtil.doubleValue(left);`, where `InfoSetUtil.doubleValue(left)` returns `Double.NaN` for `left` being an `InitialContext`. This causes the comparison `ld == rd` to return `false`, even though `ld` and `rd` are both `Double.NaN`.
+
+The corrected function should handle the case where `left` or `right` is an `InitialContext` and return `false` in that case, instead of returning `Double.NaN`. Here's the corrected function:
+```
+private boolean compute(Object left, Object right) {
+    left = reduce(left);
+    right = reduce(right);
+
+    if (left instanceof InitialContext) {
+        ((InitialContext) left).reset();
+        return false;
+    }
+    if (right instanceof InitialContext) {
+        ((InitialContext) right).reset();
+        return false;
+    }
+    if (left instanceof Iterator && right instanceof Iterator) {
+        return findMatch((Iterator) left, (Iterator) right);
+    }
+    if (left instanceof Iterator) {
+        return containsMatch((Iterator) left, right);
+    }
+    if (right instanceof Iterator) {
+        return containsMatch((Iterator) right, left);
+    }
+    double ld = InfoSetUtil.doubleValue(left);
+    double rd = InfoSetUtil.doubleValue(right);
+    return evaluateCompare(ld == rd ? 0 : ld < rd ? -1 : 1);
+}
+```

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+return parseTypeName(token);
+```
+This line is parsing the type name of the constructor function, which is a type name that starts with the `new:` keyword. The `parseTypeName` function is used to parse the type name and return a `Node` object representing the type.

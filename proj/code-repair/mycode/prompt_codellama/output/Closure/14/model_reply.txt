@@ -1,0 +1,10 @@
+ ```
+cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);
+```
+
+The correct line should be:
+```
+cfa.createEdge(fromNode, Branch.UNCOND, finallyNode, true);
+```
+
+The `true` argument indicates that the edge is a "symbolic return" edge, which is necessary for DFAs.

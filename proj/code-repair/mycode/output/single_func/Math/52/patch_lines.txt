@@ -1,0 +1,1 @@
+if (c == 0.0) {  Vector3D v3 = Vector3D.crossProduct(v1, v2);  Vector3D v3Su3 = v3.subtract(u3);  k = v1Su1.crossProduct(v3Su3);  Vector3D u2Prime = u1.crossProduct(u3);  c = k.dotProduct(u2Prime);  if (c == 0.0) {    k = v2Su2.crossProduct(v3Su3);;    c = k.dotProduct(u2.crossProduct(u3));;    if (c == 0.0) {

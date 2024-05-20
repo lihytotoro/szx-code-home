@@ -1,0 +1,9 @@
+prefix:
+public double[] fit() {
+    final double[] guess = (new ParameterGuesser(getObservations())).guess();
+
+buggy_hunk:
+    return fit(new Gaussian.Parametric(), guess);
+
+suffix:
+}

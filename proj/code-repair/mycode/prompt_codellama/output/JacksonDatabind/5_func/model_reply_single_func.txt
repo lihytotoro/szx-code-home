@@ -1,0 +1,28 @@
+ The bug is caused by the fact that the `mixIns` parameter is not being used correctly. The function is adding the mix-in methods to the `mixIns` list, but it is not actually using the `mixIns` list to find the methods to augment.
+
+Here is the corrected version of the function:
+```
+protected void _addMethodMixIns(Class<?> targetClass, AnnotatedMethodMap methods,
+        Class<?> mixInCls, AnnotatedMethodMap mixIns)
+{
+    List<Class<?>> parents = new ArrayList<Class<?>>();
+    parents.add(mixInCls);
+    ClassUtil.findSuperTypes(mixInCls, targetClass, parents);
+    for (Class<?> mixin : parents) {
+        for (Method m : mixin.getDeclaredMethods()) {
+            if (!_isIncludableMemberMethod(m)) {
+                continue;
+            }
+            AnnotatedMethod am = methods.find(m);
+            if (am != null) {
+                _addMixUnders(m, am);
+            } else {
+                mixIns.add(_constructMethod(m));
+            }
+        }
+    }
+}
+```
+In this version, the function first checks if there is an existing method to augment (using the `methods` parameter) and if so, it adds the mix-in method to the `mixIns` list. If there is no existing method to augment, the function adds the mix-in method to the `mixIns` list.
+
+The corrected version of the function should fix the bug and allow the test to pass.

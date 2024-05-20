@@ -1,0 +1,1 @@
+           if (val1 == Long.MIN_VALUE) {                return Long.MIN_VALUE;            }

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    Calendar c = new GregorianCalendar(mTimeZone, Locale.getDefault());
+
+This line creates a new `GregorianCalendar` object with the default locale, which is necessary for the `applyRules` method to work correctly. The original line creates a new `GregorianCalendar` object with a specific time zone, but without a default locale, which can cause issues with the `applyRules` method.

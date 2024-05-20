@@ -1,0 +1,16 @@
+ The bug is caused by the fact that the `DelegatingArrayCreator` class is not annotated with `@JsonCreator` and therefore does not have a default no-arguments constructor. This is a requirement for Jackson to be able to deserialize the class.
+
+To fix the bug, you can add the `@JsonCreator` annotation to the `DelegatingArrayCreator` class, like this:
+```
+@JsonCreator
+public DelegatingArrayCreator() {
+    // ...
+}
+```
+Alternatively, you can add a default no-arguments constructor to the `DelegatingArrayCreator` class, like this:
+```
+public DelegatingArrayCreator() {
+    // ...
+}
+```
+Either of these solutions should fix the bug and allow the test to pass.

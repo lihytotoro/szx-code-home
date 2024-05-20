@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (entry != 0) {
+
+This line replaces the original buggy line and ensures that the pivot row is only selected if the entry in the pivot column is not equal to 0. This is necessary because the pivot row is used to create a new basic variable, and if the pivot column is equal to 0, then the new basic variable will be 0, which is not a valid basic variable.

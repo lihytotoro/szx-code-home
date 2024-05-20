@@ -1,0 +1,15 @@
+ The buggy function is:
+```
+public Base64() {
+    this(false);
+}
+```
+The correct version of the function should be:
+```
+public Base64() {
+    this(true);
+}
+```
+The bug is that the constructor is calling `this(false)` instead of `this(true)`. This is because the `false` value is being passed as the `b` parameter to the `Base64` constructor, which is not what is intended.
+
+The corrected function should call `this(true)` to initialize the `b` parameter to `true`, which is the correct value for the `Base64` constructor.

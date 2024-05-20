@@ -1,0 +1,26 @@
+ The bug in the function is that it is not correctly handling high unicode characters. The function is using the `charAt` method to retrieve the character at a given index in the string, but this method only returns a single character, which may not be a valid unicode character.
+
+To fix the bug, the function should use the `codePointAt` method to retrieve the code point at a given index in the string, which will return the correct unicode character. Here is the corrected function:
+```
+public void escape(Writer writer, String str) throws IOException {
+    int len = str.length();
+    for (int i = 0; i < len; i++) {
+        int codePoint = str.codePointAt(i);
+        String entityName = this.entityName(codePoint);
+        if (entityName == null) {
+            if (codePoint > 0x7F) {
+                writer.write("&#");
+                writer.write(Integer.toString(codePoint, 10));
+                writer.write(';');
+            } else {
+                writer.write(codePoint);
+            }
+        } else {
+            writer.write('&');
+            writer.write(entityName);
+            writer.write(';');
+        }
+    }
+}
+```
+This function should now correctly handle high unicode characters and produce the correct escaped output.

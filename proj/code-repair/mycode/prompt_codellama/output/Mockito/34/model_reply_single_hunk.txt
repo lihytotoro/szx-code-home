@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    for (Matcher m : matchers) {
+
+This is the correct syntax for iterating over a list of matchers. The buggy hunk was trying to access the `k`th argument of the invocation, but the `k` variable was not initialized, so it was equal to 0. The `for` loop initializes `k` to 0, so the code should work as expected.

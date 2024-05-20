@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+final String classAttr = attributes.get("class");
+```
+This line is missing in the original code, and it is added by the INFILL location.

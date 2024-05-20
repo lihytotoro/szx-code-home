@@ -1,0 +1,1 @@
+ if (in.peek() != JsonToken.STRING && in.peek() != JsonToken.NULL) {    throw new JsonParseException("The date should be a string value");

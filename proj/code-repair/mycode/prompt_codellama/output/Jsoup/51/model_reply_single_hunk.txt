@@ -1,0 +1,13 @@
+ ```
+boolean matchesLetter() {
+    if (isEmpty())
+        return false;
+    char c = input[pos];
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+```
+The correct line at the INFILL location is:
+```
+return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+```
+This line checks if the character `c` is a letter (either uppercase or lowercase).

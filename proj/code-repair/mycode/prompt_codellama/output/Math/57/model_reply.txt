@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+```
+sum += d * d;
+```
+
+This line is missing from the code, and it is necessary to compute the sum of the squared distances for the k-means++ algorithm.

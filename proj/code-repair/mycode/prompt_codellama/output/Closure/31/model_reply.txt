@@ -1,0 +1,5 @@
+ The correct line should be:
+
+!options.skipAllPasses &&
+
+This line checks if the compiler should skip all passes, which is not the case in the test. The test expects the compiler to run all passes, including dependency sorting, which is why it expects the order of the inputs to be different.

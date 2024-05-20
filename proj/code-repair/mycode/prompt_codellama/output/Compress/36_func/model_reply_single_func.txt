@@ -1,0 +1,13 @@
+ The bug is in the `getCurrentStream()` method, which is supposed to return the current input stream for reading the 7z file. However, the method is not handling the case where the `deferredBlockStreams` list is empty, which means there are no more input streams to read from.
+
+The method should throw an `IllegalStateException` in this case, as there is no current 7z entry to read. The correct version of the method should be:
+```
+private InputStream getCurrentStream() throws IOException {
+    if (deferredBlockStreams.isEmpty()) {
+        throw new IllegalStateException("No current 7z entry (call getNextEntry() first).");
+    }
+
+    return deferredBlockStreams.get(0);
+}
+```
+This version of the method checks if the `deferredBlockStreams` list is empty, and if so, throws an `IllegalStateException` with the appropriate message. If the list is not empty, it returns the first input stream in the list.

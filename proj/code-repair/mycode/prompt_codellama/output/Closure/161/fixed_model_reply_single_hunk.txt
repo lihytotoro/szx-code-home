@@ -1,0 +1,4 @@
+if (intIndex < 0) {
+  error(INDEX_OUT_OF_BOUNDS_ERROR, right);
+  return n;
+}

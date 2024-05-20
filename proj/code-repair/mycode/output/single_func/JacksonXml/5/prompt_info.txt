@@ -1,0 +1,9 @@
+prefix:
+protected XmlSerializerProvider(XmlSerializerProvider src) {
+    super(src);
+
+buggy_hunk:
+    _rootNameLookup = src._rootNameLookup;
+
+suffix:
+}

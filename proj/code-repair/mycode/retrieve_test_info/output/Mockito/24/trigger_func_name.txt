@@ -1,0 +1,1 @@
+should_return_zero_if_mock_is_compared_to_itself

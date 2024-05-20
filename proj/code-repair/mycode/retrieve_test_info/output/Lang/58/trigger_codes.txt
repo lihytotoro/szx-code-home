@@ -1,0 +1,1 @@
+NumberUtils.createNumber("1l");

@@ -1,0 +1,5 @@
+junit.framework.AssertionFailedError: Expected no warnings or errors
+Errors: 
+JSC_MSG_NOT_INITIALIZED_USING_NEW_SYNTAX. message not initialized using goog.getMsg at input0 line 1 : 28
+JSC_MSG_TREE_MALFORMED. Message parse tree malformed. Cannot parse value of message MSG_FOO at input0 line 1 : 38Warnings: 
+ expected:<0> but was:<2>

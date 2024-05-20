@@ -1,0 +1,1 @@
+g.writeEmbeddedObject(WIKIPEDIA_BASE64_AS_BYTES);

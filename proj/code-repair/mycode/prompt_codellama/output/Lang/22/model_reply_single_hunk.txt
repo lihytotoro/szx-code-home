@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (u>0) { u=-u; } // make u negative
+```
+This line is responsible for making the `u` variable negative, which is necessary for the algorithm to work correctly. The original buggy hunk was removed because it was not necessary for the algorithm to work correctly, and it was causing the test to fail.

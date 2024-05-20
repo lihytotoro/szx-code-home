@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+```
+if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {
+    throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);
+}
+```
+This line is checking whether the input sigma value is greater than the range of the boundaries, and if so, it throws an `OutOfRangeException`. However, this check is performed before the boundaries are converted to the internal handling format, which means that the check is performed using the old boundaries format, and not the converted boundaries format.
+
+Therefore, the buggy hunk was removed because it was causing the test to fail due to the incorrect check.

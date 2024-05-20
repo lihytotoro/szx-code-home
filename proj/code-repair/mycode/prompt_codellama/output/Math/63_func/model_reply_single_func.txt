@@ -1,0 +1,13 @@
+ The buggy function is:
+```
+public static boolean equals(double x, double y) {
+    return (Double.isNaN(x) && Double.isNaN(y)) || x == y;
+}
+```
+The correct version of the function should be:
+```
+public static boolean equals(double x, double y) {
+    return (Double.isNaN(x) && Double.isNaN(y)) || (x == y);
+}
+```
+The bug is that the function is not handling the case where both `x` and `y` are `Double.NaN`. The correct version of the function should use the `||` operator instead of the `&&` operator to check if either `x` or `y` is `Double.NaN`.

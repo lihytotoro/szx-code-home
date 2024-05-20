@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+            pos += Character.charCount(Character.codePointAt(input, pos));
+
+This line is correct because it correctly advances the position in the input string by the number of characters in the current code point, which is the correct way to handle surrogate pairs in a CSV escape function. The previous line, which was removed, was incorrect because it was advancing the position by the number of code units in the current code point, which is not the correct way to handle surrogate pairs.

@@ -1,0 +1,19 @@
+ The bug is in the `printAndEscape` method, which is called when `quoteModePolicy` is `NONE`. The method is supposed to escape any special characters in the input string, but it is not doing so correctly.
+
+Here is the corrected version of the `printAndEscape` method:
+```
+private void printAndEscape(final CharSequence value, final int offset, final int len, final Appendable out) throws IOException {
+    int pos = offset;
+    final int end = offset + len;
+
+    while (pos < end) {
+        final char c = value.charAt(pos);
+        if (c == '\\' || c == '"') {
+            out.append('\\');
+        }
+        out.append(c);
+        pos++;
+    }
+}
+```
+This corrected version of the method properly escapes any special characters in the input string, including the backslash and double quote characters.

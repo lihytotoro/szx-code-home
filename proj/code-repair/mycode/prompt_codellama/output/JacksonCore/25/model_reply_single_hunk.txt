@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (i <= maxCode) {
+```
+This line is checking if the character `i` is less than or equal to the maximum code point in the `codes` array. If this check fails, the code will try to access the `codes` array with an index that is out of bounds, which will cause an `ArrayIndexOutOfBoundsException`.

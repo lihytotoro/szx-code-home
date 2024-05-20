@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return FastMath.pow(2 * FastMath.PI, -dim / 2) *
+```
+This line was removed from the code because it was incorrect and caused the test to fail. The correct line should be added back in to fix the bug.

@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+
+    result = lvalInt >>> rvalInt;
+
+This is the correct implementation of the `>>>` operator for JavaScript, which is different from the Java `>>>` operator. In JavaScript, the `>>>` operator performs a zero-fill right shift, which means that it fills the leftmost bits with zeros and shifts the remaining bits to the right. In Java, the `>>>` operator performs an arithmetic right shift, which means that it fills the leftmost bits with the sign bit and shifts the remaining bits to the right.
+
+The buggy hunk in the original code was using the Java `>>>` operator, which is not correct for JavaScript. The correct implementation is to use the JavaScript `>>>` operator, which is the `>>>` symbol followed by a space.

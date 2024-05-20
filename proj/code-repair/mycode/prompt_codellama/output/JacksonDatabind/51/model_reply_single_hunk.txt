@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());
+```
+This line is used to construct a specialized type for the deserializer, and it is necessary to ensure that the type is constructed correctly. The bug was caused by the fact that the type was not being constructed correctly, which resulted in the error message "Can not set com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver$Poly1Base field com.fasterxml.jackson.databind.jsontype.TestCustomTypeIdResolver$Base1270.options to java.util.LinkedHashMap".

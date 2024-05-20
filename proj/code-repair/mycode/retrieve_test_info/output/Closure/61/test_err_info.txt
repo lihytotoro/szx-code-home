@@ -1,0 +1,31 @@
+junit.framework.AssertionFailedError: 
+Expected: 
+Result: Math.sin(0)
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [sourcename: expected0] [synthetic: 1]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [sourcename: testcode] [synthetic: 1]
+        EXPR_RESULT 1 [sourcename: testcode]
+            CALL 1 [sourcename: testcode]
+                GETPROP 1 [sourcename: testcode]
+                    NAME Math 1 [sourcename: testcode]
+                    STRING sin 1 [sourcename: testcode]
+                NUMBER 0.0 1 [sourcename: testcode]
+
+
+Subtree1: SCRIPT 1 [sourcename: expected0] [synthetic: 1]
+
+
+Subtree2: SCRIPT 1 [sourcename: testcode] [synthetic: 1]
+    EXPR_RESULT 1 [sourcename: testcode]
+        CALL 1 [sourcename: testcode]
+            GETPROP 1 [sourcename: testcode]
+                NAME Math 1 [sourcename: testcode]
+                STRING sin 1 [sourcename: testcode]
+            NUMBER 0.0 1 [sourcename: testcode]
+

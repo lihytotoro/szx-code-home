@@ -1,0 +1,35 @@
+ The bug in the function is that it assumes that the date is in the Gregorian calendar, but it does not handle the case where the date is in the Julian calendar. The Julian calendar has 29 days in February, so the function should allow for this.
+
+Here is the corrected version of the function:
+```
+public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                              int hourOfDay, int minuteOfHour,
+                              int secondOfMinute, int millisOfSecond)
+    throws IllegalArgumentException
+{
+    Chronology base;
+    if ((base = getBase()) != null) {
+        return base.getDateTimeMillis
+            (year, monthOfYear, dayOfMonth,
+             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+    }
+
+    // Assume date is Gregorian.
+    long instant;
+    instant = iGregorianChronology.getDateTimeMillis
+        (year, monthOfYear, dayOfMonth,
+         hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+    if (instant < iCutoverMillis) {
+        // Maybe it's Julian.
+        instant = iJulianChronology.getDateTimeMillis
+            (year, monthOfYear, dayOfMonth,
+             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+        if (instant >= iCutoverMillis) {
+            // Okay, it's in the illegal cutover gap.
+            throw new IllegalArgumentException("Specified date does not exist");
+        }
+    }
+    return instant;
+}
+```
+In this version, the function first checks if the date is in the Julian calendar, and if so, it uses the Julian calendar to calculate the date. If the date is not in the Julian calendar, it uses the Gregorian calendar. This ensures that the function can handle dates in both calendars.

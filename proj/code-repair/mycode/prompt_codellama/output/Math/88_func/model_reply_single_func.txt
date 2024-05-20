@@ -1,0 +1,11 @@
+ The bug in the code is in the line:
+```
+coefficients[i] = (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) - (restrictToNonNegative ? 0 : mostNegative);
+```
+The correct version of the function should be:
+```
+coefficients[i] = (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) - (restrictToNonNegative ? mostNegative : 0);
+```
+The bug is that the `mostNegative` variable is being used as the default value for the `coefficients` array, but it should be used as the default value for the `restrictToNonNegative` variable.
+
+The corrected function should return the correct solution for the test case.

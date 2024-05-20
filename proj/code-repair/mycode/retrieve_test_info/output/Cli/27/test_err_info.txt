@@ -1,0 +1,1 @@
+junit.framework.ComparisonFailure: selected option expected:<bar> but was:<null>

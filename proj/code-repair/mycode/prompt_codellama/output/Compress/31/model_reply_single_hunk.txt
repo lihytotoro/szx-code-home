@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (currentByte == 0) {
+    break;
+}

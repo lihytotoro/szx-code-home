@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (c >= 0x20 && c <= 0x7e) {
+
+This is the corrected line that fixes the bug. The original line was checking for characters between 0x1f and 0x7f, which includes the ASCII control characters (0x00-0x1f) and the ASCII delete character (0x7f). The corrected line checks for characters between 0x20 and 0x7e, which excludes the ASCII control characters and the ASCII delete character.

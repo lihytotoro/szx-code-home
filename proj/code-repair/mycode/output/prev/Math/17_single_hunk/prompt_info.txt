@@ -1,0 +1,9 @@
+prefix:
+public Dfp multiply(final int x) {
+
+buggy_hunk:
+
+
+suffix:
+        return multiplyFast(x);
+}

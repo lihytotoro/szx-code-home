@@ -1,0 +1,3 @@
+if (qName != null && qName.endsWith(".prototype")) {
+  return false;
+}

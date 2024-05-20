@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+if (ch == ' ') {
+```
+This is because the code is checking if the character read from the input stream is a space, which is the first character of the keyword in the Pax header format.

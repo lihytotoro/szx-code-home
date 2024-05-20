@@ -1,0 +1,25 @@
+ The buggy function is:
+```
+public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+{
+    // 29-Jan-2016, tatu: Simple skipping for all other tokens, but FIELD_NAME bit
+    //    special unfortunately
+    p.skipChildren();
+    return null;
+}
+```
+The bug is that the function is not handling the `FIELD_NAME` token correctly. When the parser encounters a field name, it should skip the value associated with that field, but the function is not doing that.
+
+The corrected function should be:
+```
+public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+{
+    // 29-Jan-2016, tatu: Simple skipping for all other tokens, but FIELD_NAME bit
+    //    special unfortunately
+    if (p.getCurrentToken() == JsonToken.FIELD_NAME) {
+        p.skipChildren();
+    }
+    return null;
+}
+```
+This function checks if the current token is a field name, and if so, skips the value associated with that field.

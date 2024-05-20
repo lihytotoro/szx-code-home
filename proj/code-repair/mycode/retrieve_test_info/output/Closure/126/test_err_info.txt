@@ -1,0 +1,51 @@
+junit.framework.AssertionFailedError: 
+Expected: function f(){b:try{throw 9;}finally{break b}return 1}
+Result: function f(){b:try{throw 9;}finally{}return 1}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        FUNCTION f 1 [source_file: expected0]
+            NAME f 1 [source_file: expected0]
+            PARAM_LIST 1 [source_file: expected0]
+            BLOCK 1 [source_file: expected0]
+                LABEL 1 [source_file: expected0]
+                    LABEL_NAME b 1 [source_file: expected0]
+                    TRY 1 [source_file: expected0]
+                        BLOCK 1 [source_file: expected0]
+                            THROW 1 [source_file: expected0]
+                                NUMBER 9.0 1 [source_file: expected0]
+                        BLOCK 1 [source_file: expected0]
+                        BLOCK 1 [source_file: expected0]
+                            BREAK 1 [source_file: expected0]
+                                LABEL_NAME b 1 [source_file: expected0]
+                RETURN 1 [source_file: expected0]
+                    NUMBER 1.0 1 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        FUNCTION f 1 [source_file: testcode]
+            NAME f 1 [source_file: testcode]
+            PARAM_LIST 1 [source_file: testcode]
+            BLOCK 1 [source_file: testcode]
+                LABEL 1 [source_file: testcode]
+                    LABEL_NAME b 1 [source_file: testcode]
+                    TRY 1 [source_file: testcode]
+                        BLOCK 1 [source_file: testcode]
+                            THROW 1 [source_file: testcode]
+                                NUMBER 9.0 1 [source_file: testcode]
+                        BLOCK 1 [source_file: testcode]
+                        BLOCK 1 [source_file: testcode]
+                RETURN 1 [source_file: testcode]
+                    NUMBER 1.0 1 [source_file: testcode]
+
+
+Subtree1: BLOCK 1 [source_file: expected0]
+    BREAK 1 [source_file: expected0]
+        LABEL_NAME b 1 [source_file: expected0]
+
+
+Subtree2: BLOCK 1 [source_file: testcode]
+

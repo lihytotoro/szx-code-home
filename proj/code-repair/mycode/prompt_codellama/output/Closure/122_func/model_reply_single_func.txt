@@ -1,0 +1,14 @@
+ The bug in the code is that it only checks for the presence of "/* @" or "\n * @" in the comment value, but it does not check for the presence of "/* @type {number} */" or any other suspicious comment pattern.
+
+Here is the corrected version of the function:
+```
+private void handleBlockComment(Comment comment) {
+  if (comment.getValue().indexOf("/* @") != -1 || comment.getValue().indexOf("\n * @") != -1 || comment.getValue().indexOf("/* @type {number} */") != -1) {
+    errorReporter.warning(
+        SUSPICIOUS_COMMENT_WARNING,
+        sourceName,
+        comment.getLineno(), "", 0);
+  }
+}
+```
+This version of the function checks for the presence of any suspicious comment pattern, including "/* @type {number} */".

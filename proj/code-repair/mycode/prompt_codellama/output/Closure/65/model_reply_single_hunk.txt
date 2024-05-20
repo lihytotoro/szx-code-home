@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+case '\0': sb.append("\\0"); break;
+```
+This line was added to the switch statement to handle the case where the character is a null character (`\0`). The `appendHexJavaScriptRepresentation` method is used to append the hexadecimal representation of the null character to the `StringBuilder` object.

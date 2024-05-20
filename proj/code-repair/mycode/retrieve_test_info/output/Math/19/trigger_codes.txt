@@ -1,0 +1,2 @@
+final double[] result = optimizer.optimize(10000, fitnessFunction, GoalType.MINIMIZE,
+start, lower, upper).getPoint();

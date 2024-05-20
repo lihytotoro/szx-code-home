@@ -1,0 +1,10 @@
+JFreeChart chart = ChartFactory.createScatterPlot(
+"Test",
+"X",
+"Y",
+dataset,
+PlotOrientation.VERTICAL,
+false,
+false,
+false
+);

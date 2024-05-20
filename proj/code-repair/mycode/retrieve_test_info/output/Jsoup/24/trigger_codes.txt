@@ -1,0 +1,5 @@
+assertEquals("<script>\n" +
+"  <!--\n" +
+"    document.write('</scr' + 'ipt>');\n" +
+"
+"</script>", node.body().html());

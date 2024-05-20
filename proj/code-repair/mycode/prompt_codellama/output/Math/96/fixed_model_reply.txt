@@ -1,0 +1,1 @@
+                ret = (this.getReal() == rhs.getReal()) && (this.getImaginary() == rhs.getImaginary());

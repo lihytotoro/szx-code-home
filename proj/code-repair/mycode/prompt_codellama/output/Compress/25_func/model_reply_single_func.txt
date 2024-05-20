@@ -1,0 +1,31 @@
+ The buggy function is:
+```
+public ZipArchiveInputStream(InputStream inputStream,
+                             String encoding,
+                             boolean useUnicodeExtraFields,
+                             boolean allowStoredEntriesWithDataDescriptor) {
+    zipEncoding = ZipEncodingHelper.getZipEncoding(encoding);
+    this.useUnicodeExtraFields = useUnicodeExtraFields;
+    in = new PushbackInputStream(inputStream, buf.capacity());
+    this.allowStoredEntriesWithDataDescriptor =
+        allowStoredEntriesWithDataDescriptor;
+    // haven't read anything so far
+}
+```
+The bug is in the line `in = new PushbackInputStream(inputStream, buf.capacity());`. The `buf.capacity()` method returns the capacity of the buffer, which is not the same as the number of bytes that have been read. The `PushbackInputStream` class expects the number of bytes that have been read, not the capacity of the buffer.
+
+The corrected function should be:
+```
+public ZipArchiveInputStream(InputStream inputStream,
+                             String encoding,
+                             boolean useUnicodeExtraFields,
+                             boolean allowStoredEntriesWithDataDescriptor) {
+    zipEncoding = ZipEncodingHelper.getZipEncoding(encoding);
+    this.useUnicodeExtraFields = useUnicodeExtraFields;
+    in = new PushbackInputStream(inputStream, 0);
+    this.allowStoredEntriesWithDataDescriptor =
+        allowStoredEntriesWithDataDescriptor;
+    // haven't read anything so far
+}
+```
+In this corrected version, the `PushbackInputStream` constructor is called with a `0` as the second argument, which indicates that no bytes have been read. This is the correct way to initialize the `PushbackInputStream` class.

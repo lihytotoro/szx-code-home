@@ -1,0 +1,109 @@
+ The buggy function is:
+```
+public static boolean testNode(Node node, NodeTest test) {
+    if (test == null) {
+        return true;
+    }
+    if (test instanceof NodeNameTest) {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            return false;
+        }
+
+        NodeNameTest nodeNameTest = (NodeNameTest) test;
+        QName testName = nodeNameTest.getNodeName();
+        String namespaceURI = nodeNameTest.getNamespaceURI();
+        boolean wildcard = nodeNameTest.isWildcard();
+        String testPrefix = testName.getPrefix();
+        if (wildcard && testPrefix == null) {
+            return true;
+        }
+        if (wildcard
+            || testName.getName()
+                    .equals(DOMNodePointer.getLocalName(node))) {
+            String nodeNS = DOMNodePointer.getNamespaceURI(node);
+            return equalStrings(namespaceURI, nodeNS);
+        }
+        return false;
+    }
+    if (test instanceof NodeTypeTest) {
+        int nodeType = node.getNodeType();
+        switch (((NodeTypeTest) test).getNodeType()) {
+            case Compiler.NODE_TYPE_NODE :
+                return nodeType == Node.ELEMENT_NODE
+                        || nodeType == Node.DOCUMENT_NODE;
+            case Compiler.NODE_TYPE_TEXT :
+                return nodeType == Node.CDATA_SECTION_NODE
+                    || nodeType == Node.TEXT_NODE;
+            case Compiler.NODE_TYPE_COMMENT :
+                return nodeType == Node.COMMENT_NODE;
+            case Compiler.NODE_TYPE_PI :
+                return nodeType == Node.PROCESSING_INSTRUCTION_NODE;
+        }
+        return false;
+    }
+    if (test instanceof ProcessingInstructionTest) {
+        if (node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {
+            String testPI = ((ProcessingInstructionTest) test).getTarget();
+            String nodePI = ((ProcessingInstruction) node).getTarget();
+            return testPI.equals(nodePI);
+        }
+    }
+    return false;
+}
+```
+The bug is in the `NodeNameTest` case, where the code checks if the node name matches the test name. However, it does not consider the namespace of the node, which can lead to false positives if the node name is in a different namespace than the test name.
+
+The corrected version of the function is:
+```
+public static boolean testNode(Node node, NodeTest test) {
+    if (test == null) {
+        return true;
+    }
+    if (test instanceof NodeNameTest) {
+        if (node.getNodeType() != Node.ELEMENT_NODE) {
+            return false;
+        }
+
+        NodeNameTest nodeNameTest = (NodeNameTest) test;
+        QName testName = nodeNameTest.getNodeName();
+        String namespaceURI = nodeNameTest.getNamespaceURI();
+        boolean wildcard = nodeNameTest.isWildcard();
+        String testPrefix = testName.getPrefix();
+        if (wildcard && testPrefix == null) {
+            return true;
+        }
+        if (wildcard
+            || testName.getName()
+                    .equals(DOMNodePointer.getLocalName(node))) {
+            String nodeNS = DOMNodePointer.getNamespaceURI(node);
+            return equalStrings(namespaceURI, nodeNS);
+        }
+        return false;
+    }
+    if (test instanceof NodeTypeTest) {
+        int nodeType = node.getNodeType();
+        switch (((NodeTypeTest) test).getNodeType()) {
+            case Compiler.NODE_TYPE_NODE :
+                return nodeType == Node.ELEMENT_NODE
+                        || nodeType == Node.DOCUMENT_NODE;
+            case Compiler.NODE_TYPE_TEXT :
+                return nodeType == Node.CDATA_SECTION_NODE
+                    || nodeType == Node.TEXT_NODE;
+            case Compiler.NODE_TYPE_COMMENT :
+                return nodeType == Node.COMMENT_NODE;
+            case Compiler.NODE_TYPE_PI :
+                return nodeType == Node.PROCESSING_INSTRUCTION_NODE;
+        }
+        return false;
+    }
+    if (test instanceof ProcessingInstructionTest) {
+        if (node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {
+            String testPI = ((ProcessingInstructionTest) test).getTarget();
+            String nodePI = ((ProcessingInstruction) node).getTarget();
+            return testPI.equals(nodePI);
+        }
+    }
+    return false;
+}
+```
+In the corrected version, the namespace of the node is considered when checking if the node name matches the test name.

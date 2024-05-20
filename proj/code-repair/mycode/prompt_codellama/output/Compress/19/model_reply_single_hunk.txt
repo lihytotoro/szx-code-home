@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+if (rawCentralDirectoryData.length != expectedLength) {
+
+This line checks if the length of the raw central directory data matches the expected length based on the flags passed in. If the lengths don't match, it throws a ZipException with a message indicating that the length of the central directory data doesn't match the expected length.

@@ -1,0 +1,27 @@
+prefix:
+static boolean isValidDefineValue(Node val, Set<String> defines) {
+  switch (val.getType()) {
+    case Token.STRING:
+    case Token.NUMBER:
+    case Token.TRUE:
+    case Token.FALSE:
+      return true;
+
+buggy_hunk:
+    case Token.BITAND:
+    case Token.BITNOT:
+    case Token.BITOR:
+    case Token.BITXOR:
+    case Token.NOT:
+    case Token.NEG:
+
+suffix:
+      return isValidDefineValue(val.getFirstChild(), defines);
+    case Token.NAME:
+    case Token.GETPROP:
+      if (val.isQualifiedName()) {
+        return defines.contains(val.getQualifiedName());
+      }
+  }
+  return false;
+}

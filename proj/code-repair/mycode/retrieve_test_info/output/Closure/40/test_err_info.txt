@@ -1,0 +1,8 @@
+java.lang.RuntimeException: java.lang.RuntimeException: INTERNAL COMPILER ERROR.
+Please report this problem.
+Unexpected variable goog
+  Node(NAME goog): i0:1:252
+var goog = {};goog.inherits = function(x, y) {};var ns = {};/** @constructor */ns.PageSelectionModel = function() {};/** @constructor */ns.PageSelectionModel.FooEvent = function() {};/** @constructor */ns.PageSelectionModel.SelectEvent = function() {};goog.inherits(ns.PageSelectionModel.ChangeEvent,    ns.PageSelectionModel.FooEvent);
+  Parent(GETPROP): i0:1:252
+var goog = {};goog.inherits = function(x, y) {};var ns = {};/** @constructor */ns.PageSelectionModel = function() {};/** @constructor */ns.PageSelectionModel.FooEvent = function() {};/** @constructor */ns.PageSelectionModel.SelectEvent = function() {};goog.inherits(ns.PageSelectionModel.ChangeEvent,    ns.PageSelectionModel.FooEvent);
+

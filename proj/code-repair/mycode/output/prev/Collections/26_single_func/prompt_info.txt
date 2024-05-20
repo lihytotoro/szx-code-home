@@ -1,0 +1,5 @@
+buggy_func:
+private Object readResolve() {
+    calculateHashCode(keys);
+    return this;
+}

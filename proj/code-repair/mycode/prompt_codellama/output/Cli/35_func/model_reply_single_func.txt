@@ -1,0 +1,25 @@
+ The bug in the code is that it is not checking for exact matches when searching for options. The function `getMatchingOptions` is supposed to return a list of options that match the given string, but it is only checking for prefix matches.
+
+Here is the corrected version of the function:
+```
+public List<String> getMatchingOptions(String opt) {
+    opt = Util.stripLeadingHyphens(opt);
+
+    List<String> matchingOpts = new ArrayList<String>();
+
+    // for a perfect match return the single option only
+    if (longOpts.containsKey(opt)) {
+        matchingOpts.add(opt);
+    } else {
+        // for a prefix match return all options that start with the given string
+        for (String longOpt : longOpts.keySet()) {
+            if (longOpt.startsWith(opt)) {
+                matchingOpts.add(longOpt);
+            }
+        }
+    }
+
+    return matchingOpts;
+}
+```
+This version of the function checks for exact matches first, and if no exact match is found, it returns all options that start with the given string.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+return -val1;
+```
+This line is the correct implementation of the `safeMultiply` method for the case where `val2` is -1.

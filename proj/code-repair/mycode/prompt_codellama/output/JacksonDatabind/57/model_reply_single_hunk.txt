@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return _bindAndReadValues(_considerFilter(_parserFactory.createParser(src), true));
+```
+This is the corrected version of the method that fixes the bug. The `true` argument to `_considerFilter` indicates that the parser should be filtered to remove any invalid UTF-32 characters.

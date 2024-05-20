@@ -1,0 +1,49 @@
+ The bug is in the `while` loop, where the `text` variable is not being updated correctly. The `text` variable is being reassigned to `padding + text.substring(pos).trim()`, which is not the correct way to update the `text` variable.
+
+The correct version of the function should be:
+```
+protected StringBuffer renderWrappedText(StringBuffer sb, int width, 
+                                         int nextLineTabStop, String text)
+{
+    int pos = findWrapPos(text, width, 0);
+
+    if (pos == -1)
+    {
+        sb.append(rtrim(text));
+
+        return sb;
+    }
+    sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);
+
+    if (nextLineTabStop >= width)
+    {
+        // stops infinite loop happening
+        nextLineTabStop = width - 1;
+    }
+
+    // all following lines must be padded with nextLineTabStop space 
+    // characters
+    final String padding = createPadding(nextLineTabStop);
+
+    while (true)
+    {
+        text = text.substring(pos).trim();
+        pos = findWrapPos(text, width, 0);
+
+        if (pos == -1)
+        {
+            sb.append(text);
+
+            return sb;
+        }
+        
+        if ( (text.length() > width) && (pos == nextLineTabStop - 1) ) 
+        {
+            pos = width;
+        }
+
+        sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);
+    }
+}
+```
+In this version, the `text` variable is being updated correctly by calling `text.substring(pos).trim()` to remove the leading whitespace from the remaining text. This ensures that the function correctly handles long lines that are split across multiple lines.

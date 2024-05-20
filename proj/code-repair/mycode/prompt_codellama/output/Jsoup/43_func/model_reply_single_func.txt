@@ -1,0 +1,16 @@
+ The bug in the code is that it returns `null` when the element is not found in the list, instead of returning `-1`.
+
+Here is the corrected version of the function:
+```
+private static <E extends Element> Integer indexInList(Element search, List<E> elements) {
+    Validate.notNull(search);
+    Validate.notNull(elements);
+
+    for (int i = 0; i < elements.size(); i++) {
+        E element = elements.get(i);
+        if (element.equals(search))
+            return i;
+    }
+    return -1;
+}
+```

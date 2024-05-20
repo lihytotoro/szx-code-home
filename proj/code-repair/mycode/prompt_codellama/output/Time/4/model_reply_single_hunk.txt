@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return new Partial(this, newValues);
+```
+This is because the `newPartial` variable is not being used anywhere in the method, and the method is returning a new `Partial` object with the updated values.

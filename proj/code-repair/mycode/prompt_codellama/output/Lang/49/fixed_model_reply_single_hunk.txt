@@ -1,0 +1,1 @@
+int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);

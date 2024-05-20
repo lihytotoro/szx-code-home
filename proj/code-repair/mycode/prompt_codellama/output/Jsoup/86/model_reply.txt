@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (doc.childNodeSize() > 0) {
+
+This line checks if the `doc` object has any child nodes, which is necessary to ensure that the `doc.child(0)` method call in the next line does not throw an `IndexOutOfBoundsException`.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+            if (newRecord && (c < 0x20 || c > 0x21 && c < 0x23 || c > 0x2B && c < 0x2D || c > 0x7E)) {
+
+This line checks if the first character of the value is a non-printable character (i.e., less than 0x20 or greater than 0x7E) or if it is one of the characters that need to be escaped (i.e., less than 0x23 or greater than 0x2B). If either of these conditions is true, the quote flag is set to true, indicating that the value needs to be encapsulated.

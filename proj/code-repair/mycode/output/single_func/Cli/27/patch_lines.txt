@@ -1,0 +1,1 @@
+   if (selected == null || selected.getOpt().equals(option.getOpt()))    {        selected = option;

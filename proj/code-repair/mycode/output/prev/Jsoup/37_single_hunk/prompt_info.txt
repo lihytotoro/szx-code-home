@@ -1,0 +1,10 @@
+prefix:
+public String html() {
+    StringBuilder accum = new StringBuilder();
+    html(accum);
+
+buggy_hunk:
+    return accum.toString().trim();
+
+suffix:
+}

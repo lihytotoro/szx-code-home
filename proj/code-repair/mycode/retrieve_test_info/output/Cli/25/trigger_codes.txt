@@ -1,0 +1,1 @@
+assertEquals( "Long arguments did not split as expected", expected, sw.toString() );

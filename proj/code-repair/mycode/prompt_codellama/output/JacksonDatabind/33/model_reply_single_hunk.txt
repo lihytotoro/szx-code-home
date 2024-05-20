@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+|| _hasAnnotation(a, JsonRawValue.class)) {
+```
+This line checks if the `a` parameter has the `JsonRawValue` annotation, and if so, sets the `name` variable to an empty string. This is necessary because the `JsonRawValue` annotation indicates that the value should be serialized as a raw string, rather than as an object.

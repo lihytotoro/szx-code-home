@@ -1,0 +1,1 @@
+assertEquals(Integer.MIN_VALUE / 2, f.getNumerator());

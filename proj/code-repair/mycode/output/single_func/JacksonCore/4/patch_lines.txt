@@ -1,0 +1,1 @@
+   int newLen = (len == MAX_SEGMENT_LEN) ? MAX_SEGMENT_LEN : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));

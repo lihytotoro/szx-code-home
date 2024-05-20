@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    pos = findWrapPos(text, width, nextLineTabStop);
+
+This line is missing in the original code and is required to calculate the position where the text should be wrapped.

@@ -1,0 +1,5 @@
+ The correct line to insert at the INFILL location is:
+```
+this.plot = new PiePlot(dataset);
+```
+This line creates a new `PiePlot` object and sets the `dataset` property to the `dataset` parameter passed to the constructor. This is necessary because the `PiePlot` class does not have a constructor that takes a `CategoryDataset` as an argument, so we need to create a new `PiePlot` object and set its `dataset` property to the `dataset` parameter.

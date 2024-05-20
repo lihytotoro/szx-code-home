@@ -1,0 +1,17 @@
+ The bug in the code is that it modifies the `attributes` map while iterating over its keys using an iterator. This is not allowed in Java, and it results in a `ConcurrentModificationException`.
+
+To fix the bug, we need to create a copy of the iterator before iterating over the keys, and then use the copy to remove the keys. Here's the corrected code:
+```
+public void removeIgnoreCase(String key) {
+    Validate.notEmpty(key);
+    if (attributes == null)
+        return;
+    Iterator<String> it = attributes.keySet().iterator();
+    while (it.hasNext()) {
+        String attrKey = it.next();
+        if (attrKey.equalsIgnoreCase(key))
+            it.remove();
+    }
+}
+```
+This code creates a copy of the iterator using the `iterator()` method, and then uses the copy to remove the keys. This ensures that the iterator is not modified while iterating over its keys, and avoids the `ConcurrentModificationException`.

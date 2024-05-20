@@ -1,0 +1,13 @@
+if (indexOfDot == -1) {
+  // Any old place is fine.
+  compiler.getNodeForCodeInsertion(minimumModule)
+      .addChildToBack(replacementNode);
+} else {
+  // Add it after the parent namespace.
+  ProvidedName parentName =
+      providedNames.get(namespace.substring(0, indexOfDot));
+  Preconditions.checkNotNull(parentName);
+  Preconditions.checkNotNull(parentName.replacementNode);
+  parentName.replacementNode.getParent().addChildAfter(
+      replacementNode, parentName.replacementNode);
+}

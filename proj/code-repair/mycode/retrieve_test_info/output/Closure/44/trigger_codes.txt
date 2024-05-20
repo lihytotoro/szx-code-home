@@ -1,0 +1,5 @@
+assertPrint("alert(/ / / / /);", "alert(/
+assertPrint("alert(/
+}
+public void testIssue5746867() {
+assertPrint("var a = { '$\\\\' : 5 };", "var a={\"$\\\\\":5}");

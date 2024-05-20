@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+    if (p1 == null && p2 == null) {
+        return 0;
+    }
+
+This line is necessary to handle the case where both pointers are null, which can happen when the pointers are not part of the same tree. Without this line, the code would throw a JXPathException when it tries to compare two null pointers, which is not what we want.

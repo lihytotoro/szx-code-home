@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+appendTo.append(c, lastHold, pos.getIndex() - lastHold).append(QUOTE);
+```
+This line appends the contents of the `StringBuffer` `appendTo` to the `StringBuffer` `appendTo`, starting from the index `lastHold` and ending at the index `pos.getIndex() - 1`, and then appends a `QUOTE` character to the end of the `StringBuffer`.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+if (target != null) {
+
+This is because the original buggy hunk was checking if the `target` variable was null, but it should be checking if the `target` property of the `callee` object is null. The `target` property is the second child of the `callee` object, and it is the one that contains the name of the class being required.

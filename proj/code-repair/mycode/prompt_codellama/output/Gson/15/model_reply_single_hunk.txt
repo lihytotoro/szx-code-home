@@ -1,0 +1,16 @@
+ ```
+public JsonWriter value(double value) throws IOException {
+  writeDeferredName();
+  if (Double.isNaN(value) || Double.isInfinite(value)) {
+    throw new IllegalArgumentException("Numeric values must be finite, but was " + value);
+  }
+  beforeValue();
+  out.append(Double.toString(value));
+  return this;
+}
+```
+The correct line at the INFILL location is:
+```
+if (Double.isNaN(value) || Double.isInfinite(value)) {
+```
+This line checks if the value is not a number (NaN) or infinite, and if so, it throws an `IllegalArgumentException` with a message indicating that the value must be finite.

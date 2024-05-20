@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (!this.closed) {
+
+This line is missing from the original code, and it is necessary to close the input stream before returning from the method.

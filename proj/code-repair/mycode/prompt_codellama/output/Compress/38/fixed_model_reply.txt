@@ -1,0 +1,3 @@
+    if (getName().endsWith("/")) {
+        return true;
+    }

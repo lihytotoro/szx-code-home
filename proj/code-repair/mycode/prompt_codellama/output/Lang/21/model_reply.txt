@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+
+cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY)
+
+This is because the method `get(Calendar.HOUR)` returns the hour in the 12-hour clock format, while the method `get(Calendar.HOUR_OF_DAY)` returns the hour in the 24-hour clock format.
+
+Therefore, the correct comparison should be made using `get(Calendar.HOUR_OF_DAY)` instead of `get(Calendar.HOUR)`.

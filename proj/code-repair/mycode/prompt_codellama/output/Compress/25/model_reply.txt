@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+in = new PushbackInputStream(inputStream, 1024);
+
+This line creates a new `PushbackInputStream` with a buffer size of 1024 bytes, which is the default buffer size used by `ZipArchiveInputStream`. The `PushbackInputStream` is used to read the data from the input stream, and the `1024` value is the size of the buffer used by the `PushbackInputStream`.

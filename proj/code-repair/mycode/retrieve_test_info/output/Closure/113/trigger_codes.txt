@@ -1,0 +1,2 @@
+test("goog.require('namespace.Class1');\n", null,
+ProcessClosurePrimitives.MISSING_PROVIDE_ERROR);

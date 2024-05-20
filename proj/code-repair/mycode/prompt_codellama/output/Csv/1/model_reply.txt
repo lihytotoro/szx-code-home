@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (lastChar == '\n') {
+
+This line is checking if the last character read from the input stream is a newline character, which indicates that the current line has been fully read and the line counter should be incremented.

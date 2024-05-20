@@ -1,0 +1,1 @@
+assertFalse("createNumber(String) succeeded", checkCreateNumber("1eE"));

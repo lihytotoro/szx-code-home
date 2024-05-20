@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return NodeUtil.isFunctionExpression(n);
+```
+This is the correct implementation of the `isReduceableFunctionExpression` method, which checks if a given node is a function expression. The method is used in the `reduceFunctionExpressions` method to determine if a function expression can be reduced.

@@ -1,0 +1,1 @@
+ if (contextRawType == null) {    return supertype;  }

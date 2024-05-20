@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+```
+result[resultOffset] = ((tmp2[0] <= 0) ? -FastMath.PI : FastMath.PI) - 2 * tmp2[0];
+```
+
+This line is responsible for handling the special case where the input values are both positive or both negative, and the result is a multiple of pi. The buggy line was causing the result to be set to NaN in this case, which is incorrect. The corrected line sets the result to the correct value of +/- pi - 2 \* atan(y / (r - x)).

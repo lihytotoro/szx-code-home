@@ -1,0 +1,12 @@
+prefix:
+private void readTypeVariables() {
+    for (Type type : typeVariable.getBounds()) {
+        registerTypeVariablesOn(type);
+    }
+
+buggy_hunk:
+
+
+suffix:
+    registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));
+}

@@ -1,0 +1,1 @@
+appendTo.append(c, lastHold, pos.getIndex() - lastHold).append(QUOTE);

@@ -1,0 +1,1 @@
+       if (actual instanceof Class) {            return (Class) actual;        } else {            return Object.class;        }

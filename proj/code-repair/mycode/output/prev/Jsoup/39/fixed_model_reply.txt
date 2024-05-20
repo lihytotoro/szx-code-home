@@ -1,0 +1,6 @@
+if (docData.length() > 0 && docData.charAt(0) == 65279) {
+    byteData.rewind();
+    docData = Charset.forName(defaultCharset).decode(byteData).toString();
+    docData = docData.substring(1);
+    charsetName = defaultCharset;
+}

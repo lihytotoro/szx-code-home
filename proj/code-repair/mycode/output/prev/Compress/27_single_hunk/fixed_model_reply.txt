@@ -1,0 +1,4 @@
+if (start == end) {
+    throw new IllegalArgumentException(
+            exceptionMessage(buffer, offset, length, start, trailer));
+}

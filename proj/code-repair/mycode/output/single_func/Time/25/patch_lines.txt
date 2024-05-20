@@ -1,0 +1,1 @@
+       else {            long previousLocal = previousTransition(instantAdjusted);            long previousAdjusted = previousTransition(instantLocal - offsetAdjusted);            if (previousLocal != previousAdjusted) {                return offsetLocal;            }        }

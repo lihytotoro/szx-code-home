@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+```
+_hashArea = Arrays.copyOf(_hashArea, _hashArea.length);
+```
+This line is necessary to ensure that the `_hashArea` array is properly initialized before it is used. The buggy line that was removed was:
+```
+_hashArea = Arrays.copyOf(_hashArea, _hashArea.length);
+```
+This line was not necessary and was causing the `ArrayIndexOutOfBoundsException` error.

@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+```
+doc.outputSettings().charset(charset);
+```
+
+This line sets the charset of the document to the charset specified in the `charsetName` variable, which is initially set to the default charset. However, if the charset cannot be encoded, the code falls back to using the `ISO-2022-CN` charset, which is not a valid charset for HTML. To fix this issue, the code should use a valid charset that can be encoded, such as `UTF-8`.

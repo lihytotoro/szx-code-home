@@ -1,0 +1,58 @@
+ The buggy function is:
+```
+public String chompBalanced(char open, char close) {
+    int start = -1;
+    int end = -1;
+    int depth = 0;
+    char last = 0;
+
+    do {
+        if (isEmpty()) break;
+        Character c = consume();
+        if (last == 0 || last != ESC) {
+            if (c.equals(open)) {
+                depth++;
+                if (start == -1)
+                    start = pos;
+            }
+            else if (c.equals(close))
+                depth--;
+        }
+
+        if (depth > 0 && last != 0)
+            end = pos; // don't include the outer match pair in the return
+        last = c;
+    } while (depth > 0);
+    return (end >= 0) ? queue.substring(start, end) : "";
+}
+```
+The bug is in the line `if (depth > 0 && last != 0) end = pos;`, which should be `if (depth > 0 && last != 0) end = start;`. This is because the `end` variable is used to store the position of the closing bracket, but the `start` variable is used to store the position of the opening bracket. Therefore, when the closing bracket is encountered, the `end` variable should be set to the position of the opening bracket, not the current position.
+
+The corrected function is:
+```
+public String chompBalanced(char open, char close) {
+    int start = -1;
+    int end = -1;
+    int depth = 0;
+    char last = 0;
+
+    do {
+        if (isEmpty()) break;
+        Character c = consume();
+        if (last == 0 || last != ESC) {
+            if (c.equals(open)) {
+                depth++;
+                if (start == -1)
+                    start = pos;
+            }
+            else if (c.equals(close))
+                depth--;
+        }
+
+        if (depth > 0 && last != 0)
+            end = start; // don't include the outer match pair in the return
+        last = c;
+    } while (depth > 0);
+    return (end >= 0) ? queue.substring(start, end) : "";
+}
+```

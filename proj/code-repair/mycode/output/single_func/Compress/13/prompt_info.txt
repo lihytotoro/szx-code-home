@@ -1,0 +1,9 @@
+prefix:
+protected void setName(String name) {
+
+buggy_hunk:
+
+
+suffix:
+    this.name = name;
+}

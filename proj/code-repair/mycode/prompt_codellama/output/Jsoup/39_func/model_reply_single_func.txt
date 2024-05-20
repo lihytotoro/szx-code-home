@@ -1,0 +1,20 @@
+ The bug in the code is in the following line:
+```
+docData = Charset.forName(defaultCharset).decode(byteData).toString();
+```
+The `decode` method returns a `String` object, but the `toString` method is called on it without checking if the `String` is empty. If the `String` is empty, it will return an empty string, which will cause the `docData` variable to be empty.
+
+To fix the bug, you can check if the `String` is empty before calling the `toString` method. Here's the corrected code:
+```
+docData = Charset.forName(defaultCharset).decode(byteData).toString();
+if (docData.isEmpty()) {
+    docData = "";
+}
+```
+Alternatively, you can use the `decode` method's `CharsetDecoder` parameter to specify the `Charset` and the `CodingErrorAction` to be used in case of errors. This will allow you to handle the case where the `String` is empty. Here's an example:
+```
+CharsetDecoder decoder = Charset.forName(defaultCharset).newDecoder();
+decoder.onMalformedInput(CodingErrorAction.REPLACE);
+docData = decoder.decode(byteData).toString();
+```
+This will replace any malformed input with the replacement character (U+FFFD) and return an empty `String` if the input is empty.

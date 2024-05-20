@@ -1,0 +1,22 @@
+ The bug in the code is in the `if` statement that checks if the character at index `index - 2` is a `H` or `W`. If the character at index `index - 2` is not a `H` or `W`, the function will return `0` instead of the correct mapping code.
+
+Here is the corrected version of the function:
+```
+private char getMappingCode(final String str, final int index) {
+    // map() throws IllegalArgumentException
+    final char mappedChar = this.map(str.charAt(index));
+    // HW rule check
+    if (index > 1 && mappedChar != '0') {
+        final char hwChar = str.charAt(index - 1);
+        if ('H' == hwChar || 'W' == hwChar) {
+            final char preHWChar = str.charAt(index - 2);
+            final char firstCode = this.map(preHWChar);
+            if (firstCode == mappedChar || 'H' == preHWChar || 'W' == preHWChar) {
+                return 0;
+            }
+        }
+    }
+    return mappedChar;
+}
+```
+In the corrected version, the `if` statement checks if the character at index `index - 2` is a `H` or `W`, and if it is not, the function returns the correct mapping code.

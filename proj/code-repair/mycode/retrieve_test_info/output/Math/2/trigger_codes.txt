@@ -1,0 +1,1 @@
+Assert.assertTrue("sample=" + sample, 0 <= sample);

@@ -1,0 +1,9 @@
+prefix:
+public String generateToolTipFragment(String toolTipText) {
+
+buggy_hunk:
+    return " title=\"" + toolTipText
+
+suffix:
+        + "\" alt=\"\"";
+}

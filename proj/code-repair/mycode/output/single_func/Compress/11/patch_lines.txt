@@ -1,0 +1,1 @@
+       try {            TarArchiveInputStream tais = new TarArchiveInputStream(new ByteArrayInputStream(tarheader));            tais.getNextEntry();            return new TarArchiveInputStream(in);        } catch (Exception e) {        }

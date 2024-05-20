@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if ((offsetLocal - offsetAdjusted) < 0) {
+```
+This is because the `getOffset` method is used to calculate the offset at the instant `instantLocal`, and then the offset at the instant `instantAdjusted` is calculated using the adjusted instant. If the offsets differ, it means that the instant is near a DST boundary, and the code needs to ensure that the time is always after the DST gap.
+
+The bug in the original code is that it returns `offsetAdjusted` instead of `offsetLocal` when the offsets differ, which means that the time is pushed back before the transition, whereas it should be on or after the transition. The fix is to return `offsetLocal` instead of `offsetAdjusted` when the offsets differ, which ensures that the time is on or after the transition.

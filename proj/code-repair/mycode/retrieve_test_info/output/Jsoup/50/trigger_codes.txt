@@ -1,0 +1,1 @@
+assertTrue(doc.title().contains("UTF-16BE"));

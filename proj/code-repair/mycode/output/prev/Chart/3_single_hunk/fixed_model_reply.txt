@@ -1,0 +1,1 @@
+copy.data = new java.util.ArrayList(this.data.subList(start, end));

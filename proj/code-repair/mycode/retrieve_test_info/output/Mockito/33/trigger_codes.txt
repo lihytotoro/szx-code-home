@@ -1,0 +1,1 @@
+Assert.assertNotNull(((Iterable) iterable).iterator());

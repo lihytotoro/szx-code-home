@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+_inputBuffer = buf;
+```
+This line sets the `_inputBuffer` field to the `buf` parameter, which is the byte array that contains the input data.

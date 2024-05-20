@@ -1,0 +1,1 @@
+   return m1.getName().equals(m2.getName()) && m1.getParameterTypes().length == m2.getParameterTypes().length;

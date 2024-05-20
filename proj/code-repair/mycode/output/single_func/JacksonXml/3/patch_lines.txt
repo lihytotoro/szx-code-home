@@ -1,0 +1,1 @@
+       if (_mayBeLeaf) {            _mayBeLeaf = false;            _xmlTokens.skipEndElement();            _currText = _xmlTokens.getText();            _currToken = JsonToken.VALUE_STRING;            return _currText;        }        _currText = _xmlTokens.getText();        _currToken = JsonToken.VALUE_STRING;        break;

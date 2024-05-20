@@ -1,0 +1,13 @@
+prefix:
+public int read() throws IOException {
+    int current = super.read();
+
+buggy_hunk:
+    if (current == '\n') {
+
+suffix:
+        lineCounter++;
+    }
+    lastChar = current;
+    return lastChar;
+}

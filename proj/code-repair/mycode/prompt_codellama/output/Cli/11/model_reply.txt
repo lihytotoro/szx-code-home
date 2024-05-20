@@ -1,0 +1,9 @@
+ The correct line at the INFILL location should be:
+
+{
+    buff.append(" <").append(option.getArgName()).append(">");
+}
+
+This is because the `Option` class has a `getArgName()` method that returns the argument name for the option, and the `hasArg()` method that indicates whether the option has an argument. The `appendOption()` method is using these methods to determine whether to append the argument name to the usage string.
+
+The original buggy line was removed because it was not necessary, and it was causing the test to fail. The corrected line is more concise and easier to read.

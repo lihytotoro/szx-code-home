@@ -1,0 +1,15 @@
+ The buggy function is `parseContextTypeExpression`, which is trying to parse a type expression that starts with `new:`. However, the `new:` keyword is not allowed in type expressions, and the function is not handling this case correctly.
+
+Here is the corrected version of the function:
+```
+private Node parseContextTypeExpression(JsDocToken token) {
+    if (token.type == JsDocTokenType.NEW) {
+        // Handle the case where the type expression starts with "new:"
+        return parseTypeName(token);
+    } else {
+        // Handle the case where the type expression does not start with "new:"
+        return parseTypeName(token);
+    }
+}
+```
+This corrected version of the function checks the token type and handles the case where the type expression starts with `new:`. If the token type is not `NEW`, the function falls back to the original behavior of parsing the type name.

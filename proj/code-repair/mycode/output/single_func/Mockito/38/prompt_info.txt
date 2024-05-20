@@ -1,0 +1,8 @@
+prefix:
+private boolean toStringEquals(Matcher m, Object arg) {
+
+buggy_hunk:
+    return StringDescription.toString(m).equals(arg.toString());
+
+suffix:
+}

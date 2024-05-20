@@ -1,0 +1,15 @@
+ The bug in the code is that the `toCanonical()` method of the `ReferencedType` class returns a `String` that is not properly escaped for use in a Java type name. Specifically, it does not escape the `<` and `>` characters, which are used to indicate type parameters in a Java type name.
+
+Here is the corrected version of the `buildCanonicalName()` method:
+```
+protected String buildCanonicalName() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(_class.getName());
+    sb.append('<');
+    sb.append(_referencedType.toCanonical().replaceAll("[<>]", "\\\\$0"));
+    return sb.toString();
+}
+```
+In this version, the `toCanonical()` method is called on the `ReferencedType` object, and the resulting `String` is then passed to the `replaceAll()` method to escape the `<` and `>` characters. The `replaceAll()` method takes a regular expression as its first argument, and a replacement string as its second argument. In this case, the regular expression is `"[<>]"`, which matches any `<` or `>` characters. The replacement string is `"\\$0"`, which inserts a backslash and the matched character into the resulting `String`.
+
+With this correction, the `buildCanonicalName()` method should produce the correct canonical name for the type, including the escaped `<` and `>` characters.

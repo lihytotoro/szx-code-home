@@ -1,0 +1,2 @@
+assertEquals("{loop: ?, number: number, string: string}",
+record.toAnnotationString());

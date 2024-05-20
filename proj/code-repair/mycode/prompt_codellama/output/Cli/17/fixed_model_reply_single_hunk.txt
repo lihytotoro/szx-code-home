@@ -1,0 +1,6 @@
+if (currentOption.hasArg() && (token.length() != (i + 1)))
+{
+    tokens.add(token.substring(i + 1));
+
+    break;
+}

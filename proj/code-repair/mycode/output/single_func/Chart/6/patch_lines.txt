@@ -1,0 +1,1 @@
+   ShapeList other = (ShapeList) obj;    return super.equals(other);

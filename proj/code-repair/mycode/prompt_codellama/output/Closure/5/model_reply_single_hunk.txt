@@ -1,0 +1,17 @@
+ The correct line at the INFILL location is:
+```
+if (!validProperties.contains(propName)) {
+  if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {
+    validProperties.add(propName);
+  } else {
+    return false;
+  }
+}
+```
+This code checks if the property being referenced is defined on the object literal, and if it is not, it returns false. This is necessary because the object-splitting algorithm assumes that if a property is not defined on an object, then the value is undefined. However, this assumption is not always true, as properties can be added to the `Object.prototype` object.
+
+The code checks if the property is defined on the object literal by checking if it is a valid property of the object. If the property is not defined on the object literal, it checks if the property is a variable or a simple assignment statement, and if it is, it adds the property to the set of valid properties. If the property is not a variable or a simple assignment statement, it returns false.
+
+The code also checks if the property is self-referential, which means that it is assigned a value that is the parent of one of the passed in references. If the property is self-referential, it returns false, as this can cause problems with the object-splitting algorithm.
+
+Overall, this code checks if the property being referenced is defined on the object literal, and if it is not, it returns false. This is necessary to prevent the object-splitting algorithm from inlining deleted properties, which can cause problems with the code.

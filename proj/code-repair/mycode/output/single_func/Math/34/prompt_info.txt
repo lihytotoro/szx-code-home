@@ -1,0 +1,8 @@
+prefix:
+public Iterator<Chromosome> iterator() {
+
+buggy_hunk:
+    return chromosomes.iterator();
+
+suffix:
+}

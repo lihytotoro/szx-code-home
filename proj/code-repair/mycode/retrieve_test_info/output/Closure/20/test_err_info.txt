@@ -1,0 +1,37 @@
+junit.framework.AssertionFailedError: 
+Expected: var a=String("hello",bar())
+Result: var a=""+"hello"
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        VAR 1 [source_file: expected0]
+            NAME a 1 [source_file: expected0]
+                CALL 1 [free_call: 1] [source_file: expected0]
+                    NAME String 1 [source_file: expected0]
+                    STRING hello 1 [source_file: expected0]
+                    CALL 1 [free_call: 1] [source_file: expected0]
+                        NAME bar 1 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        VAR 1 [source_file: testcode]
+            NAME a 1 [source_file: testcode]
+                ADD 1 [source_file: testcode]
+                    STRING  1 [source_file: testcode]
+                    STRING hello 1 [source_file: testcode]
+
+
+Subtree1: CALL 1 [free_call: 1] [source_file: expected0]
+    NAME String 1 [source_file: expected0]
+    STRING hello 1 [source_file: expected0]
+    CALL 1 [free_call: 1] [source_file: expected0]
+        NAME bar 1 [source_file: expected0]
+
+
+Subtree2: ADD 1 [source_file: testcode]
+    STRING  1 [source_file: testcode]
+    STRING hello 1 [source_file: testcode]
+

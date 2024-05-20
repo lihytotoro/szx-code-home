@@ -1,0 +1,1 @@
+   return new SimpleType(subclass, _superClass, _superInterfaces, _bindings,

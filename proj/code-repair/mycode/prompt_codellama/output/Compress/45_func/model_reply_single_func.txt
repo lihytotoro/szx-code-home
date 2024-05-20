@@ -1,0 +1,37 @@
+ The buggy function is:
+```
+public static int formatLongOctalOrBinaryBytes(
+    final long value, final byte[] buf, final int offset, final int length) {
+
+    // Check whether we are dealing with UID/GID or SIZE field
+    final long maxAsOctalChar = length == TarConstants.UIDLEN ? TarConstants.MAXID : TarConstants.MAXSIZE;
+
+    final boolean negative = value < 0;
+    if (!negative && value <= maxAsOctalChar) { // OK to store as octal chars
+        return formatLongOctalBytes(value, buf, offset, length);
+    }
+
+    if (length < 9) {
+        formatLongBinary(value, buf, offset, length, negative);
+    }
+    formatBigIntegerBinary(value, buf, offset, length, negative);
+
+    buf[offset] = (byte) (negative ? 0xff : 0x80);
+    return offset + length;
+}
+```
+The bug is in the line `final long maxAsOctalChar = length == TarConstants.UIDLEN ? TarConstants.MAXID : TarConstants.MAXSIZE;`.
+
+The variable `maxAsOctalChar` is used to determine whether the value can be stored as octal characters. However, the value of `maxAsOctalChar` is not correctly calculated.
+
+If `length` is equal to `TarConstants.UIDLEN`, then `maxAsOctalChar` should be set to `TarConstants.MAXID`, which is the maximum value that can be stored as an octal character in a UID field.
+
+However, the current code sets `maxAsOctalChar` to `TarConstants.MAXSIZE`, which is the maximum value that can be stored as an octal character in a SIZE field.
+
+Therefore, the function is incorrectly calculating the maximum value that can be stored as octal characters, and it is not correctly handling the case where `length` is equal to `TarConstants.UIDLEN`.
+
+To fix the bug, the line should be changed to:
+```
+final long maxAsOctalChar = length == TarConstants.UIDLEN ? TarConstants.MAXID : TarConstants.MAXSIZE;
+```
+This will correctly calculate the maximum value that can be stored as octal characters, and it will correctly handle the case where `length` is equal to `TarConstants.UIDLEN`.

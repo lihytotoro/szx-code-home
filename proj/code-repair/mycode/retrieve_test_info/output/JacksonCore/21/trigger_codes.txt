@@ -1,0 +1,1 @@
+assertToken(JsonToken.END_OBJECT, p.nextToken());

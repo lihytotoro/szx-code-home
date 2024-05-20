@@ -1,0 +1,1 @@
+junit.framework.ComparisonFailure: expected:<AD AD AD AD 2003 [2003 03 20]03 January Jan 01 1 ...> but was:<AD AD AD AD 2003 [03 03 ]03 January Jan 01 1 ...>

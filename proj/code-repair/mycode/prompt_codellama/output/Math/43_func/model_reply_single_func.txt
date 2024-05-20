@@ -1,0 +1,24 @@
+ The bug is in the `if` statement that checks if the `meanImpl`, `varianceImpl`, and `geoMeanImpl` are instances of the `Mean`, `Variance`, and `GeometricMean` classes, respectively. If any of these conditions are not met, the `increment` method is not called on the corresponding implementation, and the `n` variable is not incremented.
+
+Here is the corrected version of the `addValue` method:
+```
+public void addValue(double value) {
+    sumImpl.increment(value);
+    sumsqImpl.increment(value);
+    minImpl.increment(value);
+    maxImpl.increment(value);
+    sumLogImpl.increment(value);
+    secondMoment.increment(value);
+    if (!(meanImpl instanceof Mean)) {
+        meanImpl.increment(value);
+    }
+    if (!(varianceImpl instanceof Variance)) {
+        varianceImpl.increment(value);
+    }
+    if (!(geoMeanImpl instanceof GeometricMean)) {
+        geoMeanImpl.increment(value);
+    }
+    n++;
+}
+```
+In this version, the `n` variable is incremented regardless of whether the `meanImpl`, `varianceImpl`, and `geoMeanImpl` are instances of the `Mean`, `Variance`, and `GeometricMean` classes, respectively. This ensures that the `n` variable is always incremented correctly, even if the `meanImpl`, `varianceImpl`, and `geoMeanImpl` are overridden.

@@ -1,0 +1,1 @@
+_rootNameLookup = new HashMap<>(src._rootNameLookup);

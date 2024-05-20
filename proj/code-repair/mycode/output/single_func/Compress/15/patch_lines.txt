@@ -1,0 +1,1 @@
+       if (otherComment != null && !otherComment.isEmpty()) {            return false;        }    } else if (!myComment.equals(otherComment)) {        return false;    }    return getTime() == other.getTime()

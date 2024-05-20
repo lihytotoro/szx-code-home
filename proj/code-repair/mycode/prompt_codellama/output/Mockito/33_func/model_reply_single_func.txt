@@ -1,0 +1,28 @@
+ The bug in the code is that it is using the `equals()` method to compare two `Method` objects, which is not the correct way to do it. The `equals()` method is not defined for `Method` objects, and it is not guaranteed to return `true` even if the two methods are the same.
+
+The correct way to compare two `Method` objects is to use the `equals()` method of the `Method` class, which is defined as follows:
+```
+public boolean equals(Object obj) {
+    if (obj == this) {
+        return true;
+    }
+    if (!(obj instanceof Method)) {
+        return false;
+    }
+    Method other = (Method) obj;
+    return other.getName().equals(getName()) &&
+           other.getParameterTypes().equals(getParameterTypes()) &&
+           other.getReturnType().equals(getReturnType());
+}
+```
+This method compares the name, parameter types, and return type of the two methods, and returns `true` if they are all the same.
+
+Therefore, the corrected version of the `hasSameMethod()` method would be:
+```
+public boolean hasSameMethod(Invocation candidate) {
+    Method m1 = invocation.getMethod();
+    Method m2 = candidate.getMethod();
+    return m1.equals(m2);
+}
+```
+This method uses the `equals()` method of the `Method` class to compare the two methods, and returns `true` if they are the same.

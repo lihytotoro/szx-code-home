@@ -1,0 +1,1 @@
+       if (invocation.getRawArguments()[indexOfVararg] == null) {            throw new UnsupportedOperationException();        }        ((CapturesArguments) matchers.get(indexOfVararg)).captureFrom(invocation.getRawArguments()[indexOfVararg]);

@@ -1,0 +1,1 @@
+PointValuePair solution = new SimplexSolver().optimize(f, constraints, GoalType.MINIMIZE, true);

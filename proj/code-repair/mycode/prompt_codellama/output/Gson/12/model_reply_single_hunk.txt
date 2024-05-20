@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+```
+pathNames[stackSize - 2] = "null";
+```
+This line is trying to access the `pathNames` array with an index of `-2`, which is an invalid index. The correct fix is to change the line to:
+```
+pathNames[stackSize - 1] = "null";
+```
+This will access the `pathNames` array with a valid index, and fix the bug.

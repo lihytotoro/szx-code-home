@@ -1,0 +1,1 @@
+   return getBaseValue() == null ? 0 : ValueUtils.getLength(getBaseValue());

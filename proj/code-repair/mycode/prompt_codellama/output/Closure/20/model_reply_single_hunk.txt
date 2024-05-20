@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+```
+Node addition = IR.add(
+    IR.string("").srcref(callTarget),
+    value.detachFromParent());
+```
+This line creates a new addition node with the string literal "hello" and the value of the `bar()` function as its second child. The `detachFromParent()` method is used to remove the `value` node from its parent, which is the `callTarget` node. The `srcref` method is used to set the source range of the addition node to the source range of the `callTarget` node.

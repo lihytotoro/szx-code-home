@@ -1,0 +1,31 @@
+ The bug in the code is that it assumes that the `pendingAttributeName` variable will never be an empty string, but it can be an empty string if the tokeniser has skipped whitespace control characters.
+
+To fix the bug, we need to check if the `pendingAttributeName` is an empty string before using it to create a new `Attribute` object. Here's the corrected code:
+```
+final void newAttribute() {
+    if (attributes == null)
+        attributes = new Attributes();
+
+    if (pendingAttributeName != null) {
+        // the tokeniser has skipped whitespace control chars, but trimming could collapse to empty for other control codes, so verify here
+        pendingAttributeName = pendingAttributeName.trim();
+        if (pendingAttributeName.length() > 0) {
+            Attribute attribute;
+            if (hasPendingAttributeValue)
+                attribute = new Attribute(pendingAttributeName,
+                    pendingAttributeValue.length() > 0 ? pendingAttributeValue.toString() : pendingAttributeValueS);
+            else if (hasEmptyAttributeValue)
+                attribute = new Attribute(pendingAttributeName, "");
+            else
+                attribute = new BooleanAttribute(pendingAttributeName);
+            attributes.put(attribute);
+        }
+    }
+    pendingAttributeName = null;
+    hasEmptyAttributeValue = false;
+    hasPendingAttributeValue = false;
+    reset(pendingAttributeValue);
+    pendingAttributeValueS = null;
+}
+```
+With this correction, the code should handle control code in attribute names correctly.

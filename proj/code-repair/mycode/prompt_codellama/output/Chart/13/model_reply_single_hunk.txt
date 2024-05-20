@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+new Range(0.0, constraint.getWidth() - w[2]),
+
+This is because the `w[2]` variable is used to calculate the width of the left block, and the `constraint.getWidth()` method returns the total width of the container, which includes the width of the left block. Therefore, the range for the width of the left block should be from 0 to the total width of the container minus the width of the left block.

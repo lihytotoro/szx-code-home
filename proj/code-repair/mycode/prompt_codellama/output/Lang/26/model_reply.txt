@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    c.setTimeZone(mTimeZone);
+
+This line sets the time zone of the `Calendar` object to the time zone specified in the `mTimeZone` field, which is used to format the date in the desired time zone.

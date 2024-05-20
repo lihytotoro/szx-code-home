@@ -1,0 +1,7 @@
+if (jsDoc != null &&
+        (jsDoc.isConstructor() ||
+         jsDoc.isInterface() ||
+         jsDoc.hasThisType() ||
+         jsDoc.isOverride())) {
+      return false;
+    }

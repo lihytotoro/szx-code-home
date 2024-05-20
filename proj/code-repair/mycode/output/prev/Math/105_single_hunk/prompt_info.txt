@@ -1,0 +1,8 @@
+prefix:
+public double getSumSquaredErrors() {
+
+buggy_hunk:
+    return sumYY - sumXY * sumXY / sumXX;
+
+suffix:
+}

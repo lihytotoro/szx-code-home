@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+  if (options.checkGlobalThisLevel.isOn()) {
+
+This line is checking if the `checkGlobalThisLevel` option is turned on, and if so, it sets the warning level for the `GLOBAL_THIS` diagnostic group to `ERROR`. However, the buggy hunk was removed, so this line is no longer present in the code.

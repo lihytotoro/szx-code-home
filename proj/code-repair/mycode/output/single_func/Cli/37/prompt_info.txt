@@ -1,0 +1,9 @@
+prefix:
+private boolean isShortOption(String token)
+{
+
+buggy_hunk:
+    return token.startsWith("-") && token.length() >= 2 && options.hasShortOption(token.substring(1, 2));
+
+suffix:
+}

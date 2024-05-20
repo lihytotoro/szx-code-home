@@ -1,0 +1,3 @@
+    for (Matcher m : matchers) {
+        ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
+    }

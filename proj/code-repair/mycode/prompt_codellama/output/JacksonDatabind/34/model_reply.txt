@@ -1,0 +1,3 @@
+ The correct line at the INFILL location should be:
+
+visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);

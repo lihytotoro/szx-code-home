@@ -1,0 +1,1 @@
+       for (Class<?> cls = raw; cls != Object.class; cls = cls.getSuperclass()) {            if (full.startsWith(PREFIX_STRING)) {

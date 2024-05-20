@@ -1,0 +1,5 @@
+buggy_func:
+public String generateToolTipFragment(String toolTipText) {
+    return " title=\"" + toolTipText
+        + "\" alt=\"\"";
+}

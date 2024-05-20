@@ -1,0 +1,19 @@
+ The buggy function is:
+```
+public Element clone() {
+    Element clone = (Element) super.clone();
+    clone.classNames();
+    return clone;
+}
+```
+The bug is that the `classNames()` method is being called on the cloned element, which is not what we want. We want to clone the element and preserve its original class names, not modify them.
+
+The corrected function should be:
+```
+public Element clone() {
+    Element clone = (Element) super.clone();
+    clone.classNames = new HashSet<>(classNames);
+    return clone;
+}
+```
+This function creates a new `HashSet` object for the `classNames` field of the cloned element, and initializes it with the original class names. This ensures that the cloned element has the same class names as the original element.

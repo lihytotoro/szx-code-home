@@ -1,0 +1,1 @@
+Assert.assertEquals(1, new DiscreteDistribution<Object>(list).sample(1).length);

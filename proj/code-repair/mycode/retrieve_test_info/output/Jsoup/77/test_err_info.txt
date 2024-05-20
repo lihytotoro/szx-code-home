@@ -1,0 +1,7 @@
+junit.framework.AssertionFailedError: expected:<<div>
+ test
+[</div>
+<p></p]>> but was:<<div>
+ test
+[ <p></p>
+</div]>>

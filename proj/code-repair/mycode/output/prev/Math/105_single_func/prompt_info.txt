@@ -1,0 +1,4 @@
+buggy_func:
+public double getSumSquaredErrors() {
+    return sumYY - sumXY * sumXY / sumXX;
+}

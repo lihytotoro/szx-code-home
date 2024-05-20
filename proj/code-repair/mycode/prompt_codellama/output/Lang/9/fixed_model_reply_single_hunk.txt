@@ -1,0 +1,3 @@
+if(currentStrategy.addRegex(this, regex)) {
+    collector.add(currentStrategy);
+}

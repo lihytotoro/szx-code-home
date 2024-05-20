@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {
+  return true;
+}
+```
+This line checks if the current node is a function call and if it has side effects. If it does, the function returns `true`, indicating that the current node has side effects.

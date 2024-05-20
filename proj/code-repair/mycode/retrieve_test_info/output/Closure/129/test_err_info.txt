@@ -1,0 +1,47 @@
+junit.framework.AssertionFailedError: 
+Expected: console.log((new x).abc())
+Result: console.log((0,(new x).abc)())
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: input0] [input_id: InputId: input0]
+        EXPR_RESULT 1 [source_file: input0]
+            CALL 1 [source_file: input0]
+                GETPROP 1 [source_file: input0]
+                    NAME console 1 [source_file: input0]
+                    STRING log 1 [source_file: input0]
+                CALL 1 [source_file: input0]
+                    GETPROP 1 [source_file: input0]
+                        NEW 1 [source_file: input0]
+                            NAME x 1 [source_file: input0]
+                        STRING abc 1 [source_file: input0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: i0] [input_id: InputId: i0]
+        EXPR_RESULT 1 [source_file: i0]
+            CALL 1 [source_file: i0]
+                GETPROP 1 [source_file: i0]
+                    NAME console 1 [source_file: i0]
+                    STRING log 1 [source_file: i0]
+                CALL 1 [free_call: 1] [source_file: i0]
+                    GETPROP 1 [source_file: i0]
+                        NEW 1 [source_file: i0]
+                            NAME x 1 [source_file: i0]
+                        STRING abc 1 [source_file: i0]
+
+
+Subtree1: CALL 1 [source_file: input0]
+    GETPROP 1 [source_file: input0]
+        NEW 1 [source_file: input0]
+            NAME x 1 [source_file: input0]
+        STRING abc 1 [source_file: input0]
+
+
+Subtree2: CALL 1 [free_call: 1] [source_file: i0]
+    GETPROP 1 [source_file: i0]
+        NEW 1 [source_file: i0]
+            NAME x 1 [source_file: i0]
+        STRING abc 1 [source_file: i0]
+

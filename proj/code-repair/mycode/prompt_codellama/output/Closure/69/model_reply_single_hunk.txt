@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    visitParameterList(t, n, functionType);
+
+This line is responsible for validating the parameters of the function being called, and it is the point at which the type checker checks whether the function can be called with the given parameters.

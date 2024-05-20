@@ -1,0 +1,1 @@
+java.lang.ClassCastException: com.google.javascript.rhino.jstype.StringType cannot be cast to com.google.javascript.rhino.jstype.ObjectType

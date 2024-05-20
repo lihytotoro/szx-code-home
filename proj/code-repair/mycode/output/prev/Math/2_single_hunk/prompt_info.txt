@@ -1,0 +1,8 @@
+prefix:
+public double getNumericalMean() {
+
+buggy_hunk:
+    return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();
+
+suffix:
+}

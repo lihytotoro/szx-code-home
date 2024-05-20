@@ -1,0 +1,11 @@
+ The bug is in the `BeanPropertyWriter` constructor, specifically in the `suppressNulls` parameter. The value of `suppressNulls` is determined based on the `inclusion` parameter, which is set to `JsonInclude.Include.NON_DEFAULT`. However, this value is not correctly handled in the `BeanPropertyWriter` constructor.
+
+The correct version of the `BeanPropertyWriter` constructor should be:
+```
+BeanPropertyWriter bpw = new BeanPropertyWriter(propDef,
+        am, _beanDesc.getClassAnnotations(), declaredType,
+        ser, typeSer, serializationType,
+        (inclusion == JsonInclude.Include.NON_DEFAULT) ? true : false,
+        valueToSuppress);
+```
+This ensures that the `suppressNulls` parameter is set to `true` if the `inclusion` parameter is set to `JsonInclude.Include.NON_DEFAULT`.

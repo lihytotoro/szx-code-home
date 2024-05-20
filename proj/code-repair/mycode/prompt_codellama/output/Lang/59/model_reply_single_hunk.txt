@@ -1,0 +1,13 @@
+ The correct line at the INFILL location is:
+```
+buffer[size + strLen + i] = padChar;
+```
+This line is trying to access the `buffer` array with an index that is out of bounds. The `size` variable is incremented by the `width` variable, which is the number of characters to be appended to the `StrBuilder`. The `strLen` variable is the length of the string to be appended. The `padLen` variable is the number of padding characters to be added.
+
+The bug in the original code is that the `buffer` array is not large enough to hold the entire string, including the padding characters. The `ensureCapacity` method is used to ensure that the `buffer` array is large enough, but it is not called with the correct size. The correct size should be `size + width`, not `size + strLen`.
+
+The corrected line at the INFILL location is:
+```
+buffer[size + width + i] = padChar;
+```
+This line accesses the `buffer` array with an index that is within the bounds of the array, and it correctly accounts for the padding characters.

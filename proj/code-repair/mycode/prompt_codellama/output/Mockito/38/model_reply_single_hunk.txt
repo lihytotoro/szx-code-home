@@ -1,0 +1,11 @@
+ The correct line at the INFILL location is:
+
+return StringDescription.toString(m).equals(arg.toString());
+
+This line is comparing the result of calling `toString()` on the `Matcher` object `m` with the result of calling `toString()` on the `arg` object. However, if `arg` is `null`, then calling `toString()` on `arg` will throw a `NullPointerException`.
+
+To fix this bug, you can change the line to:
+
+return StringDescription.toString(m).equals(arg == null ? "null" : arg.toString());
+
+This will return the string "null" if `arg` is `null`, and the result of calling `toString()` on `arg` otherwise.

@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+```
+sb.append('>');
+```
+Explanation:
+
+The buggy hunk was appending a semicolon (`';'`) instead of a greater-than symbol (`'>'`). This caused the generic signature to be malformed and the test to fail.

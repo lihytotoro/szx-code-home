@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return callHasLocalResult(value) || isToStringMethodCall(value) || locals.apply(value);
+```
+This line is the correct implementation of the `evaluatesToLocalValue` method for the `Token.NEW` case. It returns `true` if the `value` node is a `Token.NEW` node and either the `callHasLocalResult` or `isToStringMethodCall` method returns `true` for the `value` node, or if the `locals` predicate returns `true` for the `value` node.

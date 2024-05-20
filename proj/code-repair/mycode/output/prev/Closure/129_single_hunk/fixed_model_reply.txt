@@ -1,0 +1,3 @@
+if (!NodeUtil.isGet(first)) {
+  n.putBooleanProp(Node.FREE_CALL, true);
+}

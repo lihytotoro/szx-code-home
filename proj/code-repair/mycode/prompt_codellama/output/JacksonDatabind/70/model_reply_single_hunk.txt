@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+found = key.equalsIgnoreCase(prop.getName());
+```
+This is because the `key` variable is a String that represents the name of the property to be removed, and the `prop` variable is a `SettableBeanProperty` object that represents the property in the `props` list. The `getName()` method of the `SettableBeanProperty` class returns the name of the property, and the `equalsIgnoreCase()` method is used to compare the `key` variable to the name of the property in a case-insensitive manner.

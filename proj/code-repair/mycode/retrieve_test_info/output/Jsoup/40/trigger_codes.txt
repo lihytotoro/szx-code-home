@@ -1,0 +1,1 @@
+DocumentType fail = new DocumentType("","", "", "");

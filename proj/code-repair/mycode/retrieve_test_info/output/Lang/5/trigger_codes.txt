@@ -1,0 +1,1 @@
+assertValidToLocale("_GB", "", "GB", "");

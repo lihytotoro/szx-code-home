@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);
+```
+This line is casting the result of the `safeResolve` method to an `ObjectType`, but the method is returning a `StringType` instead. This is causing the `ClassCastException` to be thrown.

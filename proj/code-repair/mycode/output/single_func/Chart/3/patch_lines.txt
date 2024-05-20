@@ -1,0 +1,1 @@
+   copy.seriesKey = (SeriesKey) this.seriesKey.clone();

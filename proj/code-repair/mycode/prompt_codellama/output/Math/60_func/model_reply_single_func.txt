@@ -1,0 +1,39 @@
+ The buggy function is:
+```
+public double cumulativeProbability(double x) throws MathException {
+    final double dev = x - mean;
+    try {
+        return 0.5 * (1.0 + Erf.erf((dev) /
+                (standardDeviation * FastMath.sqrt(2.0))));
+    } catch (MaxIterationsExceededException ex) {
+        if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38
+            return 0;
+        } else if (x > (mean + 20 * standardDeviation)) {
+            return 1;
+        } else {
+            throw ex;
+        }
+    }
+}
+```
+The bug is in the `catch` block, where the `MaxIterationsExceededException` is caught and not handled properly. The exception is thrown when the continued fraction algorithm used in the `Erf.erf()` method fails to converge, which can happen when the input value is too large.
+
+The correct version of the function should handle the `MaxIterationsExceededException` and return a value that is consistent with the behavior of the `cumulativeProbability()` method. One way to do this is to return `1` when the input value is too large, as in the following code:
+```
+public double cumulativeProbability(double x) throws MathException {
+    final double dev = x - mean;
+    try {
+        return 0.5 * (1.0 + Erf.erf((dev) /
+                (standardDeviation * FastMath.sqrt(2.0))));
+    } catch (MaxIterationsExceededException ex) {
+        if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38
+            return 0;
+        } else if (x > (mean + 20 * standardDeviation)) {
+            return 1;
+        } else {
+            throw ex;
+        }
+    }
+}
+```
+Alternatively, the function could return a value that is consistent with the behavior of the `cumulativeProbability()` method when the input value is too large, such as `Double.POSITIVE_INFINITY`.

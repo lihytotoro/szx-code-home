@@ -1,0 +1,1 @@
+assertEquals(EURO_CH + ",Deux" + recordSeparator, sw.toString());

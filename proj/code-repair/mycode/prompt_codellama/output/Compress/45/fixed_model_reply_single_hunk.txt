@@ -1,0 +1,1 @@
+formatLongOctalOrBinaryBytes(value, buf, offset, length);

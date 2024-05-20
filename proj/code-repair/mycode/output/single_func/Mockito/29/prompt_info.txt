@@ -1,0 +1,12 @@
+prefix:
+public void describeTo(Description description) {
+    description.appendText("same(");
+    appendQuoting(description);
+
+buggy_hunk:
+    description.appendText(wanted.toString());
+
+suffix:
+    appendQuoting(description);
+    description.appendText(")");
+}

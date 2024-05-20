@@ -1,0 +1,3 @@
+junit.framework.AssertionFailedError: Expected exactly one warning or error Errors: 
+Warnings: 
+ expected:<1> but was:<0>

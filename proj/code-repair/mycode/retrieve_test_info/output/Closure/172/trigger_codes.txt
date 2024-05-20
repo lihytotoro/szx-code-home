@@ -1,0 +1,11 @@
+testTypes(
+"/** @param {Object} a */\n" +
+"function f(a) {\n" +
+"  a.prototype = '__proto'\n" +
+"}\n" +
+"/** @param {Object} b\n" +
+" *  @return {!Object}\n" +
+" */\n" +
+"function g(b) {\n" +
+"  return b.prototype\n" +
+"}\n");

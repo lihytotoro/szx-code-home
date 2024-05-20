@@ -1,0 +1,9 @@
+prefix:
+public double[] repairAndDecode(final double[] x) {
+
+buggy_hunk:
+    return
+
+suffix:
+        decode(x);
+}

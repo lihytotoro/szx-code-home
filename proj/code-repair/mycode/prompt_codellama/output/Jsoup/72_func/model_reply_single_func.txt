@@ -1,0 +1,22 @@
+ The bug in the code is in the `rangeEquals` method, which is used to check if the string in the cache is equal to the string being constructed. The method is implemented as follows:
+```
+private static boolean rangeEquals(char[] charBuf, int start, int count, String cached) {
+    for (int i = 0; i < count; i++) {
+        if (charBuf[start + i] != cached.charAt(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+```
+The problem with this implementation is that it assumes that the `cached` string is of the same length as the string being constructed. However, this is not always the case, as the `rangeEquals` method is used to check if the string in the cache is equal to the string being constructed, which may be shorter or longer than the string in the cache.
+
+To fix the bug, we need to modify the `rangeEquals` method to handle strings of different lengths. One way to do this is to use the `String.regionMatches` method, which allows us to compare a substring of a string with a substring of another string. Here's the modified `rangeEquals` method:
+```
+private static boolean rangeEquals(char[] charBuf, int start, int count, String cached) {
+    return cached.regionMatches(true, 0, charBuf, start, count);
+}
+```
+This method first checks if the `cached` string is of the same length as the string being constructed, and if not, it returns `false`. If the lengths are the same, it uses the `regionMatches` method to compare the two substrings, and returns `true` if they are equal.
+
+With this modification, the `cacheString` method should work correctly, even if the string in the cache is of a different length than the string being constructed.

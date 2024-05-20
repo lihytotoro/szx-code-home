@@ -1,0 +1,1 @@
+return MapType.construct(rawClass, _unknownType(), _unknownType());

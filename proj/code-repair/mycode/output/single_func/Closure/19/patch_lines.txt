@@ -1,0 +1,1 @@
+   case Token.ASSIGN:      declareNameInScope(scope, node.getFirstChild(), type);      break;

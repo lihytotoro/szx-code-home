@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+return new String(bytes, Charset.forName("ISO-8859-1"));
+
+This is the corrected version of the method that fixes the bug and uses the correct charset.

@@ -1,0 +1,8 @@
+prefix:
+protected BasePeriod(long duration) {
+
+buggy_hunk:
+    this(duration, null, null);
+
+suffix:
+}

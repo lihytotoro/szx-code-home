@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+return js.substring(pos, js.length());
+```
+This is because if the next new line character cannot be found, the method should return the contents of the file from the current position to the end of the file.

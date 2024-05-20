@@ -1,0 +1,1 @@
+assertEquals("Hello There", doc.text());

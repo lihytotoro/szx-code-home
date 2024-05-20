@@ -1,0 +1,2 @@
+for (Iterator ptrs = context.iteratePointers("$var | /MAIN/A"); ptrs.hasNext(); sz++) {
+ptrs.next();

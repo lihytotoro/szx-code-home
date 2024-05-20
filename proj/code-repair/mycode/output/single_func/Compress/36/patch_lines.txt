@@ -1,0 +1,1 @@
+   if (stream == null) {        throw new IllegalStateException("No current 7z entry (call getNextEntry() first).");    }

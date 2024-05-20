@@ -1,0 +1,55 @@
+junit.framework.AssertionFailedError: 
+Expected: var x;(function(){x})()
+Result: (function(){x})()
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        VAR 1 [source_file: expected0]
+            NAME x 1 [source_file: expected0]
+        EXPR_RESULT 1 [source_file: expected0]
+            CALL 1 [free_call: 1] [source_file: expected0]
+                FUNCTION  1 [source_file: expected0]
+                    NAME  1 [source_file: expected0]
+                    PARAM_LIST 1 [source_file: expected0]
+                    BLOCK 1 [source_file: expected0]
+                        EXPR_RESULT 1 [source_file: expected0]
+                            NAME x 1 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        EXPR_RESULT 1 [source_file: testcode]
+            CALL 1 [free_call: 1] [source_file: testcode]
+                FUNCTION  1 [source_file: testcode]
+                    NAME  1 [source_file: testcode]
+                    PARAM_LIST 1 [source_file: testcode]
+                    BLOCK 1 [source_file: testcode]
+                        EXPR_RESULT 1 [source_file: testcode]
+                            NAME x 1 [source_file: testcode]
+
+
+Subtree1: SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+    VAR 1 [source_file: expected0]
+        NAME x 1 [source_file: expected0]
+    EXPR_RESULT 1 [source_file: expected0]
+        CALL 1 [free_call: 1] [source_file: expected0]
+            FUNCTION  1 [source_file: expected0]
+                NAME  1 [source_file: expected0]
+                PARAM_LIST 1 [source_file: expected0]
+                BLOCK 1 [source_file: expected0]
+                    EXPR_RESULT 1 [source_file: expected0]
+                        NAME x 1 [source_file: expected0]
+
+
+Subtree2: SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+    EXPR_RESULT 1 [source_file: testcode]
+        CALL 1 [free_call: 1] [source_file: testcode]
+            FUNCTION  1 [source_file: testcode]
+                NAME  1 [source_file: testcode]
+                PARAM_LIST 1 [source_file: testcode]
+                BLOCK 1 [source_file: testcode]
+                    EXPR_RESULT 1 [source_file: testcode]
+                        NAME x 1 [source_file: testcode]
+

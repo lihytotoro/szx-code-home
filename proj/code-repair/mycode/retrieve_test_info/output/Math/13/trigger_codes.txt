@@ -1,0 +1,1 @@
+PolynomialFunction fitted = new PolynomialFunction(fitter.fit(init));

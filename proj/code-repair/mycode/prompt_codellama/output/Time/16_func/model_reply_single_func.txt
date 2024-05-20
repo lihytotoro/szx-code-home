@@ -1,0 +1,36 @@
+ The bug in the code is that it is using the `DateTimeParser` class to parse the text into a `DateTime` object, but it is not taking into account the time zone of the `DateTime` object. This means that the `DateTime` object will be in the default time zone, which is UTC, rather than the time zone specified in the `DateTime` object.
+
+To fix the bug, you need to make sure that the `DateTime` object is created with the correct time zone. You can do this by using the `DateTime.withZone()` method to set the time zone of the `DateTime` object before it is returned.
+
+Here is the corrected version of the code:
+```
+public int parseInto(ReadWritableInstant instant, String text, int position) {
+    DateTimeParser parser = requireParser();
+    if (instant == null) {
+        throw new IllegalArgumentException("Instant must not be null");
+    }
+    
+    long instantMillis = instant.getMillis();
+    Chronology chrono = instant.getChronology();
+    long instantLocal = instantMillis + chrono.getZone().getOffset(instantMillis);
+    chrono = selectChronology(chrono);
+    
+    DateTimeParserBucket bucket = new DateTimeParserBucket(
+        instantLocal, chrono, iLocale, iPivotYear, iDefaultYear);
+    int newPos = parser.parseInto(bucket, text, position);
+    instant.setMillis(bucket.computeMillis(false, text));
+    if (iOffsetParsed && bucket.getOffsetInteger() != null) {
+        int parsedOffset = bucket.getOffsetInteger();
+        DateTimeZone parsedZone = DateTimeZone.forOffsetMillis(parsedOffset);
+        chrono = chrono.withZone(parsedZone);
+    } else if (bucket.getZone() != null) {
+        chrono = chrono.withZone(bucket.getZone());
+    }
+    instant.setChronology(chrono);
+    if (iZone != null) {
+        instant.setZone(iZone);
+    }
+    return newPos;
+}
+```
+In this corrected version, the `DateTime` object is created with the correct time zone by using the `DateTime.withZone()` method. This ensures that the `DateTime` object is in the correct time zone and that the `DateTime` object is correctly parsed.

@@ -1,0 +1,14 @@
+prefix:
+public void captureArgumentsFrom(Invocation i) {
+    int k = 0;
+    for (Matcher m : matchers) {
+
+buggy_line:
+        if (m instanceof CapturesArguments) {
+
+suffix:
+            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
+        }
+        k++;
+    }
+}

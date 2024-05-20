@@ -1,0 +1,2 @@
+fold("x = ['a', foo, 'b', 'c'].join(',')",
+"x = [\"a\",foo,\"b,c\"].join()");

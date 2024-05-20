@@ -1,0 +1,24 @@
+ The buggy function is:
+```
+public boolean isCachable() {
+    /* As per [databind#735], existence of value or key deserializer (only passed
+     * if annotated to use non-standard one) should also prevent caching.
+     */
+    return (_valueTypeDeserializer == null)
+            && (_ignorableProperties == null);
+}
+```
+The bug is that the function does not take into account the possibility that the `valueTypeDeserializer` and `ignorableProperties` fields may be non-null even if the `Map` is not annotated with a custom value or key deserializer.
+
+The corrected function should be:
+```
+public boolean isCachable() {
+    /* As per [databind#735], existence of value or key deserializer (only passed
+     * if annotated to use non-standard one) should also prevent caching.
+     */
+    return (_valueTypeDeserializer == null)
+            && (_ignorableProperties == null)
+            && (_annotated == null || !_annotated.hasNonDefaultValueDeserializer());
+}
+```
+This corrected function takes into account the possibility that the `valueTypeDeserializer` and `ignorableProperties` fields may be non-null even if the `Map` is not annotated with a custom value or key deserializer. It also checks whether the `Map` is annotated with a non-default value deserializer, which would prevent caching.

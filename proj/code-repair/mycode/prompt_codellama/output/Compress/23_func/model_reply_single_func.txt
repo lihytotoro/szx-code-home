@@ -1,0 +1,30 @@
+ The buggy function is:
+```
+InputStream decode(final InputStream in, final Coder coder,
+        byte[] password) throws IOException {
+    byte propsByte = coder.properties[0];
+    long dictSize = coder.properties[1];
+    for (int i = 1; i < 4; i++) {
+        dictSize |= (coder.properties[i + 1] << (8 * i));
+    }
+    if (dictSize > LZMAInputStream.DICT_SIZE_MAX) {
+        throw new IOException("Dictionary larger than 4GiB maximum size");
+    }
+    return new LZMAInputStream(in, -1, propsByte, (int) dictSize);
+}
+```
+The bug is that the `dictSize` variable is being cast to an `int` value, which can cause the dictionary size to be truncated if it is larger than the maximum size supported by the `LZMAInputStream` class.
+
+The correct version of the function should use a `long` value to store the dictionary size, and should not cast it to an `int` value. Here is the corrected version:
+```
+InputStream decode(final InputStream in, final Coder coder,
+        byte[] password) throws IOException {
+    byte propsByte = coder.properties[0];
+    long dictSize = coder.properties[1];
+    for (int i = 1; i < 4; i++) {
+        dictSize |= (coder.properties[i + 1] << (8 * i));
+    }
+    return new LZMAInputStream(in, -1, propsByte, (int) dictSize);
+}
+```
+This corrected version will not truncate the dictionary size, and will correctly create an `LZMAInputStream` object with the correct dictionary size.

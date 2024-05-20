@@ -1,0 +1,1 @@
+       throw new IOException("Unknown escape sequence: \\" + (char)c);

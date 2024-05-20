@@ -1,0 +1,17 @@
+ The bug in the code is that it is comparing the object reference of `this` with the object reference of `o` instead of comparing the contents of the objects.
+
+The corrected version of the function should be:
+```
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+
+    Element element = (Element) o;
+
+    return this.text().equals(element.text());
+}
+```
+This function first checks if the object references are the same, and if not, it checks if the objects are of the same class and if their contents are equal.
+
+Note that the `text()` method is used to get the text content of the element, which is what is being compared in the `equals` method.

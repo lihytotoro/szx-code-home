@@ -1,0 +1,1 @@
+   return optName.length() == 1 && options.hasShortOption(optName);

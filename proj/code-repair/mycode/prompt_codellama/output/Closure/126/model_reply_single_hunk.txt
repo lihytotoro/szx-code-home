@@ -1,0 +1,21 @@
+ ```
+  if (NodeUtil.hasFinally(n)) {
+    Node finallyBlock = n.getLastChild();
+    tryMinimizeExits(finallyBlock, exitType, labelName);
+  }
+```
+The code fails on this test because the `tryMinimizeExits` function is not handling the `finally` block correctly. Specifically, it is not handling the `break` statement inside the `finally` block correctly.
+
+The correct line at the INFILL location should be:
+```
+if (NodeUtil.hasFinally(n)) {
+  Node finallyBlock = n.getLastChild();
+  tryMinimizeExits(finallyBlock, exitType, labelName);
+  // Add this line to handle the break statement inside the finally block
+  if (finallyBlock.isBreak()) {
+    NodeUtil.removeChild(finallyBlock.getParent(), finallyBlock);
+    compiler.reportCodeChange();
+  }
+}
+```
+This will handle the `break` statement inside the `finally` block correctly and prevent the code from failing on the test.

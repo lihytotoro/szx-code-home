@@ -1,0 +1,1 @@
+   if (l instanceof EvalContext) {        l = ((EvalContext) l).getSingleNodePointer();    }    if (r instanceof EvalContext) {

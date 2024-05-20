@@ -1,0 +1,21 @@
+ The bug in the code is that the `transformer.cluster()` method is called with a null argument, which causes a null pointer exception. The bug is caused by the fact that the `Arrays.asList()` method returns a list that contains a null element, which is then passed to the `cluster()` method.
+
+To fix the bug, you can modify the code to check for null elements in the list before passing it to the `cluster()` method. Here is an example of how you can do this:
+```
+public static double distance(int[] p1, int[] p2) {
+  int sum = 0;
+  for (int i = 0; i < p1.length; i++) {
+      final int dp = p1[i] - p2[i];
+      sum += dp * dp;
+  }
+  return Math.sqrt(sum);
+}
+
+public static List<Cluster<EuclideanIntegerPoint>> cluster(List<EuclideanIntegerPoint> points, int k, int maxIterations) {
+  if (points == null || points.isEmpty()) {
+    throw new IllegalArgumentException("points cannot be null or empty");
+  }
+  // ...
+}
+```
+In this modified version of the code, the `cluster()` method checks for null or empty lists before attempting to cluster the points. If the list is null or empty, an `IllegalArgumentException` is thrown to indicate that the method cannot be called with a null or empty list.

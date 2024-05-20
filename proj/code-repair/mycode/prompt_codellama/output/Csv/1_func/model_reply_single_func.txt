@@ -1,0 +1,25 @@
+ The buggy function is:
+```
+public int read() throws IOException {
+    int current = super.read();
+    if (current == '\n') {
+        lineCounter++;
+    }
+    lastChar = current;
+    return lastChar;
+}
+```
+The bug is that the `lineCounter` variable is not being updated correctly. The function is only incrementing the `lineCounter` when the current character is a newline character (`'\n'`). However, the function is not checking for carriage return characters (`'\r'`), which can also be used to indicate the end of a line.
+
+To fix the bug, we need to add an additional check for carriage return characters. Here is the corrected function:
+```
+public int read() throws IOException {
+    int current = super.read();
+    if (current == '\n' || current == '\r') {
+        lineCounter++;
+    }
+    lastChar = current;
+    return lastChar;
+}
+```
+With this correction, the function will correctly increment the `lineCounter` variable whenever a newline or carriage return character is encountered.

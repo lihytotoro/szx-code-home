@@ -1,0 +1,1 @@
+           int equals = token.indexOf('=');            if (equals != -1)            {                tokens.add(token.substring(0, equals));                tokens.add(token.substring(equals + 1, token.length()));            }            else            {                tokens.add(token);

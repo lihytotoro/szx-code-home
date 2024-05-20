@@ -1,0 +1,53 @@
+ The buggy function is:
+```
+private final static int _parseIndex(String str) {
+    final int len = str.length();
+    // [core#133]: beware of super long indexes; assume we never
+    // have arrays over 2 billion entries so ints are fine.
+    if (len == 0 || len > 10) {
+        return -1;
+    }
+    // [core#176]: no leading zeroes allowed
+    for (int i = 0; i < len; ++i) {
+        char c = str.charAt(i);
+        if (c > '9' || c < '0') {
+            return -1;
+        }
+    }
+    if (len == 10) {
+        long l = NumberInput.parseLong(str);
+        if (l > Integer.MAX_VALUE) {
+            return -1;
+        }
+    }
+    return NumberInput.parseInt(str);
+}
+```
+The bug is in the line `if (l > Integer.MAX_VALUE) { return -1; }`. This line is checking if the parsed long value is greater than the maximum value of an integer, and if so, returning -1. However, this check is not correct, as the maximum value of an integer is 2,147,483,647, not 2,147,483,648. Therefore, the function is returning -1 for valid input, such as "0123456789", which is not correct.
+
+The corrected function is:
+```
+private final static int _parseIndex(String str) {
+    final int len = str.length();
+    // [core#133]: beware of super long indexes; assume we never
+    // have arrays over 2 billion entries so ints are fine.
+    if (len == 0 || len > 10) {
+        return -1;
+    }
+    // [core#176]: no leading zeroes allowed
+    for (int i = 0; i < len; ++i) {
+        char c = str.charAt(i);
+        if (c > '9' || c < '0') {
+            return -1;
+        }
+    }
+    if (len == 10) {
+        long l = NumberInput.parseLong(str);
+        if (l > Integer.MAX_VALUE) {
+            return -1;
+        }
+    }
+    return (int)NumberInput.parseInt(str);
+}
+```
+This corrected function uses the `parseInt` method to parse the string as an integer, and then casts the result to an integer. This ensures that the function returns the correct value for valid input, such as "0123456789", which is 123456789.

@@ -1,0 +1,22 @@
+ The correct line at the INFILL location is:
+```
+case Token.CATCH:
+  // This may be a catch parameter.
+  if (parent != null) {
+    switch (parent.getType()) {
+      case Token.CATCH:
+        isSet = true;
+        type = Name.Type.OTHER;
+        break;
+      default:
+        if (NodeUtil.isAssignmentOp(parent) &&
+            parent.getFirstChild() == n) {
+          isSet = true;
+          type = Name.Type.OTHER;
+        }
+    }
+  }
+  name = n.getString();
+  break;
+```
+This line handles the case where the node is a catch parameter, which is a variable that is defined in the catch block. The variable is marked as set, and its type is set to `Name.Type.OTHER`.

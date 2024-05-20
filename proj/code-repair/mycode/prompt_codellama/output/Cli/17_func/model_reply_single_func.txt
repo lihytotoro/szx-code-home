@@ -1,0 +1,41 @@
+ The bug in the function is that it does not handle the case where the token being processed is a short option that takes an argument, but the argument is not provided in the same token.
+
+For example, if the token being processed is "-a", and the option "-a" takes an argument, but the argument is not provided in the same token, the function will not correctly handle this case.
+
+To fix the bug, we need to check if the option takes an argument and if the argument is not provided in the same token, we need to add the remaining part of the token as an argument.
+
+Here is the corrected version of the function:
+```
+protected void burstToken(String token, boolean stopAtNonOption)
+{
+    for (int i = 1; i < token.length(); i++)
+    {
+        String ch = String.valueOf(token.charAt(i));
+
+        if (options.hasOption(ch))
+        {
+            tokens.add("-" + ch);
+            currentOption = options.getOption(ch);
+
+            if (currentOption.hasArg() && (token.length() != (i + 1)))
+            {
+                tokens.add(token.substring(i + 1));
+
+                break;
+            }
+        }
+        else if (stopAtNonOption)
+        {
+            process(token.substring(i));
+        }
+        else
+        {
+            tokens.add(token);
+            break;
+        }
+    }
+}
+```
+In this corrected version, we check if the option takes an argument and if the argument is not provided in the same token, we add the remaining part of the token as an argument.
+
+This corrected version should fix the bug and correctly handle the case where the token being processed is a short option that takes an argument, but the argument is not provided in the same token.

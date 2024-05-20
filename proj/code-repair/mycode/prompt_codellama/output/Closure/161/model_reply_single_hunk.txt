@@ -1,0 +1,8 @@
+ The correct line at the INFILL location is:
+```
+if (intIndex < 0) {
+  error(INDEX_OUT_OF_BOUNDS_ERROR, right);
+  return n;
+}
+```
+This line checks if the index is negative, and if so, it reports an error and returns the original node. This is necessary because the code assumes that the index is non-negative, and if it is negative, it will cause an error when trying to access the array element.

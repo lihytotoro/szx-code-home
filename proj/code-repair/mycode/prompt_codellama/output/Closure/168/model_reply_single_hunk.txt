@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+  if (t.getScopeDepth() <= 2) {
+
+This line is checking the scope depth of the current node, and if it is less than or equal to 2, it means that the node is in the global scope or in the scope of a function that is defined in the global scope. The buggy hunk was removed because it was causing the analyzer to record the name of a variable as escaped even if it was not actually escaped. This was causing the analyzer to report false positives for variables that were not actually escaped.

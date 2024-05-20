@@ -1,0 +1,9 @@
+ The buggy function is trying to cast an `Object` to a `Comparable<?>`, which is not allowed. The correct version of the function should be:
+```
+public void addValue(Object v) {
+    addValue((Comparable<?>) v);
+}
+```
+This function will only work if the `Object` passed in is actually a `Comparable`. If the `Object` is not a `Comparable`, the cast will fail with a `ClassCastException`.
+
+To fix the bug, the function should be modified to handle non-`Comparable` objects in a way that makes sense for the application. For example, the function could check if the `Object` is a `Comparable` before trying to cast it, or it could use a different approach altogether.

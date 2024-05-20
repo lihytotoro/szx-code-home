@@ -1,0 +1,24 @@
+ The bug in the code is in the `else` block of the `equals` method. The code is comparing the `real` and `imaginary` components of the `Complex` object with the `real` and `imaginary` components of the `other` object, but it is not handling the case where `other` is not a `Complex` object.
+
+The correct version of the `equals` method should be:
+```
+public boolean equals(Object other) {
+    if (this == other) {
+        return true;
+    } else if (other == null) {
+        return false;
+    } else if (!(other instanceof Complex)) {
+        return false;
+    }
+
+    Complex rhs = (Complex)other;
+    if (rhs.isNaN()) {
+        return this.isNaN();
+    } else {
+        return (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+    }
+}
+```
+This version of the method first checks if `other` is an instance of `Complex`. If it is not, it returns `false`. If it is, it casts `other` to a `Complex` object and compares the `real` and `imaginary` components of the `Complex` object with the `real` and `imaginary` components of the `this` object.
+
+The bug in the original code was that it was not handling the case where `other` was not a `Complex` object. This caused the method to throw a `ClassCastException` when it was called with an object that was not a `Complex` object.

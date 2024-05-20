@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (node.getType() == Token.CALL) {
+```
+This line checks if the current node is a function call, and if so, it adds the name of the called function to the `changed` set.

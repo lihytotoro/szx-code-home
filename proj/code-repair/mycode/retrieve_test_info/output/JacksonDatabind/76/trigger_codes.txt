@@ -1,0 +1,1 @@
+assertEquals("John", person.getName().getFirst());

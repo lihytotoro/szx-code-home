@@ -1,0 +1,3 @@
+ The correct line at the INFILL location is:
+
+Assert.assertTrue(Double.isNaN(w.getReal()));

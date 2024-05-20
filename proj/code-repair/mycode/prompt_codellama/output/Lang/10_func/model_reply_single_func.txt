@@ -1,0 +1,48 @@
+ The bug in the code is in the `switch` statement. The `case` statements are missing the `break` keyword, which means that the code will fall through to the next `case` statement and execute the code for that case as well.
+
+Here is the corrected version of the function:
+```
+private static StringBuilder escapeRegex(StringBuilder regex, String value, boolean unquote) {
+    boolean wasWhite= false;
+    for(int i= 0; i<value.length(); ++i) {
+        char c= value.charAt(i);
+        if(Character.isWhitespace(c)) {
+            if(!wasWhite) {
+                wasWhite= true;
+                regex.append("\\s*+");
+            }
+            continue;
+        }
+        wasWhite= false;
+        switch(c) {
+        case '\'':
+            if(unquote) {
+                if(++i==value.length()) {
+                    return regex;
+                }
+                c= value.charAt(i);
+            }
+            break;
+        case '?':
+        case '[':
+        case ']':
+        case '(':
+        case ')':
+        case '{':
+        case '}':
+        case '\\':
+        case '|':
+        case '*':
+        case '+':
+        case '^':
+        case '$':
+        case '.':
+            regex.append('\\');
+            break;
+        }
+        regex.append(c);
+    }
+    return regex;
+}
+```
+The corrected version of the function will properly escape the special characters in the input string, and will not fall through to the next `case` statement and execute the code for that case as well.

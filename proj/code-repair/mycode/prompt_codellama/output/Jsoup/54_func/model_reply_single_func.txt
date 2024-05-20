@@ -1,0 +1,12 @@
+ The bug in the code is that it is not properly sanitizing the attribute names before setting them on the `Element`. The `replaceAll` method is not the correct way to sanitize the attribute names, as it only replaces the first occurrence of the pattern.
+
+To fix the bug, you can use the `replaceAll` method with a regular expression that matches any invalid characters in the attribute name, and replace them with an empty string. Here's the corrected code:
+```java
+private void copyAttributes(org.jsoup.nodes.Node source, Element el) {
+    for (Attribute attribute : source.attributes()) {
+        String key = attribute.getKey().replaceAll("[^a-zA-Z_:][-a-zA-Z0-9_:.]", "");
+        el.setAttribute(key, attribute.getValue());
+    }
+}
+```
+This code will replace any invalid characters in the attribute name with an empty string, ensuring that the attribute name is valid XML.

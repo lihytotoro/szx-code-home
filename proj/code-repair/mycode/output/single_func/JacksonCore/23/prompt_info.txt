@@ -1,0 +1,9 @@
+prefix:
+public DefaultPrettyPrinter createInstance() {
+
+buggy_hunk:
+
+
+suffix:
+    return new DefaultPrettyPrinter(this);
+}

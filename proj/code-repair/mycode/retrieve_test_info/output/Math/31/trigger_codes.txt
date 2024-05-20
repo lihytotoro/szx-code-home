@@ -1,0 +1,1 @@
+int p = dist.inverseCumulativeProbability(0.5);

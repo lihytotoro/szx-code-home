@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+return Base64.encodeBase64String(binaryData);
+
+This is the correct way to encode a byte array to a Base64 string using the `Base64` class. The `encodeBase64String` method is a static method that takes a byte array as input and returns a Base64-encoded string.

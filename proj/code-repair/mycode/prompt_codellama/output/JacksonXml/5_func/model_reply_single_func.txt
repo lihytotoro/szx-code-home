@@ -1,0 +1,21 @@
+ The buggy function is:
+```
+protected XmlSerializerProvider(XmlSerializerProvider src) {
+    super(src);
+    // 21-May-2018, tatu: As per [dataformat-xml#282], should NOT really copy
+    //    root name lookup as that may link back to diff version, configuration
+    _rootNameLookup = src._rootNameLookup;
+}
+```
+The bug is that the `XmlSerializerProvider` class is copying the `rootNameLookup` field from the `src` object, which is a reference to another `XmlSerializerProvider` object. This means that the `rootNameLookup` field is being shared between two different `XmlSerializerProvider` objects, which is not correct.
+
+To fix the bug, you should create a new `rootNameLookup` field in the constructor and initialize it with the `rootNameLookup` field from the `src` object. Here is the corrected code:
+```
+protected XmlSerializerProvider(XmlSerializerProvider src) {
+    super(src);
+    // 21-May-2018, tatu: As per [dataformat-xml#282], should NOT really copy
+    //    root name lookup as that may link back to diff version, configuration
+    _rootNameLookup = new HashMap<>(src._rootNameLookup);
+}
+```
+This ensures that each `XmlSerializerProvider` object has its own copy of the `rootNameLookup` field, which is not shared with any other object.

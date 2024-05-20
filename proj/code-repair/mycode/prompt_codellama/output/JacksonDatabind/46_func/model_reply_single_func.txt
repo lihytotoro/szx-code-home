@@ -1,0 +1,17 @@
+ The bug in the code is that the `getGenericSignature` method is not properly handling the case where the type being referenced is a type variable. In this case, the method should return the type variable's generic signature, rather than the type variable's name.
+
+Here is the corrected version of the `getGenericSignature` method:
+```
+public StringBuilder getGenericSignature(StringBuilder sb) {
+    _classSignature(_class, sb, false);
+    sb.append('<');
+    if (_referencedType instanceof TypeVariable) {
+        sb.append(((TypeVariable) _referencedType).getGenericSignature());
+    } else {
+        sb.append(_referencedType.getGenericSignature());
+    }
+    sb.append(';');
+    return sb;
+}
+```
+This version of the method checks if the referenced type is a type variable, and if so, it returns the type variable's generic signature. If the referenced type is not a type variable, it returns the type variable's name.

@@ -1,0 +1,8 @@
+prefix:
+private Node parseContextTypeExpression(JsDocToken token) {
+
+buggy_hunk:
+        return parseTypeName(token);
+
+suffix:
+}

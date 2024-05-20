@@ -1,0 +1,15 @@
+ The bug in the code is that it does not handle the case where `rhs` is `NaN`. The `MathUtils.checkNotNull` method is used to check if `rhs` is `null`, but it does not check if `rhs` is `NaN`.
+
+To fix the bug, we need to add a check for `NaN` before calling `rhs.getReal()` and `rhs.getImaginary()`. Here is the corrected version of the `add` method:
+```
+public Complex add(Complex rhs)
+    throws NullArgumentException {
+    MathUtils.checkNotNull(rhs);
+    if (Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) {
+        return createComplex(Double.NaN, Double.NaN);
+    }
+    return createComplex(real + rhs.getReal(),
+        imaginary + rhs.getImaginary());
+}
+```
+With this fix, the `add` method will return `NaN` if either `rhs` or `rhs.getReal()` or `rhs.getImaginary()` is `NaN`.

@@ -1,0 +1,65 @@
+ The correct line at the INFILL location is:
+```
+if (FastMath.abs(f1) <= ftol) {
+    switch (allowed) {
+    case ANY_SIDE:
+        return x1;
+    case LEFT_SIDE:
+        if (inverted) {
+            return x1;
+        }
+        break;
+    case RIGHT_SIDE:
+        if (!inverted) {
+            return x1;
+        }
+        break;
+    case BELOW_SIDE:
+        if (f1 <= 0) {
+            return x1;
+        }
+        break;
+    case ABOVE_SIDE:
+        if (f1 >= 0) {
+            return x1;
+        }
+        break;
+    default:
+        throw new MathInternalError();
+    }
+}
+```
+This line is responsible for detecting when the function value of the last approximation is too small, given the function value accuracy, and returning the current approximation as the root. However, the line is not correctly handling the case where the function value accuracy is too high, and the function value is not close enough to zero to be considered a root. This can cause the algorithm to get stuck in an infinite loop, leading to the `TooManyEvaluationsException` error.
+
+To fix the bug, we need to add a check to ensure that the function value accuracy is not too high, and that the function value is close enough to zero to be considered a root. We can do this by adding a check to the `if` statement, like this:
+```
+if (FastMath.abs(f1) <= ftol && FastMath.abs(f1) >= atol) {
+    switch (allowed) {
+    case ANY_SIDE:
+        return x1;
+    case LEFT_SIDE:
+        if (inverted) {
+            return x1;
+        }
+        break;
+    case RIGHT_SIDE:
+        if (!inverted) {
+            return x1;
+        }
+        break;
+    case BELOW_SIDE:
+        if (f1 <= 0) {
+            return x1;
+        }
+        break;
+    case ABOVE_SIDE:
+        if (f1 >= 0) {
+            return x1;
+        }
+        break;
+    default:
+        throw new MathInternalError();
+    }
+}
+```
+This check ensures that the function value accuracy is not too high, and that the function value is close enough to zero to be considered a root. If the function value accuracy is too high, or the function value is not close enough to zero, the algorithm will continue to iterate until it finds a better approximation.

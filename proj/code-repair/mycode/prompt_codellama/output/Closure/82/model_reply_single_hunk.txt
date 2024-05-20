@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return isNoType() || isNoObjectType() || isNoResolvedType() || isNoFunctionType();
+```
+This is because the `isEmptyType()` method is used to check if a type is empty, and it should also check if the type is a function type.

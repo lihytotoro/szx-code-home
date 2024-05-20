@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);
+
+This line calculates the greatest common divisor (GCD) of the absolute value of the numerator and the denominator, and stores it in the variable `gcd`. The buggy hunk was removed because it was causing the method to return the wrong result.

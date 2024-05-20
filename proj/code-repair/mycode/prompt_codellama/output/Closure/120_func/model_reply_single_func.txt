@@ -1,0 +1,45 @@
+ The buggy function is:
+```
+boolean isAssignedOnceInLifetime() {
+  Reference ref = getOneAndOnlyAssignment();
+  if (ref == null) {
+    return false;
+  }
+
+  // Make sure this assignment is not in a loop.
+  for (BasicBlock block = ref.getBasicBlock();
+       block != null; block = block.getParent()) {
+    if (block.isFunction) {
+      break;
+    } else if (block.isLoop) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
+The bug is in the `for` loop. The loop condition `block != null` will always be true, because `block` is a reference to a `BasicBlock` object, and `BasicBlock` objects are never null. Therefore, the loop will never terminate, and the function will always return `true`.
+
+The corrected function should be:
+```
+boolean isAssignedOnceInLifetime() {
+  Reference ref = getOneAndOnlyAssignment();
+  if (ref == null) {
+    return false;
+  }
+
+  // Make sure this assignment is not in a loop.
+  for (BasicBlock block = ref.getBasicBlock();
+       block != null; block = block.getParent()) {
+    if (block.isFunction) {
+      break;
+    } else if (block.isLoop) {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
+This function will correctly check if the assignment is in a loop or not, and return `false` if it is.

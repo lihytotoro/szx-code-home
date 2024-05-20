@@ -1,0 +1,13 @@
+ The bug is in the `readResults` method of the `Base64` class. The method returns `0` when there is no more data to read, but it should return `-1` instead. This is because the `read` method of the `InputStream` interface returns `-1` to indicate the end of the stream.
+
+Here is the corrected version of the `readResults` method:
+```
+public int readResults(byte[] b, int offset, int len) {
+    if (base64.hasData()) {
+        return base64.readResults(b, offset, len);
+    } else {
+        return -1;
+    }
+}
+```
+This version of the method returns `-1` when there is no more data to read, which is the correct behavior according to the `InputStream` interface.

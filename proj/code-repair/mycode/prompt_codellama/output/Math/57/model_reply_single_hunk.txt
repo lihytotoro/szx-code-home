@@ -1,0 +1,14 @@
+ The correct line at the INFILL location is:
+
+int sum = 0;
+
+The bug was that the variable "sum" was not initialized before it was used in the loop. The correct code should be:
+
+int sum = 0;
+for (int i = 0; i < pointSet.size(); i++) {
+    final T p = pointSet.get(i);
+    final Cluster<T> nearest = getNearestCluster(resultSet, p);
+    final double d = p.distanceFrom(nearest.getCenter());
+    sum += d * d;
+    dx2[i] = sum;
+}

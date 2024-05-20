@@ -1,0 +1,1 @@
+   if (sign > 0) {            throw new IllegalArgumentException            ("Function values at endpoints do not have different signs." +                    "  Endpoints: [" + min + "," + max + "]" +                     "  Values: [" + yMin + "," + yMax + "]");    } else {        ret = solve(min, yMin, max, yMax, max, yMax);

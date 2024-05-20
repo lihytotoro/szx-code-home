@@ -1,0 +1,20 @@
+export CUDA_VISIBLE_DEVICES="6"
+python llama_pred.py \
+    --base_model_path /data/lihy/models/CodeLlama-7b-Instruct-hf \
+    --lora_path /data/lihy/training_output/repairllama/finetuned-models_maxlen=1024_epoch=1_newdata_wo_comment_wo_initial_prompt \
+    --data_path /data/lihy/datasets/d4j-processed/processed \
+    --test_file defects4j_all_single_func_repairllama_wo_initial_prompt.jsonl \
+    --output_file /data/lihy/testing_output/d4j-output/single_func/defects4j_all_single_func_repairllama_test_output_maxlen=1024_maxnew=256_beams=3_training-epoch=1_newdata_wo_comment_wo_initial_prompt.jsonl \
+    --is_lora True \
+    --max_length 1024 \
+    --max_new_tokens 256 \
+    --do_sample True \
+    --only_do_beam True \
+    --only_do_topp False \
+    --only_do_topk False \
+    --only_do_temp False \
+    --num_beams 3 \
+    --temperature 0.8 \
+    --top_k 0 \
+    --top_p 0.95 \
+    --request_num 3 \

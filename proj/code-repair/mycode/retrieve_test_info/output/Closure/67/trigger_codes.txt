@@ -1,0 +1,4 @@
+testSame("function e(){}" +
+"e.prototype['alias1'] = e.prototype.method1 = " +
+"function(){this.method2()};" +
+"e.prototype.method2 = function(){};");

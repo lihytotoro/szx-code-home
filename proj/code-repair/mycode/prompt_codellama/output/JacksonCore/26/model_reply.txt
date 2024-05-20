@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+_inputPtr = start;
+```
+This line sets the `_inputPtr` variable to the starting position of the input buffer, which is the `start` parameter passed to the `feedInput` method.

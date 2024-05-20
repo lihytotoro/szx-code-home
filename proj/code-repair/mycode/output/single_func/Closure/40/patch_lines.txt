@@ -1,0 +1,1 @@
+       refNodes.add(new ClassDefiningFunctionNode(            getName(ns.name, false), n, parent, parent.getParent()));

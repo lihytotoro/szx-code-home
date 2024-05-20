@@ -1,0 +1,3 @@
+if (endIndex < 0) {
+    endIndex = -(endIndex + 1) - 1;
+}

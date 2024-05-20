@@ -1,0 +1,1 @@
+assertFalse("Should not have contained a '?'.", output.contains("?"));

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    super(paint, stroke, outlinePaint, outlineStroke, alpha);
+
+This is because the `ValueMarker` constructor is calling the `super` constructor with the wrong parameters. The `super` constructor is expecting the `outlinePaint` and `outlineStroke` parameters, but the `ValueMarker` constructor is passing the `paint` and `stroke` parameters instead.

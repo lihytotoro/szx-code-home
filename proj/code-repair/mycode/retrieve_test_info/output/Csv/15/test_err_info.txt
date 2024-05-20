@@ -1,0 +1,3 @@
+junit.framework.AssertionFailedError: expected:<[€],Deux
+> but was:<["€"],Deux
+>

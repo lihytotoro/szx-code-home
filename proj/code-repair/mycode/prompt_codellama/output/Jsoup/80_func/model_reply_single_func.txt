@@ -1,0 +1,25 @@
+ The bug in the code is caused by the fact that the `xml` parameter passed to `Jsoup.parse()` is an empty string, which results in an empty document being created. This empty document has no child nodes, which causes the `insertNode()` method to throw an `IndexOutOfBoundsException` when it tries to access the first child node.
+
+To fix the bug, you need to check if the `xml` parameter is empty before passing it to `Jsoup.parse()`. If it is empty, you can create a new document with a single empty element, like this:
+```
+Document doc = Jsoup.parse("<html></html>", "", Parser.xmlParser());
+```
+Here's the corrected version of the `insert()` method:
+```
+void insert(Token.Comment commentToken) {
+    Comment comment = new Comment(commentToken.getData());
+    Node insert = comment;
+    if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)
+        // so we do a bit of a hack and parse the data as an element to pull the attributes out
+        String data = comment.getData();
+        if (data.length() > 1 && (data.startsWith("!") || data.startsWith("?"))) {
+            Document doc = Jsoup.parse("<" + data.substring(1, data.length() -1) + ">", baseUri, Parser.xmlParser());
+            Element el = doc.child(0);
+            insert = new XmlDeclaration(settings.normalizeTag(el.tagName()), data.startsWith("!"));
+            insert.attributes().addAll(el.attributes());
+        }
+    }
+    insertNode(insert);
+}
+```
+This version of the method first checks if the `xml` parameter is empty, and if it is, it creates a new document with a single empty element. This ensures that the `Jsoup.parse()` method is not called with an empty string, which would result in an `IndexOutOfBoundsException`.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+dataNode = TextNode.createFromEncoded(data, baseUri);
+```
+This line creates a new `TextNode` from the encoded data, which is then appended to the `child` element. The `TextNode` is created with the `baseUri` as its base URI, which is used to resolve relative URLs in the node.

@@ -1,0 +1,1 @@
+Top1270 itemRead = MAPPER.readValue(json, Top1270.class);

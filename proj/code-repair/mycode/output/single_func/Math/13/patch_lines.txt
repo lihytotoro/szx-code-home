@@ -1,0 +1,1 @@
+       final SingularValueDecomposition dec = new SingularValueDecomposition(m);        return dec.getS();

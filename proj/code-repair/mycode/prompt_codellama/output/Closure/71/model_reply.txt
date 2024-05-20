@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+boolean isOverride = parent.getType() == Token.ASSIGN && parent.getFirstChild() == getprop;
+```
+This line checks if the current node is an ASSIGN statement and if the left-hand side of the assignment is the same as the GETPROP node. This is the correct condition to check for overriding a private property.

@@ -1,0 +1,8 @@
+prefix:
+public Base64() {
+
+buggy_hunk:
+    this(false);
+
+suffix:
+}

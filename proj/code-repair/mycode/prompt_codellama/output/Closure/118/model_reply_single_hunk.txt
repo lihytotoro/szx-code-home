@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+```
+if (propertiesToErrorFor.containsKey(name)) {
+  compiler.report(JSError.make(
+      t.getSourceName(), child, propertiesToErrorFor.get(name),
+      Warnings.INVALIDATION, name,
+      (type == null ? "null" : type.toString()), n.toString(), ""));
+}
+```

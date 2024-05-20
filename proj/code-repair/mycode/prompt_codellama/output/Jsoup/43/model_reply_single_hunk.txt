@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (element.equals(search))
+
+This line was removed from the code, and the buggy hunk was replaced with the correct code.

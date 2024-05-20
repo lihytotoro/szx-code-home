@@ -1,0 +1,9 @@
+ The correct line at the INFILL location should be:
+
+long len = binaryData.length;
+
+This line calculates the length of the input array and assigns it to the variable "len". The buggy line that was removed was:
+
+long len = getEncodeLength(binaryData, MIME_CHUNK_SIZE, CHUNK_SEPARATOR);
+
+This line was not necessary and was causing the error in the test case.

@@ -1,0 +1,35 @@
+ The buggy function is:
+```
+public Number read(JsonReader in) throws IOException {
+  JsonToken jsonToken = in.peek();
+  switch (jsonToken) {
+  case NULL:
+    in.nextNull();
+    return null;
+  case NUMBER:
+    return new LazilyParsedNumber(in.nextString());
+  default:
+    throw new JsonSyntaxException("Expecting number, got: " + jsonToken);
+  }
+}
+```
+The bug is that the function is expecting a `NUMBER` token, but it is actually getting a `STRING` token. This is causing the function to throw a `JsonSyntaxException` with the message "Expecting number, got: STRING".
+
+To fix the bug, we need to change the `switch` statement to handle `STRING` tokens as well. Here is the corrected function:
+```
+public Number read(JsonReader in) throws IOException {
+  JsonToken jsonToken = in.peek();
+  switch (jsonToken) {
+  case NULL:
+    in.nextNull();
+    return null;
+  case NUMBER:
+    return new LazilyParsedNumber(in.nextString());
+  case STRING:
+    return new LazilyParsedNumber(in.nextString());
+  default:
+    throw new JsonSyntaxException("Expecting number or string, got: " + jsonToken);
+  }
+}
+```
+This function now handles `STRING` tokens in addition to `NUMBER` tokens, and it returns a `LazilyParsedNumber` object for both `NUMBER` and `STRING` tokens.

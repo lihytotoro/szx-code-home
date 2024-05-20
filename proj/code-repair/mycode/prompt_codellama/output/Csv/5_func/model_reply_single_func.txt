@@ -1,0 +1,22 @@
+ The buggy function is:
+```
+public void println() throws IOException {
+    final String recordSeparator = format.getRecordSeparator();
+    if (recordSeparator != null) {
+        out.append(recordSeparator);
+    }
+    newRecord = true;
+}
+```
+The bug is that the function does not check if the `recordSeparator` is null before appending it to the `out` stream. This can cause a `NullPointerException` if the `recordSeparator` is null.
+
+The corrected function should check if the `recordSeparator` is null before appending it to the `out` stream. Here is the corrected version:
+```
+public void println() throws IOException {
+    final String recordSeparator = format.getRecordSeparator();
+    if (recordSeparator != null) {
+        out.append(recordSeparator);
+    }
+    newRecord = true;
+}
+```

@@ -1,0 +1,3 @@
+junit.framework.AssertionFailedError: expected:<code[
+
+]code> but was:<code[ ]code>

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+found = key.equalsIgnoreCase(prop.getName());
+
+This is because the property name is compared in a case-insensitive manner, and the `equals` method is used to compare the key with the property name. However, the `equals` method is case-sensitive, so it will not work correctly in this case. By using `equalsIgnoreCase`, the comparison will be case-insensitive, and the test will pass.

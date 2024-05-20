@@ -1,0 +1,9 @@
+ The correct line at the INFILL location should be:
+```
+if (!NodeUtil.isGet(first)) {
+  n.putBooleanProp(Node.FREE_CALL, true);
+}
+```
+This line is checking if the first child of the node is a GET node, and if not, it sets the `FREE_CALL` property of the node to true. This property is used to determine if a call is a free call or not.
+
+The buggy hunk was removed because it was causing the code to set the `FREE_CALL` property to true for all calls, regardless of whether they were free calls or not. This was causing the code to incorrectly identify some calls as free calls, which was causing the test to fail.

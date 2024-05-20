@@ -1,0 +1,8 @@
+ The correct line at the INFILL location is:
+```
+int greater = replacementList[i].length() - searchList[i].length();
+if (greater > 0) {
+    increase += 3 * greater; // assume 3 matches
+}
+```
+This line is causing the null pointer exception because `replacementList[i]` is null, and you are trying to call the `length()` method on it.

@@ -1,0 +1,1 @@
+   sb.append(getPropertyType(property).toString(forAnnotations));      ++i;      if (i == MAX_PRETTY_PRINTED_PROPERTIES) {        sb.append(", ...");        break;      }    }    sb.append("}");    prettyPrint = true;    return sb.toString();  } else {    return "{...}";

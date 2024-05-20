@@ -1,0 +1,8 @@
+prefix:
+public final boolean isEmptyType() {
+
+buggy_hunk:
+  return isNoType() || isNoObjectType() || isNoResolvedType();
+
+suffix:
+}

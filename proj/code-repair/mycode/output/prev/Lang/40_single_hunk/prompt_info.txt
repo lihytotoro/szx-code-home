@@ -1,0 +1,11 @@
+prefix:
+public static boolean containsIgnoreCase(String str, String searchStr) {
+    if (str == null || searchStr == null) {
+        return false;
+    }
+
+buggy_hunk:
+    return contains(str.toUpperCase(), searchStr.toUpperCase());
+
+suffix:
+}

@@ -1,0 +1,7 @@
+a
+.removeAttr("zero")
+.removeAttr("one")
+.removeAttr("two")
+.removeAttr("three")
+.removeAttr("four")
+.removeAttr("five");

@@ -1,0 +1,25 @@
+ The correct line at the INFILL location is:
+```
+if (!("yes".equalsIgnoreCase(value)
+        || "true".equalsIgnoreCase(value)
+        || "1".equalsIgnoreCase(value)))
+{
+    // if the value is not yes, true or 1 then don't add the
+    // option to the CommandLine
+    break;
+}
+```
+This is because the `break` statement is not inside the `if` statement, and it is not clear what the intention of the code is. The `break` statement is used to exit a loop, but it is not clear what loop it should exit.
+
+The corrected code should be:
+```
+if (!("yes".equalsIgnoreCase(value)
+        || "true".equalsIgnoreCase(value)
+        || "1".equalsIgnoreCase(value)))
+{
+    // if the value is not yes, true or 1 then don't add the
+    // option to the CommandLine
+    continue;
+}
+```
+This will continue to the next iteration of the loop, rather than exiting the loop.

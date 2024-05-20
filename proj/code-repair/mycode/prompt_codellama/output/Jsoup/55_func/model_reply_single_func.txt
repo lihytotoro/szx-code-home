@@ -1,0 +1,26 @@
+ The bug in the code is that it does not properly handle the case where the last character of the tag name is a slash (/). When this happens, the tag name is not properly terminated and the tag is not properly closed.
+
+To fix the bug, we need to check if the last character of the tag name is a slash, and if so, remove it from the tag name. Here's the corrected version of the function:
+```
+void read(Tokeniser t, CharacterReader r) {
+    char c = r.consume();
+    switch (c) {
+        case '>':
+            t.tagPending.selfClosing = true;
+            t.emitTagPending();
+            t.transition(Data);
+            break;
+        case eof:
+            t.eofError(this);
+            t.transition(Data);
+            break;
+        default:
+            if (c == '/') {
+                t.tagPending.tagName.remove(t.tagPending.tagName.length() - 1);
+            }
+            t.error(this);
+            t.transition(BeforeAttributeName);
+    }
+}
+```
+With this correction, the test case "dropsSlashFromAttributeName" should pass.

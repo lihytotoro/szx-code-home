@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    classes[i] = array[i].getClass();
+
+This line is causing the NullPointerException because the `array[i]` element is null, and calling `getClass()` on a null object will throw a NullPointerException.

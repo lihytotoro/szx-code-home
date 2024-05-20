@@ -1,0 +1,5 @@
+ The buggy hunk was removed at the INFILL location, which is:
+```
+[INFILL]
+```
+This location is where the code was removed to fix the bug.

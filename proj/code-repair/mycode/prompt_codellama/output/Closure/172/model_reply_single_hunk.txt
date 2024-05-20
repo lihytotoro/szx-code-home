@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (qName != null && qName.endsWith(".prototype")) {
+  return false;
+}
+```
+This line is checking if the name of the variable being assigned is a prototype property, and if so, it returns false to indicate that the variable is not inferred. This is necessary because the type of the variable being assigned is not known, and the type checker is not able to infer the correct type.

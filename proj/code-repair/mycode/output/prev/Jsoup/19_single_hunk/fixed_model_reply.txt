@@ -1,0 +1,2 @@
+if (!preserveRelativeLinks)
+    attr.setValue(value);

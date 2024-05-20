@@ -1,0 +1,2 @@
+junit.framework.AssertionFailedError: Overriding private property of Foo.prototype.
+ expected:<JSC_BAD_PRIVATE_PROPERTY_ACCESS: Access to private property {0} of {1} not allowed here.> but was:<JSC_PRIVATE_OVERRIDE: Overriding private property of {0}.>

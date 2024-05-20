@@ -1,0 +1,13 @@
+prefix:
+public DocumentType(String name, String publicId, String systemId, String baseUri) {
+    super(baseUri);
+
+buggy_hunk:
+
+    Validate.notEmpty(name);
+
+suffix:
+    attr("name", name);
+    attr("publicId", publicId);
+    attr("systemId", systemId);
+}

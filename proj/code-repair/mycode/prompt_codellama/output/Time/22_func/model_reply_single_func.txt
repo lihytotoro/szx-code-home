@@ -1,0 +1,16 @@
+ The buggy function is:
+```
+protected BasePeriod(long duration) {
+    this(duration, null, null);
+    // bug [3264409]
+}
+```
+The correct version of the function should be:
+```
+protected BasePeriod(long duration) {
+    this(duration, null, null);
+    // bug [3264409]
+    this.weeks = 0;
+}
+```
+The bug is that the `weeks` field is not initialized to 0, so the `getWeeks()` method returns the default value of 64. By adding the line `this.weeks = 0;` after the call to the superclass constructor, the bug is fixed and the `getWeeks()` method returns 0 as expected.

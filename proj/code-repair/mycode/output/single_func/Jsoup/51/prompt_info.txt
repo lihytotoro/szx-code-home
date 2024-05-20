@@ -1,0 +1,11 @@
+prefix:
+boolean matchesLetter() {
+    if (isEmpty())
+        return false;
+    char c = input[pos];
+
+buggy_hunk:
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+
+suffix:
+}

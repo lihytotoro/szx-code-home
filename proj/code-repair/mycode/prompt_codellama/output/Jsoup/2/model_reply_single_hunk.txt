@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+dataNode = TextNode.createFromEncoded(data, baseUri);
+```
+This line creates a new text node from the encoded data, which is then appended to the child element. The bug was caused by the fact that the data node was not properly encoded, which resulted in the incorrect output.

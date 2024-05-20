@@ -1,0 +1,2 @@
+assertEquals("[optProp dec([numberType=BIG_DECIMAL])][optProp bigInt([numberType=BIG_INTEGER])]",
+sb.toString());

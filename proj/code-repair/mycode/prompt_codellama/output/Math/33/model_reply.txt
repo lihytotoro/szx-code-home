@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+
+This line was removed from the code because it was not needed and was causing the buggy behavior. The buggy behavior was caused by the fact that the line was not removed, and the code was still using the line even though it was no longer there.

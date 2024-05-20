@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+```
+currEntry = new TarArchiveEntry(headerBuf, entrySize);
+```
+This is because the `TarArchiveEntry` constructor takes an additional `entrySize` parameter, which is used to set the size of the entry. The `entrySize` variable is already set to the correct value, so we can pass it directly to the constructor.
+
+With this change, the code should work correctly and pass the test.

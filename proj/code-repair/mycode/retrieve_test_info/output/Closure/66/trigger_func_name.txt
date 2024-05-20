@@ -1,0 +1,1 @@
+testGetTypedPercent5

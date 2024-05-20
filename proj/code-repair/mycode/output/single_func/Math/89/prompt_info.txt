@@ -1,0 +1,8 @@
+prefix:
+public void addValue(Object v) {
+
+buggy_hunk:
+        addValue((Comparable<?>) v);            
+
+suffix:
+}

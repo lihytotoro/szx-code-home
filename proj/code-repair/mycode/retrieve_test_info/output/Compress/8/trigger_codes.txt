@@ -1,0 +1,1 @@
+fail("Expected IllegalArgumentException - should be at least 2 bytes long");

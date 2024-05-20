@@ -1,0 +1,14 @@
+ The bug in the code is that the `EigenDecomposition` class is not being properly disposed of after it is no longer needed. This can cause a memory leak, which can lead to an `OutOfMemoryError` exception.
+
+To fix the bug, you can add a `try-finally` block to ensure that the `EigenDecomposition` object is properly disposed of, even if an exception is thrown. Here is the corrected code:
+```
+private RealMatrix squareRoot(RealMatrix m) {
+    try {
+        final EigenDecomposition dec = new EigenDecomposition(m);
+        return dec.getSquareRoot();
+    } finally {
+        dec.dispose();
+    }
+}
+```
+This code ensures that the `EigenDecomposition` object is properly disposed of, even if an exception is thrown.

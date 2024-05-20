@@ -1,0 +1,16 @@
+ The bug in the function is that it is using the `getDimension()` method to get the number of dimensions of the distribution, but it is not taking into account the fact that the `vals` array may have more than one element.
+
+Here is the corrected version of the function:
+```
+public double density(final double[] vals) throws DimensionMismatchException {
+    final int dim = vals.length;
+    if (dim != getDimension()) {
+        throw new DimensionMismatchException(dim, getDimension());
+    }
+
+    return FastMath.pow(2 * FastMath.PI, -dim / 2) *
+        FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+        getExponentTerm(vals);
+}
+```
+In this version, the `dim` variable is set to the length of the `vals` array, which is the number of dimensions of the distribution. This ensures that the function will work correctly even if the `vals` array has more than one element.

@@ -1,0 +1,1 @@
+ switch (n.getType()) {    case Token.FUNCTION:      if (parent.getType() == Token.NAME) {        return;      }      defineDeclaredFunction(n, parent);      break;    case Token.CATCH:      defineCatch(n, parent);      break;    case Token.VAR:      defineVar(n, parent);      break;  }  attachLiteralTypes(n);

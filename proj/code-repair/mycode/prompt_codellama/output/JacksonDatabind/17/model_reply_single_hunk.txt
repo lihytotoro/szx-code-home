@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+|| TreeNode.class.isAssignableFrom(t.getRawClass()));
+```
+This is because the `TreeNode` class is a subtype of `JsonNode`, and the `isAssignableFrom` method checks if the class is a subtype of the given class. In this case, the `TreeNode` class is a subtype of `JsonNode`, so the method returns `true`.

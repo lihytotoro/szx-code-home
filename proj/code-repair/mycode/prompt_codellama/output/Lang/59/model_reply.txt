@@ -1,0 +1,11 @@
+ The correct line at the INFILL location should be:
+```
+buffer[size + strLen] = padChar;
+```
+Explanation:
+
+The `getChars` method of the `String` class returns the characters of the string in the specified range, starting from the specified index, and stores them in the destination array. In this case, the destination array is the `buffer` array, and the range of characters to be copied is from the start of the string to the end of the string. The `size` variable is used as the starting index for the copy operation.
+
+However, in the original buggy line, the `size` variable is used as the starting index for the copy operation, but it is not updated to reflect the new length of the string after the padding characters are added. This means that the `getChars` method will try to access characters beyond the end of the `buffer` array, which causes the `ArrayIndexOutOfBoundsException`.
+
+By replacing the buggy line with the corrected line, the `getChars` method will use the correct starting index for the copy operation, and the `ArrayIndexOutOfBoundsException` will be avoided.

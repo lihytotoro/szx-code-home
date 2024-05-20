@@ -1,0 +1,52 @@
+ The buggy function is:
+```
+private void popStackToClose(Token.EndTag endTag) {
+    String elName = endTag.name();
+    Element firstFound = null;
+
+    for (int pos = stack.size() -1; pos >= 0; pos--) {
+        Element next = stack.get(pos);
+        if (next.nodeName().equals(elName)) {
+            firstFound = next;
+            break;
+        }
+    }
+    if (firstFound == null)
+        return; // not found, skip
+
+    for (int pos = stack.size() -1; pos >= 0; pos--) {
+        Element next = stack.get(pos);
+        stack.remove(pos);
+        if (next == firstFound)
+            break;
+    }
+}
+```
+The bug is in the second `for` loop, where the `stack.remove(pos)` method is called. This method removes the element at the specified position from the stack, but it does not update the `pos` variable to reflect the new position of the element. As a result, the loop continues to iterate over the same position, which causes the element to be removed multiple times.
+
+To fix the bug, we need to update the `pos` variable after each removal. Here's the corrected function:
+```
+private void popStackToClose(Token.EndTag endTag) {
+    String elName = endTag.name();
+    Element firstFound = null;
+
+    for (int pos = stack.size() -1; pos >= 0; pos--) {
+        Element next = stack.get(pos);
+        if (next.nodeName().equals(elName)) {
+            firstFound = next;
+            break;
+        }
+    }
+    if (firstFound == null)
+        return; // not found, skip
+
+    for (int pos = stack.size() -1; pos >= 0; pos--) {
+        Element next = stack.get(pos);
+        stack.remove(pos);
+        pos--; // update pos
+        if (next == firstFound)
+            break;
+    }
+}
+```
+With this fix, the function should work correctly and remove the element from the stack only once.

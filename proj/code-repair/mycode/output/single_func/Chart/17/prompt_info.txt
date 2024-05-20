@@ -1,0 +1,9 @@
+prefix:
+public Object clone() throws CloneNotSupportedException {
+
+buggy_hunk:
+    Object clone = createCopy(0, getItemCount() - 1);
+
+suffix:
+    return clone;
+}

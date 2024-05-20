@@ -1,0 +1,1 @@
+assertEquals(result, lastCompiler.toSource());

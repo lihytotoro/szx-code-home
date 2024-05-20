@@ -1,0 +1,4 @@
+buggy_func:
+public DefaultPrettyPrinter createInstance() {
+    return new DefaultPrettyPrinter(this);
+}

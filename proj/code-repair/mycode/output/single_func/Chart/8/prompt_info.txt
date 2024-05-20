@@ -1,0 +1,8 @@
+prefix:
+public Week(Date time, TimeZone zone) {
+
+buggy_hunk:
+    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());
+
+suffix:
+}

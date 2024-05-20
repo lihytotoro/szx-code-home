@@ -1,0 +1,1 @@
+assertEquals("utf-8", DataUtil.getCharsetFromContentType("text/html;charset=utf-8 "));

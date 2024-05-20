@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (lineLength > 0 && lineLength <= currentLinePos) {
+```
+This line checks if the current line position is greater than the line length, which indicates that the end of the line has been reached. If this condition is true, it means that the end of the input stream has been reached, and the EOF marker should be added to the output stream.

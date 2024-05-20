@@ -1,0 +1,10 @@
+prefix:
+public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException
+{
+
+buggy_hunk:
+        p.skipChildren();
+
+suffix:
+    return null;
+}

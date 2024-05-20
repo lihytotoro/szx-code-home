@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+if (provided != null && !provided.isExplicitlyProvided()) {
+
+This is because the `provided` variable is a `ProvidedName` object, and the `isExplicitlyProvided()` method checks whether the provided name was explicitly provided by a `goog.provide()` statement. If the provided name was not explicitly provided, then it is an undeclared variable.

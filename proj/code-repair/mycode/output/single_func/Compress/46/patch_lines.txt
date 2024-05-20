@@ -1,0 +1,1 @@
+   final long TWO_TO_31 = 0x80000000L;    if (l >= TWO_TO_31) {

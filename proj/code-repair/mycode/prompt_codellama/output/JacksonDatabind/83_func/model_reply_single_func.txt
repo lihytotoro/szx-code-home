@@ -1,0 +1,53 @@
+ The bug is in the `deserialize` method, specifically in the `if (text.length() == 0 || (text = text.trim()).length() == 0)` condition. If the `text` is an empty string, the `trim()` method will return an empty string, which will cause the `if` condition to evaluate to `true`. This will result in the `_deserializeFromEmptyString()` method being called, which will return a `null` value. However, the method is supposed to return a `UUID` object, which is not possible.
+
+The corrected version of the `deserialize` method is as follows:
+```
+public T deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    String text = p.getValueAsString();
+    if (text != null) { // has String representation
+        if (text.length() == 0 || (text = text.trim()).length() == 0) {
+            return null;
+        }
+        Exception cause = null;
+        try {
+            if (_deserialize(text, ctxt) != null) {
+                return _deserialize(text, ctxt);
+            }
+        } catch (IllegalArgumentException iae) {
+            cause = iae;
+        } catch (MalformedURLException me) {
+            cause = me;
+        }
+        String msg = "not a valid textual representation";
+        if (cause != null) {
+            String m2 = cause.getMessage();
+            if (m2 != null) {
+                msg = msg + ", problem: "+m2;
+            }
+        }
+        JsonMappingException e = ctxt.weirdStringException(text, _valueClass, msg);
+        if (cause != null) {
+            e.initCause(cause);
+        }
+        throw e;
+    }
+    JsonToken t = p.getCurrentToken();
+    // [databind#381]
+    if (t == JsonToken.START_ARRAY) {
+        return _deserializeFromArray(p, ctxt);
+    }
+    if (t == JsonToken.VALUE_EMBEDDED_OBJECT) {
+        // Trivial cases; null to null, instance of type itself returned as is
+        Object ob = p.getEmbeddedObject();
+        if (ob == null) {
+            return null;
+        }
+        if (_valueClass.isAssignableFrom(ob.getClass())) {
+            return (T) ob;
+        }
+        return _deserializeEmbedded(ob, ctxt);
+    }
+    return (T) ctxt.handleUnexpectedToken(_valueClass, p);
+}
+```
+In the corrected version, if the `text` is an empty string, the method will return `null` instead of calling the `_deserializeFromEmptyString()` method. This will fix the bug and allow the method to return a `UUID` object.

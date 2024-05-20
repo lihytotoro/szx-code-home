@@ -1,0 +1,1 @@
+MyValue de2 = MAPPER.readValue(json, MyValue.class);

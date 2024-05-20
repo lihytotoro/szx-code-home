@@ -1,0 +1,2 @@
+Assert.assertTrue("Out of bounds (" + result[0] + " > " + upper[0] + ")",
+result[0] <= upper[0]);

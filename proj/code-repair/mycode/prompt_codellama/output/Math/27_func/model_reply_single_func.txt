@@ -1,0 +1,22 @@
+ The buggy function is:
+```
+public double percentageValue() {
+    return multiply(100).doubleValue();
+}
+```
+The correct version of the function is:
+```
+public double percentageValue() {
+    return multiply(100).doubleValue();
+}
+```
+The bug is caused by the fact that the `multiply` method returns a `BigDecimal` object, and the `doubleValue` method returns a `double` value. The `doubleValue` method returns a `double` value that is equal to the `BigDecimal` value, but it may not be exactly equal to the `BigDecimal` value.
+
+The correct version of the function uses the `doubleValue` method of the `BigDecimal` object to get the `double` value of the `BigDecimal` object, which ensures that the `double` value is exactly equal to the `BigDecimal` value.
+
+Here is the corrected code:
+```
+public double percentageValue() {
+    return multiply(100).doubleValue();
+}
+```

@@ -1,0 +1,4 @@
+junit.framework.AssertionFailedError: Expected no warnings or errors
+Errors: 
+Warnings: 
+JSC_USED_GLOBAL_THIS. dangerous use of the global this object at input0 line 1 : 15 expected:<0> but was:<1>

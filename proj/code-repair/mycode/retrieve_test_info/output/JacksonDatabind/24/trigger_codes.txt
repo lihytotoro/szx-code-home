@@ -1,0 +1,1 @@
+assertEquals(tz1, mapper.getSerializationConfig().getTimeZone());

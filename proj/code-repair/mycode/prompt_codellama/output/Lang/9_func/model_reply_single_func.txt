@@ -1,0 +1,12 @@
+ The bug in the code is that the `addRegex` method of the `Strategy` class is not properly handling the case where the `regex` parameter is `null`. When the `regex` parameter is `null`, the method should return `false` instead of throwing a `NullPointerException`.
+
+Here is the corrected version of the `addRegex` method:
+```
+public boolean addRegex(String regex) {
+    if (regex == null) {
+        return false;
+    }
+    // ...
+}
+```
+With this correction, the code should no longer throw a `NullPointerException` when the `regex` parameter is `null`.

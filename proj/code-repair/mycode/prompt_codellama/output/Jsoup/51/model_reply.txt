@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '\u0080' && c <= '\u00FF');
+
+This line checks if the character is a letter (uppercase or lowercase) or a non-ASCII character (with a code point between \u0080 and \u00FF).

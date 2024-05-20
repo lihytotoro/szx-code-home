@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+String name = t.asEndTag().normalName();
+```
+This line is used to retrieve the normalized name of the end tag, which is then used to find the corresponding start tag in the stack.

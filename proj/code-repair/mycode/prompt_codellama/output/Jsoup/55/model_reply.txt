@@ -1,0 +1,6 @@
+ The correct line at the INFILL location is:
+```
+default:
+    t.error(this);
+```
+This line is missing from the original code, and it is the correct line that should be inserted at the INFILL location to fix the bug.

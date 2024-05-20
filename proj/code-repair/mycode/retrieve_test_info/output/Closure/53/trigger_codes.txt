@@ -1,0 +1,1 @@
+testLocal("var a; a = {}", "true");

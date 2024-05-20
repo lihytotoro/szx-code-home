@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+case '\0': sb.append("\\000"); break;
+```
+This is because the `StringBuilder` class in Java uses the Unicode escape sequence `\u` to represent a character with a code point of 0, and the `append` method takes a `String` argument. Therefore, we need to use the Unicode escape sequence `\u0000` to represent the character with a code point of 0 in the output string.

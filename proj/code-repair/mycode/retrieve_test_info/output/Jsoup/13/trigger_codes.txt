@@ -1,0 +1,1 @@
+assertTrue(two.hasAttr("abs:href"));

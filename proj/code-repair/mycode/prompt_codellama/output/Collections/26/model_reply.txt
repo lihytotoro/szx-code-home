@@ -1,0 +1,6 @@
+ The correct line at the INFILL location is:
+
+private Object readResolve() {
+    calculateHashCode(keys);
+    return this;
+}

@@ -1,0 +1,3 @@
+ The correct line at the INFILL location is:
+
+return new String(bytes, "ISO-8859-1");

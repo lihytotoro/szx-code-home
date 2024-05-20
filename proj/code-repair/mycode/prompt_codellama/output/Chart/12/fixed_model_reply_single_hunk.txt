@@ -1,0 +1,1 @@
+this.piePlot = new PiePlot(dataset);

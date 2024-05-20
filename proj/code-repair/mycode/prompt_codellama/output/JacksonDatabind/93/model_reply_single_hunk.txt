@@ -1,0 +1,8 @@
+ The correct line at the INFILL location is:
+```
+if ("AbstractPointcutAdvisor".equals(name)
+        || "AbstractApplicationContext".equals(name)) {
+    break main_check;
+}
+```
+This line checks if the class name is "AbstractPointcutAdvisor" or "AbstractApplicationContext", and if so, breaks out of the main_check loop. This is necessary because these classes are not allowed to be deserialized, and the code needs to prevent them from being deserialized.

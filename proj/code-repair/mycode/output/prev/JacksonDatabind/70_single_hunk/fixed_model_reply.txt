@@ -1,0 +1,1 @@
+found = key.equalsIgnoreCase(prop.getName());

@@ -1,0 +1,1 @@
+   if (value == null) {        str = null;    } else if (value instanceof Date) {        provider.defaultSerializeDateKey((Date) value, jgen);        return;

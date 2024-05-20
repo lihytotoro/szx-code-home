@@ -1,0 +1,52 @@
+ The buggy function is:
+```
+void add(String newcode) {
+  maybeEndStatement();
+
+  if (newcode.length() == 0) {
+    return;
+  }
+
+  char c = newcode.charAt(0);
+  if ((isWordChar(c) || c == '\\') &&
+      isWordChar(getLastChar())) {
+    // need space to separate. This is not pretty printing.
+    // For example: "return foo;"
+    append(" ");
+    // Do not allow a forward slash to appear after a DIV.
+    // For example,
+    // REGEXP DIV REGEXP
+    // is valid and should print like
+    // / // / /
+  }
+
+  append(newcode);
+}
+```
+The bug is in the `if` statement that checks if the character is a word character or a backslash. The condition `isWordChar(c) || c == '\\'` will always be true, because the `isWordChar` function always returns true for any character. Therefore, the `if` statement will always execute, and the function will always append a space to the output.
+
+The corrected function should be:
+```
+void add(String newcode) {
+  maybeEndStatement();
+
+  if (newcode.length() == 0) {
+    return;
+  }
+
+  char c = newcode.charAt(0);
+  if (c == '\\' && isWordChar(getLastChar())) {
+    // need space to separate. This is not pretty printing.
+    // For example: "return foo;"
+    append(" ");
+    // Do not allow a forward slash to appear after a DIV.
+    // For example,
+    // REGEXP DIV REGEXP
+    // is valid and should print like
+    // / // / /
+  }
+
+  append(newcode);
+}
+```
+This corrected function will only append a space to the output if the first character is a backslash and the last character is a word character.

@@ -1,0 +1,9 @@
+prefix:
+public Line revert() {
+
+buggy_hunk:
+    final Line reverted = new Line(zero, zero.subtract(direction));
+
+suffix:
+    return reverted;
+}

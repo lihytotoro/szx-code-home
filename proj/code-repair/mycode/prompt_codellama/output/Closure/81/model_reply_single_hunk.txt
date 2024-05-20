@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+```
+if (name == null) {
+    name = new Name();
+    name.setIdentifier("");
+    isUnnamedFunction = true;
+}
+```
+This line is checking if the function name is null, and if so, it creates a new name object with an empty identifier and sets the `isUnnamedFunction` flag to true. This is necessary because the Rhino parser does not always create a name object for unnamed functions, and the `transform` method relies on the presence of a name object to correctly parse the function.

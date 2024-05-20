@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (upper == -1 || upper > str.length()) {
+    upper = str.length();
+}
+```
+This line checks if the `upper` value is -1 or greater than the length of the string, and if so, sets `upper` to the length of the string. This is necessary because the `abbreviate` method is supposed to return the entire string if the `upper` value is -1 or greater than the length of the string.

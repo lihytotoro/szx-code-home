@@ -1,0 +1,6 @@
+ ```
+[INFILL]
+accum.append("   \n");
+[/INFILL]
+```
+This will fix the bug and make the code pass the test.

@@ -1,0 +1,6 @@
+junit.framework.ComparisonFailure: expected:<...ion here
+assert (1;
+[          ^
+]> but was:<...ion here
+assert (1;
+[]>

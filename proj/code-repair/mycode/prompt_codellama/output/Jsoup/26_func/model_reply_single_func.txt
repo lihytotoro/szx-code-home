@@ -1,0 +1,27 @@
+ The buggy function is:
+```
+public Document clean(Document dirtyDocument) {
+    Validate.notNull(dirtyDocument);
+
+    Document clean = Document.createShell(dirtyDocument.baseUri());
+    copySafeNodes(dirtyDocument.body(), clean.body());
+
+    return clean;
+}
+```
+The bug is in the `copySafeNodes` method, which is not properly handling the case where the `dirtyDocument.body()` or `clean.body()` is null.
+
+The corrected function should be:
+```
+public Document clean(Document dirtyDocument) {
+    Validate.notNull(dirtyDocument);
+
+    Document clean = Document.createShell(dirtyDocument.baseUri());
+    if (dirtyDocument.body() != null && clean.body() != null) {
+        copySafeNodes(dirtyDocument.body(), clean.body());
+    }
+
+    return clean;
+}
+```
+This version checks if the `dirtyDocument.body()` and `clean.body()` are not null before calling the `copySafeNodes` method.

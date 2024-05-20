@@ -1,0 +1,10 @@
+prefix:
+public ValueMarker(double value, Paint paint, Stroke stroke, 
+                   Paint outlinePaint, Stroke outlineStroke, float alpha) {
+
+buggy_line:
+    super(paint, stroke, paint, stroke, alpha);
+
+suffix:
+    this.value = value;
+}

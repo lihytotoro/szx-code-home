@@ -1,0 +1,1 @@
+    return createCopy(0, getItemCount() - 1);

@@ -1,0 +1,17 @@
+ The bug in the code is in the `burstToken` method, which is called when a token that starts with a hyphen but is not a long option is encountered. The method is supposed to split the token into multiple tokens, but it is not doing so correctly.
+
+Here is the corrected version of the `burstToken` method:
+```
+protected void burstToken(String token, boolean stopAtNonOption) {
+    // split the token into multiple tokens
+    String[] parts = token.split("-");
+    for (String part : parts) {
+        if (part.length() > 0) {
+            tokens.add(part);
+        }
+    }
+}
+```
+This version of the method splits the token into multiple tokens using the `-` character as the delimiter. It then adds each part of the token to the `tokens` list.
+
+With this correction, the `flatten` method should work correctly.

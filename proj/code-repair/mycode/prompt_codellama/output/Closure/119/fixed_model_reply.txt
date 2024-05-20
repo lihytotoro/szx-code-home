@@ -1,0 +1,18 @@
+case Token.CATCH:
+  // This may be a catch parameter.
+  if (parent != null) {
+    switch (parent.getType()) {
+      case Token.CATCH:
+        isSet = true;
+        type = Name.Type.OTHER;
+        break;
+      default:
+        if (NodeUtil.isAssignmentOp(parent) &&
+            parent.getFirstChild() == n) {
+          isSet = true;
+          type = Name.Type.OTHER;
+        }
+    }
+  }
+  name = n.getString();
+  break;

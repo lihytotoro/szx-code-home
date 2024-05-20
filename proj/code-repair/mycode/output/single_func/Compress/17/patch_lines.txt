@@ -1,0 +1,1 @@
+   if (trailer == ' ' || trailer == 0){        end--;

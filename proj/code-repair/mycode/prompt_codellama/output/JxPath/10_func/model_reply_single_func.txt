@@ -1,0 +1,25 @@
+ The buggy function is:
+```
+public final Object computeValue(EvalContext context) {
+    return compute(args[0].computeValue(context), args[1].computeValue(context)) 
+            ? Boolean.TRUE : Boolean.FALSE;
+}
+```
+The bug is that the function is using the `compute` method to compare the values of the two arguments, but it is not checking for the case where one of the arguments is a node-set and the other is a number.
+
+The correct version of the function should check for this case and handle it appropriately. Here is an example of how the function could be corrected:
+```
+public final Object computeValue(EvalContext context) {
+    Object arg1 = args[0].computeValue(context);
+    Object arg2 = args[1].computeValue(context);
+    if (arg1 instanceof NodeSet && arg2 instanceof Number) {
+        // Handle the case where one of the arguments is a node-set and the other is a number
+        // by converting the node-set to a number and then comparing the two values
+        Number num = ((NodeSet) arg1).getNumber();
+        return compute(num, arg2) ? Boolean.TRUE : Boolean.FALSE;
+    } else {
+        return compute(arg1, arg2) ? Boolean.TRUE : Boolean.FALSE;
+    }
+}
+```
+This corrected version of the function will handle the case where one of the arguments is a node-set and the other is a number by converting the node-set to a number and then comparing the two values. It will also handle the case where both arguments are numbers by comparing the two numbers directly.

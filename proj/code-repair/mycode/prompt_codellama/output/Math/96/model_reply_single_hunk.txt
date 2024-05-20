@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+```
+This line compares the real and imaginary parts of the complex numbers using the `Double.doubleToRawLongBits` method, which converts the double values to long values in a way that is consistent with the `equals` method. This ensures that the comparison is done in a way that is consistent with the `equals` method, and avoids the potential for false positives or false negatives due to rounding errors.

@@ -1,0 +1,23 @@
+ The correct line at the INFILL location is:
+```
+if (property == null) {
+    return this;
+}
+```
+This line is checking if the `property` parameter is null, and if it is, it returns the `this` object, which is the current `JsonSerializer` instance. This is necessary because the `createContextual` method is called with a null `property` parameter when the `JsonFormat` annotation is not present on the property.
+
+The buggy hunk that was removed was:
+```
+if (property == null) {
+    return this;
+}
+```
+This hunk was checking if the `property` parameter is null, and if it is, it returns the `this` object, which is the current `JsonSerializer` instance. However, this hunk was not necessary, because the `createContextual` method is called with a null `property` parameter when the `JsonFormat` annotation is not present on the property.
+
+The correct line at the INFILL location is:
+```
+if (property == null) {
+    return this;
+}
+```
+This line is checking if the `property` parameter is null, and if it is, it returns the `this` object, which is the current `JsonSerializer` instance. This is necessary because the `createContextual` method is called with a null `property` parameter when the `JsonFormat` annotation is not present on the property.

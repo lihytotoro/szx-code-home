@@ -1,0 +1,1 @@
+inFunction("var out = 3; if (goog.isNull(this)) out = this;");

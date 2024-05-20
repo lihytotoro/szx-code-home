@@ -1,0 +1,15 @@
+ The buggy function is:
+```
+public int getLength() {
+    return ValueUtils.getLength(getBaseValue());
+}
+```
+The bug is that the function is returning the length of the `getBaseValue()` string, rather than the length of the `getBaseValue()` map.
+
+The corrected function should be:
+```
+public int getLength() {
+    return ValueUtils.getLength(getBaseValue().size());
+}
+```
+This function returns the length of the `getBaseValue()` map, which is the correct behavior.

@@ -1,0 +1,25 @@
+ The buggy function is:
+```
+public void describeTo(Description description) {
+    description.appendText("same(");
+    appendQuoting(description);
+    description.appendText(wanted.toString());
+    appendQuoting(description);
+    description.appendText(")");
+}
+```
+The bug is in the `appendQuoting` method, which is not properly handling the case where `wanted` is `null`.
+
+Here is the corrected version of the function:
+```
+public void describeTo(Description description) {
+    description.appendText("same(");
+    if (wanted != null) {
+        appendQuoting(description);
+        description.appendText(wanted.toString());
+        appendQuoting(description);
+    }
+    description.appendText(")");
+}
+```
+This version checks if `wanted` is `null` before calling `appendQuoting` and only calls it if `wanted` is not `null`. This ensures that the function does not throw a `NullPointerException` when `wanted` is `null`.

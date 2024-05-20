@@ -1,0 +1,8 @@
+prefix:
+private static boolean isReduceableFunctionExpression(Node n) {
+
+buggy_hunk:
+  return NodeUtil.isFunctionExpression(n);
+
+suffix:
+}

@@ -1,0 +1,5 @@
+junit.framework.ComparisonFailure: expected:<in[consistent return type
+found   : (TwoNumbers|null)
+required: number]> but was:<in[itializing variable
+found   : (TwoNumbers|null)
+required: {first: number, second: number}]>

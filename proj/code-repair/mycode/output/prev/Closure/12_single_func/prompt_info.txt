@@ -1,0 +1,4 @@
+buggy_func:
+private boolean hasExceptionHandler(Node cfgNode) {
+  return false;
+}

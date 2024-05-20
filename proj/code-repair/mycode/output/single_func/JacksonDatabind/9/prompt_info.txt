@@ -1,0 +1,15 @@
+prefix:
+public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    String str;
+
+buggy_hunk:
+    if (value instanceof Date) {
+        provider.defaultSerializeDateKey((Date) value, jgen);
+        return;
+
+suffix:
+    } else {
+        str = value.toString();
+    }
+    jgen.writeFieldName(str);
+}

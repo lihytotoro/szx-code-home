@@ -1,0 +1,7 @@
+if (!validProperties.contains(propName)) {
+  if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {
+    validProperties.add(propName);
+  } else {
+    return false;
+  }
+}

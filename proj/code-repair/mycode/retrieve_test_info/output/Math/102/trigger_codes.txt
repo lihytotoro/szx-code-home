@@ -1,0 +1,2 @@
+assertEquals( "chi-square test statistic",
+114875.90421929007, testStatistic.chiSquare(exp, obs), 1E-9);

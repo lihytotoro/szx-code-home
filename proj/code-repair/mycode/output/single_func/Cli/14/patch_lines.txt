@@ -1,0 +1,1 @@
+       if (commandLine.hasOption(option)) {            if (++present > maximum) {                unexpected = option;                break;            }            if (validate) {

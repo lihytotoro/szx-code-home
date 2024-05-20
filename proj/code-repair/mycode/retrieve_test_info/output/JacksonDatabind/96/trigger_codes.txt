@@ -1,0 +1,3 @@
+OneProperty actual = MAPPER.readValue(
+"{\"param_name0\":\""+MSG+"\"}",
+OneProperty.class);

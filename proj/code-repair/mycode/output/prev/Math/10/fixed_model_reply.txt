@@ -1,0 +1,1 @@
+result[resultOffset] = ((tmp2[0] <= 0) ? -FastMath.PI : FastMath.PI) - 2 * tmp2[0];

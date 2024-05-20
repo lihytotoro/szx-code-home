@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+tokeniser.emit(new Token.EndTag(el.tagName()));  // ensure we get out of whatever state we are in. emitted for yielded processing
+```
+This line is responsible for emitting an end tag for the current element, which is necessary to ensure that the element is properly closed and that the parser is in the correct state for parsing the next element.

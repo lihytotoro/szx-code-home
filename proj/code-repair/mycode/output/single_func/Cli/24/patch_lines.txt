@@ -1,0 +1,1 @@
+       throw new IllegalStateException("Total width is less than the width of the argument and indent - " +                                         "no room for the description");

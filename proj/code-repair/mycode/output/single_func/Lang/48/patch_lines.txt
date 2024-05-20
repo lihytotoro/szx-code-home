@@ -1,0 +1,1 @@
+       isEquals = lhs.equals(rhs);

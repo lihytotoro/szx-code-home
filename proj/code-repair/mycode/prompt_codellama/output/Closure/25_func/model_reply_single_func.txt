@@ -1,0 +1,32 @@
+ The bug in the code is in the following line:
+```
+n.setJSType(type);
+```
+The `setJSType` method is setting the type of the `n` node to `type`, but the `type` variable is not being initialized correctly.
+
+The correct version of the function should be:
+```
+private FlowScope traverseNew(Node n, FlowScope scope) {
+  Node constructor = n.getFirstChild();
+  scope = traverse(constructor, scope);
+  JSType constructorType = constructor.getJSType();
+  JSType type = null;
+  if (constructorType != null) {
+    constructorType = constructorType.restrictByNotNullOrUndefined();
+    if (constructorType.isUnknownType()) {
+      type = getNativeType(UNKNOWN_TYPE);
+    } else {
+      FunctionType ct = constructorType.toMaybeFunctionType();
+      if (ct != null && ct.isConstructor()) {
+        type = ct.getInstanceType();
+      }
+    }
+  }
+  n.setJSType(type);
+  for (Node arg = constructor.getNext(); arg != null; arg = arg.getNext()) {
+    scope = traverse(arg, scope);
+  }
+  return scope;
+}
+```
+In this version, the `type` variable is initialized to `null` before the `if` statement, and then set to the correct type if the constructor is a function type and it has an instance type.

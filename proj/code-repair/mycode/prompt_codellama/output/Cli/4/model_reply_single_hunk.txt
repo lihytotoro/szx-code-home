@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    StringBuffer buff = new StringBuffer();
+
+The buggy hunk was removed by the INFILL location, so the correct line at that location is the one that creates the StringBuffer object.

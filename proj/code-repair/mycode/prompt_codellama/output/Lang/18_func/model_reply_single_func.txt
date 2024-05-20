@@ -1,0 +1,34 @@
+ The bug in the code is in the `parseToken` method, which is used to parse the pattern string and create a list of `Rule` objects. The method is not handling the case where the token is a single quote (') followed by a character or a string of characters.
+
+Here is the corrected version of the `parseToken` method:
+```
+protected String parseToken(String pattern, int[] indexRef) {
+    StringBuilder buffer = new StringBuilder();
+    int i = indexRef[0];
+    int length = pattern.length();
+
+    while (i < length) {
+        char c = pattern.charAt(i);
+        if (c == '\'') {
+            // Handle single quote (') followed by a character or a string of characters
+            i++;
+            if (i < length && pattern.charAt(i) == '\'') {
+                // Escaped single quote (''), add it to the buffer as-is
+                buffer.append(c);
+                i++;
+            } else {
+                // Not an escaped single quote, add the next character to the buffer
+                buffer.append(pattern.charAt(i++));
+            }
+        } else {
+            // Not a single quote, add it to the buffer
+            buffer.append(c);
+            i++;
+        }
+    }
+
+    indexRef[0] = i;
+    return buffer.toString();
+}
+```
+With this correction, the `parseToken` method will correctly handle single quotes (') followed by a character or a string of characters, and the `parsePattern` method will correctly parse the pattern string and create a list of `Rule` objects.

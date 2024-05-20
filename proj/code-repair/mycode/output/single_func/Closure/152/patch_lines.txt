@@ -1,0 +1,1 @@
+ typeOfThis = (ObjectType) safeResolve(typeOfThis, t, scope);

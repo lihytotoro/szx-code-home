@@ -1,0 +1,1 @@
+return new LazilyParsedNumber(in.nextString());

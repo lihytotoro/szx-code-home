@@ -1,0 +1,1 @@
+junit.framework.ComparisonFailure: expected:<[inner] strength> but was:<[null] strength>

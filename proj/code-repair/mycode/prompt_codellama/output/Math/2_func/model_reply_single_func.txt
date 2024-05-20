@@ -1,0 +1,25 @@
+ The buggy function is:
+```
+public double getNumericalMean() {
+    return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();
+}
+```
+The bug is in the calculation of the sample size. The formula for the sample size is:
+```
+sampleSize = (populationSize * sampleProportion) / (1 - sampleProportion)
+```
+where `sampleProportion` is the proportion of successes in the sample, and `populationSize` is the total number of items in the population.
+
+In the buggy function, the sample size is calculated as:
+```
+sampleSize = (getPopulationSize() * getNumberOfSuccesses()) / (double) getPopulationSize()
+```
+This is incorrect because the sample size is calculated using the total number of items in the population, rather than the sample proportion.
+
+To fix the bug, the function should be modified to use the correct formula for the sample size:
+```
+public double getNumericalMean() {
+    return (double) (getPopulationSize() * getNumberOfSuccesses()) / (double) (getPopulationSize() * (1 - getSampleProportion()));
+}
+```
+This function calculates the sample size using the correct formula, and returns the correct numerical mean.

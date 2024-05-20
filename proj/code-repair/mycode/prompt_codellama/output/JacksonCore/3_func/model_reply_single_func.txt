@@ -1,0 +1,25 @@
+ The bug is in the line:
+```
+_inputPtr = start;
+```
+The variable `start` is not being used correctly. It should be used as the starting position of the input buffer, but it is being used as the ending position of the input buffer.
+
+The correct version of the function would be:
+```
+public UTF8StreamJsonParser(IOContext ctxt, int features, InputStream in,
+        ObjectCodec codec, BytesToNameCanonicalizer sym,
+        byte[] inputBuffer, int start, int end,
+        boolean bufferRecyclable)
+{
+    super(ctxt, features);
+    _inputStream = in;
+    _objectCodec = codec;
+    _symbols = sym;
+    _inputBuffer = inputBuffer;
+    _inputPtr = start;
+    _inputEnd = end;
+    // If we have offset, need to omit that from byte offset, so:
+    _bufferRecyclable = bufferRecyclable;
+}
+```
+In this version, the variable `start` is used correctly as the starting position of the input buffer, and the variable `end` is used correctly as the ending position of the input buffer.

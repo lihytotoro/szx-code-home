@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (ext.handlePropertyValue(p, ctxt, propName, null)) {
+
+This is because the `handlePropertyValue` method of the `ExternalTypeHandler` interface takes an additional `Object` parameter that represents the value of the property. In this case, the value of the property is not needed, so `null` is passed as the value.

@@ -1,0 +1,31 @@
+ The bug in the code is in the `handleObjectLit` function, specifically in the `for` loop that iterates over the children of the `n` node. The loop is expecting that all children of `n` will be either strings or GET or SET nodes, but it is not handling the case where a child node is a number.
+
+The fix is to add a check to ensure that the child node is a string or a GET or SET node before trying to get its string value. Here's the corrected code:
+```
+private void handleObjectLit(NodeTraversal t, Node n) {
+  for (Node child = n.getFirstChild();
+      child != null;
+      child = child.getNext()) {
+    // Maybe STRING, GET, SET
+
+    if (child.isString() || child.isGet() || child.isSet()) {
+      String name = child.getString();
+      T type = typeSystem.getType(getScope(), n, name);
+
+      Property prop = getProperty(name);
+      if (!prop.scheduleRenaming(child,
+                                 processProperty(t, prop, type, null))) {
+        // TODO(user): It doesn't look like the user can do much in this
+        // case right now.
+        if (propertiesToErrorFor.containsKey(name)) {
+          compiler.report(JSError.make(
+              t.getSourceName(), child, propertiesToErrorFor.get(name),
+              Warnings.INVALIDATION, name,
+              (type == null ? "null" : type.toString()), n.toString(), ""));
+        }
+      }
+    }
+  }
+}
+```
+With this fix, the code should handle the case where a child node is a number and not crash.

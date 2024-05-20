@@ -1,0 +1,3 @@
+junit.framework.AssertionFailedError: There should be one error. required "namespace.Class1" namespace never provided
+variable goog is undeclared
+ expected:<1> but was:<2>

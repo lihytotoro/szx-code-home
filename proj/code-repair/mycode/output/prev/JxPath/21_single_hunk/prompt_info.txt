@@ -1,0 +1,8 @@
+prefix:
+public int getLength() {
+
+buggy_hunk:
+    return ValueUtils.getLength(getBaseValue());
+
+suffix:
+}

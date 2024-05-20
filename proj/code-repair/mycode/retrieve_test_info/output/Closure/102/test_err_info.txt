@@ -1,0 +1,54 @@
+junit.framework.AssertionFailedError: 
+Expected: function f(){arguments=Array.prototype.slice.call(arguments,0);return arguments[0]}
+Result: function f(){var arguments=Array.prototype.slice.call(arguments,0);return arguments[0]}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [source name: null] [encoded source length: 0] [base line: -1] [end line: -1] 1 [sourcename: input0] [synthetic: 1]
+        FUNCTION f 1 [sourcename: input0]
+            NAME f 1
+            LP 1
+            BLOCK 1
+                EXPR_RESULT 1
+                    ASSIGN 1
+                        NAME arguments 1
+                        CALL 1
+                            GETPROP 1
+                                GETPROP 1
+                                    GETPROP 1
+                                        NAME Array 1
+                                        STRING prototype 1
+                                    STRING slice 1
+                                STRING call 1
+                            NAME arguments 1
+                            NUMBER 0.0 1
+                RETURN 1
+                    GETELEM 1
+                        NAME arguments 1
+                        NUMBER 0.0 1
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [source name: null] [encoded source length: 0] [base line: -1] [end line: -1] 1 [sourcename: i0] [synthetic: 1]
+        FUNCTION f 1 [sourcename: i0] : function (): ?
+            NAME f 1 : function (): ?
+            LP 1
+            BLOCK 1
+                VAR 1
+                    NAME arguments 1 : ?
+                        CALL 1 : ?
+                            GETPROP 1 : ?
+                                GETPROP 1 : ?
+                                    GETPROP 1 : Array.prototype
+                                        NAME Array 1 : function (this:Array, ...[*]): Array
+                                        STRING prototype 1 : string
+                                    STRING slice 1 : string
+                                STRING call 1 : string
+                            NAME arguments 1 : undefined
+                            NUMBER 0.0 1 : number
+                RETURN 1
+                    GETELEM 1 : ?
+                        NAME arguments 1 : ?
+                        NUMBER 0.0 1 : number
+

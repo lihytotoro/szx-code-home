@@ -1,0 +1,8 @@
+java.lang.RuntimeException: INTERNAL COMPILER ERROR.
+Please report this problem.
+index (1) must be less than size (1)
+  Node(BLOCK): testcode:1:16
+function local(){var a; a = {}}
+  Parent(FUNCTION local): testcode:1:0
+function local(){var a; a = {}}
+

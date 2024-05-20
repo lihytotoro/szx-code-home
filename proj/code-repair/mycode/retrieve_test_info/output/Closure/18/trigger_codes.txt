@@ -1,0 +1,11 @@
+test(
+options,
+new String[] {
+"goog.require('x');",
+"goog.provide('x');",
+},
+new String[] {
+"goog.provide('x');",
+"goog.require('x');",
+"",
+});

@@ -1,0 +1,40 @@
+ The bug in the code is caused by the use of the `appendReplacement` method of the `Matcher` class, which requires a group index as an argument. However, in the code, the `appendReplacement` method is called with a group name as an argument, which is not a valid group index.
+
+To fix the bug, you can replace the `appendReplacement` method with a custom implementation that uses a `StringBuilder` to build the replacement string. Here's an example of how you can do this:
+```
+static String unescape(String string) {
+    if (!string.contains("&"))
+        return string;
+
+    Matcher m = unescapePattern.matcher(string); // &(#(x|X)?([0-9a-fA-F]+)|[a-zA-Z]+);?
+    StringBuffer accum = new StringBuffer(string.length()); // pity matcher can't use stringbuilder, avoid syncs
+
+    while (m.find()) {
+        int charval = -1;
+        String num = m.group(3);
+        if (num != null) {
+            try {
+                int base = m.group(2) != null ? 16 : 10; // 2 is hex indicator
+                charval = Integer.valueOf(num, base);
+            } catch (NumberFormatException e) {
+            } // skip
+        } else {
+            String name = m.group(1);
+            if (full.containsKey(name))
+                charval = full.get(name);
+        }
+
+        if (charval != -1 || charval > 0xFFFF) { // out of range
+            String c = Character.toString((char) charval);
+            accum.append(c);
+        } else {
+            accum.append(m.group(0));
+        }
+    }
+    m.appendTail(accum);
+    return accum.toString();
+}
+```
+In this implementation, the `appendReplacement` method is replaced with a custom method that uses a `StringBuilder` to build the replacement string. The `StringBuilder` is used to build the replacement string, and the `append` method is used to append the replacement string to the `StringBuilder`. The `toString` method is then called on the `StringBuilder` to return the resulting string.
+
+This implementation should fix the bug in the code and allow it to pass the test.

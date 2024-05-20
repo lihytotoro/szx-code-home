@@ -1,0 +1,36 @@
+ The buggy function is:
+```
+private void processOptionToken(String token, boolean stopAtNonOption)
+{
+    if (options.hasOption(token))
+    {
+        currentOption = options.getOption(token);
+        tokens.add(token);
+    }
+    else if (stopAtNonOption)
+    {
+        eatTheRest = true;
+        tokens.add(token);
+    }
+}
+```
+The bug is that the function does not throw an `UnrecognizedOptionException` when the `stopAtNonOption` parameter is `true` and the token is not recognized as an option.
+
+The corrected function should be:
+```
+private void processOptionToken(String token, boolean stopAtNonOption)
+{
+    if (options.hasOption(token))
+    {
+        currentOption = options.getOption(token);
+        tokens.add(token);
+    }
+    else if (stopAtNonOption)
+    {
+        eatTheRest = true;
+        tokens.add(token);
+        throw new UnrecognizedOptionException(token);
+    }
+}
+```
+This corrected function will throw an `UnrecognizedOptionException` when the `stopAtNonOption` parameter is `true` and the token is not recognized as an option, which will cause the test to fail.

@@ -1,0 +1,19 @@
+ The correct line at the INFILL location is:
+```
+if ("select".equals(el.normalName())) {
+    Elements options = el.select("option[selected]");
+    boolean set = false;
+    for (Element option: options) {
+        data.add(HttpConnection.KeyVal.create(name, option.val()));
+        set = true;
+    }
+    if (!set) {
+        Element option = el.select("option").first();
+        if (option != null)
+            data.add(HttpConnection.KeyVal.create(name, option.val()));
+    }
+}
+```
+The bug was caused by the fact that the `select` element was not being properly handled in the `formData` method. The method was only checking if the `select` element had the `selected` attribute, but it was not checking if any of the options were selected. This resulted in the `select` element being added to the `data` list even if no options were selected, which caused the test to fail.
+
+The corrected code checks if any of the options are selected and adds the selected option to the `data` list. If no options are selected, it adds the first option to the `data` list. This ensures that the `select` element is properly handled and the test passes.

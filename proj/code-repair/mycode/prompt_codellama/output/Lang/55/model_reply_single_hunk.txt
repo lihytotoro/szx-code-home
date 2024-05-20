@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+stopTime = System.currentTimeMillis();
+
+This line is missing from the original code, and it is needed to calculate the total time for the stopwatch.

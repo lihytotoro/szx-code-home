@@ -1,0 +1,19 @@
+ The buggy function is:
+```
+public int compareTo(Fraction object) {
+    double nOd = doubleValue();
+    double dOn = object.doubleValue();
+    return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);
+}
+```
+The bug is in the last line, where the function returns 0 instead of -1 when the `nOd` is greater than `dOn`.
+
+The corrected function should be:
+```
+public int compareTo(Fraction object) {
+    double nOd = doubleValue();
+    double dOn = object.doubleValue();
+    return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : -1);
+}
+```
+This function returns -1 when `nOd` is greater than `dOn`, which is the correct behavior for the `compareTo` method.

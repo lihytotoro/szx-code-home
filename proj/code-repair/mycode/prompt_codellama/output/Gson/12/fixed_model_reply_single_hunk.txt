@@ -1,0 +1,1 @@
+pathNames[stackSize - 1] = "null";

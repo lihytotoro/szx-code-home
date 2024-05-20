@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+if(currentStrategy.addRegex(this, regex)) {
+    collector.add(currentStrategy);
+}
+
+The bug in the original code was that the `currentStrategy` variable was not being updated properly, so the `addRegex` method was being called with the same strategy object multiple times, which caused the `collector` list to contain duplicate strategies. The fix is to move the `currentStrategy` variable assignment inside the `if` block, so that it is updated with the correct strategy for each iteration of the loop.

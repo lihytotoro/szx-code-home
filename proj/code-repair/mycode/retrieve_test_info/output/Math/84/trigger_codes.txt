@@ -1,0 +1,1 @@
+Assert.assertTrue(optimizer.getEvaluations() < 150);

@@ -1,0 +1,8 @@
+ The correct line at the INFILL location is:
+```
+return tf.constructSpecializedType(_baseType, cls);
+```
+This line is missing a closing parenthesis, which is causing the error. The corrected line should be:
+```
+return tf.constructSpecializedType(_baseType, cls);
+```

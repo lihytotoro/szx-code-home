@@ -1,0 +1,1 @@
+ if (!options.checkSymbols) {    guards.add(new DiagnosticGroupWarningsGuard(        DiagnosticGroups.CHECK_VARIABLES, CheckLevel.OFF));  }  this.warningsGuard = new ComposeWarningsGuard(guards);

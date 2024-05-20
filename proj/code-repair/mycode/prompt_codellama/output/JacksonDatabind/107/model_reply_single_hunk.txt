@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+return ctxt.findContextualValueDeserializer(actual, _property);
+```
+This line is the replacement for the original `return null;` line, and it fixes the bug by returning a non-null value when the type id is not found.

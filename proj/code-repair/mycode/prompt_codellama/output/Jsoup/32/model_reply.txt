@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    clone.classNames = new HashSet<>(classNames);
+
+This line creates a new instance of the `HashSet` class and assigns it to the `classNames` field of the `clone` object, which is a shallow copy of the original `Element` object. This is necessary because the `classNames` field is a `HashSet` object, and the `clone` method only performs a shallow copy of the object, which means that the new `clone` object will have a reference to the same `HashSet` object as the original `Element` object. By creating a new instance of the `HashSet` class and assigning it to the `classNames` field of the `clone` object, we ensure that the `clone` object has its own copy of the `classNames` field, which is necessary for the `Element` object to be properly cloned.

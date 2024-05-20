@@ -1,0 +1,8 @@
+prefix:
+public double getPct(Object v) {
+
+buggy_line:
+    return getCumPct((Comparable<?>) v);
+
+suffix:
+}

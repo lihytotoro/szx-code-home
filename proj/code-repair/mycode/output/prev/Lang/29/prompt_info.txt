@@ -1,0 +1,8 @@
+prefix:
+
+buggy_line:
+static float toJavaVersionInt(String version) {
+
+suffix:
+    return toVersionInt(toJavaVersionIntArray(version, JAVA_VERSION_TRIM_SIZE));
+}

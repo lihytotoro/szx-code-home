@@ -1,0 +1,3 @@
+ The correct line at the INFILL location is:
+
+    final boolean emptyHeader = header.trim().isEmpty();

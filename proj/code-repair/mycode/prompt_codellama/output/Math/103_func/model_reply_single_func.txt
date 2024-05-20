@@ -1,0 +1,14 @@
+ The bug in the code is that the `Erf.erf()` method is being called with a negative argument, which is not allowed. The `erf()` method is defined as:
+
+erf(x) = 2/sqrt(π) ∫[0,x] e^(-t^2) dt
+
+The `erf()` method is only defined for non-negative arguments. To fix the bug, we need to ensure that the argument to `erf()` is non-negative. One way to do this is to add a check to ensure that the argument is non-negative before calling `erf()`. Here is the corrected code:
+```
+public double cumulativeProbability(double x) throws MathException {
+    if (x < 0) {
+        throw new IllegalArgumentException("x must be non-negative");
+    }
+    return 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));
+}
+```
+This code checks that the argument to `cumulativeProbability()` is non-negative before calling `Erf.erf()`. If the argument is negative, an `IllegalArgumentException` is thrown.

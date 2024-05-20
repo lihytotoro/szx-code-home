@@ -1,0 +1,2 @@
+assertTrue(Arrays.equals(new Class[] { String.class, null, Double.class },
+ClassUtils.toClass(new Object[] { "Test", null, 99d })));

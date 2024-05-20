@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (str.startsWith("0x") || str.startsWith("-0x")) {
+
+This line was added to the method to handle hexadecimal numbers, but it was not properly tested and it caused the method to fail on the test case provided.

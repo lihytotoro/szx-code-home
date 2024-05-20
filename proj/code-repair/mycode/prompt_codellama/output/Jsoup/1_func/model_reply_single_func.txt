@@ -1,0 +1,25 @@
+ The bug in the code is that it is removing the text nodes from the `element` and then appending them back to the `body` element, but it is not updating the `element` to reflect the changes. This means that the `element` still contains the original text nodes, and when the `doc.text()` method is called, it is returning the original text, rather than the updated text with the text nodes removed.
+
+To fix the bug, you need to update the `element` to reflect the changes made to the `body` element. One way to do this is to use the `element.normalize()` method, which will remove any empty text nodes from the `element` and update the `element` to reflect the changes.
+
+Here is the corrected code:
+```
+private void normalise(Element element) {
+    List<Node> toMove = new ArrayList<Node>();
+    for (Node node: element.childNodes) {
+        if (node instanceof TextNode) {
+            TextNode tn = (TextNode) node;
+            if (!tn.isBlank())
+                toMove.add(tn);
+        }
+    }
+
+    for (Node node: toMove) {
+        element.removeChild(node);
+        element.normalize();
+        body().appendChild(new TextNode(" ", ""));
+        body().appendChild(node);
+    }
+}
+```
+This code will remove the empty text nodes from the `element` and update the `element` to reflect the changes. It will then append the text nodes to the `body` element and update the `body` element to reflect the changes. The `doc.text()` method will then return the updated text with the empty text nodes removed.

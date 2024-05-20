@@ -1,0 +1,13 @@
+ The correct line at the INFILL location is:
+```
+mixIns.add(_constructMethod(m));
+```
+This line is adding a method to the `mixIns` list, but it is not checking if the method is already present in the list before adding it. This can cause the `mixIns` list to contain duplicate methods, which can lead to unexpected behavior when the list is used to create a serializer.
+
+To fix the bug, you can add a check to see if the method is already present in the list before adding it. Here is an example of how you can modify the code to fix the bug:
+```
+if (!mixIns.contains(m)) {
+    mixIns.add(_constructMethod(m));
+}
+```
+This code checks if the method is already present in the `mixIns` list before adding it. If the method is already present, the code does not add it to the list. This ensures that the `mixIns` list does not contain duplicate methods, which can help prevent unexpected behavior.

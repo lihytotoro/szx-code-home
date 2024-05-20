@@ -1,0 +1,31 @@
+ The bug in the code is that it doesn't handle scanning for surrogates. The `charAt` method returns a `char` value, which may be a surrogate character. If the `char` value is a surrogate, it may not be a valid character in the input string.
+
+To fix the bug, we need to check if the `char` value is a surrogate and handle it appropriately. Here's the corrected version of the function:
+```
+int nextIndexOf(CharSequence seq) {
+    char startChar = seq.charAt(0);
+    for (int offset = pos; offset < length; offset++) {
+        if (startChar != input[offset]) {
+            while (++offset < length && startChar != input[offset]) {
+                if (Character.isSurrogate(input[offset])) {
+                    offset++;
+                }
+            }
+        }
+        int i = offset + 1;
+        int last = i + seq.length() - 1;
+        if (offset < length) {
+            for (int j = 1; i < last && seq.charAt(j) == input[i]; i++, j++) {
+                if (Character.isSurrogate(input[i])) {
+                    i++;
+                }
+            }
+            if (i == last) { // found full sequence
+                return offset - pos;
+            }
+        }
+    }
+    return -1;
+}
+```
+In this corrected version, we check if the `char` value is a surrogate and increment the `offset` variable if it is. This ensures that we skip over the surrogate character and continue scanning for the next character in the input string.

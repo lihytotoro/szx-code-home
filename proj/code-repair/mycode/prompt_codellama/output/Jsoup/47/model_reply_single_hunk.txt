@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (!inAttribute || escapeMode == EscapeMode.xhtml)
+
+This change is necessary because the original code was escaping the `<` character in XML attributes, which is not valid. By adding the `|| escapeMode == EscapeMode.xhtml` condition, we ensure that the `<` character is only escaped in XML attributes if the `EscapeMode` is set to `xhtml`.

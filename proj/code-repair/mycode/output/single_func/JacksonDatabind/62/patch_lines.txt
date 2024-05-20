@@ -1,0 +1,1 @@
+           if (delegateDeser == null) {                throw new IllegalArgumentException("Invalid delegate-creator definition for "+_collectionType                        +": value instantiator ("+_valueInstantiator.getClass().getName()                        +") returned true for 'canCreateUsingDelegate()', but null for 'getDelegateType()'");            }

@@ -1,0 +1,18 @@
+ The bug in the code is that it is using the `==` operator to compare the objects, which will only compare the references and not the contents of the objects. To fix the bug, we need to use the `equals()` method to compare the contents of the objects.
+
+Here is the corrected version of the `equals()` method:
+```
+public boolean equals(Object obj) {
+    if (obj == this) {
+        return true;
+    }
+    if (!(obj instanceof ShapeList)) {
+        return false;
+    }
+    ShapeList other = (ShapeList) obj;
+    return super.equals(other) && other.getShapes().equals(this.getShapes());
+}
+```
+In this version, we first check if the `obj` parameter is the same object as `this`, and if so, we return `true`. If `obj` is not the same object as `this`, we check if it is an instance of `ShapeList` using the `instanceof` operator. If it is not, we return `false`. If it is, we cast `obj` to a `ShapeList` and then compare the contents of the `getShapes()` methods using the `equals()` method.
+
+This corrected version of the `equals()` method will correctly compare the contents of the `ShapeList` objects, rather than just comparing the references.

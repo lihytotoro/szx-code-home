@@ -1,0 +1,114 @@
+ The buggy function is:
+```
+public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+
+  if (n.getType() == Token.FUNCTION) {
+    // Don't traverse functions that are constructors or have the @this
+    // or @override annotation.
+    JSDocInfo jsDoc = getFunctionJsDocInfo(n);
+    if (jsDoc != null &&
+        (jsDoc.isConstructor() ||
+         jsDoc.hasThisType() ||
+         jsDoc.isOverride())) {
+      return false;
+    }
+
+    // Don't traverse functions unless they would normally
+    // be able to have a @this annotation associated with them. e.g.,
+    // var a = function() { }; // or
+    // function a() {} // or
+    // a.x = function() {};
+    int pType = parent.getType();
+    if (!(pType == Token.BLOCK ||
+          pType == Token.SCRIPT ||
+          pType == Token.NAME ||
+          pType == Token.ASSIGN)) {
+      return false;
+    }
+  }
+
+  if (parent != null && parent.getType() == Token.ASSIGN) {
+    Node lhs = parent.getFirstChild();
+    Node rhs = lhs.getNext();
+    
+    if (n == lhs) {
+      // Always traverse the left side of the assignment. To handle
+      // nested assignments properly (e.g., (a = this).property = c;),
+      // assignLhsChild should not be overridden.
+      if (assignLhsChild == null) {
+        assignLhsChild = lhs;
+      }
+    } else {
+      // Only traverse the right side if it's not an assignment to a prototype
+      // property or subproperty.
+        if (lhs.getType() == Token.GETPROP &&
+            lhs.getLastChild().getString().equals("prototype")) {
+          return false;
+        }
+        if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(".prototype.")) {
+          return false;
+        }
+    }
+  }
+
+  return true;
+}
+```
+The bug is in the `if (lhs.getType() == Token.GETPROP && lhs.getLastChild().getString().equals("prototype"))` condition. This condition is checking if the left side of the assignment is a property of the `prototype` object, but it is not checking if the property is a subproperty of `prototype`. For example, if the code is `a.prototype.b.c = function() { this.foo = 3; };`, the condition will return `false` because `lhs.getLastChild().getString()` will return `"b"`, which is not equal to `"prototype"`.
+
+To fix the bug, we need to check if the left side of the assignment is a subproperty of `prototype`, not just if it is a property of `prototype`. We can do this by checking if the qualified name of the left side of the assignment contains `"prototype."`. Here is the corrected version of the function:
+```
+public boolean shouldTraverse(NodeTraversal t, Node n, Node parent) {
+
+  if (n.getType() == Token.FUNCTION) {
+    // Don't traverse functions that are constructors or have the @this
+    // or @override annotation.
+    JSDocInfo jsDoc = getFunctionJsDocInfo(n);
+    if (jsDoc != null &&
+        (jsDoc.isConstructor() ||
+         jsDoc.hasThisType() ||
+         jsDoc.isOverride())) {
+      return false;
+    }
+
+    // Don't traverse functions unless they would normally
+    // be able to have a @this annotation associated with them. e.g.,
+    // var a = function() { }; // or
+    // function a() {} // or
+    // a.x = function() {};
+    int pType = parent.getType();
+    if (!(pType == Token.BLOCK ||
+          pType == Token.SCRIPT ||
+          pType == Token.NAME ||
+          pType == Token.ASSIGN)) {
+      return false;
+    }
+  }
+
+  if (parent != null && parent.getType() == Token.ASSIGN) {
+    Node lhs = parent.getFirstChild();
+    Node rhs = lhs.getNext();
+    
+    if (n == lhs) {
+      // Always traverse the left side of the assignment. To handle
+      // nested assignments properly (e.g., (a = this).property = c;),
+      // assignLhsChild should not be overridden.
+      if (assignLhsChild == null) {
+        assignLhsChild = lhs;
+      }
+    } else {
+      // Only traverse the right side if it's not an assignment to a prototype
+      // property or subproperty.
+        if (lhs.getType() == Token.GETPROP &&
+            lhs.getLastChild().getString().equals("prototype")) {
+          return false;
+        }
+        if (lhs.getQualifiedName() != null && lhs.getQualifiedName().contains(".prototype.")) {
+          return false;
+        }
+    }
+  }
+
+  return true;
+}
+```

@@ -1,0 +1,203 @@
++ [ -w /var/tmp/xdg_runtime_dir_lihaoyu ]
++ [ -d /home/lihaoyu ]
++ rootlesskit=
++ command -v docker-rootlesskit
++ command -v rootlesskit
++ rootlesskit=rootlesskit
++ break
++ [ -z rootlesskit ]
++ : 
++ : 
++ : builtin
++ : auto
++ : auto
++ net=
++ mtu=
++ [ -z  ]
++ command -v slirp4netns
++ slirp4netns --help
++ grep -qw -- --netns-type
++ net=slirp4netns
++ [ -z  ]
++ mtu=65520
++ [ -z slirp4netns ]
++ [ -z 65520 ]
++ dockerd=dockerd
++ [ -z  ]
++ _DOCKERD_ROOTLESS_CHILD=1
++ export _DOCKERD_ROOTLESS_CHILD
++ id -u
++ [ 38211 = 0 ]
++ command -v selinuxenabled
++ exec rootlesskit --net=slirp4netns --mtu=65520 --slirp4netns-sandbox=auto --slirp4netns-seccomp=auto --disable-host-loopback --port-driver=builtin --copy-up=/etc --copy-up=/run --propagation=rslave /apps/tools/rootless-docker/bin/dockerd-rootless.sh --experimental --data-root=/docker-image/docker-container-storage-lihaoyu --storage-driver overlay2
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
++ [ -w /var/tmp/xdg_runtime_dir_lihaoyu ]
++ [ -d /home/lihaoyu ]
++ rootlesskit=
++ command -v docker-rootlesskit
++ command -v rootlesskit
++ rootlesskit=rootlesskit
++ break
++ [ -z rootlesskit ]
++ : 
++ : 
++ : builtin
++ : auto
++ : auto
++ net=
++ mtu=
++ [ -z  ]
++ command -v slirp4netns
++ slirp4netns --help
++ grep -qw -- --netns-type
++ net=slirp4netns
++ [ -z  ]
++ mtu=65520
++ [ -z slirp4netns ]
++ [ -z 65520 ]
++ dockerd=dockerd
++ [ -z 1 ]
++ [ 1 = 1 ]
++ rm -f /run/docker /run/containerd /run/xtables.lock
++ [ -n  ]
++ stat -c %T -f /etc
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
++ [ tmpfs = tmpfs ]
++ [ -L /etc/ssl ]
++ realpath /etc/ssl
++ realpath_etc_ssl=/etc/.ro3357475416/ssl
++ rm -f /etc/ssl
++ mkdir /etc/ssl
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
++ mount --rbind /etc/.ro3357475416/ssl /etc/ssl
++ exec dockerd --experimental --data-root=/docker-image/docker-container-storage-lihaoyu --storage-driver overlay2
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+Cannot connect to the Docker daemon at unix:///var/tmp/xdg_runtime_dir_lihaoyu/docker.sock. Is the docker daemon running?
+time="2024-05-08T15:20:33.175992112+08:00" level=info msg="Starting up"
+time="2024-05-08T15:20:33.176080768+08:00" level=warning msg="Running experimental build"
+time="2024-05-08T15:20:33.176095307+08:00" level=warning msg="Running in rootless mode. This mode has feature limitations."
+time="2024-05-08T15:20:33.176108423+08:00" level=info msg="Running with RootlessKit integration"
+time="2024-05-08T15:20:33.177416088+08:00" level=info msg="containerd not running, starting managed containerd"
+time="2024-05-08T15:20:33.197589355+08:00" level=info msg="started new containerd process" address=/var/tmp/xdg_runtime_dir_lihaoyu/docker/containerd/containerd.sock module=libcontainerd pid=3965628
+time="2024-05-08T15:20:33.395102818+08:00" level=info msg="starting containerd" revision=1677a17964311325ed1c31e2c0a3589ce6d5c30d version=v1.7.1
+time="2024-05-08T15:20:33.414074107+08:00" level=info msg="loading plugin \"io.containerd.snapshotter.v1.aufs\"..." type=io.containerd.snapshotter.v1
+time="2024-05-08T15:20:33.418809075+08:00" level=info msg="loading plugin \"io.containerd.content.v1.content\"..." type=io.containerd.content.v1
+time="2024-05-08T15:20:33.418898398+08:00" level=info msg="loading plugin \"io.containerd.snapshotter.v1.native\"..." type=io.containerd.snapshotter.v1
+time="2024-05-08T15:20:33.418979710+08:00" level=info msg="loading plugin \"io.containerd.snapshotter.v1.overlayfs\"..." type=io.containerd.snapshotter.v1
+time="2024-05-08T15:20:33.424045847+08:00" level=info msg="loading plugin \"io.containerd.snapshotter.v1.devmapper\"..." type=io.containerd.snapshotter.v1
+time="2024-05-08T15:20:33.424278714+08:00" level=warning msg="failed to load plugin io.containerd.snapshotter.v1.devmapper" error="devmapper not configured"
+time="2024-05-08T15:20:33.424389415+08:00" level=info msg="loading plugin \"io.containerd.snapshotter.v1.zfs\"..." type=io.containerd.snapshotter.v1
+time="2024-05-08T15:20:33.425736720+08:00" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.zfs\"..." error="path /docker-image/docker-container-storage-lihaoyu/containerd/daemon/io.containerd.snapshotter.v1.zfs must be a zfs filesystem to be used with the zfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
+time="2024-05-08T15:20:33.425900073+08:00" level=info msg="loading plugin \"io.containerd.metadata.v1.bolt\"..." type=io.containerd.metadata.v1
+time="2024-05-08T15:20:33.426129798+08:00" level=warning msg="could not use snapshotter devmapper in metadata plugin" error="devmapper not configured"
+time="2024-05-08T15:20:33.426251894+08:00" level=info msg="metadata content store policy set" policy=shared
+time="2024-05-08T15:20:33.429473774+08:00" level=info msg="loading plugin \"io.containerd.differ.v1.walking\"..." type=io.containerd.differ.v1
+time="2024-05-08T15:20:33.429519196+08:00" level=info msg="loading plugin \"io.containerd.event.v1.exchange\"..." type=io.containerd.event.v1
+time="2024-05-08T15:20:33.429542079+08:00" level=info msg="loading plugin \"io.containerd.gc.v1.scheduler\"..." type=io.containerd.gc.v1
+time="2024-05-08T15:20:33.429659255+08:00" level=info msg="loading plugin \"io.containerd.lease.v1.manager\"..." type=io.containerd.lease.v1
+time="2024-05-08T15:20:33.429694209+08:00" level=info msg="loading plugin \"io.containerd.nri.v1.nri\"..." type=io.containerd.nri.v1
+time="2024-05-08T15:20:33.429748016+08:00" level=info msg="NRI interface is disabled by configuration."
+time="2024-05-08T15:20:33.429765235+08:00" level=info msg="loading plugin \"io.containerd.runtime.v2.task\"..." type=io.containerd.runtime.v2
+time="2024-05-08T15:20:33.429895341+08:00" level=info msg="loading plugin \"io.containerd.runtime.v2.shim\"..." type=io.containerd.runtime.v2
+time="2024-05-08T15:20:33.429917395+08:00" level=info msg="loading plugin \"io.containerd.sandbox.store.v1.local\"..." type=io.containerd.sandbox.store.v1
+time="2024-05-08T15:20:33.429933850+08:00" level=info msg="loading plugin \"io.containerd.sandbox.controller.v1.local\"..." type=io.containerd.sandbox.controller.v1
+time="2024-05-08T15:20:33.429950279+08:00" level=info msg="loading plugin \"io.containerd.streaming.v1.manager\"..." type=io.containerd.streaming.v1
+time="2024-05-08T15:20:33.429973530+08:00" level=info msg="loading plugin \"io.containerd.service.v1.introspection-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.429998903+08:00" level=info msg="loading plugin \"io.containerd.service.v1.containers-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.430015606+08:00" level=info msg="loading plugin \"io.containerd.service.v1.content-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.430031253+08:00" level=info msg="loading plugin \"io.containerd.service.v1.diff-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.430047280+08:00" level=info msg="loading plugin \"io.containerd.service.v1.images-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.430067008+08:00" level=info msg="loading plugin \"io.containerd.service.v1.namespaces-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.430083018+08:00" level=info msg="loading plugin \"io.containerd.service.v1.snapshots-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.430098382+08:00" level=info msg="loading plugin \"io.containerd.runtime.v1.linux\"..." type=io.containerd.runtime.v1
+time="2024-05-08T15:20:33.430188521+08:00" level=info msg="loading plugin \"io.containerd.monitor.v1.cgroups\"..." type=io.containerd.monitor.v1
+time="2024-05-08T15:20:33.430543724+08:00" level=info msg="loading plugin \"io.containerd.service.v1.tasks-service\"..." type=io.containerd.service.v1
+time="2024-05-08T15:20:33.430586014+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.introspection\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430604404+08:00" level=info msg="loading plugin \"io.containerd.transfer.v1.local\"..." type=io.containerd.transfer.v1
+time="2024-05-08T15:20:33.430644272+08:00" level=info msg="loading plugin \"io.containerd.internal.v1.restart\"..." type=io.containerd.internal.v1
+time="2024-05-08T15:20:33.430735152+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.containers\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430751762+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.content\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430773611+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.diff\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430790017+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.events\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430805736+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.healthcheck\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430824727+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.images\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430842233+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.leases\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430857496+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.namespaces\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.430873782+08:00" level=info msg="loading plugin \"io.containerd.internal.v1.opt\"..." type=io.containerd.internal.v1
+time="2024-05-08T15:20:33.431047486+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.sandbox-controllers\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.431072414+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.sandboxes\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.431088074+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.snapshots\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.431105893+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.streaming\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.431129044+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.tasks\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.431146685+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.transfer\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.431161845+08:00" level=info msg="loading plugin \"io.containerd.grpc.v1.version\"..." type=io.containerd.grpc.v1
+time="2024-05-08T15:20:33.431176620+08:00" level=info msg="loading plugin \"io.containerd.tracing.processor.v1.otlp\"..." type=io.containerd.tracing.processor.v1
+time="2024-05-08T15:20:33.431199834+08:00" level=info msg="skip loading plugin \"io.containerd.tracing.processor.v1.otlp\"..." error="no OpenTelemetry endpoint: skip plugin" type=io.containerd.tracing.processor.v1
+time="2024-05-08T15:20:33.431219114+08:00" level=info msg="loading plugin \"io.containerd.internal.v1.tracing\"..." type=io.containerd.internal.v1
+time="2024-05-08T15:20:33.431233242+08:00" level=info msg="skipping tracing processor initialization (no tracing plugin)" error="no OpenTelemetry endpoint: skip plugin"
+time="2024-05-08T15:20:33.431657248+08:00" level=info msg=serving... address=/var/tmp/xdg_runtime_dir_lihaoyu/docker/containerd/containerd-debug.sock
+time="2024-05-08T15:20:33.431702077+08:00" level=info msg=serving... address=/var/tmp/xdg_runtime_dir_lihaoyu/docker/containerd/containerd.sock.ttrpc
+time="2024-05-08T15:20:33.431738135+08:00" level=info msg=serving... address=/var/tmp/xdg_runtime_dir_lihaoyu/docker/containerd/containerd.sock
+time="2024-05-08T15:20:33.431761719+08:00" level=info msg="containerd successfully booted in 0.039044s"
+time="2024-05-08T15:20:33.443795515+08:00" level=info msg="[graphdriver] trying configured driver: overlay2"
+time="2024-05-08T15:20:33.465940497+08:00" level=info msg="Loading containers: start."
+time="2024-05-08T15:20:33.466317716+08:00" level=info msg="skipping firewalld management for rootless mode"
+time="2024-05-08T15:20:33.563210447+08:00" level=info msg="Loading containers: done."
+time="2024-05-08T15:20:33.633086014+08:00" level=warning msg="Not using native diff for overlay2, this may cause degraded performance for building images: running in a user namespace" storage-driver=overlay2
+time="2024-05-08T15:20:33.633255177+08:00" level=warning msg="WARNING: Running in rootless-mode without cgroups. To enable cgroups in rootless-mode, you need to boot the system in cgroup v2 mode."
+time="2024-05-08T15:20:33.633296140+08:00" level=info msg="Docker daemon" commit=a61e2b4 graphdriver=overlay2 version=24.0.5
+time="2024-05-08T15:20:33.633428425+08:00" level=info msg="Daemon has completed initialization"
+time="2024-05-08T15:20:33.668672143+08:00" level=info msg="API listen on /var/tmp/xdg_runtime_dir_lihaoyu/docker.sock"
+Unable to find image 'nvidia/cuda:11.6.2-base-ubuntu20.04' locally
+11.6.2-base-ubuntu20.04: Pulling from nvidia/cuda
+96d54c3075c9: Pulling fs layer
+a3d20efe6db8: Pulling fs layer
+bfdf8ce43b67: Pulling fs layer
+ad14f66bfcf9: Pulling fs layer
+1056ff735c59: Pulling fs layer
+1056ff735c59: Waiting
+ad14f66bfcf9: Waiting
+a3d20efe6db8: Verifying Checksum
+a3d20efe6db8: Download complete
+bfdf8ce43b67: Verifying Checksum
+bfdf8ce43b67: Download complete
+96d54c3075c9: Verifying Checksum
+96d54c3075c9: Download complete
+ad14f66bfcf9: Verifying Checksum
+ad14f66bfcf9: Download complete
+1056ff735c59: Verifying Checksum
+1056ff735c59: Download complete
+96d54c3075c9: Pull complete
+a3d20efe6db8: Pull complete
+bfdf8ce43b67: Pull complete
+ad14f66bfcf9: Pull complete
+1056ff735c59: Pull complete
+Digest: sha256:a0dd581afdbf82ea9887dd077aebf9723aba58b51ae89acb4c58b8705b74179b
+Status: Downloaded newer image for nvidia/cuda:11.6.2-base-ubuntu20.04
+6c684d341eb45f812bba6be654fc4b148590bb2b14cae6b77c58e8cdaa89e4da
+time="2024-05-08T15:20:41.520910758+08:00" level=info msg="loading plugin \"io.containerd.internal.v1.shutdown\"..." runtime=io.containerd.runc.v2 type=io.containerd.internal.v1
+time="2024-05-08T15:20:41.521047224+08:00" level=info msg="loading plugin \"io.containerd.ttrpc.v1.pause\"..." runtime=io.containerd.runc.v2 type=io.containerd.ttrpc.v1
+time="2024-05-08T15:20:41.521089586+08:00" level=info msg="loading plugin \"io.containerd.event.v1.publisher\"..." runtime=io.containerd.runc.v2 type=io.containerd.event.v1
+time="2024-05-08T15:20:41.521123834+08:00" level=info msg="loading plugin \"io.containerd.ttrpc.v1.task\"..." runtime=io.containerd.runc.v2 type=io.containerd.ttrpc.v1
+the input device is not a TTY

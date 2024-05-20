@@ -1,0 +1,3 @@
+ The correct line at the INFILL location is:
+
+return (a <= b) ? a : (Float.isNaN(a + b) ? Float.NaN : a);

@@ -1,0 +1,1 @@
+assertEquals ("foo bar baz", doc.text());

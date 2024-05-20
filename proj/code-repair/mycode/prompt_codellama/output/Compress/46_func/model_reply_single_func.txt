@@ -1,0 +1,12 @@
+ The bug in the code is that the `unixTimeToZipLong` function is not handling the case where the input `l` is greater than or equal to 2^32. The function is returning a `ZipLong` object with the value of `l`, which is not correct.
+
+Here is the corrected version of the function:
+```
+private static ZipLong unixTimeToZipLong(long l) {
+    if (l >= 0x100000000L) {
+        throw new IllegalArgumentException("X5455 timestamps must fit in a signed 32 bit integer: " + l);
+    }
+    return new ZipLong(l);
+}
+```
+In this version, the function checks if `l` is greater than or equal to 2^32, and if so, it throws an `IllegalArgumentException`. If `l` is less than 2^32, the function returns a `ZipLong` object with the value of `l`.

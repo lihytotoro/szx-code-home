@@ -1,0 +1,9 @@
+prefix:
+private boolean hasExceptionHandler(Node cfgNode) {
+
+buggy_hunk:
+
+
+suffix:
+  return false;
+}

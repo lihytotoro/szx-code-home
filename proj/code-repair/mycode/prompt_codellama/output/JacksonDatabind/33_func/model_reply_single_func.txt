@@ -1,0 +1,26 @@
+ The bug in the code is that it does not handle the case where the `JsonSerialize.class`, `JsonView.class`, or `JsonRawValue.class` annotations are present on a property that is not a field. In this case, the `findNameForSerialization` method returns `null`, which causes the serialization process to fail.
+
+To fix the bug, we need to add a check to see if the property is a field before trying to find the name. If the property is not a field, we should return an empty string instead of `null`. Here is the corrected version of the `findNameForSerialization` method:
+```
+public PropertyName findNameForSerialization(Annotated a)
+{
+    String name = null;
+
+    JsonGetter jg = _findAnnotation(a, JsonGetter.class);
+    if (jg != null) {
+        name = jg.value();
+    } else {
+        JsonProperty pann = _findAnnotation(a, JsonProperty.class);
+        if (pann != null) {
+            name = pann.value();
+        } else if (a.isField()) {
+            // If the property is not a field, return an empty string
+            name = "";
+        } else {
+            return null;
+        }
+    }
+    return PropertyName.construct(name);
+}
+```
+With this fix, the serialization process should succeed even if the `JsonSerialize.class`, `JsonView.class`, or `JsonRawValue.class` annotations are present on a property that is not a field.

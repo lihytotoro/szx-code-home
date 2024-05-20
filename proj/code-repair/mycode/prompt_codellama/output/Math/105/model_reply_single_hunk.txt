@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return sumYY - sumXY * sumXY / sumXX;
+```
+This is the original buggy hunk that was removed, and it contains a division by zero error. The error is caused by the fact that `sumXX` is equal to zero, which means that `sumXY * sumXY / sumXX` is undefined. The correct implementation should handle this case by returning a different value, such as `Double.NaN` or `Double.POSITIVE_INFINITY`.

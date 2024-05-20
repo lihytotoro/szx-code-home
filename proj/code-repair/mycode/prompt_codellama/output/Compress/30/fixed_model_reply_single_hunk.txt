@@ -1,0 +1,1 @@
+int c = (destOffs == offs) ? -1 : (destOffs - offs);

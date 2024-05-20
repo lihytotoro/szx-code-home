@@ -1,0 +1,68 @@
+ The buggy function is:
+```
+private void removeUnreferencedFunctionArgs(Scope fnScope) {
+  Node function = fnScope.getRootNode();
+
+  Preconditions.checkState(function.isFunction());
+  if (NodeUtil.isGetOrSetKey(function.getParent())) {
+    // The parameters object literal setters can not be removed.
+    return;
+  }
+
+  Node argList = getFunctionArgList(function);
+  boolean modifyCallers = modifyCallSites
+      && callSiteOptimizer.canModifyCallers(function);
+  if (!modifyCallers) {
+    // Strip unreferenced args off the end of the function declaration.
+    Node lastArg;
+    while ((lastArg = argList.getLastChild()) != null) {
+      Var var = fnScope.getVar(lastArg.getString());
+      if (!referenced.contains(var)) {
+        argList.removeChild(lastArg);
+        compiler.reportCodeChange();
+      } else {
+        break;
+      }
+    }
+  } else {
+    callSiteOptimizer.optimize(fnScope, referenced);
+  }
+}
+```
+The bug is in the line `while ((lastArg = argList.getLastChild()) != null) {`. The function is removing unreferenced function arguments, but it is not checking if the argument is actually used in the function body. If the argument is not used in the function body, it will be removed, even if it is referenced in the function declaration.
+
+To fix the bug, the function should check if the argument is used in the function body before removing it. Here is the corrected function:
+```
+private void removeUnreferencedFunctionArgs(Scope fnScope) {
+  Node function = fnScope.getRootNode();
+
+  Preconditions.checkState(function.isFunction());
+  if (NodeUtil.isGetOrSetKey(function.getParent())) {
+    // The parameters object literal setters can not be removed.
+    return;
+  }
+
+  Node argList = getFunctionArgList(function);
+  boolean modifyCallers = modifyCallSites
+      && callSiteOptimizer.canModifyCallers(function);
+  if (!modifyCallers) {
+    // Strip unreferenced args off the end of the function declaration.
+    Node lastArg;
+    while ((lastArg = argList.getLastChild()) != null) {
+      Var var = fnScope.getVar(lastArg.getString());
+      if (!referenced.contains(var)) {
+        // Check if the argument is used in the function body.
+        if (!NodeUtil.isUsedInFunctionBody(function, lastArg)) {
+          argList.removeChild(lastArg);
+          compiler.reportCodeChange();
+        } else {
+          break;
+        }
+      }
+    }
+  } else {
+    callSiteOptimizer.optimize(fnScope, referenced);
+  }
+}
+```
+This corrected function will only remove unreferenced function arguments that are not used in the function body.

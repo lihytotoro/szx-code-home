@@ -1,0 +1,12 @@
+prefix:
+public Complex add(Complex rhs)
+    throws NullArgumentException {
+    MathUtils.checkNotNull(rhs);
+
+buggy_hunk:
+
+
+suffix:
+    return createComplex(real + rhs.getReal(),
+        imaginary + rhs.getImaginary());
+}

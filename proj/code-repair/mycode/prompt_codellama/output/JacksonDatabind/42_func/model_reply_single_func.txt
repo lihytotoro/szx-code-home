@@ -1,0 +1,24 @@
+ The buggy function is:
+```
+protected Object _deserializeFromEmptyString() throws IOException {
+    // As per [databind#398], URI requires special handling
+    if (_kind == STD_URI) {
+        return URI.create("");
+    }
+    // As per [databind#1123], Locale too
+    return super._deserializeFromEmptyString();
+}
+```
+The bug is that the function is returning `null` for the `Locale` type, instead of `Locale.ROOT`.
+
+The corrected function should be:
+```
+protected Object _deserializeFromEmptyString() throws IOException {
+    // As per [databind#398], URI requires special handling
+    if (_kind == STD_URI) {
+        return URI.create("");
+    }
+    // As per [databind#1123], Locale too
+    return Locale.ROOT;
+}
+```

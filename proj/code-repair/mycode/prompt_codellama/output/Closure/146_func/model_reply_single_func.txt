@@ -1,0 +1,50 @@
+ The buggy function is:
+```
+public TypePair getTypesUnderInequality(JSType that) {
+  // unions types
+  if (that instanceof UnionType) {
+    TypePair p = that.getTypesUnderInequality(this);
+    return new TypePair(p.typeB, p.typeA);
+  }
+
+  // other types
+  switch (this.testForEquality(that)) {
+    case TRUE:
+      return new TypePair(null, null);
+
+    case FALSE:
+    case UNKNOWN:
+      return new TypePair(this, that);
+  }
+
+  // switch case is exhaustive
+  throw new IllegalStateException();
+}
+```
+The bug is in the `switch` statement. The `UNKNOWN` case is not handled properly. The function should return `new TypePair(this, that)` in the `UNKNOWN` case, but it returns `null` instead.
+
+The corrected function is:
+```
+public TypePair getTypesUnderInequality(JSType that) {
+  // unions types
+  if (that instanceof UnionType) {
+    TypePair p = that.getTypesUnderInequality(this);
+    return new TypePair(p.typeB, p.typeA);
+  }
+
+  // other types
+  switch (this.testForEquality(that)) {
+    case TRUE:
+      return new TypePair(null, null);
+
+    case FALSE:
+      return new TypePair(this, that);
+
+    case UNKNOWN:
+      return new TypePair(this, that);
+  }
+
+  // switch case is exhaustive
+  throw new IllegalStateException();
+}
+```

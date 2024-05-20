@@ -1,0 +1,18 @@
+ The bug in the code is that it is trying to store elements of type `Long` into an array of type `Integer`. This is not allowed, and results in a `java.lang.ArrayStoreException`.
+
+The correct version of the function should be:
+```
+public static <T> T[] addAll(T[] array1, T... array2) {
+    if (array1 == null) {
+        return clone(array2);
+    } else if (array2 == null) {
+        return clone(array1);
+    }
+    final Class<?> type1 = array1.getClass().getComponentType();
+    T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);
+    System.arraycopy(array1, 0, joinedArray, 0, array1.length);
+    System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
+    return joinedArray;
+}
+```
+This function checks the types of the arrays before trying to store elements into the joined array, and makes sure that the types are compatible.

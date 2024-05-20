@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+return str.substring(2, str.length());
+
+This line is causing the NullPointerException because the method is being called with a null argument, and the method is trying to call substring on a null object.

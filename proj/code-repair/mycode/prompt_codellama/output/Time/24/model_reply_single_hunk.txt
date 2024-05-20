@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+millis = savedFields[i].set(millis, resetFields);
+```
+This line is inside the `for` loop and is responsible for setting the value of `millis` based on the current field being parsed. The bug in the original code was that it was not correctly handling the case where the first field being parsed was a month or day field, and the base year was not being updated correctly.

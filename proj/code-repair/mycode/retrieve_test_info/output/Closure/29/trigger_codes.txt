@@ -1,0 +1,2 @@
+testLocal("var x = {}; var b = f(); x = {a:a, b:b}; if(x.a) g(x.b) + x.c",
+"var x = {}; var b = f(); x = {a:a, b:b}; if(x.a) g(x.b) + x.c");

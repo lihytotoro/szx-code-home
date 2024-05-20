@@ -1,0 +1,6 @@
+junit.framework.AssertionFailedError: 
+Wanted but not invoked:
+invocationListener.reportInvocation(<any>);
+-> at org.mockitousage.bugs.ListenersLostOnResetMockTest.listener(ListenersLostOnResetMockTest.java:23)
+Actually, there were zero interactions with this mock.
+

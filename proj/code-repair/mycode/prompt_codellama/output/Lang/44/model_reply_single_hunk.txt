@@ -1,0 +1,10 @@
+ ```
+if (val.startsWith("--")) {
+    // this is protection for poorness in java.lang.BigDecimal.
+    // it accepts this as a legal value, but it does not appear 
+    // to be in specification of class. OS X Java parses it to 
+    // a wrong value.
+    return null;
+}
+```
+The buggy hunk was removed because it was causing a `StringIndexOutOfBoundsException` when the input string starts with "--". This is because the code was trying to access the first character of the string, but the string was empty. The fix is to return `null` instead of trying to access the first character of the empty string.

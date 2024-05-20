@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+if (x < 0 && prev == '-') {
+```
+The buggy hunk was checking if the previous character was a hyphen, but it was not checking if the previous character was a hyphen and the current character was a space. This caused the test to fail.

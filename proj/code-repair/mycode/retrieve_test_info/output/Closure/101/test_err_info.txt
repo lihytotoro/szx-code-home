@@ -1,0 +1,31 @@
+junit.framework.AssertionFailedError: 
+Expected: var goog={};goog.provide("goog.dom")
+Result: var goog={};goog.dom={}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [source name: null] [encoded source length: 0] [base line: -1] [end line: -1] 1 [sourcename: input0] [synthetic: 1]
+        VAR 1
+            NAME goog 1
+                OBJECTLIT 1
+        EXPR_RESULT 1
+            CALL 1
+                GETPROP 1
+                    NAME goog 1
+                    STRING provide 1
+                STRING goog.dom 1
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [source name: null] [encoded source length: 0] [base line: -1] [end line: -1] 1 [sourcename: i0] [synthetic: 1]
+        VAR 1
+            NAME goog 1
+                OBJECTLIT 1
+        EXPR_RESULT 1 [is_namespace: 1]
+            ASSIGN 1
+                GETPROP 1 [originalname: goog.dom]
+                    NAME goog 1
+                    STRING dom 1
+                OBJECTLIT 1
+

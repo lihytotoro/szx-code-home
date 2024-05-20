@@ -1,0 +1,20 @@
+ The buggy function is:
+```
+private boolean hasExceptionHandler(Node cfgNode) {
+  return false;
+}
+```
+The correct version of the function should return `true` if the given `cfgNode` has an exception handler, and `false` otherwise.
+
+Here's the corrected version of the function:
+```
+private boolean hasExceptionHandler(Node cfgNode) {
+  for (Node child : cfgNode.getChildren()) {
+    if (child.getType() == NodeType.EXCEPTION_HANDLER) {
+      return true;
+    }
+  }
+  return false;
+}
+```
+This function iterates over the children of the given `cfgNode` and checks if any of them are of type `EXCEPTION_HANDLER`. If it finds one, it returns `true`, otherwise it returns `false`.

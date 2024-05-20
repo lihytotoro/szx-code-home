@@ -1,0 +1,8 @@
+prefix:
+public String getValue() {
+
+buggy_hunk:
+    return val;
+
+suffix:
+}

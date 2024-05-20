@@ -1,0 +1,63 @@
+ The buggy function is:
+```
+public boolean useForType(JavaType t)
+{
+    switch (_appliesFor) {
+    case NON_CONCRETE_AND_ARRAYS:
+        while (t.isArrayType()) {
+            t = t.getContentType();
+        }
+        // fall through
+    case OBJECT_AND_NON_CONCRETE:
+          return t.isJavaLangObject() || 
+        return (t.getRawClass() == Object.class)
+                || (!t.isConcrete()
+                        // [databind#88] Should not apply to JSON tree models:
+                || TreeNode.class.isAssignableFrom(t.getRawClass()));
+
+    case NON_FINAL:
+        while (t.isArrayType()) {
+            t = t.getContentType();
+        }
+        // [Issue#88] Should not apply to JSON tree models:
+        return !t.isFinal() && !TreeNode.class.isAssignableFrom(t.getRawClass());
+    default:
+    //case JAVA_LANG_OBJECT:
+          return t.isJavaLangObject();
+        return (t.getRawClass() == Object.class);
+    }
+}
+```
+The bug is in the `case NON_CONCRETE_AND_ARRAYS` block, where the `t` variable is not updated after the `while` loop. This means that the `t` variable will still refer to the original array type, and not the content type of the array, which is what the function is supposed to do.
+
+The corrected function is:
+```
+public boolean useForType(JavaType t)
+{
+    switch (_appliesFor) {
+    case NON_CONCRETE_AND_ARRAYS:
+        while (t.isArrayType()) {
+            t = t.getContentType();
+        }
+        // fall through
+    case OBJECT_AND_NON_CONCRETE:
+          return t.isJavaLangObject() || 
+        return (t.getRawClass() == Object.class)
+                || (!t.isConcrete()
+                        // [databind#88] Should not apply to JSON tree models:
+                || TreeNode.class.isAssignableFrom(t.getRawClass()));
+
+    case NON_FINAL:
+        while (t.isArrayType()) {
+            t = t.getContentType();
+        }
+        // [Issue#88] Should not apply to JSON tree models:
+        return !t.isFinal() && !TreeNode.class.isAssignableFrom(t.getRawClass());
+    default:
+    //case JAVA_LANG_OBJECT:
+          return t.isJavaLangObject();
+        return (t.getRawClass() == Object.class);
+    }
+}
+```
+In this corrected version, the `t` variable is updated after the `while` loop in the `case NON_CONCRETE_AND_ARRAYS` block, so that it refers to the content type of the array.

@@ -1,0 +1,1 @@
+   if (lower == -1) {        lower = 0;    }

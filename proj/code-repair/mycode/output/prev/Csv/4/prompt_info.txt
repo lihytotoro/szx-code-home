@@ -1,0 +1,8 @@
+prefix:
+public Map<String, Integer> getHeaderMap() {
+
+buggy_line:
+    return new LinkedHashMap<String, Integer>(this.headerMap);
+
+suffix:
+}

@@ -1,0 +1,13 @@
+ ```
+if (endIndex < 0) {
+    endIndex = -(endIndex + 1);
+    endIndex = endIndex - 1;
+}
+```
+The bug was caused by the incorrect order of operations in the line. The correct line should be:
+```
+if (endIndex < 0) {
+    endIndex = -(endIndex + 1) - 1;
+}
+```
+This will fix the bug and make the code work as expected.

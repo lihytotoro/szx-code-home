@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (u * v == 0) {
+```
+This line is the culprit because it checks if the product of `u` and `v` is equal to 0, which is not the correct condition to check for the GCD. The correct condition is to check if one of the numbers is 0, which is handled in the `if` statement that follows.

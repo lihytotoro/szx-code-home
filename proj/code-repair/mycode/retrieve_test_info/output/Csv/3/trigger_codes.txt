@@ -1,0 +1,1 @@
+assertThat(lexer.nextToken(new Token()), hasContent("character\\NEscaped"));

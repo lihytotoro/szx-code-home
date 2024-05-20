@@ -1,0 +1,13 @@
+ The bug is caused by the fact that the `ChartFactory.createScatterPlot()` method returns a `JFreeChart` object, but the `getDataRange()` method is expecting an `XYDataset` object.
+
+To fix the bug, you can modify the `getDataRange()` method to accept a `JFreeChart` object instead of an `XYDataset` object. Here's the modified code:
+```java
+public Range getDataRange(JFreeChart chart) {
+    // ...
+}
+```
+Then, you can call the `getDataRange()` method with a `JFreeChart` object instead of an `XYDataset` object:
+```java
+Range range = getDataRange(chart);
+```
+This should fix the bug and allow the test to pass.

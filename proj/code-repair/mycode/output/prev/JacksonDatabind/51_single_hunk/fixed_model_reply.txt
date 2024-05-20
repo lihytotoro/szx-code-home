@@ -1,0 +1,1 @@
+type = ctxt.getTypeFactory().constructSpecializedType(_baseType, type.getRawClass());

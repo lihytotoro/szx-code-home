@@ -1,0 +1,3 @@
+if (inputSigma[i] > boundaries[1][i] - boundaries[0][i]) {
+    throw new OutOfRangeException(inputSigma[i], 0, boundaries[1][i] - boundaries[0][i]);
+}

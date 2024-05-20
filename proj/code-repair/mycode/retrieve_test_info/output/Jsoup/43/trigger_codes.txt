@@ -1,0 +1,1 @@
+assertTrue(1 == ps.get(1).elementSiblingIndex());

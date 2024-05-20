@@ -1,0 +1,43 @@
+ The buggy function is:
+```
+private static String extractClassNameIfGoog(Node node, Node parent,
+    String functionName){
+  String className = null;
+  if (NodeUtil.isExprCall(parent)) {
+    Node callee = node.getFirstChild();
+    if (callee != null && callee.getType() == Token.GETPROP) {
+      String qualifiedName = callee.getQualifiedName();
+      if (functionName.equals(qualifiedName)) {
+        Node target = callee.getNext();
+        if (target != null) {
+          className = target.getString();
+        }
+      }
+    }
+  }
+  return className;
+}
+```
+The bug is in the line `className = target.getString();`, which should be `className = target.getQualifiedName();`.
+
+The corrected function is:
+```
+private static String extractClassNameIfGoog(Node node, Node parent,
+    String functionName){
+  String className = null;
+  if (NodeUtil.isExprCall(parent)) {
+    Node callee = node.getFirstChild();
+    if (callee != null && callee.getType() == Token.GETPROP) {
+      String qualifiedName = callee.getQualifiedName();
+      if (functionName.equals(qualifiedName)) {
+        Node target = callee.getNext();
+        if (target != null) {
+          className = target.getQualifiedName();
+        }
+      }
+    }
+  }
+  return className;
+}
+```
+This function correctly returns the qualified name of the class being required, rather than just the string value of the `target` node.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+int g = (int) ((value - this.lowerBound) / (this.upperBound - this.lowerBound) * 255.0);
+
+This line is the corrected version of the original buggy hunk, which was removed by the INFILL location.

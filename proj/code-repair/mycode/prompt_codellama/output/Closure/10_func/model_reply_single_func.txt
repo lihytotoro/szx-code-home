@@ -1,0 +1,23 @@
+ The buggy function is:
+```
+static boolean mayBeString(Node n, boolean recurse) {
+  if (recurse) {
+    return allResultsMatch(n, MAY_BE_STRING_PREDICATE);
+  } else {
+    return mayBeStringHelper(n);
+  }
+}
+```
+The bug is in the `else` block, where the function calls `mayBeStringHelper(n)` instead of `mayBeString(n, true)`. This causes the function to always return `false` when `recurse` is `false`, even if the node is actually a string.
+
+The corrected function should be:
+```
+static boolean mayBeString(Node n, boolean recurse) {
+  if (recurse) {
+    return allResultsMatch(n, MAY_BE_STRING_PREDICATE);
+  } else {
+    return mayBeString(n, true);
+  }
+}
+```
+This ensures that the function recursively checks the node and its children for string-ness, even if `recurse` is `false`.

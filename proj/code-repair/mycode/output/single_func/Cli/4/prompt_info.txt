@@ -1,0 +1,19 @@
+prefix:
+private void checkRequiredOptions()
+    throws MissingOptionException
+{
+    if (requiredOptions.size() > 0)
+    {
+        Iterator iter = requiredOptions.iterator();
+
+buggy_hunk:
+        StringBuffer buff = new StringBuffer();
+
+suffix:
+        while (iter.hasNext())
+        {
+            buff.append(iter.next());
+        }
+        throw new MissingOptionException(buff.toString());
+    }
+}

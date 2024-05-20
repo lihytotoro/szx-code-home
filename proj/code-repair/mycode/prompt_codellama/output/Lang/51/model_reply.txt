@@ -1,0 +1,17 @@
+ The correct line at the INFILL location is:
+```
+case 3: {
+    char ch = str.charAt(0);
+    if (ch == 'y') {
+        return 
+            (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
+            (str.charAt(2) == 's' || str.charAt(2) == 'S');
+    }
+    if (ch == 'Y') {
+        return 
+            (str.charAt(1) == 'E' || str.charAt(1) == 'e') &&
+            (str.charAt(2) == 'S' || str.charAt(2) == 's');
+    }
+}
+```
+The bug was caused by the fact that the code was checking the length of the string and then accessing characters at indices 1 and 2, without first checking that the string was long enough to support those indices. The fix is to add a check to ensure that the string is at least 3 characters long before accessing characters at indices 1 and 2.

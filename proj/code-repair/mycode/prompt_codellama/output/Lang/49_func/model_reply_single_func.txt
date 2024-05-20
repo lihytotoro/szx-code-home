@@ -1,0 +1,25 @@
+ The buggy function is:
+```
+public Fraction reduce() {
+    int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);
+    if (gcd == 1) {
+        return this;
+    }
+    return Fraction.getFraction(numerator / gcd, denominator / gcd);
+}
+```
+The bug is in the line `return Fraction.getFraction(numerator / gcd, denominator / gcd);`. The function is returning a new `Fraction` object with the numerator and denominator reduced, but it is not updating the `this` object. Therefore, the `this` object is still holding the original numerator and denominator, and the test is failing.
+
+The corrected version of the function should be:
+```
+public Fraction reduce() {
+    int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);
+    if (gcd == 1) {
+        return this;
+    }
+    numerator /= gcd;
+    denominator /= gcd;
+    return this;
+}
+```
+This version of the function updates the `this` object with the reduced numerator and denominator, and returns the updated `this` object.

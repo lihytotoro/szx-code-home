@@ -1,0 +1,12 @@
+if (start == 0 && end == 0) {
+    if (chars != null) {
+        end = chars.length;
+    } else {
+        if (!letters && !numbers) {
+            end = Integer.MAX_VALUE;
+        } else {
+            end = 'z' + 1;
+            start = ' ';
+        }
+    }
+}

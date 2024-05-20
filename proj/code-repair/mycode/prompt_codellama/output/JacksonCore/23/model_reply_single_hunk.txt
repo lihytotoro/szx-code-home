@@ -1,0 +1,6 @@
+ ```
+public DefaultPrettyPrinter createInstance() {
+    return new DefaultPrettyPrinter(this);
+}
+```
+The buggy hunk is the `return new DefaultPrettyPrinter(this);` line, which should be `return new DefaultPrettyPrinter();`. The `this` keyword refers to the current instance of the `DefaultPrettyPrinter` class, but in this case, it is not necessary to pass the current instance to the constructor.

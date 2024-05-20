@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    return "";
+
+This is the corrected version of the method that fixes the bug and returns an empty string instead of null.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+formatLongOctalOrBinaryBytes(value, buf, offset, length);
+```
+This is the corrected version of the method that fixes the bug and allows it to pass the test.

@@ -1,0 +1,12 @@
+ The correct line at the INFILL location is:
+```
+if (currentOption.hasArg() && (token.length() != (i + 1)))
+{
+    tokens.add(token.substring(i + 1));
+
+    break;
+}
+```
+This line is responsible for handling the case where the current option has an argument and the token is not the last token in the string. In this case, the method should add the remaining part of the token as an argument to the current option, and then break out of the loop.
+
+The buggy hunk was removed because it was causing the method to incorrectly handle the case where the current option has an argument and the token is the last token in the string. In this case, the method was adding the entire token as an argument to the current option, which was incorrect. The corrected line fixes this issue by only adding the remaining part of the token as an argument if the token is not the last token in the string.

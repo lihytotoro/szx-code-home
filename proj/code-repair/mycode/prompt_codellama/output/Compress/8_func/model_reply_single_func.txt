@@ -1,0 +1,47 @@
+ The bug in the code is that it does not check if the input buffer is at least 2 bytes long before attempting to parse the octal value. This can cause the code to throw an `IllegalArgumentException` when the input buffer is too short, which is not what the function is supposed to do.
+
+Here is the corrected version of the function:
+```
+public static long parseOctal(final byte[] buffer, final int offset, final int length) {
+    if (length < 2) {
+        throw new IllegalArgumentException("Input buffer must be at least 2 bytes long");
+    }
+
+    long result = 0;
+    boolean stillPadding = true;
+    int end = offset + length;
+    int start = offset;
+
+    for (int i = start; i < end; i++) {
+        final byte currentByte = buffer[i];
+        if (currentByte == 0) {
+            break;
+        }
+
+        // Skip leading spaces
+        if (currentByte == (byte) ' ' || currentByte == '0') {
+            if (stillPadding) {
+                continue;
+            }
+            if (currentByte == (byte) ' ') {
+                break;
+            }
+        }
+
+        // Must have trailing NUL or space
+        // May have additional NUL or space
+
+        stillPadding = false;
+        // CheckStyle:MagicNumber OFF
+        if (currentByte < '0' || currentByte > '7') {
+            throw new IllegalArgumentException(
+                    exceptionMessage(buffer, offset, length, start, currentByte));
+        }
+        result = (result << 3) + (currentByte - '0'); // convert from ASCII
+        // CheckStyle:MagicNumber ON
+    }
+
+    return result;
+}
+```
+In this version, the function checks if the input buffer is at least 2 bytes long before attempting to parse the octal value. If the buffer is too short, the function throws an `IllegalArgumentException` with a message indicating that the input buffer must be at least 2 bytes long.

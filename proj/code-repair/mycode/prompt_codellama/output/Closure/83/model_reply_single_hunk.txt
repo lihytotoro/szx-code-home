@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+String lowerParam = param.toLowerCase();
+```
+This line is missing in the original code, and it is needed to convert the parameter to lowercase before checking if it is equal to "true" or "false".

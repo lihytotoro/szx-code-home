@@ -1,0 +1,1 @@
+junit.framework.AssertionFailedError: expected:<interface java.lang.CharSequence> but was:<class java.lang.Object>

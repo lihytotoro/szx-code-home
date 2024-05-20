@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+`this.in = new PushbackInputStream(inputStream, buf.capacity());`
+
+This line creates a new `PushbackInputStream` object and assigns it to the `in` field. The `PushbackInputStream` is used to read the data from the input stream, and the `buf.capacity()` method is used to determine the size of the buffer that will be used to store the data.

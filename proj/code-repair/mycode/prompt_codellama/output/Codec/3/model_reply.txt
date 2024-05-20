@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+        } else if (contains(value, index + 1, 4, "IER")) {
+
+This is because the code is checking if the substring "IER" appears at the current index + 1 position in the input string, and if it does, it appends "J" to the result.

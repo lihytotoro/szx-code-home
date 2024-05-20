@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (getName().endsWith("/")) {
+
+This line is checking if the name of the entry ends with a forward slash, which is a common convention used in tar archives to indicate that the entry is a directory. The buggy hunk was checking if the entry was a directory by checking if the link flag was set to `LF_DIR`, but this check was not correct. The correct check is to check if the name ends with a forward slash, as this is the standard convention used in tar archives.

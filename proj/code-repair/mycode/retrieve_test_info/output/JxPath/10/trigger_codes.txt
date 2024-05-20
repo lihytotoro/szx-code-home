@@ -1,0 +1,1 @@
+assertXPathValue(context, "/idonotexist >= 0", Boolean.FALSE, Boolean.class);

@@ -1,0 +1,38 @@
+ The bug in the code is that it is not handling the case where the `node` parameter is an `Element` that is the root element of a document, and it is not returning the correct namespace URI.
+
+Here is the corrected version of the function:
+```
+public static String getNamespaceURI(Node node) {
+    if (node instanceof Document) {
+        node = ((Document) node).getDocumentElement();
+    }
+
+    Element element = (Element) node;
+
+    String uri = element.getNamespaceURI();
+    if (uri == null) {
+        String prefix = getPrefix(node);
+        String qname = prefix == null ? "xmlns" : "xmlns:" + prefix;
+
+        Node aNode = node;
+        while (aNode != null) {
+            if (aNode.getNodeType() == Node.ELEMENT_NODE) {
+                Attr attr = ((Element) aNode).getAttributeNode(qname);
+                if (attr != null) {
+                    return attr.getValue();
+                }
+            }
+            aNode = aNode.getParentNode();
+        }
+        return null;
+    }
+    return uri;
+}
+```
+This version of the function first checks if the `node` parameter is an instance of `Document`. If it is, it gets the root element of the document and uses that as the `node` parameter for the rest of the function. This ensures that the function is handling the case where the `node` parameter is the root element of a document correctly.
+
+The function then uses the `getNamespaceURI()` method of the `Element` class to get the namespace URI of the `node` parameter. If the namespace URI is null, it means that the `node` parameter is not in a namespace, so the function returns null.
+
+If the namespace URI is not null, the function returns the namespace URI.
+
+This corrected version of the function should pass the test you provided.

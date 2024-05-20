@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (c > '9' || c < '0') {
+    return -1;
+}
+```
+This line checks if the character at the current index is a digit (i.e., between '0' and '9'). If it is not a digit, then the function returns -1, indicating that the index is invalid.

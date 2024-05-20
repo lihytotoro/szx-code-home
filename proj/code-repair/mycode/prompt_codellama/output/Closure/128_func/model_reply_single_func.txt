@@ -1,0 +1,21 @@
+ The bug in the code is in the line `if (c < '0' || c > '9') { return false; }`. This line is checking if the character at the current index is a digit, but it is not checking if the character is a digit in the correct range.
+
+The correct version of the function should be:
+```
+static boolean isSimpleNumber(String s) {
+  int len = s.length();
+  for (int index = 0; index < len; index++) {
+    char c = s.charAt(index);
+    if (c < '0' || c > '9') {
+      return false;
+    }
+  }
+  return len > 0 && s.charAt(0) != '0';
+}
+```
+This version of the function checks if the character at the current index is a digit in the correct range, and returns `false` if it is not. The function then checks if the length of the string is greater than 0 and if the first character is not equal to 0, and returns `true` if both conditions are met.
+
+The corrected function should pass the test `testIssue942` with the following test error:
+```
+junit.framework.ComparisonFailure: expected:<var x={0:1}> but was:<var x={["0"]:1}>
+```

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+p.skipChildren();
+```
+This line skips the children of the current token, which in this case is a FIELD_NAME token. The FIELD_NAME token has the name "location", which is not recognized by the deserializer. By skipping the children of this token, the deserializer can continue to the next token and successfully deserialize the rest of the JSON data.

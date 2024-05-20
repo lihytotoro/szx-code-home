@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (name.globalSets == 1 && name.localSets == 0 && name.aliasingGets == 0) {
+```
+This line checks if the name meets the conditions (a) and (c) from the original buggy line, and if it does, it adds all of its children to the worklist.

@@ -1,0 +1,10 @@
+ ```
+cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);
+```
+The buggy line is creating an edge from the `fromNode` to the `finallyNode` without checking if the `finallyNode` is a valid target for the edge. This can cause the control flow analysis to fail and produce incorrect results.
+
+The correct line should be:
+```
+cfa.createEdge(fromNode, Branch.UNCOND, finallyNode, true);
+```
+The `true` argument indicates that the edge should be created even if the `finallyNode` is not a valid target for the edge. This ensures that the control flow analysis produces the correct results.

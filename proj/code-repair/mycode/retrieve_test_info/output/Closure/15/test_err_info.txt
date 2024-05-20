@@ -1,0 +1,57 @@
+junit.framework.AssertionFailedError: 
+Expected: function _func(){var a,b,x=a in b;delete a[b];x}
+Result: function _func(){var a,b,x;delete a[b];a in b}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        FUNCTION _func 1 [source_file: expected0]
+            NAME _func 1 [source_file: expected0]
+            PARAM_LIST 1 [source_file: expected0]
+            BLOCK 1 [source_file: expected0]
+                VAR 1 [source_file: expected0]
+                    NAME a 1 [source_file: expected0]
+                    NAME b 1 [source_file: expected0]
+                    NAME x 1 [source_file: expected0]
+                        IN 1 [source_file: expected0]
+                            NAME a 1 [source_file: expected0]
+                            NAME b 1 [source_file: expected0]
+                EXPR_RESULT 1 [source_file: expected0]
+                    DELPROP 1 [source_file: expected0]
+                        GETELEM 1 [source_file: expected0]
+                            NAME a 1 [source_file: expected0]
+                            NAME b 1 [source_file: expected0]
+                EXPR_RESULT 1 [source_file: expected0]
+                    NAME x 1 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        FUNCTION _func 1 [source_file: testcode]
+            NAME _func 1 [source_file: testcode]
+            PARAM_LIST 1 [source_file: testcode]
+            BLOCK 1 [source_file: testcode]
+                VAR 1 [source_file: testcode]
+                    NAME a 1 [source_file: testcode]
+                    NAME b 1 [source_file: testcode]
+                    NAME x 1 [source_file: testcode]
+                EXPR_RESULT 1 [source_file: testcode]
+                    DELPROP 1 [source_file: testcode]
+                        GETELEM 1 [source_file: testcode]
+                            NAME a 1 [source_file: testcode]
+                            NAME b 1 [source_file: testcode]
+                EXPR_RESULT 1 [source_file: testcode]
+                    IN 1 [source_file: testcode]
+                        NAME a 1 [source_file: testcode]
+                        NAME b 1 [source_file: testcode]
+
+
+Subtree1: NAME x 1 [source_file: expected0]
+    IN 1 [source_file: expected0]
+        NAME a 1 [source_file: expected0]
+        NAME b 1 [source_file: expected0]
+
+
+Subtree2: NAME x 1 [source_file: testcode]
+

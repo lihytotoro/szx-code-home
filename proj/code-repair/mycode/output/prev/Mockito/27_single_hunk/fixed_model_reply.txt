@@ -1,0 +1,1 @@
+((Factory) mock).setCallback(0, newFilter);

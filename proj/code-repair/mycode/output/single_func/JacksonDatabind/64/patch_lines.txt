@@ -1,0 +1,1 @@
+       valueToSuppress = getPropertyDefaultValue(propDef.getName(), am, actualType);        if (_useRealPropertyDefaults) {            if (prov.isEnabled(MapperFeature.CAN_OVERRIDE_ACCESS_MODIFIERS)) {                am.fixAccess(_config.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));            }

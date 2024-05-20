@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (relationship != null && relationship.isSubclass()) {
+
+This line checks if the subclass relationship between the constructor and the class defining the call is a subclass relationship, and if so, it returns false to prevent inlining the subclass definition into the class defining the call.

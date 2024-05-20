@@ -1,0 +1,15 @@
+ The bug is in the line `super.serializeValue(jgen, null);`. The `serializeValue` method is called with a null value, which is not handled correctly.
+
+The correct version of the function should be:
+```
+protected void _serializeXmlNull(JsonGenerator jgen) throws IOException
+{
+    // 14-Nov-2016, tatu: As per [dataformat-xml#213], we may have explicitly
+    //    configured root name...
+    if (jgen instanceof ToXmlGenerator) {
+        _initWithRootName((ToXmlGenerator) jgen, ROOT_NAME_FOR_NULL);
+    }
+    super.serializeValue(jgen, "null");
+}
+```
+In this version, the `serializeValue` method is called with the string "null" instead of a null value. This is because the `serializeValue` method expects a non-null value, and passing a null value will cause the method to fail. By passing the string "null", the method is able to handle the null value correctly.

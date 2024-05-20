@@ -1,0 +1,3 @@
+EnumMap<KeyEnum,String> map = mapper.readValue(
+aposToQuotes("{'REPlaceMENTS':'foobar'}"),
+new TypeReference<EnumMap<KeyEnum,String>>() { });

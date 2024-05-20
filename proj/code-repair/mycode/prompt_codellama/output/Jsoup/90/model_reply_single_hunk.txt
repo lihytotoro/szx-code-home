@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+
+while (i < end) {
+    i++;
+    o = input[i];
+    if ((o & 0xC0) != 0x80) {
+        return false;
+    }
+}

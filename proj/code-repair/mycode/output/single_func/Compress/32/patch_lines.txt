@@ -1,0 +1,1 @@
+           currEntry.setGroupId(Long.parseLong(val));        } else if ("gname".equals(key)){            currEntry.setGroupName(val);        } else if ("uid".equals(key)){            currEntry.setUserId(Long.parseLong(val));

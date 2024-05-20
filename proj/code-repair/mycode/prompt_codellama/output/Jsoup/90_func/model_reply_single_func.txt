@@ -1,0 +1,3 @@
+ The bug in the function is in the line `if (input.length >= 3 && (input[0] & 0xFF) == 0xEF && (input[1] & 0xFF) == 0xBB & (input[2] & 0xFF) == 0xBF)`. The operator `&` has higher precedence than `&&`, so the expression is evaluated as `(input[1] & 0xFF) == 0xBB & (input[2] & 0xFF) == 0xBF)`, which is always true because the result of the bitwise AND operation is always 0 or 1.
+
+To fix the bug, you need to add parentheses around the expression to ensure that it is evaluated correctly. The corrected line should be `if (input.length >= 3 && (input[0] & 0xFF) == 0xEF && (input[1] & 0xFF) == 0xBB && (input[2] & 0xFF) == 0xBF))`.

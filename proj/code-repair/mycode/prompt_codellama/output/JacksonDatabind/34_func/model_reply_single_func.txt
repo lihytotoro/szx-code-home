@@ -1,0 +1,36 @@
+ The buggy function is:
+```
+public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+{
+    if (_isInt) {
+        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);
+    } else {
+        Class<?> h = handledType();
+        if (h == BigDecimal.class) {
+            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);
+        } else {
+            // otherwise bit unclear what to call... but let's try:
+            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);
+        }
+    }
+}
+```
+The bug is in the `else` block, where the `visitFloatFormat` method is called with `JsonParser.NumberType.BIG_INTEGER` instead of `JsonParser.NumberType.BIG_DECIMAL`. This causes the `JsonNumberFormatVisitor` to be created with the wrong number type, which leads to the incorrect output in the test.
+
+The corrected function is:
+```
+public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+{
+    if (_isInt) {
+        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);
+    } else {
+        Class<?> h = handledType();
+        if (h == BigDecimal.class) {
+            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);
+        } else {
+            // otherwise bit unclear what to call... but let's try:
+            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);
+        }
+    }
+}
+```

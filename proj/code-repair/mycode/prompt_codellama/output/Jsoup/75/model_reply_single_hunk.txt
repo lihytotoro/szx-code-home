@@ -1,0 +1,6 @@
+ The correct line at the INFILL location should be:
+```
+if (!(out.syntax() == Document.OutputSettings.Syntax.html
+    && (val == null || val.equals(key) && Attribute.isBooleanAttribute(key)))) {
+```
+This is because the `Attribute.isBooleanAttribute(key)` method checks if the attribute is a boolean attribute, and if it is, it should not be output with a value. The `val` variable is the value of the attribute, and if it is null or an empty string, it should not be output. The `out` variable is the output settings, and the `Document.OutputSettings.Syntax.html` enum value is used to check if the output syntax is HTML.

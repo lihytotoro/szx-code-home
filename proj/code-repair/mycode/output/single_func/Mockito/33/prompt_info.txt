@@ -1,0 +1,11 @@
+prefix:
+public boolean hasSameMethod(Invocation candidate) {        
+    Method m1 = invocation.getMethod();
+    Method m2 = candidate.getMethod();
+
+buggy_hunk:
+    	/* Avoid unnecessary cloning */
+    return m1.equals(m2);
+
+suffix:
+}

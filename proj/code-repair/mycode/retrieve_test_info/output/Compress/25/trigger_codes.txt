@@ -1,0 +1,2 @@
+assertArrayEquals(new byte[] {'d', 'a', 't', 'a', '\n'},
+IOUtils.toByteArray(in));

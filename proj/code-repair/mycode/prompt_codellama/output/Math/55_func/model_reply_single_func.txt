@@ -1,0 +1,9 @@
+ The bug in the code is that it uses the wrong vectors in the cross product computation. Instead of computing the cross product of `v1` and `v2`, it computes the cross product of `v1` and `v3`, where `v3` is the vector obtained by subtracting `rho` times `v2` from `v1`. This is incorrect because `v3` is not necessarily perpendicular to `v2`, and therefore the cross product of `v3` and `v2` may not be the same as the cross product of `v1` and `v2`.
+
+The correct version of the function should be:
+```
+public static Vector3D crossProduct(final Vector3D v1, final Vector3D v2) {
+    return new Vector3D(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x);
+}
+```
+This function computes the cross product of `v1` and `v2` directly, without using the preconditioning step.

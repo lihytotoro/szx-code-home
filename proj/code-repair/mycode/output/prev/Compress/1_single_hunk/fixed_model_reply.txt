@@ -1,0 +1,2 @@
+while ((entry = in.getNextEntry()) != null) {
+File target = new File(dir, entry.getName());

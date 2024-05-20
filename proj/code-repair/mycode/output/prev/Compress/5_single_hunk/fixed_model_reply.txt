@@ -1,0 +1,3 @@
+if (inf.finished()) {
+    return -1;
+}

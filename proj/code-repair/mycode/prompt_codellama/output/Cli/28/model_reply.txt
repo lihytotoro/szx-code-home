@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+if (!("yes".equalsIgnoreCase(value) || "true".equalsIgnoreCase(value) || "1".equalsIgnoreCase(value)))
+
+This is because the buggy line was causing the "e" option to be added to the CommandLine even if its value was not "yes", "true", or "1". The corrected line ensures that the "e" option is only added to the CommandLine if its value is one of the expected values.

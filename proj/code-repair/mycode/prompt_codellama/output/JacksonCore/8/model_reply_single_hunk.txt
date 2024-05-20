@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (_resultString != null) {
+    return (_resultArray = _resultString.toCharArray());
+}
+```
+This line is responsible for creating a new array from the `resultString` if it is not null. The buggy hunk was removed because it was not necessary and it was causing the `NullPointerException` error.

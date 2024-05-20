@@ -1,0 +1,2 @@
+assertFalse(Locale.getDefault() + ": " + j + " " + fdata[j][0] + " " + fdata[j][1], StringUtils
+.containsIgnoreCase(fdata[j][0], fdata[j][1]));

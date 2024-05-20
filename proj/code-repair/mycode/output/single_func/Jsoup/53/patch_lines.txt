@@ -1,0 +1,1 @@
+   do {        if (isEmpty()) break;        Character c = consume();        if (last == 0 || last == ESC) {

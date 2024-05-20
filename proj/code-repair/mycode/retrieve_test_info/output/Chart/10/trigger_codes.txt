@@ -1,0 +1,2 @@
+assertEquals(" title=\"Series &quot;A&quot;, 100.0\" alt=\"\"",
+g.generateToolTipFragment("Series \"A\", 100.0"));

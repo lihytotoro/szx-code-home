@@ -1,0 +1,17 @@
+ The buggy function is:
+```
+public double solve(final UnivariateRealFunction f, double min, double max, double initial)
+    throws MaxIterationsExceededException, FunctionEvaluationException {
+    return solve(min, max);
+}
+```
+The bug is that the function is calling `solve(min, max)` instead of `solve(f, min, max, initial)`. This means that the function is not using the `UnivariateRealFunction` object `f` to evaluate the function, and is instead using the `min` and `max` parameters as the function's domain and range.
+
+The corrected function should be:
+```
+public double solve(final UnivariateRealFunction f, double min, double max, double initial)
+    throws MaxIterationsExceededException, FunctionEvaluationException {
+    return solve(f, min, max, initial);
+}
+```
+This will ensure that the function is using the `UnivariateRealFunction` object `f` to evaluate the function, and will not use the `min` and `max` parameters as the function's domain and range.

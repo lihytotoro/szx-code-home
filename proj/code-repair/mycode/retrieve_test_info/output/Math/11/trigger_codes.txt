@@ -1,0 +1,1 @@
+Assert.assertEquals(uni.density(v), multi.density(new double[] { v }), tol);

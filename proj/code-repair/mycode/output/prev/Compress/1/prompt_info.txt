@@ -1,0 +1,12 @@
+prefix:
+public void close() throws IOException {
+    if (!this.closed) {
+
+buggy_line:
+
+
+suffix:
+        super.close();
+        this.closed = true;
+    }
+}

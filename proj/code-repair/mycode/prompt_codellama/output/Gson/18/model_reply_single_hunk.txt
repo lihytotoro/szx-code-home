@@ -1,0 +1,6 @@
+ The correct line at the INFILL location is:
+```
+return resolve(context, contextRawType,
+    $Gson$Types.getGenericSupertype(context, contextRawType, supertype));
+```
+This line is the one that is causing the ClassCastException, as it is trying to cast a `LinkedTreeMap` to a `SmallClass`, which is not possible. The bug is caused by the fact that the `getGenericSupertype` method is not properly handling wildcards, and is returning the raw type of the supertype instead of the actual type parameter.

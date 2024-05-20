@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+if (x < 0 && prev == '-') {
+```
+This is because the buggy line was checking if the previous character was a hyphen, but it should be checking if the previous character was a space. The space is added by the `add(" ")` method call in the previous line, which is intended to prevent misparsing of the number as a negative number.

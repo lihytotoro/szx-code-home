@@ -1,0 +1,1 @@
+   if (yMin * yMax < 0) {        return solve(f, min, yMin, max, yMax, min, yMin);    }

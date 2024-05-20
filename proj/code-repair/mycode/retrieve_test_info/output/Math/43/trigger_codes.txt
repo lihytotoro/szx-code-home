@@ -1,0 +1,1 @@
+Assert.assertEquals((new Mean()).evaluate(scores),stats.getMean(), 0);

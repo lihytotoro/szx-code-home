@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    final double n1n2prod = n1 * n2;
+
+This line calculates the product of n1 and n2 and assigns it to a double variable named n1n2prod. The buggy line that was removed was trying to multiply two integers and assign the result to a double variable, which is not allowed in Java.

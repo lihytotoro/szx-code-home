@@ -1,0 +1,6 @@
+ ```
+if (str.startsWith("0x") || str.startsWith("-0x")) {
+    return createInteger(str.substring(2), 16);
+}
+```
+This code fixes the bug by removing the protection for poorness in `java.lang.BigDecimal` and instead treating the string as a hexadecimal number. The `createInteger` method is used to create an `Integer` object from the hexadecimal string, and the `substring(2)` method is used to remove the "0x" or "-0x" prefix. The `16` argument specifies that the number should be interpreted as a hexadecimal number.

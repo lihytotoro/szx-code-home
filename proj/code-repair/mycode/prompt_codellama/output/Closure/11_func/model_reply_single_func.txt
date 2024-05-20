@@ -1,0 +1,50 @@
+ The buggy function is:
+```
+private void visitGetProp(NodeTraversal t, Node n, Node parent) {
+  // obj.prop or obj.method()
+  // Lots of types can appear on the left, a call to a void function can
+  // never be on the left. getPropertyType will decide what is acceptable
+  // and what isn't.
+  Node property = n.getLastChild();
+  Node objNode = n.getFirstChild();
+  JSType childType = getJSType(objNode);
+
+  if (childType.isDict()) {
+    report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, "'.'", "dict");
+  } else if (n.getJSType() != null && parent.isAssign()) {
+    return;
+  } else if (validator.expectNotNullOrUndefined(t, n, childType,
+      "No properties on this expression", getNativeType(OBJECT_TYPE))) {
+    checkPropertyAccess(childType, property.getString(), t, n);
+  }
+  ensureTyped(t, n);
+}
+```
+The bug is in the `else if` block, where the function checks if the expression is a null or undefined value. The function assumes that if the expression is a null or undefined value, then it is not a valid property access. However, this is not always the case. For example, in the test case "var x = null; x.prop = 3;", the expression `x` is a null value, but it is still a valid property access.
+
+To fix the bug, the function should check if the expression is a null or undefined value, but only if it is not a property access. The function should also check if the expression is a call to a void function, which is not allowed. Here is the corrected function:
+```
+private void visitGetProp(NodeTraversal t, Node n, Node parent) {
+  // obj.prop or obj.method()
+  // Lots of types can appear on the left, a call to a void function can
+  // never be on the left. getPropertyType will decide what is acceptable
+  // and what isn't.
+  Node property = n.getLastChild();
+  Node objNode = n.getFirstChild();
+  JSType childType = getJSType(objNode);
+
+  if (childType.isDict()) {
+    report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, "'.'", "dict");
+  } else if (n.getJSType() != null && parent.isAssign()) {
+    return;
+  } else if (validator.expectNotNullOrUndefined(t, n, childType,
+      "No properties on this expression", getNativeType(OBJECT_TYPE))) {
+    checkPropertyAccess(childType, property.getString(), t, n);
+  } else if (n.isGetProp() && validator.expectNotNullOrUndefined(t, n, childType,
+      "No properties on this expression", getNativeType(OBJECT_TYPE))) {
+    checkPropertyAccess(childType, property.getString(), t, n);
+  }
+  ensureTyped(t, n);
+}
+```
+With this correction, the function will correctly handle the test case "var x = null; x.prop = 3;".

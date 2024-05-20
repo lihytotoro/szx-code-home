@@ -1,0 +1,35 @@
+ The bug in the code is in the `getSolution` method, specifically in the `for` loop that iterates over the decision variables. The issue is that the loop is not properly handling the case where multiple variables can take the same value.
+
+The loop sets the coefficient for each variable to 0 if the basic row is found to be the objective function row, but it does not properly handle the case where multiple variables can take the same value. In this case, the loop should set the coefficient for all variables with the same value to 0, and only set the coefficient for the first variable with that value to a non-zero value.
+
+Here is the corrected version of the `getSolution` method:
+```
+protected RealPointValuePair getSolution() {
+  int negativeVarColumn = columnLabels.indexOf(NEGATIVE_VAR_COLUMN_LABEL);
+  Integer negativeVarBasicRow = negativeVarColumn > 0 ? getBasicRow(negativeVarColumn) : null;
+  double mostNegative = negativeVarBasicRow == null ? 0 : getEntry(negativeVarBasicRow, getRhsOffset());
+
+  Set<Integer> basicRows = new HashSet<Integer>();
+  double[] coefficients = new double[getOriginalNumDecisionVariables()];
+  for (int i = 0; i < coefficients.length; i++) {
+      int colIndex = columnLabels.indexOf("x" + i);
+      if (colIndex < 0) {
+        coefficients[i] = 0;
+        continue;
+      }
+      Integer basicRow = getBasicRow(colIndex);
+      if (basicRows.contains(basicRow)) {
+          // if multiple variables can take a given value
+          // then we choose the first and set the rest equal to 0
+          coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);
+      } else {
+          basicRows.add(basicRow);
+          coefficients[i] =
+              (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -
+              (restrictToNonNegative ? 0 : mostNegative);
+      }
+  }
+  return new RealPointValuePair(coefficients, f.getValue(coefficients));
+}
+```
+This corrected version of the `getSolution` method properly handles the case where multiple variables can take the same value, and sets the coefficient for all variables with the same value to 0, and only sets the coefficient for the first variable with that value to a non-zero value.

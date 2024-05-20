@@ -1,0 +1,1 @@
+fail("shouldn't be able to read from truncated entry");

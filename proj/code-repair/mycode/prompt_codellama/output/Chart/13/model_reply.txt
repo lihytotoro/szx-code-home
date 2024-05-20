@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+
+new Range(0.0, constraint.getWidth() - w[2]),
+
+This line was removed from the code because it was causing the bug. The bug was caused by the fact that the width of the container was being subtracted from the width of the constraint, which resulted in a negative value. The correct line should be:
+
+new Range(0.0, constraint.getWidth()),
+
+This line ensures that the width of the constraint is used as the upper bound for the range, rather than the width of the container.

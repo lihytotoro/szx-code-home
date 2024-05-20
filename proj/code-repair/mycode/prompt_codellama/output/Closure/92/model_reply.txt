@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+indexOfDot = namespace.indexOf('.');
+```
+This line is used to find the first occurrence of a dot in the namespace, which is used to determine the location where the new variable declaration should be added.

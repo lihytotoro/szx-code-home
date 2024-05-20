@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+`Map<String, String> map = shortRec.toMap();`
+
+This line is causing the NullPointerException because `shortRec` is null, and calling the `toMap()` method on a null object will throw a NullPointerException.

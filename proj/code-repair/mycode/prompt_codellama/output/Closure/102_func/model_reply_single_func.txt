@@ -1,0 +1,27 @@
+ The buggy function is:
+```
+NodeTraversal.traverse(compiler, root, this);
+if (MAKE_LOCAL_NAMES_UNIQUE) {
+  MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();
+  NodeTraversal t = new NodeTraversal(compiler, renamer);
+  t.traverseRoots(externs, root);
+}
+removeDuplicateDeclarations(root);
+new PropogateConstantAnnotations(compiler, assertOnChange)
+    .process(externs, root);
+```
+The bug is that the `MakeDeclaredNamesUnique` renamer is not being applied to the `root` node, only to the `externs` node. This means that the `arguments` variable is not being renamed, and the test is failing.
+
+The corrected function should be:
+```
+NodeTraversal.traverse(compiler, root, this);
+if (MAKE_LOCAL_NAMES_UNIQUE) {
+  MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();
+  NodeTraversal t = new NodeTraversal(compiler, renamer);
+  t.traverseRoots(root, root);
+}
+removeDuplicateDeclarations(root);
+new PropogateConstantAnnotations(compiler, assertOnChange)
+    .process(externs, root);
+```
+In this version, the `MakeDeclaredNamesUnique` renamer is applied to both the `externs` and `root` nodes, which should fix the bug.

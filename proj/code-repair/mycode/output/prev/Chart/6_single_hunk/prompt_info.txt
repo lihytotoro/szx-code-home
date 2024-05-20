@@ -1,0 +1,16 @@
+prefix:
+public boolean equals(Object obj) {
+
+    if (obj == this) {
+        return true;
+    }
+    if (!(obj instanceof ShapeList)) {
+        return false;
+    }
+
+buggy_hunk:
+    return super.equals(obj);
+
+suffix:
+
+}

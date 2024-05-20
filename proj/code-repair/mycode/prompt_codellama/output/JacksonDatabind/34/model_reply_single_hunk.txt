@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);
+
+This is because the method is checking if the handled type is BigDecimal, and if so, it should call visitIntFormat with the BigInteger number type.

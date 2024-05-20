@@ -1,0 +1,2 @@
+if (!(out.syntax() == Document.OutputSettings.Syntax.html
+    && (val == null || val.equals(key) && Attribute.isBooleanAttribute(key)))) {

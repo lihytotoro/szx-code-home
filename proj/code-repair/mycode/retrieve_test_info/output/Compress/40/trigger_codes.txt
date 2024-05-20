@@ -1,0 +1,2 @@
+assertEquals(1186,
+bin.readBits(12));

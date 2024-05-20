@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+dictSize |= (coder.properties[i + 1] & 0xFF) << (8 * i);
+
+This line is equivalent to the original line, but it uses the bitwise AND operator (&) to mask off any high bits that may be set in the byte read from the properties array. This ensures that the value is treated as a 8-bit unsigned integer, which is what the LZMAInputStream constructor expects.

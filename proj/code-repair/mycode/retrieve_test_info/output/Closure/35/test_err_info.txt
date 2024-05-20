@@ -1,0 +1,4 @@
+junit.framework.AssertionFailedError: unexpected warnings(s):
+JSC_TYPE_MISMATCH. inconsistent return type
+found   : ({prop1: {a: number}}|{prop2: number})
+required: {prop1: (Object|null|undefined)} at [testcode] line 1 : 174

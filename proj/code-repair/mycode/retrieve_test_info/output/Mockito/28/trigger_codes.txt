@@ -1,0 +1,1 @@
+assertSame(REFERENCE, illegalInjectionExample.mockShouldNotGoInHere);

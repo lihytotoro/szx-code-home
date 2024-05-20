@@ -1,0 +1,1 @@
+buffer.assignParameter(typeProp, ctxt.findContextualValueDeserializer(typeProp.getType(), ctxt).deserialize(p, ctxt));

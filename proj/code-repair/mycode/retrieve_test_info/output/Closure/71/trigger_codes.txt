@@ -1,0 +1,7 @@
+test(new String[] {
+"/** @constructor */ function Foo() {} " +
+"/** @private */ Foo.prototype.bar_ = function() {};",
+"/** @constructor \n * @extends {Foo} */ " +
+"function SubFoo() {};" +
+"SubFoo.prototype.bar_ = function() {};"
+}, null, BAD_PRIVATE_PROPERTY_ACCESS);

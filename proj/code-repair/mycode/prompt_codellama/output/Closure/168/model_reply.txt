@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (t.getScopeDepth() <= 2) {
+```
+This line was removed from the code because it was causing the analyzer to only consider variables that are assigned in the global scope, which is not the desired behavior. By removing this line, the analyzer will now consider all variables, regardless of their scope, and will record them as escaped if they are assigned more than once.

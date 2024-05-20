@@ -1,0 +1,1 @@
+boolean isOverride = parent.getType() == Token.ASSIGN && parent.getFirstChild() == getprop;

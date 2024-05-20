@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (raw == CharSequence.class) {
+```
+This line is added to handle the `CharSequence` type, which is not handled by the original code.

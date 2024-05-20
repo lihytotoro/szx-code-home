@@ -1,0 +1,1 @@
+   } else {        formatBigIntegerBinary(value, buf, offset, length, negative);    }

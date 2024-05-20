@@ -1,0 +1,1 @@
+   if (trailer == ' ' || trailer == 0){        end--;    } else {        throw new IllegalArgumentException(                exceptionMessage(buffer, offset, length, end-1, trailer));    }    trailer = buffer[end - 1];    while (start < end - 1 && (trailer == ' ' || trailer == 0)) {        end--;        trailer = buffer[end - 1];

@@ -1,0 +1,4 @@
+if ("AbstractPointcutAdvisor".equals(name)
+        || "AbstractApplicationContext".equals(name)) {
+    break main_check;
+}

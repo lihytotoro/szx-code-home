@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+sumWts += weights[i];
+
+This line should be added after the for loop to calculate the sum of the weights.

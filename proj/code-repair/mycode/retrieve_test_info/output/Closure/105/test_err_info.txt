@@ -1,0 +1,29 @@
+junit.framework.AssertionFailedError: 
+Expected: x=["",foo].join(",")
+Result: x=""+foo
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT [source name: null] [encoded source length: 0] [base line: -1] [end line: -1] 1 [sourcename: expected0] [synthetic: 1]
+        EXPR_RESULT 1
+            ASSIGN 1
+                NAME x 1
+                CALL 1
+                    GETPROP 1
+                        ARRAYLIT 1
+                            STRING  1
+                            NAME foo 1
+                        STRING join 1
+                    STRING , 1
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT [source name: null] [encoded source length: 0] [base line: -1] [end line: -1] 1 [sourcename: testcode] [synthetic: 1]
+        EXPR_RESULT 1
+            ASSIGN 1
+                NAME x 1
+                ADD 1
+                    STRING 
+                    NAME foo 1
+

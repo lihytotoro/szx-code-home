@@ -1,0 +1,14 @@
+prefix:
+public Document clean(Document dirtyDocument) {
+    Validate.notNull(dirtyDocument);
+
+    Document clean = Document.createShell(dirtyDocument.baseUri());
+
+buggy_hunk:
+
+
+suffix:
+        copySafeNodes(dirtyDocument.body(), clean.body());
+
+    return clean;
+}

@@ -1,0 +1,1 @@
+       Element el = namespace == null ? doc.createElement(tagName) :

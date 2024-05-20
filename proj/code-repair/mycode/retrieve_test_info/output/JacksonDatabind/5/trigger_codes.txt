@@ -1,0 +1,1 @@
+assertEquals("{\"city\":\"Seattle\"}", mapper.writeValueAsString(new PersonImpl()));

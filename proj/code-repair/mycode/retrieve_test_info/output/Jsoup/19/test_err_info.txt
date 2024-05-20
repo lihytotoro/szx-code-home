@@ -1,0 +1,3 @@
+junit.framework.AssertionFailedError: expected:<<img [src="cid:12345" /> 
+<img src="data:gzzt"] />> but was:<<img [/> 
+<img] />>

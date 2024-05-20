@@ -1,0 +1,28 @@
+ The bug in the function is that it is trying to access the contents of a `TextNode` as a binary value, but the `TextNode` may contain a broken Base64 encoding. The correct version of the function should handle this case by returning `null` instead of throwing an exception.
+
+Here is the corrected version of the function:
+```
+public byte[] getBinaryValue(Base64Variant b64variant)
+    throws IOException, JsonParseException
+{
+    // Multiple possibilities...
+    JsonNode n = currentNode();
+    if (n != null) {
+        // [databind#2096]: although `binaryValue()` works for real binary node
+        // and embedded "POJO" node, coercion from TextNode may require variant, so:
+        byte[] data = n.binaryValue();
+        if (data != null) {
+            return data;
+        }
+        if (n.isPojo()) {
+            Object ob = ((POJONode) n).getPojo();
+            if (ob instanceof byte[]) {
+                return (byte[]) ob;
+            }
+        }
+    }
+    // otherwise return null to mark we have no binary content
+    return null;
+}
+```
+This version of the function checks if the `TextNode` contains a broken Base64 encoding, and if so, it returns `null` instead of throwing an exception.

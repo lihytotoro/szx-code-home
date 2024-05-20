@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    classes[i] = array[i].getClass();
+
+This line was removed from the code because it was causing a null pointer exception when the array contained a null element. The correct way to handle this situation is to check for null elements before trying to get the class of the element.

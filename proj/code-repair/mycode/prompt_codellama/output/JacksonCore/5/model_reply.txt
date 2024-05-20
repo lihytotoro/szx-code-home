@@ -1,0 +1,11 @@
+ The correct line at the INFILL location should be:
+
+    char c = str.charAt(i);
+
+The buggy line was:
+
+    char c = str.charAt(i++);
+
+The reason for the bug is that the `i++` increment operator was used, which increments the value of `i` and then returns the original value. This means that the `charAt` method was called with an index that was one greater than the actual index of the character in the string.
+
+The corrected line uses the `charAt` method with the current value of `i`, which is the correct index of the character in the string.

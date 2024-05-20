@@ -1,0 +1,10 @@
+prefix:
+public ChecksumCalculatingInputStream(final Checksum checksum, final InputStream in) {
+
+buggy_hunk:
+
+
+suffix:
+    this.checksum = checksum;
+    this.in = in;
+}

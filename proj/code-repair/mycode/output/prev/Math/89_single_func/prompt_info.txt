@@ -1,0 +1,4 @@
+buggy_func:
+public void addValue(Object v) {
+        addValue((Comparable<?>) v);            
+}

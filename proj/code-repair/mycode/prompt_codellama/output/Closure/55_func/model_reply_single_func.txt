@@ -1,0 +1,15 @@
+ The buggy function is:
+```
+private static boolean isReduceableFunctionExpression(Node n) {
+  return NodeUtil.isFunctionExpression(n);
+}
+```
+The function is incorrectly checking if a node is a function expression by calling `NodeUtil.isFunctionExpression(n)`. However, this method only checks if a node is a function expression, and does not check if it is a reduceable function expression.
+
+To fix the bug, we need to add a check to see if the function expression is reduceable. One way to do this is to check if the function expression has a `reduce` method. Here is the corrected function:
+```
+private static boolean isReduceableFunctionExpression(Node n) {
+  return NodeUtil.isFunctionExpression(n) && n.has("reduce");
+}
+```
+This function checks if the node is a function expression and if it has a `reduce` method, which indicates that it is a reduceable function expression.

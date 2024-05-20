@@ -1,0 +1,16 @@
+ The correct line at the INFILL location is:
+```
+if (fnType != null) {
+```
+This line is checking if the function type is not null, which is a bug in the original code. The function type should be checked for null before it is used.
+
+The corrected code should be:
+```
+if (fnType != null) {
+  visitParameterList(t, n, fnType);
+  ensureTyped(t, n, fnType.getInstanceType());
+} else {
+  ensureTyped(t, n);
+}
+```
+This code checks if the function type is not null before using it, and if it is null, it uses the `ensureTyped` method with the `n` node as the argument.

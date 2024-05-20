@@ -1,0 +1,15 @@
+ The bug is in the `canEncode` method, which is used to check if a character can be encoded by the encoder. The method is implemented as follows:
+```
+private static boolean canEncode(CoreCharset coreCharset, char c, CharsetEncoder encoder) {
+    return encoder.canEncode(c);
+}
+```
+The problem is that the `canEncode` method is not checking the character's code point, but rather its UTF-16 representation. This means that characters outside of the BMP (i.e. those with code points above 0xFFFF) will not be properly encoded.
+
+To fix the bug, we need to modify the `canEncode` method to check the character's code point instead of its UTF-16 representation. Here's the corrected version:
+```
+private static boolean canEncode(CoreCharset coreCharset, char c, CharsetEncoder encoder) {
+    return encoder.canEncode(Character.toCodePoint(c));
+}
+```
+With this fix, the `canEncode` method will properly check the character's code point, and the bug should be resolved.

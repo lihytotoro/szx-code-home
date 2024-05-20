@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+String elName = endTag.name();
+```
+This line is missing from the original code, and it is needed to fix the bug.

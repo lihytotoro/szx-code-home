@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+if (comment.getValue().indexOf("/* @") != -1 || comment.getValue().indexOf("\n * @") != -1) {
+```
+This is the correct code that was removed by the INFILL location.

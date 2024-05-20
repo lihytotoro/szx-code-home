@@ -1,0 +1,15 @@
+ The buggy hunk is:
+
+```
+String key = attribute.getKey().replaceAll("[^-a-zA-Z0-9_:.]", "");
+```
+
+The correct line should be:
+
+```
+String key = attribute.getKey().replaceAll("[^a-zA-Z_:][-a-zA-Z0-9_:.]", "");
+```
+
+The bug is caused by the regular expression used to validate the attribute name. The regular expression should allow for any character that is not a hyphen or a letter or a digit, but the current regular expression only allows for a hyphen or a letter or a digit. This means that any attribute name that starts with a hyphen or a letter or a digit will be invalid, and the code will throw an exception.
+
+The corrected regular expression allows for any character that is not a hyphen or a letter or a digit, but also allows for a hyphen or a letter or a digit if it is preceded by a colon. This allows for attribute names that start with a hyphen or a letter or a digit, but still ensures that the attribute name is a valid XML name.

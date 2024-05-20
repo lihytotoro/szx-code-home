@@ -1,0 +1,20 @@
+ The bug in the code is that it is using the `singletons` list to get the class of the elements in the `out` array, but `singletons` is a list of singletons, and therefore it only contains one element, which is the class of the first element in the list.
+
+The correct version of the function should use the `T` type parameter to get the class of the elements in the `out` array, like this:
+```
+public T[] sample(int sampleSize) throws NotStrictlyPositiveException {
+    if (sampleSize <= 0) {
+        throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,
+                sampleSize);
+    }
+
+    final T[] out = (T[]) java.lang.reflect.Array.newInstance(T.class, sampleSize);
+
+    for (int i = 0; i < sampleSize; i++) {
+        out[i] = sample();
+    }
+
+    return out;
+}
+```
+This will ensure that the `out` array is created with the correct class of elements, and the `ArrayStoreException` will no longer be thrown.

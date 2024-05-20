@@ -1,0 +1,1 @@
+should_spy_inner_class

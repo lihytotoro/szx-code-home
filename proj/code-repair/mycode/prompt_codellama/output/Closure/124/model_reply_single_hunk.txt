@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+Preconditions.checkArgument(node.isGetProp());
+```
+This line is missing in the original code, and it is needed to ensure that the `node` is a `GetProp` node before accessing its `firstChild` property.

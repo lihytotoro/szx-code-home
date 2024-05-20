@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+final boolean emptyHeader = header.trim().isEmpty();
+```
+The bug in the original code was that the `emptyHeader` variable was not initialized, which caused a `NullPointerException` when the `containsHeader` variable was checked. The fix was to initialize the `emptyHeader` variable to `false` before the `if` statement.

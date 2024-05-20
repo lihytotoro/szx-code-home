@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+return getPct((Integer) v);
+
+This is because the method getPct() is overloaded and has two versions: one that takes a Comparable<?> parameter and another that takes an Integer parameter. The first version is the one that was removed, and the second version is the one that should be used instead.

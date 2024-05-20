@@ -1,0 +1,1 @@
+final ArchiveInputStream tar = getStreamFor("COMPRESS-335.tar");

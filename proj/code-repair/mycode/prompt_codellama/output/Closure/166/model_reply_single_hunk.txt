@@ -1,0 +1,12 @@
+ The correct line at the INFILL location is:
+```
+matchRecordTypeConstraint(constraint.toObjectType());
+```
+This line calls the `matchRecordTypeConstraint` method with the `constraint.toObjectType()` object as an argument. The `matchRecordTypeConstraint` method is responsible for modifying the object literal to match the constraint, by taking any each property on the record and trying to match properties on this object.
+
+The bug in the original code was that the `matchRecordTypeConstraint` method was not being called with the correct argument. The `constraint.toObjectType()` method returns the object type of the record, which is not the correct type to pass to the `matchRecordTypeConstraint` method. The correct type to pass is the `constraint` object itself, which is a record type.
+
+Therefore, the corrected line at the INFILL location should be:
+```
+matchRecordTypeConstraint(constraint);
+```

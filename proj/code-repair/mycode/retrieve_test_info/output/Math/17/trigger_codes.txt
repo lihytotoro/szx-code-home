@@ -1,0 +1,3 @@
+test(field.newDfp("1").multiply(10000),
+field.newDfp("10000"),
+0, "Multiply #37");

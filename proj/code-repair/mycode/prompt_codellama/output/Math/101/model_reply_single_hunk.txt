@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (source.substring(startIndex, endIndex).compareTo(getImaginaryCharacter()) != 0) {
+
+This line checks if the imaginary character is present in the input string, and if it is not, it sets the error index to the start index of the imaginary character and returns null.

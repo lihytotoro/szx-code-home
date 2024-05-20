@@ -1,0 +1,22 @@
+export CUDA_VISIBLE_DEVICES="2"
+python llama_pred_cwe_category.py \
+    --base_model_path /data/lihy/models/CodeLlama-7b-Instruct-hf \
+    --lora_path /data/lihy/training_output/codellama-cwe/finetuned-models_maxlen=1024_epoch=2_input-format=new/checkpoint-1650 \
+    --test_data_dir /data/lihy/datasets/d4j-processed/processed \
+    --test_file defects4j_all_single_func_repairllama_wo_initial_prompt.jsonl \
+    --test_file_from_d4j True \
+    --row_cnt_from_juliet 400 \
+    --output_file /data/lihy/testing_output/codellama-cwe/cwe_output_dataset=d4j_maxlen=1024_maxnew=128_beams=3_training-epoch=1_input_format=new.jsonl \
+    --is_lora True \
+    --max_length 1024 \
+    --max_new_tokens 128 \
+    --do_sample True \
+    --only_do_beam True \
+    --only_do_topp False \
+    --only_do_topk False \
+    --only_do_temp False \
+    --num_beams 3 \
+    --temperature 0.8 \
+    --top_k 0 \
+    --top_p 0.95 \
+    --request_num 1 \

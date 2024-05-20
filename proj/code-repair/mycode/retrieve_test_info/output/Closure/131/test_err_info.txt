@@ -1,0 +1,29 @@
+junit.framework.AssertionFailedError: 
+Expected: ({"a\u0004b":0})
+Result: ({ab:0})
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        EXPR_RESULT 1 [source_file: expected0]
+            OBJECTLIT 1 [source_file: expected0]
+                STRING_KEY ab 1 [quoted: 1] [source_file: expected0]
+                    NUMBER 0.0 1 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        EXPR_RESULT 1 [source_file: testcode]
+            OBJECTLIT 1 [source_file: testcode]
+                STRING_KEY ab 1 [source_file: testcode]
+                    NUMBER 0.0 1 [source_file: testcode]
+
+
+Subtree1: STRING_KEY ab 1 [quoted: 1] [source_file: expected0]
+    NUMBER 0.0 1 [source_file: expected0]
+
+
+Subtree2: STRING_KEY ab 1 [source_file: testcode]
+    NUMBER 0.0 1 [source_file: testcode]
+

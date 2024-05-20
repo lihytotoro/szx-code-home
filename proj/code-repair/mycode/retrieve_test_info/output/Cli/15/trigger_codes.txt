@@ -1,0 +1,1 @@
+assertEquals("[" + enteredValue1 + ", 1000]", b + "");

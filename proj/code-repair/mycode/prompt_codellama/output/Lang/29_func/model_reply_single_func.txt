@@ -1,0 +1,12 @@
+ The bug in the code is that the function `toJavaVersionInt` is trying to convert a `null` string to an integer, which is not possible. The function should check for `null` before trying to convert the string to an integer.
+
+Here is the corrected version of the function:
+```
+static float toJavaVersionInt(String version) {
+    if (version == null) {
+        return 0;
+    }
+    return toVersionInt(toJavaVersionIntArray(version, JAVA_VERSION_TRIM_SIZE));
+}
+```
+This function checks if the `version` parameter is `null`, and if it is, it returns `0` instead of trying to convert a `null` string to an integer.

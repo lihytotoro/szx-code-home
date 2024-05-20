@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    if (option.hasArg())
+
+This is because the `getArgName()` method returns the argument name for the option, and if the option has no argument, it returns `null`. The `hasArg()` method returns `true` if the option has an argument, and `false` otherwise. So, if the option has an argument, we should append the argument name to the usage string, but if it doesn't have an argument, we should not append anything.

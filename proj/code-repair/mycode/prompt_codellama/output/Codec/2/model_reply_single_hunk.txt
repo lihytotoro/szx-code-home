@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+if (lineLength > 0 && lineLength <= currentLinePos) {
+
+This line checks if the current line position is greater than the line length, and if so, it copies the line separator to the buffer. The line separator is an array of bytes that represents the line separator, such as CRLF or LF. The line length is the maximum number of bytes to write to the buffer before inserting a line separator. The current line position is the number of bytes written to the buffer on the current line.

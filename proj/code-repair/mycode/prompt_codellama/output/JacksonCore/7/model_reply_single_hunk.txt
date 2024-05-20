@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+_gotName = false;
+```
+This line sets the `_gotName` variable to `false`, which is used to determine whether a field name has been written or not. If a field name has not been written, then the `writeString()` method should not be used in place of `writeFieldName()`.

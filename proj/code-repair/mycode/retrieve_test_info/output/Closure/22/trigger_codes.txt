@@ -1,0 +1,2 @@
+test("var a, b; a = (bar(), 6, 7)",
+"var a, b; a = (bar(), JSCOMPILER_PRESERVE(6), 7)", e);

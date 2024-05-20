@@ -1,0 +1,13 @@
+ The buggy function is:
+```
+public double getSumSquaredErrors() {
+    return sumYY - sumXY * sumXY / sumXX;
+}
+```
+The correct version of the function should be:
+```
+public double getSumSquaredErrors() {
+    return sumYY - (sumXY * sumXY) / sumXX;
+}
+```
+The bug is in the division operation. The division should be performed before the subtraction, so that the result is a positive value.

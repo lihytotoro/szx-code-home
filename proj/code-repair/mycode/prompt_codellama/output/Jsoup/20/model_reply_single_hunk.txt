@@ -1,0 +1,9 @@
+ The correct line at the INFILL location is:
+
+```
+if (docData.startsWith("\uFEFF")) {
+    docData = docData.substring(1);
+}
+```
+
+This code checks if the decoded string starts with the Unicode byte order mark (BOM) character (U+FEFF), and if it does, it removes the BOM by taking the substring starting from the second character. This is necessary because the BOM is not allowed in HTML, and it can cause the parser to go straight into head mode, which can lead to unexpected results.

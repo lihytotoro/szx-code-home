@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (raw == CharSequence.class) {
+```
+This is because the `CharSequence` class is a common interface that is implemented by many classes, including `String`, `StringBuffer`, and `StringBuilder`. The `StdKeyDeserializer` method is trying to find a deserializer for the `CharSequence` class, but it is not able to find one because it is not a concrete class. By adding the `if (raw == CharSequence.class)` check, the method is able to find a deserializer for `CharSequence` and return it.

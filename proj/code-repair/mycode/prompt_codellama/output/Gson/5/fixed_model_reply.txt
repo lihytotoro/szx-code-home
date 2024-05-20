@@ -1,0 +1,1 @@
+String timezoneOffset = date.substring(offset, offset + 5);

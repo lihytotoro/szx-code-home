@@ -1,0 +1,9 @@
+prefix:
+public void writeEmbeddedObject(Object object) throws IOException {
+
+buggy_hunk:
+    throw new JsonGenerationException("No native support for writing embedded objects",
+
+suffix:
+            this);
+}

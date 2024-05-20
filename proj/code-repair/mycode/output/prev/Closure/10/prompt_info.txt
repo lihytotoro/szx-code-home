@@ -1,0 +1,12 @@
+prefix:
+static boolean mayBeString(Node n, boolean recurse) {
+  if (recurse) {
+
+buggy_line:
+    return allResultsMatch(n, MAY_BE_STRING_PREDICATE);
+
+suffix:
+  } else {
+    return mayBeStringHelper(n);
+  }
+}

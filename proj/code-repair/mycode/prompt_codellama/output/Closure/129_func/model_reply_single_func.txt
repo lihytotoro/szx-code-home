@@ -1,0 +1,49 @@
+ The buggy function is:
+```
+private void annotateCalls(Node n) {
+  Preconditions.checkState(n.isCall());
+
+  // Keep track of of the "this" context of a call.  A call without an
+  // explicit "this" is a free call.
+  Node first = n.getFirstChild();
+
+  // ignore cast nodes.
+
+  if (!NodeUtil.isGet(first)) {
+    n.putBooleanProp(Node.FREE_CALL, true);
+  }
+
+  // Keep track of the context in which eval is called. It is important
+  // to distinguish between "(0, eval)()" and "eval()".
+  if (first.isName() &&
+      "eval".equals(first.getString())) {
+    first.putBooleanProp(Node.DIRECT_EVAL, true);
+  }
+}
+```
+The bug is in the `if` statement that checks if the first child of the `n` node is a `Name` node with the string value "eval". This check is incorrect, as it only checks if the first child is a `Name` node, and does not check if the `Name` node has the string value "eval".
+
+The correct version of the function should be:
+```
+private void annotateCalls(Node n) {
+  Preconditions.checkState(n.isCall());
+
+  // Keep track of of the "this" context of a call.  A call without an
+  // explicit "this" is a free call.
+  Node first = n.getFirstChild();
+
+  // ignore cast nodes.
+
+  if (!NodeUtil.isGet(first)) {
+    n.putBooleanProp(Node.FREE_CALL, true);
+  }
+
+  // Keep track of the context in which eval is called. It is important
+  // to distinguish between "(0, eval)()" and "eval()".
+  if (first.isName() &&
+      first.getString().equals("eval")) {
+    first.putBooleanProp(Node.DIRECT_EVAL, true);
+  }
+}
+```
+This version of the function checks if the first child of the `n` node is a `Name` node with the string value "eval", rather than just checking if the first child is a `Name` node.

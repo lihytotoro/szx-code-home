@@ -1,0 +1,18 @@
+ The buggy function is inserting a fake end tag for self-closing tags, which is not expected by the test. The correct version of the function should not insert a fake end tag for self-closing tags.
+
+Here's the corrected version of the function:
+```
+Element insert(Token.StartTag startTag) {
+    // handle empty unknown tags
+    if (startTag.isSelfClosing()) {
+        Element el = insertEmpty(startTag);
+        stack.add(el);
+        return el;
+    }
+    
+    Element el = new Element(Tag.valueOf(startTag.name()), baseUri, startTag.attributes);
+    insert(el);
+    return el;
+}
+```
+With this correction, the function will not insert a fake end tag for self-closing tags, and the test will pass.

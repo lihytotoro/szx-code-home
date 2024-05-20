@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+return mayBeStringHelper(n);
+
+This is the corrected version of the code that fixes the bug.

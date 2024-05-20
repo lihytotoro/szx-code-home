@@ -1,0 +1,165 @@
+ The buggy function is:
+```
+void defineSlot(Node n, Node parent, JSType type, boolean inferred) {
+  Preconditions.checkArgument(inferred || type != null);
+
+  // Only allow declarations of NAMEs and qualfied names.
+  boolean shouldDeclareOnGlobalThis = false;
+  if (n.getType() == Token.NAME) {
+    Preconditions.checkArgument(
+        parent.getType() == Token.FUNCTION ||
+        parent.getType() == Token.VAR ||
+        parent.getType() == Token.LP ||
+        parent.getType() == Token.CATCH);
+    shouldDeclareOnGlobalThis = scope.isGlobal() &&
+        (parent.getType() == Token.VAR ||
+         parent.getType() == Token.FUNCTION);
+  } else {
+    Preconditions.checkArgument(
+        n.getType() == Token.GETPROP &&
+        (parent.getType() == Token.ASSIGN ||
+         parent.getType() == Token.EXPR_RESULT));
+  }
+  String variableName = n.getQualifiedName();
+  Preconditions.checkArgument(!variableName.isEmpty());
+
+  // If n is a property, then we should really declare it in the
+  // scope where the root object appears. This helps out people
+  // who declare "global" names in an anonymous namespace.
+  Scope scopeToDeclareIn = scope;
+
+    // don't try to declare in the global scope if there's
+    // already a symbol there with this name.
+
+  // declared in closest scope?
+  if (scopeToDeclareIn.isDeclared(variableName, false)) {
+    Var oldVar = scopeToDeclareIn.getVar(variableName);
+    validator.expectUndeclaredVariable(
+        sourceName, n, parent, oldVar, variableName, type);
+  } else {
+    if (!inferred) {
+      setDeferredType(n, type);
+    }
+    CompilerInput input = compiler.getInput(sourceName);
+    scopeToDeclareIn.declare(variableName, n, type, input, inferred);
+
+    if (shouldDeclareOnGlobalThis) {
+      ObjectType globalThis =
+          typeRegistry.getNativeObjectType(JSTypeNative.GLOBAL_THIS);
+      boolean isExtern = input.isExtern();
+      if (inferred) {
+        globalThis.defineInferredProperty(variableName,
+            type == null ?
+                getNativeType(JSTypeNative.NO_TYPE) :
+                type,
+            isExtern);
+      } else {
+        globalThis.defineDeclaredProperty(variableName, type, isExtern);
+      }
+    }
+
+    // If we're in the global scope, also declare var.prototype
+    // in the scope chain.
+    if (scopeToDeclareIn.isGlobal() && type instanceof FunctionType) {
+      FunctionType fnType = (FunctionType) type;
+      if (fnType.isConstructor() || fnType.isInterface()) {
+        FunctionType superClassCtor = fnType.getSuperClassConstructor();
+        scopeToDeclareIn.declare(variableName + ".prototype", n,
+            fnType.getPrototype(), compiler.getInput(sourceName),
+            /* declared iff there's an explicit supertype */
+            superClassCtor == null ||
+            superClassCtor.getInstanceType().equals(
+                getNativeType(OBJECT_TYPE)));
+      }
+    }
+  }
+}
+```
+The bug is in the line `scopeToDeclareIn.declare(variableName, n, type, input, inferred);`. The `type` parameter is not being used correctly. The function is using the `type` parameter to set the type of the variable, but it is not actually checking the type of the variable. Instead, it is using the `type` parameter to set the type of the variable, regardless of whether the variable is actually declared or not.
+
+To fix the bug, the function should check the type of the variable before setting the type of the variable. The function should use the `type` parameter to check the type of the variable, and if the type of the variable is not the same as the `type` parameter, then the function should not set the type of the variable.
+
+Here is an example of how the function could be fixed:
+```
+void defineSlot(Node n, Node parent, JSType type, boolean inferred) {
+  Preconditions.checkArgument(inferred || type != null);
+
+  // Only allow declarations of NAMEs and qualfied names.
+  boolean shouldDeclareOnGlobalThis = false;
+  if (n.getType() == Token.NAME) {
+    Preconditions.checkArgument(
+        parent.getType() == Token.FUNCTION ||
+        parent.getType() == Token.VAR ||
+        parent.getType() == Token.LP ||
+        parent.getType() == Token.CATCH);
+    shouldDeclareOnGlobalThis = scope.isGlobal() &&
+        (parent.getType() == Token.VAR ||
+         parent.getType() == Token.FUNCTION);
+  } else {
+    Preconditions.checkArgument(
+        n.getType() == Token.GETPROP &&
+        (parent.getType() == Token.ASSIGN ||
+         parent.getType() == Token.EXPR_RESULT));
+  }
+  String variableName = n.getQualifiedName();
+  Preconditions.checkArgument(!variableName.isEmpty());
+
+  // If n is a property, then we should really declare it in the
+  // scope where the root object appears. This helps out people
+  // who declare "global" names in an anonymous namespace.
+  Scope scopeToDeclareIn = scope;
+
+    // don't try to declare in the global scope if there's
+    // already a symbol there with this name.
+
+  // declared in closest scope?
+  if (scopeToDeclareIn.isDeclared(variableName, false)) {
+    Var oldVar = scopeToDeclareIn.getVar(variableName);
+    validator.expectUndeclaredVariable(
+        sourceName, n, parent, oldVar, variableName, type);
+  } else {
+    if (!inferred) {
+      setDeferredType(n, type);
+    }
+    CompilerInput input = compiler.getInput(sourceName);
+    JSType varType = scopeToDeclareIn.getVar(variableName).getType();
+    if (varType != null && !varType.equals(type)) {
+      validator.expectTypeMismatch(
+          sourceName, n, parent, varType, type);
+    } else {
+      scopeToDeclareIn.declare(variableName, n, type, input, inferred);
+    }
+
+    if (shouldDeclareOnGlobalThis) {
+      ObjectType globalThis =
+          typeRegistry.getNativeObjectType(JSTypeNative.GLOBAL_THIS);
+      boolean isExtern = input.isExtern();
+      if (inferred) {
+        globalThis.defineInferredProperty(variableName,
+            type == null ?
+                getNativeType(JSTypeNative.NO_TYPE) :
+                type,
+            isExtern);
+      } else {
+        globalThis.defineDeclaredProperty(variableName, type, isExtern);
+      }
+    }
+
+    // If we're in the global scope, also declare var.prototype
+    // in the scope chain.
+    if (scopeToDeclareIn.isGlobal() && type instanceof FunctionType) {
+      FunctionType fnType = (FunctionType) type;
+      if (fnType.isConstructor() || fnType.isInterface()) {
+        FunctionType superClassCtor = fnType.getSuperClassConstructor();
+        scopeToDeclareIn.declare(variableName + ".prototype", n,
+            fnType.getPrototype(), compiler.getInput(sourceName),
+            /* declared iff there's an explicit supertype */
+            superClassCtor == null ||
+            superClassCtor.getInstanceType().equals(
+                getNativeType(OBJECT_TYPE)));
+      }
+    }
+  }
+}
+```
+This version of the function checks the type of the variable before setting the type of the variable. If the type of the variable is not the same as the `type` parameter, then the function will not set the type of the variable. This will prevent the function from setting the type of the variable to a different type than the type of the variable.

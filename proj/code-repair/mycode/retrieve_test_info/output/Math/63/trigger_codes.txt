@@ -1,0 +1,2 @@
+assertFalse(MathUtils.equals(new double[] { Double.NaN },
+new double[] { Double.NaN }));

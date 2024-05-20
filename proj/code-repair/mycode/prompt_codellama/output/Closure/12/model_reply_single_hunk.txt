@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+return cfgNode.getExceptionHandlers().size() > 0;
+```
+This line checks if the given `cfgNode` has any exception handlers, and returns `true` if it does.

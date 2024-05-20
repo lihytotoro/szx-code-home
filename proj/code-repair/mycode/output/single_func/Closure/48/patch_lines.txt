@@ -1,0 +1,1 @@
+ if (inferred && rhsValue != null && rhsValue.isFunction()) {    inferred = !(info != null || !scope.isDeclared(qName, false));

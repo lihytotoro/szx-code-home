@@ -1,0 +1,3 @@
+junit.framework.AssertionFailedError: 
+Expected: token has content "character\NEscaped"
+     but: token content is "characterNEscaped"

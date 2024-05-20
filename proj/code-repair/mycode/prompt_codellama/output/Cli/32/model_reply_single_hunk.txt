@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+
+    while ((pos < text.length()) && ((c = text.charAt(pos)) != ' ')
+           && (c != '\n') && (c != '\r'))
+    {
+        ++pos;
+    }

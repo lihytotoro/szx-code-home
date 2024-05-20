@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+defineDeclaredFunction(n, parent);
+```
+This line is missing in the original code, but it is needed to define the function correctly.

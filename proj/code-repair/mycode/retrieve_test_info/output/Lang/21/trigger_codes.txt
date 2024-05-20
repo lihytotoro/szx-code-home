@@ -1,0 +1,1 @@
+assertFalse("LANG-677", DateUtils.isSameLocalTime(cal3, cal4));

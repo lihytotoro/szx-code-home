@@ -1,0 +1,33 @@
+ The bug in the code is that it is not handling the case where there are multiple selected options in a select element. The code is only adding the first selected option, but it should add all selected options.
+
+Here is the corrected version of the function:
+```
+public List<Connection.KeyVal> formData() {
+    ArrayList<Connection.KeyVal> data = new ArrayList<Connection.KeyVal>();
+
+    // iterate the form control elements and accumulate their values
+    for (Element el: elements) {
+        if (!el.tag().isFormSubmittable()) continue; // contents are form listable, superset of submitable
+        String name = el.attr("name");
+        if (name.length() == 0) continue;
+        String type = el.attr("type");
+
+        if ("select".equals(el.tagName())) {
+            Elements options = el.select("option[selected]");
+            for (Element option: options) {
+                data.add(HttpConnection.KeyVal.create(name, option.val()));
+            }
+        } else if ("checkbox".equalsIgnoreCase(type) || "radio".equalsIgnoreCase(type)) {
+            // only add checkbox or radio if they have the checked attribute
+            if (el.hasAttr("checked")) {
+                final String val = el.val();
+                data.add(HttpConnection.KeyVal.create(name, val));
+            }
+        } else {
+            data.add(HttpConnection.KeyVal.create(name, el.val()));
+        }
+    }
+    return data;
+}
+```
+This version of the function will correctly handle multiple selected options in a select element, and will add all selected options to the form data.

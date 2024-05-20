@@ -1,0 +1,3 @@
+JSType type = testParseType(
+"function (new:?)",
+"function (): ?");

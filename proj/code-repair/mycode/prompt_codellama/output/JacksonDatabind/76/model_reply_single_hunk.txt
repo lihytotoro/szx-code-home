@@ -1,0 +1,27 @@
+ The correct line at the INFILL location should be:
+```
+if (buffer.assignParameter(creatorProp, creatorProp.deserialize(p, ctxt))) {
+    t = p.nextToken();
+    Object bean;
+    try {
+        bean = creator.build(ctxt, buffer);
+    } catch (Exception e) {
+        wrapAndThrow(e, _beanType.getRawClass(), propName, ctxt);
+        continue;
+    }
+    while (t == JsonToken.FIELD_NAME) {
+        p.nextToken();
+        tokens.copyCurrentStructure(p);
+        t = p.nextToken();
+    }
+    tokens.writeEndObject();
+    if (bean.getClass() != _beanType.getRawClass()) {
+        ctxt.reportMappingException("Can not create polymorphic instances with unwrapped values");
+        return null;
+    }
+    return _unwrappedPropertyHandler.processUnwrapped(p, ctxt, bean, tokens);
+}
+```
+The bug was caused by the fact that the `assignParameter` method of the `PropertyValueBuffer` class was not correctly handling the case where the property name was not found in the buffer. This caused the `build` method of the `PropertyBasedCreator` class to be called with an empty buffer, which resulted in a `NullPointerException` when trying to access the `first` field of the `name` property.
+
+The fix was to add a check to the `assignParameter` method to ensure that the property name was found in the buffer before trying to assign the value. This check was added in the `if` statement at the beginning of the method.

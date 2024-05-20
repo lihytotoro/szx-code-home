@@ -1,0 +1,47 @@
+junit.framework.AssertionFailedError: 
+Expected: if(f)f.onchange()
+Result: f&&f.onchange()
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [sourcename: expected0] [synthetic: 1]
+        IF 1 [sourcename: expected0]
+            NAME f 1 [sourcename: expected0]
+            BLOCK 1 [sourcename: expected0]
+                EXPR_RESULT 1 [sourcename: expected0]
+                    CALL 1 [sourcename: expected0]
+                        GETPROP 1 [sourcename: expected0]
+                            NAME f 1 [sourcename: expected0]
+                            STRING onchange 1 [sourcename: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [sourcename: testcode] [synthetic: 1]
+        EXPR_RESULT 1 [sourcename: testcode]
+            AND 1 [sourcename: testcode]
+                NAME f 1 [sourcename: testcode]
+                CALL 1 [sourcename: testcode]
+                    GETPROP 1 [sourcename: testcode]
+                        NAME f 1 [sourcename: testcode]
+                        STRING onchange 1 [sourcename: testcode]
+
+
+Subtree1: IF 1 [sourcename: expected0]
+    NAME f 1 [sourcename: expected0]
+    BLOCK 1 [sourcename: expected0]
+        EXPR_RESULT 1 [sourcename: expected0]
+            CALL 1 [sourcename: expected0]
+                GETPROP 1 [sourcename: expected0]
+                    NAME f 1 [sourcename: expected0]
+                    STRING onchange 1 [sourcename: expected0]
+
+
+Subtree2: EXPR_RESULT 1 [sourcename: testcode]
+    AND 1 [sourcename: testcode]
+        NAME f 1 [sourcename: testcode]
+        CALL 1 [sourcename: testcode]
+            GETPROP 1 [sourcename: testcode]
+                NAME f 1 [sourcename: testcode]
+                STRING onchange 1 [sourcename: testcode]
+

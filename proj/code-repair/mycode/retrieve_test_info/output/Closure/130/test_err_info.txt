@@ -1,0 +1,69 @@
+junit.framework.AssertionFailedError: 
+Expected: function f(){return function(){var args=arguments;setTimeout(function(){alert(args)},0)}}
+Result: function f(){return function(){var args=null;setTimeout(function(){alert(arguments)},0)}}
+Node tree inequality:
+Tree1:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: expected0] [input_id: InputId: expected0]
+        FUNCTION f 1 [source_file: expected0]
+            NAME f 1 [source_file: expected0]
+            PARAM_LIST 1 [source_file: expected0]
+            BLOCK 1 [source_file: expected0]
+                RETURN 2 [source_file: expected0]
+                    FUNCTION  2 [source_file: expected0]
+                        NAME  2 [source_file: expected0]
+                        PARAM_LIST 2 [source_file: expected0]
+                        BLOCK 2 [source_file: expected0]
+                            VAR 3 [source_file: expected0]
+                                NAME args 3 [source_file: expected0]
+                                    NAME arguments 3 [source_file: expected0]
+                            EXPR_RESULT 4 [source_file: expected0]
+                                CALL 4 [free_call: 1] [source_file: expected0]
+                                    NAME setTimeout 4 [source_file: expected0]
+                                    FUNCTION  4 [source_file: expected0]
+                                        NAME  4 [source_file: expected0]
+                                        PARAM_LIST 4 [source_file: expected0]
+                                        BLOCK 4 [source_file: expected0]
+                                            EXPR_RESULT 4 [source_file: expected0]
+                                                CALL 4 [free_call: 1] [source_file: expected0]
+                                                    NAME alert 4 [source_file: expected0]
+                                                    NAME args 4 [source_file: expected0]
+                                    NUMBER 0.0 4 [source_file: expected0]
+        EMPTY 6 [source_file: expected0]
+
+
+Tree2:
+BLOCK [synthetic: 1]
+    SCRIPT 1 [synthetic: 1] [source_file: testcode] [input_id: InputId: testcode]
+        FUNCTION f 1 [source_file: testcode]
+            NAME f 1 [source_file: testcode]
+            PARAM_LIST 1 [source_file: testcode]
+            BLOCK 1 [source_file: testcode]
+                RETURN 2 [source_file: testcode]
+                    FUNCTION  2 [source_file: testcode]
+                        NAME  2 [source_file: testcode]
+                        PARAM_LIST 2 [source_file: testcode]
+                        BLOCK 2 [source_file: testcode]
+                            VAR 3 [source_file: testcode]
+                                NAME args 3 [source_file: testcode]
+                                    NULL 3 [source_file: testcode]
+                            EXPR_RESULT 4 [source_file: testcode]
+                                CALL 4 [free_call: 1] [source_file: testcode]
+                                    NAME setTimeout 4 [source_file: testcode]
+                                    FUNCTION  4 [source_file: testcode]
+                                        NAME  4 [source_file: testcode]
+                                        PARAM_LIST 4 [source_file: testcode]
+                                        BLOCK 4 [source_file: testcode]
+                                            EXPR_RESULT 4 [source_file: testcode]
+                                                CALL 4 [free_call: 1] [source_file: testcode]
+                                                    NAME alert 4 [source_file: testcode]
+                                                    NAME arguments 3 [source_file: testcode]
+                                    NUMBER 0.0 4 [source_file: testcode]
+        EMPTY 6 [source_file: testcode]
+
+
+Subtree1: NAME arguments 3 [source_file: expected0]
+
+
+Subtree2: NULL 3 [source_file: testcode]
+

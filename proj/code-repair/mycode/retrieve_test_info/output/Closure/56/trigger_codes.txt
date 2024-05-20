@@ -1,0 +1,1 @@
+assertEquals("foo2:third line", provider.getSourceLine("foo2", 3));

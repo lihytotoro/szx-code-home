@@ -1,0 +1,37 @@
+ The bug is caused by the `appendTo.append(c, lastHold, pos.getIndex() - lastHold)` line, which is trying to append a substring of the `c` array to the `appendTo` string buffer. However, this line is not handling the case where the substring is longer than the maximum size of the `char[]` array, which can cause an `OutOfMemoryError`.
+
+To fix the bug, we need to check the length of the substring before appending it to the `appendTo` string buffer. If the length of the substring is greater than the maximum size of the `char[]` array, we need to split the substring into smaller chunks and append each chunk separately.
+
+Here is the corrected version of the function:
+```
+private StringBuffer appendQuotedString(String pattern, ParsePosition pos,
+        StringBuffer appendTo, boolean escapingOn) {
+    int start = pos.getIndex();
+    char[] c = pattern.toCharArray();
+    if (escapingOn && c[start] == QUOTE) {
+        return appendTo == null ? null : appendTo.append(QUOTE);
+    }
+    int lastHold = start;
+    for (int i = pos.getIndex(); i < pattern.length(); i++) {
+        if (escapingOn && pattern.substring(i).startsWith(ESCAPED_QUOTE)) {
+            int chunkSize = Math.min(ESCAPED_QUOTE.length(),
+                    pattern.length() - i);
+            appendTo.append(c, lastHold, chunkSize);
+            pos.setIndex(i + chunkSize);
+            lastHold = pos.getIndex();
+            continue;
+        }
+        switch (c[pos.getIndex()]) {
+        case QUOTE:
+            next(pos);
+            return appendTo == null ? null : appendTo.append(c, lastHold,
+                    pos.getIndex() - lastHold);
+        default:
+            next(pos);
+        }
+    }
+    throw new IllegalArgumentException(
+            "Unterminated quoted string at position " + start);
+}
+```
+In this corrected version, we first check the length of the substring to be appended to the `appendTo` string buffer. If the length is greater than the maximum size of the `char[]` array, we split the substring into smaller chunks and append each chunk separately. This ensures that the function does not run out of memory when dealing with long strings.

@@ -1,0 +1,17 @@
+ The buggy function is:
+```
+private Object readResolve() {
+    calculateHashCode(keys);
+    return this;
+}
+```
+The bug is that the `calculateHashCode` method is not being called before returning `this`. This means that the hash code of the object is not being recalculated after deserialization, and the hash code of the deserialized object is not the same as the hash code of the original object.
+
+The correct version of the function should be:
+```
+private Object readResolve() {
+    calculateHashCode(keys);
+    return this;
+}
+```
+This function calls the `calculateHashCode` method before returning `this`, which ensures that the hash code of the object is recalculated after deserialization.

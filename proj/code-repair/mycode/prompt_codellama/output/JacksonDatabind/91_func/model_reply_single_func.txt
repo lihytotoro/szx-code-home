@@ -1,0 +1,17 @@
+ The bug in the code is in the `if` statement that checks if the content type of the container type has a value handler or a type handler. The condition should be `ct.getValueHandler() != null || ct.getTypeHandler() != null` instead of `ct.getValueHandler() != null || ct.getTypeHandler() != null`.
+
+The corrected function should look like this:
+```
+private boolean _hasCustomHandlers(JavaType t) {
+    if (t.isContainerType()) {
+        // First: value types may have both value and type handlers
+        JavaType ct = t.getContentType();
+        if (ct != null) {
+            return (ct.getValueHandler() != null || ct.getTypeHandler() != null);
+        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)
+        }
+    }
+    return false;
+}
+```
+This change will fix the bug and the function will correctly identify when a custom key deserializer is being used.

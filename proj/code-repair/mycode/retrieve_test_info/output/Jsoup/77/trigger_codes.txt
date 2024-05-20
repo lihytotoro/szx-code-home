@@ -1,0 +1,1 @@
+assertEquals("<div>\n test\n</div>\n<p></p>", document.html());

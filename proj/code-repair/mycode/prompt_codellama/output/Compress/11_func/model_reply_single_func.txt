@@ -1,0 +1,27 @@
+ The bug is in the `matches` method of the `TarArchiveInputStream` class. The method is checking the signature of the input stream by reading the first 512 bytes and then checking if the signature matches. However, if the input stream is a short text file, it may not have enough bytes to read the signature, and the method will throw an `IOException`.
+
+To fix the bug, we need to check if the input stream is a short text file before reading the signature. We can do this by checking if the `available()` method of the input stream returns 0. If it does, we know that the input stream is a short text file and we should not try to read the signature.
+
+Here is the corrected version of the `matches` method:
+```
+public static boolean matches(final InputStream in) throws IOException {
+    if (in.available() == 0) {
+        return false;
+    }
+
+    final byte[] signature = new byte[512];
+    in.mark(signature.length);
+    try {
+        int signatureLength = in.read(signature);
+        in.reset();
+        if (TarArchiveInputStream.matches(signature, signatureLength)) {
+            return true;
+        }
+    } catch (IOException e) {
+        throw new IOException("Could not use reset and mark operations.", e);
+    }
+
+    return false;
+}
+```
+With this fix, the test case `shortTextFilesAreNoTARs` will pass.

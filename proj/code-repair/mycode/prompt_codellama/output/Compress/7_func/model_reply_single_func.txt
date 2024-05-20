@@ -1,0 +1,16 @@
+ The bug in the function is that it is using the `char` type to represent the bytes in the `buffer` array, which is not correct. The `char` type is a 16-bit type, but the bytes in the `buffer` array are 8-bit. This means that some of the bytes are being interpreted as a single character, which is causing the incorrect output.
+
+To fix the bug, you should use the `byte` type to represent the bytes in the `buffer` array. Here is the corrected function:
+```
+public static String parseName(byte[] buffer, final int offset, final int length) {
+    StringBuffer result = new StringBuffer(length);
+    int          end = offset + length;
+
+    for (int i = offset; i < end; ++i) {
+        result.append((char) buffer[i]);
+    }
+
+    return result.toString();
+}
+```
+This function will correctly interpret the bytes in the `buffer` array as 8-bit characters, and will produce the correct output.

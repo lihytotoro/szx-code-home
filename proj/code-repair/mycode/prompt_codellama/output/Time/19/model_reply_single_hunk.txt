@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    } else if (offsetLocal > 0) {
+
+This line is missing from the original code, but it is needed to fix the bug. The bug is caused by the fact that the method is not handling the case where the offset is positive, but the instant is before the DST gap. The method needs to return the offset of the previous transition, which is what this line does.

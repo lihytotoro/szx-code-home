@@ -1,0 +1,8 @@
+prefix:
+public static boolean isAvailableLocale(Locale locale) {
+
+buggy_hunk:
+    return cAvailableLocaleSet.contains(locale);
+
+suffix:
+}

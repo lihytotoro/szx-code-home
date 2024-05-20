@@ -1,0 +1,59 @@
+ The buggy function is:
+```
+private void inferPropertyTypesToMatchConstraint(
+    JSType type, JSType constraint) {
+  if (type == null || constraint == null) {
+    return;
+  }
+
+  ObjectType constraintObj =
+      ObjectType.cast(constraint.restrictByNotNullOrUndefined());
+  if (constraintObj != null && constraintObj.isRecordType()) {
+    ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());
+    if (objType != null) {
+      for (String prop : constraintObj.getOwnPropertyNames()) {
+        JSType propType = constraintObj.getPropertyType(prop);
+        if (!objType.isPropertyTypeDeclared(prop)) {
+          JSType typeToInfer = propType;
+          if (!objType.hasProperty(prop)) {
+            typeToInfer =
+                getNativeType(VOID_TYPE).getLeastSupertype(propType);
+          }
+          objType.defineInferredProperty(prop, typeToInfer, null);
+        }
+      }
+    }
+  }
+}
+```
+The bug is in the `if (!objType.isPropertyTypeDeclared(prop))` condition. If the property is not declared in the `objType`, it will be inferred as `undefined`, which is not the correct type for the property.
+
+The corrected function should be:
+```
+private void inferPropertyTypesToMatchConstraint(
+    JSType type, JSType constraint) {
+  if (type == null || constraint == null) {
+    return;
+  }
+
+  ObjectType constraintObj =
+      ObjectType.cast(constraint.restrictByNotNullOrUndefined());
+  if (constraintObj != null && constraintObj.isRecordType()) {
+    ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());
+    if (objType != null) {
+      for (String prop : constraintObj.getOwnPropertyNames()) {
+        JSType propType = constraintObj.getPropertyType(prop);
+        if (!objType.isPropertyTypeDeclared(prop)) {
+          JSType typeToInfer = propType;
+          if (!objType.hasProperty(prop)) {
+            typeToInfer =
+                getNativeType(VOID_TYPE).getLeastSupertype(propType);
+          }
+          objType.defineInferredProperty(prop, typeToInfer, null);
+        }
+      }
+    }
+  }
+}
+```
+This function will correctly infer the property types for the `objType` based on the `constraintObj`.

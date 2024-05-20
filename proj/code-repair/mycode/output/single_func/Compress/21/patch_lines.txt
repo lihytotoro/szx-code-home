@@ -1,0 +1,1 @@
+       shift--;        if (shift == 0) {            header.write(cache);            shift = 7;            cache = 0;        }    }    if (length > 0 && shift < 7) {

@@ -1,0 +1,1 @@
+assertNotRequire("goog.require(foo)");

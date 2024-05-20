@@ -1,0 +1,9 @@
+prefix:
+
+buggy_hunk:
+private Object readResolve() {
+
+suffix:
+    calculateHashCode(keys);
+    return this;
+}

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+char c = str.charAt(i++);
+```
+This line is missing from the original code, and it is needed to parse the string correctly. The buggy hunk was removed by mistake, and the correct line should be added back in.

@@ -1,0 +1,1 @@
+Person p = mapper.readValue("{ }", Person.class);

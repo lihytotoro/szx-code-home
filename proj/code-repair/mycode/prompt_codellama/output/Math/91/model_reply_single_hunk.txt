@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+return (nOd < dOn) ? -1 : ((nOd > dOn) ? 1 : 0);
+
+The bug in the original code was that the return value for when nOd is equal to dOn was not specified. The corrected code returns 0 in this case, which is the correct result for the compareTo method.

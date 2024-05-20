@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    int idx = 0;
+
+This line should be placed before the while loop, as it initializes the index to 0, which is the correct value for the first dimension. The while loop then increments the index by 1 for each iteration, which is the correct behavior for the second dimension.

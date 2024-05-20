@@ -1,0 +1,7 @@
+ The correct line to insert at the INFILL location is:
+
+    if (getName().endsWith("/")) {
+        return true;
+    }
+
+This line checks if the entry name ends with a slash, and if so, returns true to indicate that the entry is a directory. This fixes the buggy behavior of the original code, which returned true for all entries regardless of their name.

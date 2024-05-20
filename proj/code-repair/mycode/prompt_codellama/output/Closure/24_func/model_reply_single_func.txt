@@ -1,0 +1,28 @@
+ The bug in the code is that it is not handling the case where a local variable is used as an alias in a `goog.scope` block. The code is assuming that all variables in the scope block are aliases, but this is not always the case.
+
+Here is the corrected version of the function:
+```
+private void findAliases(NodeTraversal t) {
+  Scope scope = t.getScope();
+  for (Var v : scope.getVarIterable()) {
+    Node n = v.getNode();
+    int type = n.getType();
+    Node parent = n.getParent();
+    if (parent.isVar()) {
+      if (n.hasChildren() && n.getFirstChild().isQualifiedName()) {
+        String name = n.getString();
+        Var aliasVar = scope.getVar(name);
+        aliases.put(name, aliasVar);
+
+        String qualifiedName =
+            aliasVar.getInitialValue().getQualifiedName();
+        transformation.addAlias(name, qualifiedName);
+      } else {
+        // TODO(robbyw): Support using locals for private variables.
+        report(t, n, GOOG_SCOPE_NON_ALIAS_LOCAL, n.getString());
+      }
+    }
+  }
+}
+```
+In this version, we check if the variable is a local variable, and if so, we report an error. We also add the variable to the `aliases` map, but only if it is an alias.

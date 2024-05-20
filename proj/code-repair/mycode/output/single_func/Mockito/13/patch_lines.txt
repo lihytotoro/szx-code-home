@@ -1,0 +1,1 @@
+       if (verificationMode instanceof MockAwareVerificationMode) {            if (((MockAwareVerificationMode) verificationMode).getMock() == invocation.getMock()) {                VerificationDataImpl data = new VerificationDataImpl(invocationContainerImpl, invocationMatcher);                verificationMode.verify(data);                return null;            }

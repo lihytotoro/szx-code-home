@@ -1,0 +1,1 @@
+Company result = mapper.readValue(json, Company.class);

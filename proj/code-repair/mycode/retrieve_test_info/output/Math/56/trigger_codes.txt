@@ -1,0 +1,2 @@
+Assert.assertEquals("Wrong multidimensional index for [" + i + "][" + dimIndex + "]",
+expected[i][dimIndex], indices[dimIndex]);

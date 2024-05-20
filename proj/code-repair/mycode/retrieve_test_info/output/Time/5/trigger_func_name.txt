@@ -1,0 +1,1 @@
+testNormalizedStandard_periodType_months1

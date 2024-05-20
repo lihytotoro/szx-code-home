@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+this);
+```
+This is the correct way to call the `writeEmbeddedObject` method, and it should fix the bug.

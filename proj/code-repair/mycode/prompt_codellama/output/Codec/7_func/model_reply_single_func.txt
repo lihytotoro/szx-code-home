@@ -1,0 +1,9 @@
+ The bug in the code is that the `encodeBase64` method is being called with the `true` argument, which means that the resulting Base64 string will include line separators. However, the `newStringUtf8` method is being called on the resulting Base64 string, which is not expecting line separators.
+
+To fix the bug, you can modify the `encodeBase64String` method to remove the line separators from the resulting Base64 string before passing it to `newStringUtf8`:
+```
+public static String encodeBase64String(byte[] binaryData) {
+    return StringUtils.newStringUtf8(encodeBase64(binaryData, false));
+}
+```
+This will ensure that the resulting Base64 string is in the correct format for the `newStringUtf8` method.

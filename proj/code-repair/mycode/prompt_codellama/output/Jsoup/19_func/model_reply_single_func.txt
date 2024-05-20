@@ -1,0 +1,31 @@
+ The buggy function is:
+```
+private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {
+    // try to resolve relative urls to abs, and optionally update the attribute so output html has abs.
+    // rels without a baseuri get removed
+    String value = el.absUrl(attr.getKey());
+    if (!preserveRelativeLinks)
+        attr.setValue(value);
+    
+    for (Protocol protocol : protocols) {
+        String prot = protocol.toString() + ":";
+        if (value.toLowerCase().startsWith(prot)) {
+            return true;
+        }
+    }
+    return false;
+}
+```
+The bug is in the `if` statement where it checks if the `value` starts with the protocol. The `value` is the absolute URL of the attribute, which includes the protocol. However, the `if` statement only checks if the protocol is at the beginning of the `value`, which means it will only return `true` if the protocol is the first part of the URL.
+
+For example, if the `value` is "http://example.com/image.jpg", the `if` statement will return `true` because "http" is at the beginning of the `value`. However, if the `value` is "example.com/image.jpg", the `if` statement will return `false` because "example" is not at the beginning of the `value`.
+
+To fix the bug, we need to check if the `value` starts with any of the protocols in the `protocols` set, not just the first protocol. We can do this by using the `contains` method of the `Set` class, like this:
+```
+for (Protocol protocol : protocols) {
+    if (value.toLowerCase().contains(protocol.toString() + ":")) {
+        return true;
+    }
+}
+```
+This will check if the `value` contains any of the protocols in the `protocols` set, and return `true` if it does.

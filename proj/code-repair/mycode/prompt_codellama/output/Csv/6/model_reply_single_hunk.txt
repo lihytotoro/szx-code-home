@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+`map.put(entry.getKey(), values[col]);`
+
+This line is causing the `ArrayIndexOutOfBoundsException` because the `values` array has only two elements, but the `col` variable is being used to access the third element.

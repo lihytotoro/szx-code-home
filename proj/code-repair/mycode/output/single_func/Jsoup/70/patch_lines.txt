@@ -1,0 +1,1 @@
+       if (el.tag.preserveWhitespace())            return true;        else if (el.parent() != null && el.parent().tag.preserveWhitespace())            return true;

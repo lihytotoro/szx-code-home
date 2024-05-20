@@ -1,0 +1,49 @@
+ The buggy function is:
+```
+static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
+    TypeToken<?> fieldType, JsonAdapter annotation) {
+  Class<?> value = annotation.value();
+  TypeAdapter<?> typeAdapter;
+  if (TypeAdapter.class.isAssignableFrom(value)) {
+    Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;
+    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
+  } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
+    Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
+    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
+        .construct()
+        .create(gson, fieldType);
+  } else {
+    throw new IllegalArgumentException(
+        "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
+  }
+    typeAdapter = typeAdapter.nullSafe();
+  return typeAdapter;
+}
+```
+The bug is in the line `typeAdapter = typeAdapter.nullSafe();`, where the `nullSafe()` method is called on the `typeAdapter` object, which is not initialized if the `value` parameter is not a `TypeAdapter` or `TypeAdapterFactory` class.
+
+The corrected function should be:
+```
+static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
+    TypeToken<?> fieldType, JsonAdapter annotation) {
+  Class<?> value = annotation.value();
+  TypeAdapter<?> typeAdapter;
+  if (TypeAdapter.class.isAssignableFrom(value)) {
+    Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;
+    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
+  } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {
+    Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;
+    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))
+        .construct()
+        .create(gson, fieldType);
+  } else {
+    throw new IllegalArgumentException(
+        "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
+  }
+  if (typeAdapter != null) {
+    typeAdapter = typeAdapter.nullSafe();
+  }
+  return typeAdapter;
+}
+```
+This corrected function checks if the `typeAdapter` object is not null before calling the `nullSafe()` method, which ensures that the `typeAdapter` object is properly initialized before calling the `nullSafe()` method.

@@ -1,0 +1,1 @@
+assertEquals(mk.hashCode(), mk2.hashCode());

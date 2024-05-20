@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    long len = binaryData.length;
+
+This line calculates the length of the input array, which is used to check if the output array would be bigger than the specified maximum size.

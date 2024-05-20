@@ -1,0 +1,1 @@
+testByteByByte(emptyEncoded, emptyDecoded, 76, CRLF);

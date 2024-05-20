@@ -1,0 +1,1 @@
+       setResult(min, 0);        return result;    }    if (yInitial * yMin < 0) {        return solve(f, min, yMin, initial, yInitial, min, yMin);    }    double yMax = f.value(max);    if (Math.abs(yMax) <= functionValueAccuracy) {        setResult(max, 0);

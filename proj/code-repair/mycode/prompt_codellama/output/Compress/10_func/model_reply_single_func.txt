@@ -1,0 +1,63 @@
+ The buggy function is:
+```
+private void resolveLocalFileHeaderData(Map<ZipArchiveEntry, NameAndComment> entriesWithoutUTF8Flag)
+    throws IOException {
+    // changing the name of a ZipArchiveEntry is going to change
+    // the hashcode - see COMPRESS-164
+    // Map needs to be reconstructed in order to keep central
+    // directory order
+    for (ZipArchiveEntry ze : entries.keySet()) {
+        OffsetEntry offsetEntry = entries.get(ze);
+        long offset = offsetEntry.headerOffset;
+        archive.seek(offset + LFH_OFFSET_FOR_FILENAME_LENGTH);
+        byte[] b = new byte[SHORT];
+        archive.readFully(b);
+        int fileNameLen = ZipShort.getValue(b);
+        archive.readFully(b);
+        int extraFieldLen = ZipShort.getValue(b);
+        int lenToSkip = fileNameLen;
+        while (lenToSkip > 0) {
+            int skipped = archive.skipBytes(lenToSkip);
+            if (skipped <= 0) {
+                throw new RuntimeException("failed to skip file name in"
+                                           + " local file header");
+            }
+            lenToSkip -= skipped;
+        }
+        byte[] localExtraData = new byte[extraFieldLen];
+        archive.readFully(localExtraData);
+        ze.setExtra(localExtraData);
+        offsetEntry.dataOffset = offset + LFH_OFFSET_FOR_FILENAME_LENGTH
+            + SHORT + SHORT + fileNameLen + extraFieldLen;
+
+        if (entriesWithoutUTF8Flag.containsKey(ze)) {
+            String orig = ze.getName();
+            NameAndComment nc = entriesWithoutUTF8Flag.get(ze);
+            ZipUtil.setNameAndCommentFromExtraFields(ze, nc.name,
+                                                     nc.comment);
+            if (!orig.equals(ze.getName())) {
+                nameMap.remove(orig);
+                nameMap.put(ze.getName(), ze);
+            }
+        }
+    }
+}
+```
+The bug is in the `resolveLocalFileHeaderData` method, specifically in the `if (entriesWithoutUTF8Flag.containsKey(ze))` block. The `ze` variable is a `ZipArchiveEntry` object, and the `entriesWithoutUTF8Flag` map is a map of `ZipArchiveEntry` objects to `NameAndComment` objects. The `if` statement is checking if the `ze` object is present in the `entriesWithoutUTF8Flag` map, but it is not checking the value of the `ze` object.
+
+The buggy code is assuming that the `ze` object is the same object as the one in the `entriesWithoutUTF8Flag` map, but this is not guaranteed. The `ZipArchiveEntry` class overrides the `equals` method to compare the name of the entry, but it does not override the `hashCode` method, which means that two `ZipArchiveEntry` objects with the same name but different other properties will have different hash codes.
+
+To fix the bug, the `if` statement should be changed to check the value of the `ze` object, not just its presence in the map. Here is the corrected code:
+```
+if (entriesWithoutUTF8Flag.containsKey(ze) && entriesWithoutUTF8Flag.get(ze).equals(ze)) {
+    String orig = ze.getName();
+    NameAndComment nc = entriesWithoutUTF8Flag.get(ze);
+    ZipUtil.setNameAndCommentFromExtraFields(ze, nc.name,
+                                             nc.comment);
+    if (!orig.equals(ze.getName())) {
+        nameMap.remove(orig);
+        nameMap.put(ze.getName(), ze);
+    }
+}
+```
+This code checks if the `ze` object is present in the `entriesWithoutUTF8Flag` map and if its value is equal to the `ze` object. If both conditions are true, then the code sets the name and comment of the `ze` object using the `ZipUtil.setNameAndCommentFromExtraFields` method, and if the name of the `ze` object has changed, then it updates the `nameMap` map.

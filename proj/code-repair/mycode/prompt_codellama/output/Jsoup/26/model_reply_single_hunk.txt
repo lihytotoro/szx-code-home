@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+    Document clean = Document.createShell(dirtyDocument.baseUri());
+
+This line creates a new `Document` object and sets its base URI to the base URI of the `dirtyDocument`. The `Document.createShell()` method creates a new `Document` object with an empty body, and the `baseUri()` method returns the base URI of the document.
+
+The buggy hunk was removed because it was causing a `NullPointerException` when the `clean()` method was called with a `dirtyDocument` that was `null`. The `Validate.notNull()` method was added to check if the `dirtyDocument` is not `null` before creating the `clean` document.

@@ -1,0 +1,1 @@
+   double nOd = this.doubleValue();    double dOn = object.doubleValue();

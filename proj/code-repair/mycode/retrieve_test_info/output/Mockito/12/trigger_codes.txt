@@ -1,0 +1,1 @@
+assertEquals(Set.class, m.getGenericType(field("nested")));

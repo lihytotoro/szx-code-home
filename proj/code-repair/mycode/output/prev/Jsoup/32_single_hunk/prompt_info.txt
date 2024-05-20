@@ -1,0 +1,10 @@
+prefix:
+public Element clone() {
+    Element clone = (Element) super.clone();
+
+buggy_hunk:
+    clone.classNames();
+
+suffix:
+    return clone;
+}

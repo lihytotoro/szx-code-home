@@ -1,0 +1,6 @@
+ The correct line at the INFILL location is:
+
+while ((entry = in.getNextEntry()) != null) {
+File target = new File(dir, entry.getName());
+
+This line is the one that is causing the error, as it is trying to read from the input stream after it has reached the end of the file. The buggy hunk that was removed was trying to close the input stream after it had already been closed, which was causing the error.

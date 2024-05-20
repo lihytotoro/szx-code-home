@@ -1,0 +1,9 @@
+if (NodeUtil.hasFinally(n)) {
+  Node finallyBlock = n.getLastChild();
+  tryMinimizeExits(finallyBlock, exitType, labelName);
+  // Add this line to handle the break statement inside the finally block
+  if (finallyBlock.isBreak()) {
+    NodeUtil.removeChild(finallyBlock.getParent(), finallyBlock);
+    compiler.reportCodeChange();
+  }
+}

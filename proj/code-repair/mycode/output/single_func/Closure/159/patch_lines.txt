@@ -1,0 +1,1 @@
+   if (node.getType() == Token.CALL) {      Node child = node.getFirstChild();      if (child.getType() == Token.NAME) {        changed.add(child.getString());      }

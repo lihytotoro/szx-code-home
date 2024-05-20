@@ -1,0 +1,1 @@
+testSame("window.f = function(a) {};");

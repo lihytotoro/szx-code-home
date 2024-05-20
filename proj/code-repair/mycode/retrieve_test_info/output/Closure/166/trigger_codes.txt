@@ -1,0 +1,2 @@
+assertEquals("{a: (boolean|undefined), b: (string|undefined)}",
+getType("out").toString());

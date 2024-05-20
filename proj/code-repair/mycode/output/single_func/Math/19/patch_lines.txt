@@ -1,0 +1,1 @@
+           if (boundaries[0].length != boundaries[1].length) {                throw new DimensionMismatchException(boundaries[0].length, boundaries[1].length);            }

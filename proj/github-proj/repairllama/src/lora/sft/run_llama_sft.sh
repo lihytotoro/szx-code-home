@@ -1,0 +1,24 @@
+export CUDA_VISIBLE_DEVICES="1,2,3"
+accelerate launch --main_process_port 29502 llama_sft.py \
+    --model_name_or_path /data/lihy/models/CodeLlama-7b-hf \
+    --data_path /data/lihy/datasets/megadiff-single-function/processed/parquet \
+    --train_file finetuning_data_maxlen=1024_usertype=repairllama_dataset=megadiff.parquet \
+    --eval_file finetuning_data_maxlen=1024_usertype=repairllama_dataset=megadiff.parquet \
+    --is_lora True \
+    --model_max_length 1024 \
+    --cache_path /data/lihy/training_output/repairllama/cache \
+    --do_train \
+    --do_eval False \
+    --fp16 True \
+    --output_dir /data/lihy/training_output/repairllama/finetuned-models_model=base_maxlen=1024_epoch=2_input-format=new \
+    --num_train_epochs 2 \
+    --per_device_train_batch_size 4 \
+    --per_device_eval_batch_size 1 \
+    --gradient_accumulation_steps 1 \
+    --evaluation_strategy "no" \
+    --eval_steps 10 \
+    --save_steps 500 \
+    --learning_rate 5e-4 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 10 \
+    --ddp_find_unused_parameters False \

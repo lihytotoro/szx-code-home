@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+```
+if (fa * fb <= 0.0) {
+```
+This is because the function `inverseCumulativeProbability` is expected to return a value between 0 and 1, and the `bracket` method is used to find the inverse of this function. The `bracket` method is designed to find the roots of the function, and it does this by iteratively updating the values of `a` and `b` until the function value at `a` and `b` have opposite signs. If the function value at `a` and `b` have the same sign, then the method will not converge and an exception will be thrown.
+
+Therefore, the condition `fa * fb >= 0.0` should be changed to `fa * fb <= 0.0` to ensure that the method converges to the correct root.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+int len = thisBuf.length - strLen;
+```
+This line calculates the length of the buffer minus the length of the string to be searched, which is used in the loop to iterate over the characters in the buffer. The buggy hunk was removed by replacing it with the correct line.

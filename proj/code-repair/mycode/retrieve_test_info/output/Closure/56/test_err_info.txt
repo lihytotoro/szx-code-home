@@ -1,0 +1,1 @@
+junit.framework.ComparisonFailure: expected:<foo2:third line> but was:<null>

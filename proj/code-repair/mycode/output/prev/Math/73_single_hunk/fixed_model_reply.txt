@@ -1,0 +1,1 @@
+return solve(f, min, yMin, max, yMax, initial, yInitial);

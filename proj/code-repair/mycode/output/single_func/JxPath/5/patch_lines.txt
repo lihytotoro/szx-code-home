@@ -1,0 +1,1 @@
+       throw new JXPathException("Cannot compare pointers that do not belong to the same tree: '"                + p1 + "' and '" + p2 + "'");

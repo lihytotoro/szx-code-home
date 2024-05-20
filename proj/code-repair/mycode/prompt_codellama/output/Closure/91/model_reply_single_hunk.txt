@@ -1,0 +1,11 @@
+ The correct line at the INFILL location is:
+```
+if (jsDoc != null &&
+        (jsDoc.isConstructor() ||
+         jsDoc.isInterface() ||
+         jsDoc.hasThisType() ||
+         jsDoc.isOverride())) {
+      return false;
+    }
+```
+This line checks if the function being traversed is a constructor, interface, or has the `@this` or `@override` annotation, and if so, it returns `false` to prevent traversal. This is the buggy code that was removed.

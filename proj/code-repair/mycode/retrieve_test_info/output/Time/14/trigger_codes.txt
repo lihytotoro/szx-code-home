@@ -1,0 +1,1 @@
+MonthDay result = test.plusMonths(-1);

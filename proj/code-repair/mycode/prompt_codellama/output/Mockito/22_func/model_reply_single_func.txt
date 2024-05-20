@@ -1,0 +1,17 @@
+ The bug in the code is that it does not handle the case where both `o1` and `o2` are arrays, but the arrays are not of the same type.
+
+Here is the corrected version of the function:
+```
+public static boolean areEqual(Object o1, Object o2) {
+    if (o1 == null || o2 == null) {
+        return o1 == null && o2 == null;
+    } else if (isArray(o1) && isArray(o2)) {
+        return areArraysEqual(o1, o2);
+    } else {
+        return o1.equals(o2);
+    }
+}
+```
+This version checks if both `o1` and `o2` are arrays, and if so, it calls the `areArraysEqual` function to compare them. If either `o1` or `o2` is not an array, it falls back to the `equals` method.
+
+With this correction, the test should pass.

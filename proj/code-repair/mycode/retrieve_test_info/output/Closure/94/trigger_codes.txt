@@ -1,0 +1,1 @@
+assertTrue(testValidDefineValue("1 + 8"));

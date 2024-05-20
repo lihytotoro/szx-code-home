@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+        } else if ("td".equals(name) || "th".equals(name) && !last) {
+
+This is because the buggy hunk was checking for "td" or "th" elements, but it should have been checking for "td" elements only. The "th" element is a table header cell, and it should not be treated as a table cell.

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return (Class<?>) actual;
+```
+This is because the `getActualTypeArguments()` method returns an array of `Type` objects, and we need to cast the first element of this array to a `Class` object. The `<?>` wildcard is used to indicate that the type of the `Class` object is unknown, since it is a generic type.

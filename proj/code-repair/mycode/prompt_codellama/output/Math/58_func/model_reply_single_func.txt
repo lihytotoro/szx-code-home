@@ -1,0 +1,20 @@
+ The buggy function is:
+```
+public double[] fit() {
+    final double[] guess = (new ParameterGuesser(getObservations())).guess();
+    return fit(new Gaussian.Parametric(), guess);
+}
+```
+The bug is that the `guess` method of the `ParameterGuesser` class returns a negative value, which is then passed to the `fit` method as the initial guess for the parameters. The `fit` method then tries to use this negative value as the initial guess for the parameters, which is not allowed.
+
+To fix the bug, we need to make sure that the `guess` method returns a positive value. One way to do this is to add a check to make sure that the returned value is positive, and if it's not, to return a positive value instead. Here's an example of how this could be implemented:
+```
+public double[] fit() {
+    final double[] guess = (new ParameterGuesser(getObservations())).guess();
+    if (guess[0] < 0) {
+        return fit(new Gaussian.Parametric(), new double[] {0, 0});
+    }
+    return fit(new Gaussian.Parametric(), guess);
+}
+```
+This code checks the first element of the `guess` array to make sure it's positive, and if it's not, it returns a new array with the first element set to 0 and the second element set to 0, which is a valid initial guess for the parameters.

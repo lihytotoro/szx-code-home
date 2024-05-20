@@ -1,0 +1,13 @@
+ The correct line at the INFILL location is:
+```
+if (fnType != null) {
+```
+This line is checking if the function type of the constructor is not null, which is necessary for the code to work correctly. The buggy line that was removed was:
+```
+JSType type = getJSType(constructor).restrictByNotNullOrUndefined();
+```
+This line was trying to get the function type of the constructor, but it was not necessary for the code to work correctly. The correct line to replace it with is:
+```
+JSType type = getJSType(constructor);
+```
+This line gets the function type of the constructor without trying to restrict it to not be null or undefined.

@@ -1,0 +1,70 @@
+ The buggy function is:
+```
+private boolean inferTemplatedTypesForCall(
+    Node n, FunctionType fnType) {
+  final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()
+      .getTemplateKeys();
+  if (keys.isEmpty()) {
+    return false;
+  }
+
+  // Try to infer the template types
+  Map<TemplateType, JSType> inferred = 
+      inferTemplateTypesFromParameters(fnType, n);
+
+
+  // Replace all template types. If we couldn't find a replacement, we
+  // replace it with UNKNOWN.
+  TemplateTypeReplacer replacer = new TemplateTypeReplacer(
+      registry, inferred);
+  Node callTarget = n.getFirstChild();
+
+  FunctionType replacementFnType = fnType.visit(replacer)
+      .toMaybeFunctionType();
+  Preconditions.checkNotNull(replacementFnType);
+
+  callTarget.setJSType(replacementFnType);
+  n.setJSType(replacementFnType.getReturnType());
+
+  return replacer.madeChanges;
+}
+```
+The bug is in the line:
+```
+FunctionType replacementFnType = fnType.visit(replacer)
+    .toMaybeFunctionType();
+```
+The `toMaybeFunctionType()` method is called on the result of the `visit()` method, which is a `JSType` object. However, the `visit()` method returns a `JSType` object, which is not a `FunctionType` object. Therefore, the `toMaybeFunctionType()` method is called on a non-function type, which is a type error.
+
+The correct version of the function should be:
+```
+private boolean inferTemplatedTypesForCall(
+    Node n, FunctionType fnType) {
+  final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()
+      .getTemplateKeys();
+  if (keys.isEmpty()) {
+    return false;
+  }
+
+  // Try to infer the template types
+  Map<TemplateType, JSType> inferred = 
+      inferTemplateTypesFromParameters(fnType, n);
+
+
+  // Replace all template types. If we couldn't find a replacement, we
+  // replace it with UNKNOWN.
+  TemplateTypeReplacer replacer = new TemplateTypeReplacer(
+      registry, inferred);
+  Node callTarget = n.getFirstChild();
+
+  FunctionType replacementFnType = fnType.visit(replacer)
+      .toMaybeFunctionType();
+  Preconditions.checkNotNull(replacementFnType);
+
+  callTarget.setJSType(replacementFnType);
+  n.setJSType(replacementFnType.getReturnType());
+
+  return replacer.madeChanges;
+}
+```
+In this version, the `visit()` method is called on the `fnType` object, which is a `FunctionType` object. The result of the `visit()` method is a `FunctionType` object, which is then passed to the `toMaybeFunctionType()` method to get the correct `FunctionType` object.

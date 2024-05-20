@@ -1,0 +1,7 @@
+ The correct line at the INFILL location should be:
+
+    for (Matcher m : matchers) {
+        ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
+    }
+
+This line captures the arguments from the invocation using the `CapturesArguments` matcher, which is an interface that extends `Matcher`. The `captureFrom` method is called on each matcher in the list, passing in the argument at the current index `k`. The `k` variable is incremented after each iteration of the loop.

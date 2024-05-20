@@ -1,0 +1,15 @@
+ The bug in the given code is that it is not properly handling the case where the `style` tag is empty. The function should not transition to the `Text` insertion mode when the `style` tag is empty, as this will cause the `meta` tag to be incorrectly placed inside the `style` tag.
+
+Here is the corrected version of the function:
+```
+private static void handleRawtext(Token.StartTag startTag, HtmlTreeBuilder tb) {
+    if (startTag.getName().equals("style") && startTag.getAttributes().isEmpty()) {
+        tb.insert(startTag);
+        tb.tokeniser.transition(TokeniserState.Rawtext);
+        tb.markInsertionMode();
+    } else {
+        tb.transition(Text);
+    }
+}
+```
+This function checks if the `style` tag is empty and if so, it inserts the `style` tag and transitions to the `Rawtext` insertion mode. If the `style` tag is not empty, it transitions to the `Text` insertion mode.

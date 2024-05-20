@@ -1,0 +1,87 @@
+ The buggy function is:
+```
+protected boolean equal(
+    EvalContext context,
+    Expression left,
+    Expression right) 
+{
+    Object l = left.compute(context);
+    Object r = right.compute(context);
+
+    System.err.println("COMPARING: " +
+        (l == null ? "null" : l.getClass().getName()) + " " +
+        (r == null ? "null" : r.getClass().getName()));
+
+    if (l instanceof InitialContext || l instanceof SelfContext) {
+        l = ((EvalContext) l).getSingleNodePointer();
+    }
+
+    if (r instanceof InitialContext || r instanceof SelfContext) {
+        r = ((EvalContext) r).getSingleNodePointer();
+    }
+
+    if (l instanceof Collection) {
+        l = ((Collection) l).iterator();
+    }
+
+    if (r instanceof Collection) {
+        r = ((Collection) r).iterator();
+    }
+
+    if ((l instanceof Iterator) && !(r instanceof Iterator)) {
+        return contains((Iterator) l, r);
+    }
+    if (!(l instanceof Iterator) && (r instanceof Iterator)) {
+        return contains((Iterator) r, l);
+    }
+    if (l instanceof Iterator && r instanceof Iterator) {
+        return findMatch((Iterator) l, (Iterator) r);
+    }
+    return equal(l, r);
+}
+```
+The bug is in the `contains` method, which is used to compare two iterators. The method returns `true` if the first iterator contains the second iterator, but it should return `false` if the second iterator contains the first iterator.
+
+Here is the corrected version of the function:
+```
+protected boolean equal(
+    EvalContext context,
+    Expression left,
+    Expression right) 
+{
+    Object l = left.compute(context);
+    Object r = right.compute(context);
+
+    System.err.println("COMPARING: " +
+        (l == null ? "null" : l.getClass().getName()) + " " +
+        (r == null ? "null" : r.getClass().getName()));
+
+    if (l instanceof InitialContext || l instanceof SelfContext) {
+        l = ((EvalContext) l).getSingleNodePointer();
+    }
+
+    if (r instanceof InitialContext || r instanceof SelfContext) {
+        r = ((EvalContext) r).getSingleNodePointer();
+    }
+
+    if (l instanceof Collection) {
+        l = ((Collection) l).iterator();
+    }
+
+    if (r instanceof Collection) {
+        r = ((Collection) r).iterator();
+    }
+
+    if ((l instanceof Iterator) && !(r instanceof Iterator)) {
+        return !contains((Iterator) l, r);
+    }
+    if (!(l instanceof Iterator) && (r instanceof Iterator)) {
+        return !contains((Iterator) r, l);
+    }
+    if (l instanceof Iterator && r instanceof Iterator) {
+        return !findMatch((Iterator) l, (Iterator) r);
+    }
+    return equal(l, r);
+}
+```
+The corrected version of the function uses the `!` operator to negate the result of the `contains` method, so that it returns `false` if the first iterator contains the second iterator, and `true` if the second iterator contains the first iterator.

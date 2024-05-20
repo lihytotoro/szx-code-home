@@ -1,0 +1,5 @@
+ The correct line to insert at the INFILL location is:
+
+return StringDescription.toString(m).equals(arg);
+
+This fixes the bug by comparing the string representation of the matcher with the string representation of the argument, rather than calling the `toString()` method on the argument and comparing the result with the string representation of the matcher.

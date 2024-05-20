@@ -1,0 +1,1 @@
+assertTrue(tb.getTextBuffer().length == 0);

@@ -1,0 +1,9 @@
+ The correct line at the INFILL location should be:
+
+return (Double.isNaN(x) && Double.isNaN(y)) || (x == y);
+
+This is because the original line was using the "==" operator to compare the two double values, which is not the correct way to compare NaN values. The "==" operator will always return false when comparing NaN values, so the original line was always returning false.
+
+The corrected line uses the "||" operator to check if either the x or y value is NaN, and if so, returns true. If neither value is NaN, then it uses the "==" operator to compare the two values and returns the result.
+
+This corrected line should fix the bug in the code and make it pass the test.

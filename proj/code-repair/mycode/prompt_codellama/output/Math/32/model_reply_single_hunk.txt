@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+```
+if (tree.getAttribute() == BoundaryAttribute.INSIDE) {
+```
+This is because the `getAttribute()` method returns an instance of `BoundaryAttribute`, which is an enum that represents the boundary type of a region. The `INSIDE` attribute indicates that the region is inside the space.
+
+The buggy code was trying to cast the `BoundaryAttribute` instance to a `Boolean`, which is not possible because `BoundaryAttribute` is not a `Boolean`. The correct code should check the value of the `BoundaryAttribute` instance instead.

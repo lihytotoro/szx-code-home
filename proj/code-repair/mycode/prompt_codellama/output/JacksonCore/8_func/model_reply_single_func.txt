@@ -1,0 +1,17 @@
+ The bug is in the following line:
+```
+if (_resultString != null) {
+    return (_resultArray = _resultString.toCharArray());
+}
+```
+The `toCharArray()` method returns a `char[]` array, but the variable `_resultArray` is not initialized beforehand. Therefore, the line `return (_resultArray = _resultString.toCharArray());` is trying to assign a value to a null reference, which causes a `NullPointerException`.
+
+To fix the bug, you need to initialize the `_resultArray` variable before calling the `toCharArray()` method. Here's the corrected code:
+```
+if (_resultString != null) {
+    _resultArray = new char[_resultString.length()];
+    _resultString.getChars(0, _resultString.length(), _resultArray, 0);
+    return _resultArray;
+}
+```
+This code initializes the `_resultArray` variable with a new `char[]` array of the appropriate size, and then uses the `getChars()` method to copy the contents of `_resultString` into the array.

@@ -1,0 +1,8 @@
+prefix:
+public double percentageValue() {
+
+buggy_line:
+    return multiply(100).doubleValue();
+
+suffix:
+}

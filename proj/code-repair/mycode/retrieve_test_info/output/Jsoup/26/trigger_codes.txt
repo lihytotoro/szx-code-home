@@ -1,0 +1,1 @@
+Document cleanDoc = new Cleaner(Whitelist.basic()).clean(dirtyDoc);

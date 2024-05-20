@@ -1,0 +1,1 @@
+assertEquals(CharSequence.class, t.getRawClass());

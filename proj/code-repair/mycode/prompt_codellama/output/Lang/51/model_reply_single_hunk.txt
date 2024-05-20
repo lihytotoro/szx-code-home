@@ -1,0 +1,17 @@
+ The correct line at the INFILL location is:
+```
+case 3: {
+    char ch = str.charAt(0);
+    if (ch == 'y') {
+        return 
+            (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
+            (str.charAt(2) == 's' || str.charAt(2) == 'S');
+    }
+    if (ch == 'Y') {
+        return 
+            (str.charAt(1) == 'E' || str.charAt(1) == 'e') &&
+            (str.charAt(2) == 'S' || str.charAt(2) == 's');
+    }
+}
+```
+This is the case 3 block that was removed by the INFILL location. The bug was caused by the fact that the code was checking for the length of the string, but it was not checking if the string was null or if it had enough characters to be valid. The code was also using the `charAt` method to access the characters of the string, but it was not checking if the index was within the bounds of the string.

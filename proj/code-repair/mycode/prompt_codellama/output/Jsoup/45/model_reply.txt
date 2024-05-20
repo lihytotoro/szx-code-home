@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+        } else if ("td".equals(name) || "th".equals(name) && !last) {
+
+This line is missing in the original code, and it is required to handle the case where the current node is a "td" or "th" element, and it is not the last node in the stack.

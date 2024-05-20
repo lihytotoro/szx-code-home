@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return callHasLocalResult(value) || isToStringMethodCall(value) || locals.apply(value);
+```
+This is because the `new` operator can create a new object that is not local to the current scope, and the `toString` method can also return a non-local value.

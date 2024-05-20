@@ -1,0 +1,7 @@
+ The correct line at the INFILL location is:
+
+```
+return calculateHashCode(keys);
+```
+
+This line calculates the hash code for the map and returns it. The `readResolve` method is called after the map has been deserialized, and this line ensures that the hash code is recalculated correctly.

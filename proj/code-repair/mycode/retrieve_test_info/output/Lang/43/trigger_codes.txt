@@ -1,0 +1,1 @@
+ExtendedMessageFormat emf = new ExtendedMessageFormat(pattern, registry);

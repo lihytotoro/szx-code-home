@@ -1,0 +1,8 @@
+ The correct line at the INFILL location should be:
+
+return StringUtils.newStringUtf8(encodeBase64(binaryData, false));
+
+This is because the method encodeBase64(byte[], boolean) in the Apache Commons Codec library takes a boolean parameter that specifies whether to include the line separator characters in the encoded string. The method encodeBase64(byte[], boolean) returns a byte[] array, and the method newStringUtf8(byte[]) in the Apache Commons Lang library converts the byte[] array to a String using the UTF-8 character encoding.
+
+The test error "junit.framework.ComparisonFailure: byteToString static Hello World expected:<SGVsbG8gV29ybGQ=[]> but was:<SGVsbG8gV29ybGQ=[
+]>" indicates that the method encodeBase64(byte[], boolean) is including the line separator characters in the encoded string, which is not what the test expects. By passing false as the second parameter to the method encodeBase64(byte[], boolean), we can ensure that the method does not include the line separator characters in the encoded string, which will fix the test error.

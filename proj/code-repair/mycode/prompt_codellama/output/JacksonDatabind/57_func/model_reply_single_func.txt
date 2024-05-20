@@ -1,0 +1,31 @@
+ The buggy function is:
+```
+public <T> MappingIterator<T> readValues(byte[] src, int offset, int length)
+    throws IOException, JsonProcessingException
+{
+    if (_dataFormatReaders != null) {
+        return _detectBindAndReadValues(_dataFormatReaders.findFormat(src, offset, length), false);
+    }
+    return _bindAndReadValues(_considerFilter(_parserFactory.createParser(src), 
+            true));
+}
+```
+The bug is in the line:
+```
+return _bindAndReadValues(_considerFilter(_parserFactory.createParser(src), 
+            true));
+```
+The function `_considerFilter` is not defined, so the function is not able to filter the parser. This causes the function to return the unfiltered parser, which is then passed to `_bindAndReadValues`, which is expecting a filtered parser.
+
+The correct version of the function should be:
+```
+public <T> MappingIterator<T> readValues(byte[] src, int offset, int length)
+    throws IOException, JsonProcessingException
+{
+    if (_dataFormatReaders != null) {
+        return _detectBindAndReadValues(_dataFormatReaders.findFormat(src, offset, length), false);
+    }
+    return _bindAndReadValues(_parserFactory.createParser(src));
+}
+```
+This version of the function creates a parser using the `_parserFactory` and passes it to `_bindAndReadValues`, which is expecting a filtered parser.

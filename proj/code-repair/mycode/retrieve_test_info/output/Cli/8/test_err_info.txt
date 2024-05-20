@@ -1,0 +1,2 @@
+junit.framework.ComparisonFailure: single line padded text 2 expected:<...TE[-DATE] where DATE[
+                       ] has form YYYY[MM[DD...> but was:<...TE[-DATE] where DATE[] has form YYYY[MM[DD...>

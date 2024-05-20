@@ -1,0 +1,13 @@
+ The buggy function is:
+```
+public static float max(final float a, final float b) {
+    return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);
+}
+```
+The bug is in the ternary operator `? :`. If `a + b` is NaN, the function will return `b`, which is incorrect. The correct implementation should be:
+```
+public static float max(final float a, final float b) {
+    return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : a);
+}
+```
+This implementation will return `a` if `a + b` is NaN, which is the correct behavior.

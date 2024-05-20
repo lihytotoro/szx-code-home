@@ -1,0 +1,12 @@
+ The bug in the code is that it does not handle non-ASCII characters correctly. The `c >= 'A' && c <= 'Z'` and `c >= 'a' && c <= 'z'` checks only work for ASCII characters, and will return false for non-ASCII characters.
+
+To fix the bug, we need to modify the function to handle non-ASCII characters correctly. One way to do this is to use the `Character.isLetter()` method, which returns true if the character is a letter (uppercase or lowercase). Here's the corrected code:
+```
+boolean matchesLetter() {
+    if (isEmpty())
+        return false;
+    char c = input[pos];
+    return Character.isLetter(c);
+}
+```
+This code uses the `Character.isLetter()` method to check if the character at the current position in the input string is a letter. If it is, the function returns true, otherwise it returns false.

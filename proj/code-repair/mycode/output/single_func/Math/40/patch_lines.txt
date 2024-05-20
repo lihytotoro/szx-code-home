@@ -1,0 +1,1 @@
+           targetY = REDUCTION_FACTOR * yB;        } else if (agingB >= MAXIMAL_AGING) {            targetY = REDUCTION_FACTOR * yA;

@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    nextLineTabStop = width;
+
+This change ensures that the next line is indented with the correct number of spaces, which fixes the bug in the test case.

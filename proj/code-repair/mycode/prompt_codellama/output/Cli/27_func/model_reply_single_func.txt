@@ -1,0 +1,50 @@
+ The buggy function is:
+```
+public void setSelected(Option option) throws AlreadySelectedException
+{
+    if (option == null)
+    {
+        // reset the option previously selected
+        selected = null;
+        return;
+    }
+    
+    // if no option has already been selected or the 
+    // same option is being reselected then set the
+    // selected member variable
+    if (selected == null || selected.equals(option.getOpt()))
+    {
+        selected = option.getOpt();
+    }
+    else
+    {
+        throw new AlreadySelectedException(this, option);
+    }
+}
+```
+The bug is in the `else` block, where the `AlreadySelectedException` is thrown. The `else` block should only be executed when the `selected` member variable is not `null` and is not equal to the `option.getOpt()` method. However, the `else` block is always executed when the `option` parameter is not `null`, regardless of whether the `selected` member variable is `null` or not.
+
+To fix the bug, the `else` block should be modified to only be executed when the `selected` member variable is not `null` and is not equal to the `option.getOpt()` method. Here is the corrected version of the function:
+```
+public void setSelected(Option option) throws AlreadySelectedException
+{
+    if (option == null)
+    {
+        // reset the option previously selected
+        selected = null;
+        return;
+    }
+    
+    // if no option has already been selected or the 
+    // same option is being reselected then set the
+    // selected member variable
+    if (selected == null || selected.equals(option.getOpt()))
+    {
+        selected = option.getOpt();
+    }
+    else if (selected != null && !selected.equals(option.getOpt()))
+    {
+        throw new AlreadySelectedException(this, option);
+    }
+}
+```

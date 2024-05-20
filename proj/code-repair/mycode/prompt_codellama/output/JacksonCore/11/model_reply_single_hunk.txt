@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+_hashArea = Arrays.copyOf(_hashArea, _hashArea.length);
+```
+This line is used to copy the contents of the `_hashArea` array to a new array with the same length. The buggy hunk was removed because it was causing the `ArrayIndexOutOfBoundsException` error.

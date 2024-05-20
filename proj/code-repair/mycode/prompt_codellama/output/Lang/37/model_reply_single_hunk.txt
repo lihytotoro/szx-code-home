@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
+```
+This line is causing the problem because it is trying to store elements of type `Long` into an array of type `Integer`, which is not allowed. The `ArrayStoreException` is thrown because the runtime type of the array is not compatible with the type of the elements being stored in it.

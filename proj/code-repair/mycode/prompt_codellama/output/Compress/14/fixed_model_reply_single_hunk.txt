@@ -1,0 +1,3 @@
+    if (allNUL) {
+        end--;
+    }

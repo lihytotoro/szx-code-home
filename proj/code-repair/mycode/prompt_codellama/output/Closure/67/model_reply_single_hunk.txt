@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+      ) {
+```
+This line is the closing parenthesis of the `isPrototypePropertyAssign` method, which is the method that contains the buggy hunk that was removed.

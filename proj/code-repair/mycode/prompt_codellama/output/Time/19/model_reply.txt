@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    } else if (offsetLocal > 0) {
+
+This line is added to the code to fix the bug. The bug was caused by the fact that the method was not handling the case where the offset was positive, but the time was before the DST gap. The code was returning the adjusted offset, which was incorrect in this case. The new line checks if the offset is positive and if the time is before the DST gap, and if so, it returns the original offset instead of the adjusted one.

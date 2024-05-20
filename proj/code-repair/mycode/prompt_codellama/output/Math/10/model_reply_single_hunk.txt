@@ -1,0 +1,6 @@
+ The correct line at the INFILL location is:
+```
+result[resultOffset] =
+                ((tmp2[0] <= 0) ? -FastMath.PI : FastMath.PI) - 2 * tmp2[0]; // +/-pi - 2 * atan(y / (r - x))
+```
+This line is responsible for handling the special case where `x` is negative, and it is causing the `NaN` value to be returned. The correct fix is to add a check for `x` being negative before computing the atan2 value.

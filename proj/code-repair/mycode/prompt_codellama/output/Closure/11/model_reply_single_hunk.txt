@@ -1,0 +1,6 @@
+ The correct line at the INFILL location should be:
+```
+  } else if (validator.expectNotNullOrUndefined(t, n, childType,
+      "No properties on this expression", getNativeType(OBJECT_TYPE))) {
+```
+This line checks if the expression on the left-hand side of the dot operator is not null or undefined, and if it is not, it checks if the property being accessed is valid for that type. If the expression is null or undefined, it reports an error.

@@ -1,0 +1,1 @@
+   Node arrayNode = callTarget.getFirstChild();    Node functionName = arrayNode.getNext();    if ((arrayNode.getType() != Token.ARRAYLIT) ||        !functionName.getString().equals("join")) {      return n;    }    if (!NodeUtil.isImmutableValue(right)) {      return n;    }  }

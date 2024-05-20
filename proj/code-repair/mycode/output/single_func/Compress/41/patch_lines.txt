@@ -1,0 +1,1 @@
+   } else if (!sig.equals(ZipLong.LFH_SIG)) {        return null;

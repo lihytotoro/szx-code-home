@@ -1,0 +1,9 @@
+prefix:
+
+buggy_line:
+private Object readResolve() {
+
+suffix:
+    calculateHashCode(keys);
+    return this;
+}

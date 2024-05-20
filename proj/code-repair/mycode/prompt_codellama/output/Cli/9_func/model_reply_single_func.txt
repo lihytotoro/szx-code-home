@@ -1,0 +1,21 @@
+ The bug in the code is in the `StringBuffer` concatenation. The `buff.append(iter.next());` line should be `buff.append(", ").append(iter.next());` to separate the required options with a comma and a space.
+
+Here is the corrected code:
+```
+protected void checkRequiredOptions() throws MissingOptionException {
+    // if there are required options that have not been processed
+    if (getRequiredOptions().size() > 0) {
+        Iterator iter = getRequiredOptions().iterator();
+        StringBuffer buff = new StringBuffer("Missing required option");
+        buff.append(getRequiredOptions().size() == 1 ? "" : "s");
+        buff.append(": ");
+
+        // loop through the required options
+        while (iter.hasNext()) {
+            buff.append(", ").append(iter.next());
+        }
+
+        throw new MissingOptionException(buff.toString());
+    }
+}
+```

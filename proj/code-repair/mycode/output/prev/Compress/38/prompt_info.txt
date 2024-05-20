@@ -1,0 +1,19 @@
+prefix:
+public boolean isDirectory() {
+    if (file != null) {
+        return file.isDirectory();
+    }
+
+    if (linkFlag == LF_DIR) {
+        return true;
+    }
+
+buggy_line:
+    if (getName().endsWith("/")) {
+
+suffix:
+        return true;
+    }
+
+    return false;
+}

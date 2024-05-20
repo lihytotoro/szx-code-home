@@ -1,0 +1,1 @@
+       text = padding + text.substring(pos).trim();        pos = findWrapPos(text, width, 0);        if (pos == -1)        {            sb.append(text);            return sb;        } else        if (pos == 0)        {            throw new RuntimeException("Text too long for line - throwing exception to avoid infinite loop [CLI-162]: " + text);

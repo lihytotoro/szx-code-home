@@ -1,0 +1,13 @@
+ The bug in the code is that it is using the `equals` method to compare the previous annotation with the new one, but it should be using the `==` operator to compare the references.
+
+Here is the corrected version of the function:
+```
+protected final boolean _add(Annotation ann) {
+    if (_annotations == null) {
+        _annotations = new HashMap<Class<? extends Annotation>,Annotation>();
+    }
+    Annotation previous = _annotations.put(ann.annotationType(), ann);
+    return (previous != null) && (previous == ann);
+}
+```
+This will fix the bug and the test will pass.

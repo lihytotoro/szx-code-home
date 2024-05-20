@@ -1,0 +1,1 @@
+   int     end = offset + length;    int     start = offset;    for (int i = start; i < end; i++){        final byte currentByte = buffer[i];        if (currentByte == 0) {            break;        }        if (currentByte == (byte) ' ' || currentByte == '0') {            continue;        }

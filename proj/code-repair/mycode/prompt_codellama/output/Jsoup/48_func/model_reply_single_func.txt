@@ -1,0 +1,31 @@
+ The bug in the code is that it is not properly handling the case where multiple values are present for a given header name. The function is only considering the first value for each header name, and ignoring the rest.
+
+To fix the bug, we need to modify the function to properly handle multiple values for each header name. One way to do this is to use the `String.join` method to combine all the values for a given header name into a single string, separated by commas. Here's the corrected code:
+```
+void processResponseHeaders(Map<String, List<String>> resHeaders) {
+    for (Map.Entry<String, List<String>> entry : resHeaders.entrySet()) {
+        String name = entry.getKey();
+        if (name == null)
+            continue; // http/1.1 line
+
+        List<String> values = entry.getValue();
+        if (name.equalsIgnoreCase("Set-Cookie")) {
+            for (String value : values) {
+                if (value == null)
+                    continue;
+                TokenQueue cd = new TokenQueue(value);
+                String cookieName = cd.chompTo("=").trim();
+                String cookieVal = cd.consumeTo(";").trim();
+                // ignores path, date, domain, validateTLSCertificates et al. req'd?
+                // name not blank, value not null
+                if (cookieName.length() > 0)
+                    cookie(cookieName, cookieVal);
+            }
+        } else { // combine same header names with comma: http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
+            if (!values.isEmpty())
+                header(name, String.join(",", values));
+        }
+    }
+}
+```
+With this corrected version, the function should properly handle multiple values for each header name, and combine them into a single string separated by commas.

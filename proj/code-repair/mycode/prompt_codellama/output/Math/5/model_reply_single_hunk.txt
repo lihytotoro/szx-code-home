@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+```
+return Complex.ZERO;
+```
+This is because the method is supposed to return the reciprocal of the complex number, which is `Complex.ZERO` when the real and imaginary parts are both zero. The original buggy line `return NaN;` was removed, and the correct line was inserted at the INFILL location.

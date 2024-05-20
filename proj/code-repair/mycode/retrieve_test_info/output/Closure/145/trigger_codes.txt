@@ -1,0 +1,2 @@
+assertPrint("if(e1)A:function goo(){return true}",
+"if(e1){A:function goo(){return true}}");

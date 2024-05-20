@@ -1,0 +1,17 @@
+ The buggy function is:
+```
+public Line revert() {
+    final Line reverted = new Line(zero, zero.subtract(direction));
+    return reverted;
+}
+```
+The correct version of the function should be:
+```
+public Line revert() {
+    final Line reverted = new Line(zero, direction.negate());
+    return reverted;
+}
+```
+The bug was in the `subtract` method, which was used to calculate the new direction of the line. The correct way to negate a vector is to use the `negate` method, which returns a new vector with the opposite direction.
+
+The test error was caused by the fact that the `subtract` method was not negating the direction vector correctly, resulting in a small difference between the expected and actual values.

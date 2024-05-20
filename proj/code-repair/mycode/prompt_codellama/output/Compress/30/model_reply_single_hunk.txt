@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+int c = (destOffs == offs) ? -1 : (destOffs - offs);
+
+This line is used to return the number of bytes read from the input stream. The bug in the original code was that it was returning -1 instead of 0 when the length of the read was 0.

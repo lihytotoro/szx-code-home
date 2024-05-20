@@ -1,0 +1,41 @@
+ The buggy function is:
+```
+private void findCalledFunctions(
+    Node node, Set<String> changed) {
+  Preconditions.checkArgument(changed != null);
+  // For each referenced function, add a new reference
+  if (node.getType() == Token.CALL) {
+    Node child = node.getFirstChild();
+    if (child.getType() == Token.NAME) {
+      changed.add(child.getString());
+    }
+  }
+
+  for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {
+    findCalledFunctions(c, changed);
+  }
+}
+```
+The bug is in the `findCalledFunctions` method, specifically in the `if` statement that checks if the current node is a `CALL` node. If the current node is a `CALL` node, it will add the name of the called function to the `changed` set. However, if the current node is a `CALL` node and it has a child node that is a `NAME` node, it will add the name of the called function to the `changed` set again, even if it has already been added.
+
+To fix the bug, we need to check if the current node is a `CALL` node and if it has a child node that is a `NAME` node, and only add the name of the called function to the `changed` set if it has not already been added. Here is the corrected version of the `findCalledFunctions` method:
+```
+private void findCalledFunctions(
+    Node node, Set<String> changed) {
+  Preconditions.checkArgument(changed != null);
+  // For each referenced function, add a new reference
+  if (node.getType() == Token.CALL) {
+    Node child = node.getFirstChild();
+    if (child.getType() == Token.NAME) {
+      if (!changed.contains(child.getString())) {
+        changed.add(child.getString());
+      }
+    }
+  }
+
+  for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {
+    findCalledFunctions(c, changed);
+  }
+}
+```
+With this corrected version, the `findCalledFunctions` method will only add the name of the called function to the `changed` set if it has not already been added, which fixes the bug.

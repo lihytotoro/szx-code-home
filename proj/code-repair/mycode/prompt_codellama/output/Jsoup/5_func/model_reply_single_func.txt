@@ -1,0 +1,34 @@
+ The bug in the code is in the `else` block of the `if (tq.matchChomp("="))` statement. If the `=` is not found, the code tries to consume the value of the attribute, but it does not check if the next character is a quote (`'`, `"`). If the next character is not a quote, the code will try to consume the value of the attribute until it finds a quote, but it will not check if the quote is a single quote (`'`) or a double quote (`"`). This can cause the code to consume more characters than it should, leading to a `StringIndexOutOfBoundsException`.
+
+Here is the corrected version of the function:
+```
+private Attribute parseAttribute() {
+    tq.consumeWhitespace();
+    String key = tq.consumeAttributeKey();
+    String value = "";
+    tq.consumeWhitespace();
+    if (tq.matchChomp("=")) {
+        tq.consumeWhitespace();
+        if (tq.matchChomp(SQ)) {
+            value = tq.chompTo(SQ);
+        } else if (tq.matchChomp(DQ)) {
+            value = tq.chompTo(DQ);
+        } else {
+            StringBuilder valueAccum = new StringBuilder();
+            // no ' or " to look for, so scan to end tag or space (or end of stream)
+            while (!tq.matchesAny("<", "/>", ">") && !tq.matchesWhitespace() && !tq.isEmpty()) {
+                valueAccum.append(tq.consume());
+            }
+            value = valueAccum.toString();
+        }
+        tq.consumeWhitespace();
+    }
+    if (key.length() != 0)
+        return Attribute.createFromEncoded(key, value);
+    else {
+        tq.consume();
+        return null;
+    }
+}
+```
+In this version, the code checks if the next character is a quote before trying to consume the value of the attribute. If the next character is not a quote, the code will not try to consume the value of the attribute, and it will return `null` instead.

@@ -1,0 +1,5 @@
+ The correct line to insert at the INFILL location is:
+
+if (nextLineTabStop >= width) {
+    nextLineTabStop = width - 1;
+}

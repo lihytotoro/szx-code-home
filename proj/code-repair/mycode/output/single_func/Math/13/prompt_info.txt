@@ -1,0 +1,9 @@
+prefix:
+private RealMatrix squareRoot(RealMatrix m) {
+
+buggy_hunk:
+        final EigenDecomposition dec = new EigenDecomposition(m);
+        return dec.getSquareRoot();
+
+suffix:
+}

@@ -1,0 +1,1 @@
+testCompress252(7, 0);

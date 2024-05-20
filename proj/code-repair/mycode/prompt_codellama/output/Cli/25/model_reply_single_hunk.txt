@@ -1,0 +1,5 @@
+ The correct line at the INFILL location should be:
+
+    nextLineTabStop = width;
+
+This is because the `nextLineTabStop` variable is used to determine the number of spaces to add to the beginning of each line when wrapping text. If `nextLineTabStop` is set to `width - 1`, then the first line will have one space less than the desired number of spaces, which can cause the line to be wrapped incorrectly. By setting `nextLineTabStop` to `width`, the correct number of spaces will be added to the beginning of each line, ensuring that the text is wrapped correctly.

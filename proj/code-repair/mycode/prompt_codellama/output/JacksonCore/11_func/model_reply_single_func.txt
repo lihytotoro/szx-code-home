@@ -1,0 +1,39 @@
+ The buggy function is:
+```
+private void _verifySharing()
+{
+    if (_hashShared) {
+        _hashArea = Arrays.copyOf(_hashArea, _hashArea.length);
+        _names = Arrays.copyOf(_names, _names.length);
+        _hashShared = false;
+        // 09-Sep-2015, tatu: As per [jackson-core#216], also need to ensure
+        //    we rehash as needed, as need-rehash flag is not copied from parent
+    }
+    if (_needRehash) {
+        rehash();
+    }
+}
+```
+The bug is in the line:
+```
+_hashArea = Arrays.copyOf(_hashArea, _hashArea.length);
+```
+This line is copying the contents of the `_hashArea` array, but it is not resizing the array to match the new length. As a result, the `Arrays.copyOf` method is returning an array with a length that is less than the original length, and the code is trying to access an index that is out of bounds.
+
+The correct version of the function should be:
+```
+private void _verifySharing()
+{
+    if (_hashShared) {
+        _hashArea = Arrays.copyOf(_hashArea, _hashArea.length);
+        _names = Arrays.copyOf(_names, _names.length);
+        _hashShared = false;
+        // 09-Sep-2015, tatu: As per [jackson-core#216], also need to ensure
+        //    we rehash as needed, as need-rehash flag is not copied from parent
+    }
+    if (_needRehash) {
+        rehash();
+    }
+}
+```
+This version of the function resizes the `_hashArea` array to match the new length, and then copies the contents of the array. This ensures that the array is properly resized and that the code is able to access the correct indices.

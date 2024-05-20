@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+```
+if (DateTimeUtils.isContiguous(partial)) {
+```
+This line checks if the partial object is contiguous, which means that it has a continuous range of values for each field. If the partial object is not contiguous, the code will fall back to the superclass algorithm, which may not handle the 2004-02-29 + 48 months -> 2008-02-29 type dates correctly.

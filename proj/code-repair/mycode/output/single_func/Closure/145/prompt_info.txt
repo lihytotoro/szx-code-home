@@ -1,0 +1,8 @@
+prefix:
+private boolean isOneExactlyFunctionOrDo(Node n) {
+
+buggy_hunk:
+    return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);
+
+suffix:
+}

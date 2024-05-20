@@ -1,0 +1,1 @@
+   if (dirtyDocument.body() != null)

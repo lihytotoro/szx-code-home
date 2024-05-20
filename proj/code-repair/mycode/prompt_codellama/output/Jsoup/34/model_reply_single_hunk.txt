@@ -1,0 +1,5 @@
+ The correct line at the INFILL location is:
+
+    if (offset < length) {
+
+This line checks if the offset is less than the length of the input sequence, which is a precondition for the rest of the code to work correctly. The buggy hunk that was removed was attempting to access the input sequence at an index that was out of bounds, which caused the ArrayIndexOutOfBoundsException.

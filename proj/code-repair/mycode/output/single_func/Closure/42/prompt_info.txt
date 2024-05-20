@@ -1,0 +1,13 @@
+prefix:
+Node processForInLoop(ForInLoop loopNode) {
+
+buggy_hunk:
+
+
+suffix:
+  return newNode(
+      Token.FOR,
+      transform(loopNode.getIterator()),
+      transform(loopNode.getIteratedObject()),
+      transformBlock(loopNode.getBody()));
+}

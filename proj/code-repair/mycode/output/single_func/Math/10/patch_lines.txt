@@ -1,0 +1,1 @@
+   for (int i = 0; i < getSize(); ++i) {        result[resultOffset + i] = FastMath.toDegrees(result[resultOffset + i]);    }
